@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="15bb0cab-be1b-4a0f-bd0f-b52f7b677b71" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/Web_Service/Service/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="b56e3233-a14b-4650-842c-0abd682e464d" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Web_Service/Service/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="07b9d019-7987-4c71-879f-6a6a159d6d08" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Web_Service/Service/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="19387afa-2a84-4985-9801-7f9acd0bee0a" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Web_Service/Service/mex" />
+    <MetadataFile FileName="Web_Service.xsd" MetadataType="Schema" ID="16bea054-f394-4fda-a318-dcc2e036058b" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Web_Service/Service/mex" />
+    <MetadataFile FileName="Web_Service.Mirror_Classes.xsd" MetadataType="Schema" ID="82b0aceb-886e-49db-b0c5-9f7997b0f761" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Web_Service/Service/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

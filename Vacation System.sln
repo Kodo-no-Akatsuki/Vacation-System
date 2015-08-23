@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vacation System", "Vacation System\Vacation System.csproj", "{28F0FC25-E93F-4DA8-9E1B-E14373B95592}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7FCC2DF8-BF70-4AFA-AA7A-6D1BA325D38A} = {7FCC2DF8-BF70-4AFA-AA7A-6D1BA325D38A}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web Service", "Web Service\Web Service.csproj", "{7FCC2DF8-BF70-4AFA-AA7A-6D1BA325D38A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28F0FC25-E93F-4DA8-9E1B-E14373B95592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F0FC25-E93F-4DA8-9E1B-E14373B95592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F0FC25-E93F-4DA8-9E1B-E14373B95592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28F0FC25-E93F-4DA8-9E1B-E14373B95592}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FCC2DF8-BF70-4AFA-AA7A-6D1BA325D38A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FCC2DF8-BF70-4AFA-AA7A-6D1BA325D38A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FCC2DF8-BF70-4AFA-AA7A-6D1BA325D38A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FCC2DF8-BF70-4AFA-AA7A-6D1BA325D38A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,193 @@
+﻿@model Vacation_System.ServiceReference.Empleado
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap-theme.css" />
+    <link href="~/Content/css/lightbox.css" rel="stylesheet" />
+    <link href="~/Content/css/register.css" rel="stylesheet" />
+    <link href="~/Content/css/datepicker.css" rel="stylesheet" />
+    <title>Registrar Empleado</title>
+    <script language="javascript" type="text/javascript">
+    function crearPassword() {
+
+        var length = 8;
+        var charset = "abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        var result = "";
+        for (var i = 0, n = charset.length; i < length; i++) {
+            result += charset.charAt(Math.floor(Math.random() * n));
+        }
+        document.forms[0].password.value = result;
+
+        $("#registerform :input").tooltip({
+
+            // place tooltip on the right edge
+
+            // a little tweaking of the position
+            offset: [20, 10],
+
+            // use the built-in fadeIn/fadeOut effect
+            effect: "fade",
+
+            // custom opacity setting
+            opacity: 0.5
+
+        });
+
+        $("selector").tooltip("option", "tooltipClass", "custom-tooltip-styling");
+    }
+
+    </script>
+
+
+
+</head>
+
+<body onload="crearPassword()">
+    <script src="~/Content/js/lightbox-plus-jquery.min.js"></script>
+    <script src="~/Content/js/nprogress.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+
+    <div class="container center-div">
+        <div class="row">
+            @using (Html.BeginForm())
+            {
+                <form role="form" id="registerform">
+                    <div class="col-md-4 col-md-offset-4">
+
+                        <img src="~/Content/imgs/unilogo.png" class="img-responsive center-block">
+                        <h1>Registrar Usuario</h1>
+                        <div class="form-group">
+                            <label for="InputInt">Numero de talento humano</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="TalentoHumano" name="TalentoHumano" placeholder="Talento humano" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="InputName">Nombre Completo</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="PrimerNombre" name="PrimerNombre" placeholder="Primer Nombre" required>
+                                <input type="text" class="form-control" id="SegundoNombre" name="SegundoNombre" placeholder="Segundo Nombre" required>
+                                <input type="text" class="form-control" id="PrimerApellido" name="PrimerApellido" placeholder="Primer Apellido" required>
+                                <input type="text" class="form-control" id="SegundoApellido" name="SegundoApellido" placeholder="Segundo Apellido" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="InputEmail">Correo/Email</label>
+                            <div class="input-group">
+                                <input type="email" class="form-control" id="Email" name="Email" placeholder="Correo del empleado" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="InputDate">Fecha de Ingreso</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="datepicker" name="datepicker" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+                        <script src="~/Scripts/bootstrap-datepicker.js"></script>
+                        <script type="text/javascript">
+                            // When the document is ready
+                            $(document).ready(function() {
+
+                                $('#datepicker').datepicker({
+                                    format: "yyyy/mm/dd"
+                                });
+
+                            });
+                        </script>
+
+                        <div class="form-group">
+                            <label for="Departamento">Departamento</label>
+                            <div class="input-group">
+
+                                <select id="combobox">
+
+                                    <option value="Motorista">Motorista</option>
+                                    <option value="Aseador">Aseador</option>
+                                </select>
+
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Rol">Rol de Usuario</label>
+                            <div class="input-group">
+
+                                <select id="combobox">
+                                    <option value="Jefe Inmediato">Jefe Inmediato</option>
+                                    <option value="Empleado">Empleado</option>
+                                </select>
+
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="InputPass">Clave</label>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" id="password" title="Clave Sugerida" value="" name="password" required>
+
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="InputName">Confirmar Clave</label>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" id="confirmpass" value="" name="confirmpass" required>
+
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                                <label for="InputMessage">Descripcion</label>
+                                <div class="input-group">
+                                    <textarea name="InputMessage" id="InputMessage" class="form-control" rows="5" required></textarea>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                </div>
+                            </div>*@
+                        <div class="well well-sm">
+                            <strong><span class="glyphicon glyphicon-asterisk"></span>Campos Requeridos</strong>
+                        </div>
+                        <input type="submit" name="submit" id="submit" value="Guardar" class="btn btn-info pull-right">
+
+                    </div>
+                </form>
+
+            }
+            @*<div class="col-lg-5 col-md-push-1">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            <strong><span class="glyphicon glyphicon-ok"></span> Success! Message sent.</strong>
+                        </div>
+                        <div class="alert alert-danger">
+                            <span class="glyphicon glyphicon-remove"></span><strong> Error! Please check all page inputs.</strong>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+
+
+</body>
+</html>
+

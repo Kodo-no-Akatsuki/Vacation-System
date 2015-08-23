@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfCalendarMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CalendarMirror" nillable="true" type="tns:CalendarMirror" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCalendarMirror" nillable="true" type="tns:ArrayOfCalendarMirror" />
+  <xs:complexType name="CalendarMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TalentoHumanoEmpleado" type="xs:int" />
+      <xs:element minOccurs="0" name="TalentoHumanoJefe" type="xs:int" />
+      <xs:element minOccurs="0" name="TipoDiaId" type="xs:int" />
+      <xs:element minOccurs="0" name="fecha" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CalendarMirror" nillable="true" type="tns:CalendarMirror" />
+  <xs:complexType name="ArrayOfDepartamentoMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DepartamentoMirror" nillable="true" type="tns:DepartamentoMirror" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDepartamentoMirror" nillable="true" type="tns:ArrayOfDepartamentoMirror" />
+  <xs:complexType name="DepartamentoMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DepartamentoId" type="xs:int" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DepartamentoMirror" nillable="true" type="tns:DepartamentoMirror" />
+  <xs:complexType name="ArrayOfJerarquiaMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="JerarquiaMirror" nillable="true" type="tns:JerarquiaMirror" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfJerarquiaMirror" nillable="true" type="tns:ArrayOfJerarquiaMirror" />
+  <xs:complexType name="JerarquiaMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DepartamentoId" type="xs:int" />
+      <xs:element minOccurs="0" name="JefeTalentoHumano" type="xs:int" />
+      <xs:element minOccurs="0" name="JerarquiaId" type="xs:int" />
+      <xs:element minOccurs="0" name="TalentoHumano" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="JerarquiaMirror" nillable="true" type="tns:JerarquiaMirror" />
+  <xs:complexType name="ArrayOfLogVacacionesMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LogVacacionesMirror" nillable="true" type="tns:LogVacacionesMirror" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLogVacacionesMirror" nillable="true" type="tns:ArrayOfLogVacacionesMirror" />
+  <xs:complexType name="LogVacacionesMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EstatusActual" type="xs:int" />
+      <xs:element minOccurs="0" name="EstatusAnterior" type="xs:int" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LogId" type="xs:int" />
+      <xs:element minOccurs="0" name="Modifico" type="xs:int" />
+      <xs:element minOccurs="0" name="VacacionesId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LogVacacionesMirror" nillable="true" type="tns:LogVacacionesMirror" />
+  <xs:complexType name="ArrayOfPermisosMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PermisosMirror" nillable="true" type="tns:PermisosMirror" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPermisosMirror" nillable="true" type="tns:ArrayOfPermisosMirror" />
+  <xs:complexType name="PermisosMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PermisosId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PermisosMirror" nillable="true" type="tns:PermisosMirror" />
+  <xs:complexType name="ArrayOfRolesMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RolesMirror" nillable="true" type="tns:RolesMirror" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRolesMirror" nillable="true" type="tns:ArrayOfRolesMirror" />
+  <xs:complexType name="RolesMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RolesMirror" nillable="true" type="tns:RolesMirror" />
+  <xs:complexType name="ArrayOfStatusMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StatusMirror" nillable="true" type="tns:StatusMirror" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStatusMirror" nillable="true" type="tns:ArrayOfStatusMirror" />
+  <xs:complexType name="StatusMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StatusMirror" nillable="true" type="tns:StatusMirror" />
+  <xs:complexType name="ArrayOfTipoDiaMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TipoDiaMirror" nillable="true" type="tns:TipoDiaMirror" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTipoDiaMirror" nillable="true" type="tns:ArrayOfTipoDiaMirror" />
+  <xs:complexType name="TipoDiaMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" type="xs:int" />
+      <xs:element minOccurs="0" name="TipoDiaId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TipoDiaMirror" nillable="true" type="tns:TipoDiaMirror" />
+  <xs:complexType name="UserMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaCreacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaIngreso" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimerApellido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimerNombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SegundoApellido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SegundoNombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TalentoHumano" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserMirror" nillable="true" type="tns:UserMirror" />
+  <xs:complexType name="ArrayOfVacacionesMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VacacionesMirror" nillable="true" type="tns:VacacionesMirror" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVacacionesMirror" nillable="true" type="tns:ArrayOfVacacionesMirror" />
+  <xs:complexType name="VacacionesMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DiasSolicitados" type="xs:int" />
+      <xs:element minOccurs="0" name="EstatusId" type="xs:int" />
+      <xs:element minOccurs="0" name="FechaAprobacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaEntrada" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaSalida" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaSolicitud" type="xs:int" />
+      <xs:element minOccurs="0" name="TalentoHumano" type="xs:int" />
+      <xs:element minOccurs="0" name="VacacionesId" type="xs:int" />
+      <xs:element minOccurs="0" name="Year" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VacacionesMirror" nillable="true" type="tns:VacacionesMirror" />
+</xs:schema>

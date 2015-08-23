@@ -1,0 +1,93 @@
+﻿@model Vacation_System.Models.LoginModel
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/css/lightbox.css" rel="stylesheet" />
+    <link href="~/Content/css/login.css" rel="stylesheet" />
+    <title>Vacation System Log In</title>
+</head>
+<body>
+    <script src="~/Content/js/lightbox-plus-jquery.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+    <div id="myCarousel" class="carousel slide" data-interval="false">
+        <ol class="carousel">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+        </ol>
+        <div class="logo">
+            <img src="~/Content/imgs/unilogo.png" class="img-responsive center-block" height="110" width="110" />
+        </div>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                @using (Html.BeginForm())
+                {
+                    <div class="form">
+                        <div class="header"><h2>Iniciar Sesion</h2></div>
+                        <div class="login">
+                            <form action="">
+                                <ul>
+                                    <li>
+                                        <span class="un"><i class="fa fa-user"></i></span><input id="Email" name="Email" type="text" required class="text" placeholder="Email" />
+                                    </li>
+                                    <li>
+                                        <span class="un"><i class="fa fa-lock"></i></span><input id="Password" name="Password" type="password" required class="text" placeholder="Clave" />
+                                    </li>
+                                    <li>
+                                        <input type="submit" value="Ingresar" class="btn btn-info">
+                                    </li>
+                                    <li>
+                                        <div class="span"><span class="ch"><a href="#">Olvidaste tu clave?</a></span> <span class="ch"><a href="#myCarousel" role="button" data-slide="next"><input type="button" value="Dale un vistazo" class="btn btn-info center-block"></a></span> </div>
+                                    </li>
+                                </ul>
+                            </form>
+                            <br />
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+            <br />
+
+            <div class="item">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="jumbotron center-block">
+                                <div class="container">
+                                    <h2 id="peektitle">Administra y solicita tus vacaciones</h2>
+                                    <p>
+                                        Con nuestro dashboard tendras la libertad de administrar tus vacaciones
+                                        facilmente.<br /><b>No mas filas!</b> programa tus vacaciones con la ayuda de nuestro
+                                        <b>calendario.</b><br />Llena el formulario requerido, y en pocos minutos
+                                        ya estaras listo para disfrutar de tus vacaciones.
+                                    </p>
+                                    <ul class="center-block">
+                                        <a href="#myCarousel" role="button" data-slide="prev"><input type="button" value="Pruebalo" class="btn btn-info"></a>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <a href="~/Content/imgs/file_dashboard.png" data-lightbox="image-1" data-title="Dashboard"><img src="~/Content/imgs/file_dashboard.png" class="img-responsive center-block" /></a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
