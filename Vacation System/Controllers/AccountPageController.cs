@@ -37,7 +37,7 @@ namespace Vacation_System.Controllers
 
             return "El departamento ha sido creado";
         }
-
+		
         public RedirectToRouteResult LogOut()
         {
             Session["User"] = null;
