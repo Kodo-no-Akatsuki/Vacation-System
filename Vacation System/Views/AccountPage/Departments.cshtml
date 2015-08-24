@@ -1,4 +1,4 @@
-﻿@model Vacation_System.ServiceReference.Empleado
+﻿@model Vacation_System.ServiceReference.DepartamentoMirror
 
 @{
     Layout = null;
@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inicio</title>
+    <title>Configurar Departamentos</title>
     <!-- Bootstrap core CSS -->
     <link href="~/Content/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/fonts/css/font-awesome.min.css" rel="stylesheet">
@@ -27,6 +27,7 @@
     <script>
         NProgress.start();
     </script>
+
     <!--[if lt IE 9]>
         <script src="../assets/js/ie8-responsive-file-warning.js"></script>
         <![endif]-->
@@ -111,6 +112,7 @@
                                             <span class="fa fa-user pull-right"></span>
                                             <span>Perfil</span>
                                         </a>
+                                        
                                     </li>
                                     <li>
                                         <a href="javascript:;">
@@ -166,45 +168,276 @@
             </div>
             <!-- /top navigation -->
             <!-- page content -->
-            <div class="right_col" role="main">
-                <!--Express information to add here :^)-->
-                <div class="row tile_count">
-                    <h2 class="center-block">Vacaciones</h2>
-                    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-                        <div class="left"></div>
-                        <div class="right">
-                            <span class="count_top"><i class="fa fa-calendar-o"></i> Vencidas</span>
-                            <div class="count red">2500</div>
-                            @*<span class="count_bottom"><i class="green">4% </i> From last Week</span>*@
+          
+                <div class="right_col" role="main">
+
+                    <div class="">
+                        <div class="page-title">
+                            <div class="title_left">
+                                <h3> Editar Departamentos </h3>
+                            </div>
+
+                            <div class="title_right">
+                                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Buscar...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">Go!</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-                        <div class="left"></div>
-                        <div class="right">
-                            <span class="count_top"><i class="fa fa-clock-o"></i> Proporcionales</span>
-                            <div class="count red">123.50</div>
-                            @*<span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>*@
+                        <div class="clearfix"></div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Departamentos</h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li>
+                                                        <a href="#">Settings 1</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Settings 2</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+
+                                        <div class="row">
+
+
+                                            <div class="col-md-55">
+                                                <div class="thumbnail">
+                                                    <div class="image view view-first">
+                                                        <img style="width: 100%; display: block;" src="~/Content/imgs/iconakatsuki.png" alt="image" />
+                                                        <div class="mask">
+                                                            <p>Texto Aqui</p>
+                                                            <div class="tools tools-bottom">
+                                                                <a href="#"><i class="fa fa-link"></i></a>
+                                                                <a href="#"><i class="fa fa-pencil"></i></a>
+                                                                <a href="#"><i class="fa fa-times"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="caption">
+                                                        <p>Snow and Ice Incoming for the South</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-55">
+                                                <div class="thumbnail">
+                                                    <div class="image view view-first">
+                                                        <img style="width: 100%; display: block;" src="~/Content/imgs/iconakatsuki.png" alt="image" />
+                                                        <div class="mask">
+                                                            <p>Texto Aqui</p>
+                                                            <div class="tools tools-bottom">
+                                                                <a href="#"><i class="fa fa-link"></i></a>
+                                                                <a href="#"><i class="fa fa-pencil"></i></a>
+                                                                <a href="#"><i class="fa fa-times"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="caption">
+                                                        <p>Snow and Ice Incoming for the South</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-55">
+                                                <div class="thumbnail">
+                                                    <div class="image view view-first">
+                                                        <img style="width: 100%; display: block;" src="~/Content/imgs/iconakatsuki.png" alt="image" />
+                                                        <div class="mask">
+                                                            <p>Texto Aqui</p>
+                                                            <div class="tools tools-bottom">
+                                                                <a href="#"><i class="fa fa-link"></i></a>
+                                                                <a href="#"><i class="fa fa-pencil"></i></a>
+                                                                <a href="#"><i class="fa fa-times"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="caption">
+                                                        <p>Snow and Ice Incoming for the South</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-55">
+                                                <div class="thumbnail">
+                                                    <div class="image view view-first">
+                                                        <img style="width: 100%; display: block;" src="~/Content/imgs/iconakatsuki.png" alt="image" />
+                                                        <div class="mask">
+                                                            <p>Texto Aqui</p>
+                                                            <div class="tools tools-bottom">
+                                                                <a href="#"><i class="fa fa-link"></i></a>
+                                                                <a href="#"><i class="fa fa-pencil"></i></a>
+                                                                <a href="#"><i class="fa fa-times"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="caption">
+                                                        <p>Snow and Ice Incoming for the South</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-55">
+                                                <div class="thumbnail">
+                                                    <div class="image view view-first">
+                                                        <img style="width: 100%; display: block;" src="~/Content/imgs/iconakatsuki.png" alt="image" />
+                                                        <div class="mask">
+                                                            <p>Texto Aqui</p>
+                                                            <div class="tools tools-bottom">
+                                                                <a href="#"><i class="fa fa-link"></i></a>
+                                                                <a href="#"><i class="fa fa-pencil"></i></a>
+                                                                <a href="#"><i class="fa fa-times"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="caption">
+                                                        <p>Snow and Ice Incoming for the South</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-55">
+                                                <div class="thumbnail">
+                                                    <div class="image view view-first">
+                                                        <img style="width: 100%; display: block;" src="~/Content/imgs/iconakatsuki.png" alt="image" />
+                                                        <div class="mask no-caption">
+                                                            <div class="tools tools-bottom">
+                                                                <a href="#"><i class="fa fa-link"></i></a>
+                                                                <a href="#"><i class="fa fa-pencil"></i></a>
+                                                                <a href="#"><i class="fa fa-times"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="caption">
+                                                        <p>
+                                                            <strong>Image Name</strong>
+                                                        </p>
+                                                        <p>Snow and Ice Incoming</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-55">
+                                                <div class="thumbnail">
+                                                    <div class="image view view-first">
+                                                        <img style="width: 100%; display: block;" src="~/Content/imgs/iconakatsuki.png" alt="image" />
+                                                        <div class="mask no-caption">
+                                                            <div class="tools tools-bottom">
+                                                                <a href="#"><i class="fa fa-link"></i></a>
+                                                                <a href="#"><i class="fa fa-pencil"></i></a>
+                                                                <a href="#"><i class="fa fa-times"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="caption">
+                                                        <p>
+                                                            <strong>Image Name</strong>
+                                                        </p>
+                                                        <p>Snow and Ice Incoming</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-55">
+                                                <div class="thumbnail">
+                                                    <div class="image view view-first">
+                                                        <img style="width: 100%; display: block;" src="~/Content/imgs/iconakatsuki.png" alt="image" />
+                                                        <div class="mask no-caption">
+                                                            <div class="tools tools-bottom">
+                                                                <a href="#"><i class="fa fa-link"></i></a>
+                                                                <a href="#"><i class="fa fa-pencil"></i></a>
+                                                                <a href="#"><i class="fa fa-times"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="caption">
+                                                        <p>
+                                                            <strong>Image Name</strong>
+                                                        </p>
+                                                        <p>Snow and Ice Incoming</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-55">
+                                                <div class="thumbnail">
+                                                    <div class="image view view-first">
+                                                        <img style="width: 100%; display: block;" src="~/Content/imgs/iconakatsuki.png" alt="image" />
+                                                        <div class="mask no-caption">
+                                                            <div class="tools tools-bottom">
+                                                                <a href="#"><i class="fa fa-link"></i></a>
+                                                                <a href="#"><i class="fa fa-pencil"></i></a>
+                                                                <a href="#"><i class="fa fa-times"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="caption">
+                                                        <p>
+                                                            <strong>Image Name</strong>
+                                                        </p>
+                                                        <p>Snow and Ice Incoming</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-55">
+                                                <div class="thumbnail">
+                                                    <div class="image view view-first">
+                                                        <img style="width: 100%; display: block;" src="~/Content/imgs/iconakatsuki.png" alt="image" />
+                                                        <div class="mask no-caption">
+                                                            <div class="tools tools-bottom">
+                                                                <a href="#"><i class="fa fa-link"></i></a>
+                                                                <a href="#"><i class="fa fa-pencil"></i></a>
+                                                                <a href="#"><i class="fa fa-times"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="caption">
+                                                        <p>
+                                                            <strong>Image Name</strong>
+                                                        </p>
+                                                        <p>Snow and Ice Incoming</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-
-                    <!--Data Page here :^)-->
 
                 </div>
-                <!-- /page content -->
+                    <!-- /page content -->
+                </div>
+                <!-- footer content -->
+                <footer class="">
+                    <div class="footer-cont pull-right">
+
+                        <span class="pull-right">
+                            <b>Design by</b> <a href="https://github.com/Kodo-no-Akatsuki" target="_blank"><img src="~/Content/imgs/iconakatsuki.png" class="footer-img" width="50" height="40" /></a>
+                        </span>
+                    </div>
+                    <div class="clearfix"></div>
+                </footer>
+                <!-- /footer content -->
             </div>
-            <!-- footer content -->
-            <footer class="">
-                <div class="footer-cont pull-right">
-
-                    <span class="pull-right">
-                        <b>Design by</b> <a href="https://github.com/Kodo-no-Akatsuki" target="_blank"><img src="~/Content/imgs/iconakatsuki.png" class="footer-img" width="50" height="40" /></a>
-                    </span>
-                </div>
-                <div class="clearfix"></div>
-            </footer>
-            <!-- /footer content -->
-        </div>
         <div id="custom_notifications" class="custom-notifications dsp_none">
             <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group"></ul>
             <div class="clearfix"></div>

@@ -19,6 +19,12 @@ namespace Vacation_System.Controllers
             return View(Session["User"] as Empleado);
         }
 
+        public ActionResult Departments()
+        {
+            if (Session["User"] == null) return LogOut();
+
+            return View();
+        }
         public RedirectToRouteResult LogOut()
         {
             Session["User"] = null;
@@ -31,7 +37,20 @@ namespace Vacation_System.Controllers
             return View();
         }
 
-        public string RegisterUser(Empleado emp)
+        [HttpPost]
+        public string CreateRole(RolesMirror rol)
+        {
+            ServiceClient service = new ServiceClient();
+
+            service.CreateRol(rol);
+
+            service.Close();
+
+            return "Rol creado exitosamente.";
+        }
+
+        [HttpPost]
+        public string Register(Empleado emp)
         {
             ServiceClient service = new ServiceClient();
 
