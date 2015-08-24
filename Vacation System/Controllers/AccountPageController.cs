@@ -31,7 +31,7 @@ namespace Vacation_System.Controllers
 		public string Departments(DepartamentoMirror departamentoMirror)
 		{
 			ServiceClient service = new ServiceClient();
-		    departamentoMirror.Activo = true;
+			departamentoMirror.Activo = true;
 
 			service.CreateDepartment(departamentoMirror);
 
@@ -48,6 +48,19 @@ namespace Vacation_System.Controllers
 
 			return View();
 		}
+
+		[HttpPost]
+		public string Roles(RolesMirror rol)
+		{
+			ServiceClient service = new ServiceClient();
+		    rol.Activo = true;
+
+			service.CreateRol(rol);
+
+			service.Close();
+
+			return "Rol creado exitosamente.";
+		}
 		
 		
 		public RedirectToRouteResult LogOut()
@@ -60,18 +73,6 @@ namespace Vacation_System.Controllers
 		public ViewResult Register()
 		{
 			return View();
-		}
-
-		[HttpPost]
-		public string Roles(RolesMirror rol)
-		{
-			ServiceClient service = new ServiceClient();
-
-			service.CreateRol(rol);
-
-			service.Close();
-
-			return "Rol creado exitosamente.";
 		}
 
 		[HttpPost]
