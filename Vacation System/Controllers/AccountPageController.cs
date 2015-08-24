@@ -23,7 +23,7 @@ namespace Vacation_System.Controllers
         {
             if (Session["User"] == null) return LogOut();
 
-            return View(Session["User"] as Empleado);
+            return View();
         }
         public RedirectToRouteResult LogOut()
         {
