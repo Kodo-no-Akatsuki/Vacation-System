@@ -21,13 +21,14 @@ namespace Web_Service
             VacationEntities entities = new VacationEntities();
             Empleado emp = new Empleado();
 
-            Usuarios user = (from u in entities.Usuarios
-                            where u.email == email && u.password == password && u.activo
-                            select u).FirstOrDefault();
+            var userResults = (from u in entities.Usuarios
+                               where u.email == email && u.password == password && u.activo
+                               select u);
 
-
-            if (user != null)
+            if (userResults != null && userResults.Any())
             {
+                Usuarios user = userResults.FirstOrDefault();
+
                 emp.User = new UserMirror(user);
 
                 var departamentos = (from j in user.tbl_jerarquia
