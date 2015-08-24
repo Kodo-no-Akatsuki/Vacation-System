@@ -21,13 +21,14 @@ namespace Web_Service
             VacationEntities entities = new VacationEntities();
             Empleado emp = new Empleado();
 
-            Usuarios user = (from u in entities.Usuarios
-                            where u.email == email && u.password == password && u.activo
-                            select u).FirstOrDefault();
+            var userResults = (from u in entities.Usuarios
+                               where u.email == email && u.password == password && u.activo
+                               select u);
 
-
-            if (user != null)
+            if (userResults != null && userResults.Any())
             {
+                Usuarios user = userResults.FirstOrDefault();
+
                 emp.User = new UserMirror(user);
 
                 var departamentos = (from j in user.tbl_jerarquia
@@ -160,27 +161,27 @@ namespace Web_Service
             user.password = userMirror.Password;
             user.activo = true;
 
-            foreach (DepartamentoMirror deptoMirror in empleado.Departamento)
-            {
-                Departamento depto = new Departamento();
+            //foreach (DepartamentoMirror deptoMirror in empleado.Departamento)
+            //{
+            //    Departamento depto = new Departamento();
 
-                depto.departamentoid = deptoMirror.DepartamentoId;
-                depto.descripcion = deptoMirror.Descripcion;
-                depto.activo = deptoMirror.Activo;
+            //    depto.departamentoid = deptoMirror.DepartamentoId;
+            //    depto.descripcion = deptoMirror.Descripcion;
+            //    depto.activo = deptoMirror.Activo;
 
-                user.tbl_departamento.Add(depto);
-            }
+            //    user.tbl_departamento.Add(depto);
+            //}
 
-            foreach (RolesMirror rolMirror in empleado.Roles)
-            {
-                Roles rol = new Roles();
+            //foreach (RolesMirror rolMirror in empleado.Roles)
+            //{
+            //    Roles rol = new Roles();
 
-                rol.rolesid = rolMirror.Id;
-                rol.descripcion = rolMirror.Descripcion;
-                rol.activo = rolMirror.Activo;
+            //    rol.rolesid = rolMirror.Id;
+            //    rol.descripcion = rolMirror.Descripcion;
+            //    rol.activo = rolMirror.Activo;
 
-                user.tbl_roles.Add(rol);
-            }
+            //    user.tbl_roles.Add(rol);
+            //}
 
             entities.Usuarios.Add(user);
             entities.SaveChanges();
