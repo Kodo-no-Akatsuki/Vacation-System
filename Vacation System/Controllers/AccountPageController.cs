@@ -19,6 +19,12 @@ namespace Vacation_System.Controllers
             return View(Session["User"] as Empleado);
         }
 
+        public ActionResult Departments()
+        {
+            if (Session["User"] == null) return LogOut();
+
+            return View();
+        }
         public RedirectToRouteResult LogOut()
         {
             Session["User"] = null;
