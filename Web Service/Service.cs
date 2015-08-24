@@ -160,27 +160,27 @@ namespace Web_Service
             user.password = userMirror.Password;
             user.activo = true;
 
-            foreach (DepartamentoMirror deptoMirror in empleado.Departamento)
-            {
-                Departamento depto = new Departamento();
+            //foreach (DepartamentoMirror deptoMirror in empleado.Departamento)
+            //{
+            //    Departamento depto = new Departamento();
 
-                depto.departamentoid = deptoMirror.DepartamentoId;
-                depto.descripcion = deptoMirror.Descripcion;
-                depto.activo = deptoMirror.Activo;
+            //    depto.departamentoid = deptoMirror.DepartamentoId;
+            //    depto.descripcion = deptoMirror.Descripcion;
+            //    depto.activo = deptoMirror.Activo;
 
-                user.tbl_departamento.Add(depto);
-            }
+            //    user.tbl_departamento.Add(depto);
+            //}
 
-            foreach (RolesMirror rolMirror in empleado.Roles)
-            {
-                Roles rol = new Roles();
+            //foreach (RolesMirror rolMirror in empleado.Roles)
+            //{
+            //    Roles rol = new Roles();
 
-                rol.rolesid = rolMirror.Id;
-                rol.descripcion = rolMirror.Descripcion;
-                rol.activo = rolMirror.Activo;
+            //    rol.rolesid = rolMirror.Id;
+            //    rol.descripcion = rolMirror.Descripcion;
+            //    rol.activo = rolMirror.Activo;
 
-                user.tbl_roles.Add(rol);
-            }
+            //    user.tbl_roles.Add(rol);
+            //}
 
             entities.Usuarios.Add(user);
             entities.SaveChanges();
