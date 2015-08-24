@@ -1,4 +1,4 @@
-﻿@model Vacation_System.ServiceReference.DepartamentoMirror
+﻿@model Vacation_System.ServiceReference.Empleado
 
 @{
     Layout = null;
@@ -36,12 +36,16 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+
 </head>
+
 <body class="nav-md">
+
     <div class="container body">
         <div class="main_container">
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
+
                     <div class="navbar nav_title" style="border: 0;">
                         <a href="#" class="site_title"><img src="~/Content/imgs/unilogo.png" class="uni-logo center-block" /><span></span></a>
                     </div>
@@ -53,7 +57,7 @@
                         </div>
                         <div class="profile_info">
                             <span>Bienvenido,</span>
-                            <h2>@ViewData.Model.User.PrimerNombre</h2>
+                            <h2>@*@ViewData.Model.User.PrimerNombre*@</h2>
                         </div>
                     </div>
                     <!-- /menu prile quick info -->
@@ -64,7 +68,7 @@
                             <h3>None</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a href="@Url.Action("Dashboard")"><i class="fa fa-home"></i>Inicio</a>
+                                    <a href="#"><i class="fa fa-home"></i>Inicio</a>
 
                                 </li>
                                 <li>
@@ -82,7 +86,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out"></i>Cerrar Sesion</a>
+                                    <a href="#"><i class="fa fa-sign-out"></i>Cerrar Sesion</a>
                                 </li>
                             </ul>
                         </div>
@@ -103,12 +107,12 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/Content/imgs/img.png" alt="">@ViewData.Model.User.PrimerNombre @ViewData.Model.User.SegundoNombre
+                                    <img src="~/Content/imgs/img.png" alt="">@*@ViewData.Model.User.PrimerNombre @ViewData.Model.User.SegundoNombre*@
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                                     <li>
-                                        <a href="@Url.Action("Profile")">
+                                        <a href="#">
                                             <span class="fa fa-user pull-right"></span>
                                             <span>Perfil</span>
                                         </a>
@@ -128,7 +132,7 @@
                                     </li>
                                     <li>
                                         <!--<a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>-->
-                                        <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesion</a>
+                                        <a href="#"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesion</a>
                                 </ul>
                             </li>
                             <li role="presentation" class="dropdown">
@@ -144,7 +148,7 @@
                                                 <img src="~/Content/images/img.png" alt="Profile Image" />
                                             </span>
                                             <span>
-                                                <span>@ViewData.Model.User.PrimerNombre  </span>
+                                                <span>@*@ViewData.Model.User.PrimerNombre*@  </span>
                                                 <span class="time">Hace 3 mins</span>
                                             </span>
                                             <span class="message">
@@ -413,8 +417,21 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            
+                                           <div class="col-md-offset-10">
+                                               <input type="text" class="form-control pull-right" placeholder="">
+                                              
+                                               <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#loginModal">Agregar Nuevo</button>
+                                           </div>
+                                                
+                                                    
+                                                    
+                                                
+                                           
 
-                                        </div>
+
+
+                                            </div>
 
                                     </div>
                                 </div>
