@@ -3,37 +3,30 @@ using Vacation_System.ServiceReference;
 
 namespace Vacation_System.Controllers
 {
-    public class AccountPageController : Controller
-    {
-        public ActionResult Dashboard()
-        {
-            if (Session["User"] == null) return LogOut();
+	public class AccountPageController : Controller
+	{
+		public ActionResult Dashboard()
+		{
+			if (Session["User"] == null) return LogOut();
 
-            return View(Session["User"] as Empleado);
-        }
+			return View(Session["User"] as Empleado);
+		}
 
-        public ActionResult Profile()
-        {
-            if (Session["User"] == null) return LogOut();
+		public ActionResult Profile()
+		{
+			if (Session["User"] == null) return LogOut();
 
-            return View(Session["User"] as Empleado);
-        }
+			return View(Session["User"] as Empleado);
+		}
 
-        public ActionResult Departments()
-        {
-            if (Session["User"] == null) return LogOut();
+		[HttpGet]
+		public ActionResult Departments()
+		{
+			if (Session["User"] == null) return LogOut();
 
-            return View();
-        }
+			return View();
+		}
 
-        
-        public ActionResult Roles()
-        {
-            if (Session["User"] == null) return LogOut();
-
-            return View();
-        }
-        
         [HttpPost]
         public string Departments(DepartamentoMirror departamentoMirror)
         {
@@ -45,42 +38,51 @@ namespace Vacation_System.Controllers
 
             return "El departamento ha sido creado";
         }
+
 		
-        
-        public RedirectToRouteResult LogOut()
-        {
-            Session["User"] = null;
+		[HttpGet]
+		public ActionResult Roles()
+		{
+			if (Session["User"] == null) return LogOut();
 
-            return RedirectToAction("Index", "LogIn");
-        }
+			return View();
+		}
+		
+		
+		public RedirectToRouteResult LogOut()
+		{
+			Session["User"] = null;
 
-        public ViewResult Register()
-        {
-            return View();
-        }
+			return RedirectToAction("Index", "LogIn");
+		}
 
-        [HttpPost]
-        public string CreateRole(RolesMirror rol)
-        {
-            ServiceClient service = new ServiceClient();
+		public ViewResult Register()
+		{
+			return View();
+		}
 
-            service.CreateRol(rol);
+		[HttpPost]
+		public string Roles(RolesMirror rol)
+		{
+			ServiceClient service = new ServiceClient();
 
-            service.Close();
+			service.CreateRol(rol);
 
-            return "Rol creado exitosamente.";
-        }
+			service.Close();
 
-        [HttpPost]
-        public string Register(Empleado emp)
-        {
-            ServiceClient service = new ServiceClient();
+			return "Rol creado exitosamente.";
+		}
 
-            service.CreateUser(emp);
+		[HttpPost]
+		public string Register(Empleado emp)
+		{
+			ServiceClient service = new ServiceClient();
 
-            service.Close();
+			service.CreateUser(emp);
 
-            return "Se ha creado el usuario con exito";
-        }
-    }
+			service.Close();
+
+			return "Se ha creado el usuario con exito";
+		}
+	}
 }
