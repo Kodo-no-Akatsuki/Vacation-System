@@ -1,4 +1,4 @@
-﻿@model Vacation_System.ServiceReference.Empleado
+﻿@model Vacation_System.ServiceReference.DepartamentoMirror
 
 @{
     Layout = null;
@@ -418,11 +418,14 @@
                                                 </div>
                                             </div>
                                             
-                                           <div class="col-md-offset-10">
-                                               <input type="text" class="form-control pull-right" placeholder="">
-                                              
-                                               <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#loginModal">Agregar Nuevo</button>
-                                           </div>
+                                           @using (Html.BeginForm())
+                                           {
+                                            <div class="col-md-offset-10">
+                                                <input type="text" id="Descripcion" name="Descripcion" class="form-control pull-right" placeholder="Nombre">
+
+                                                <input type="submit" class="btn btn-info pull-right" id="Des" value="Agregar Nuevo" />
+                                            </div>
+                                           }
                                                 
                                                     
                                                     
