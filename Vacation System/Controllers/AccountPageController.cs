@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 using Vacation_System.ServiceReference;
 
 namespace Vacation_System.Controllers
@@ -26,12 +26,27 @@ namespace Vacation_System.Controllers
             return View();
         }
 
+        
         public ActionResult Roles()
         {
             if (Session["User"] == null) return LogOut();
 
             return View();
         }
+        
+        [HttpPost]
+        public string Departments(DepartamentoMirror departamentoMirror)
+        {
+            ServiceClient service = new ServiceClient();
+
+            service.CreateDepartment(departamentoMirror);
+
+            service.Close();
+
+            return "El departamento ha sido creado";
+        }
+		
+        
         public RedirectToRouteResult LogOut()
         {
             Session["User"] = null;

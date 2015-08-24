@@ -189,7 +189,16 @@ namespace Web_Service
 
         public void CreateDepartment(DepartamentoMirror depto)
         {
-            
+            VacationEntities entities = new VacationEntities();
+            Departamento departamento = new Departamento
+            {
+                activo = depto.Activo,
+                departamentoid = depto.DepartamentoId,
+                descripcion = depto.Descripcion
+            };
+
+            entities.Departamentoes.Add(departamento);
+            entities.SaveChanges();
         }
 
         public void CreateRol(RolesMirror mirror)
