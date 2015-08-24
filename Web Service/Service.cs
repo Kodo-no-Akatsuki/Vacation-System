@@ -49,35 +49,35 @@ namespace Web_Service
 
                 //REVISAR ESTOS QUERIES-------------------------------------------------
 
-                //var roles = from r in entities.Roles
-                //    from u in r.tbl_usuarios
-                //    where r.rolesid == u.talento_humano
-                //    select r;
+                var roles = from r in entities.Roles
+                            from u in r.tbl_usuarios
+                            where r.rolesid == u.talento_humano
+                            select r;
 
-                //var permisos = from p in entities.Permisos
-                //    from r in roles
-                //    where p.permisosid == r.rolesid
-                //    select p;
+                var permisos = from p in entities.Permisos
+                               from r in roles
+                               where p.permisosid == r.rolesid
+                               select p;
 
-                //foreach (Roles rol in roles)
-                //{
-                //    emp.Roles.Add(new RolesMirror
-                //    {
-                //        Activo = rol.activo,
-                //        Descripcion = rol.descripcion,
-                //        Id = rol.rolesid
-                //    });
-                //}
+                foreach (Roles rol in roles)
+                {
+                    emp.Roles.Add(new RolesMirror
+                    {
+                        Activo = rol.activo,
+                        Descripcion = rol.descripcion,
+                        Id = rol.rolesid
+                    });
+                }
 
-                //foreach (Permisos permiso in permisos)
-                //{
-                //    emp.Permisos.Add(new PermisosMirror
-                //    {
-                //        Activo = permiso.activo,
-                //        Descripcion = permiso.descripcion,
-                //        PermisosId = permiso.permisosid
-                //    });
-                //}
+                foreach (Permisos permiso in permisos)
+                {
+                    emp.Permisos.Add(new PermisosMirror
+                    {
+                        Activo = permiso.activo,
+                        Descripcion = permiso.descripcion,
+                        PermisosId = permiso.permisosid
+                    });
+                }
 
                 //------------------------------------------------------------------------
 
