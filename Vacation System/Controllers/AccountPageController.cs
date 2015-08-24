@@ -32,7 +32,11 @@ namespace Vacation_System.Controllers
         }
 
         [HttpPost]
+<<<<<<< HEAD
         public string Register(Empleado emp)
+=======
+        public string RegisterUser(Empleado emp)
+>>>>>>> create department
         {
             ServiceClient service = new ServiceClient();
 
