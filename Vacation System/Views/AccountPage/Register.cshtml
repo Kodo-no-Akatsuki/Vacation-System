@@ -22,7 +22,7 @@
         var charset = "abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         var result = "";
         for (var i = 0, n = charset.length; i < length; i++) {
-            result += charset.charAt(Math.floor(Math.random() * n));
+            result += charset.charAt(Math.floor(Math.random()*n));
         }
         document.forms[0].password.value = result;
 
@@ -94,7 +94,7 @@
                         <div class="form-group">
                             <label for="InputDate">Fecha de Ingreso</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="User.datepicker" name="User.datepicker" required>
+                                <input type="text" class="form-control" id="datepicker" name="User.datepicker" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
                             <label for="InputPass">Clave</label>
                             <div class="input-group">
 
-                                <input type="text" class="form-control" id="User.Password" title="Clave Sugerida" value="" name="User.Password" required>
+                                <input type="text" class="form-control" id="password" title="Clave Sugerida" value="" name="password" required>
 
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
