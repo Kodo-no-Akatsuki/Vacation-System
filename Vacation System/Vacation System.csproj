@@ -872,6 +872,7 @@
     <Content Include="Views\AccountPage\Profile.cshtml" />
     <Content Include="Views\AccountPage\Register.cshtml" />
     <Content Include="Views\AccountPage\Departments.cshtml" />
+    <Content Include="Views\AccountPage\Roles.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
