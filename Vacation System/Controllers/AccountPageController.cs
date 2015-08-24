@@ -25,6 +25,19 @@ namespace Vacation_System.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public string Departments(DepartamentoMirror departamentoMirror)
+        {
+            ServiceClient service = new ServiceClient();
+
+            service.CreateDepartment(departamentoMirror);
+
+            service.Close();
+
+            return "El departamento ha sido creado";
+        }
+
         public RedirectToRouteResult LogOut()
         {
             Session["User"] = null;
@@ -47,19 +60,6 @@ namespace Vacation_System.Controllers
             service.Close();
 
             return "Se ha creado el usuario con exito";
-        }
-
-        [HttpGet]
-        public ViewResult CreateDepartment()
-        {
-            //@Kelvin, ahi le especificas el view que tendra el formulario de Departamentos.
-            return View();
-        }
-
-        [HttpPost]
-        public string CreateDepartment(DepartamentoMirror departamentoMirror)
-        {
-            
         }
     }
 }
