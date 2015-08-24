@@ -1,4 +1,5 @@
-﻿
+﻿@model Vacation_System.ServiceReference.Empleado
+
 @{
     Layout = null;
 }
@@ -51,7 +52,7 @@
                         </div>
                         <div class="profile_info">
                             <span>Bienvenido,</span>
-                            <h2>Test User</h2>
+                            <h2>@ViewData.Model.User.PrimerNombre</h2>
                         </div>
                     </div>
                     <!-- /menu prile quick info -->
@@ -62,7 +63,7 @@
                             <h3>None</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a href="#"><i class="fa fa-home"></i>Inicio</a>
+                                    <a href="@Url.Action("Dashboard")"><i class="fa fa-home"></i>Inicio</a>
 
                                 </li>
                                 <li>
@@ -78,7 +79,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-sign-out"></i>Cerrar Sesion</a>
+                                    <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out"></i>Cerrar Sesion</a>
                                 </li>
                             </ul>
                         </div>
@@ -99,12 +100,12 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/Content/imgs/img.png" alt="">Test User
+                                    <img src="~/Content/imgs/img.png" alt="">@ViewData.Model.User.PrimerNombre @ViewData.Model.User.SegundoNombre
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                                     <li>
-                                        <a href="#">
+                                        <a href="@Url.Action("Profile")">
                                             <span class="fa fa-user pull-right"></span>
                                             <span>Perfil</span>
                                         </a>
@@ -123,7 +124,7 @@
                                     </li>
                                     <li>
                                         <!--<a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>-->
-                                        <a href="#"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesion</a>
+                                        <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesion</a>
                                 </ul>
                             </li>
                             <li role="presentation" class="dropdown">
@@ -139,7 +140,7 @@
                                                 <img src="~/Content/images/img.png" alt="Profile Image" />
                                             </span>
                                             <span>
-                                                <span>Test User </span>
+                                                <span>@ViewData.Model.User.PrimerNombre  </span>
                                                 <span class="time">Hace 3 mins</span>
                                             </span>
                                             <span class="message">
