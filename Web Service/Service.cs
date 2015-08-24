@@ -201,9 +201,19 @@ namespace Web_Service
             entities.SaveChanges();
         }
 
-        public void CreateRol(RolesMirror rol)
+        public void CreateRol(RolesMirror mirror)
         {
-            
+            VacationEntities entities = new VacationEntities();
+
+            Roles rol = new Roles
+            {
+                activo = mirror.Activo,
+                descripcion = mirror.Descripcion,
+                rolesid = mirror.Id
+            };
+
+            entities.Roles.Add(rol);
+            entities.SaveChanges();
         }
     }
 }
