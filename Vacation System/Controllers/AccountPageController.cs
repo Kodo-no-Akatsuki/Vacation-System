@@ -25,6 +25,13 @@ namespace Vacation_System.Controllers
 
             return View();
         }
+
+        public ActionResult Roles()
+        {
+            if (Session["User"] == null) return LogOut();
+
+            return View();
+        }
         public RedirectToRouteResult LogOut()
         {
             Session["User"] = null;
