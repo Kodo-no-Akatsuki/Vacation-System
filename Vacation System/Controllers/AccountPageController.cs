@@ -27,17 +27,18 @@ namespace Vacation_System.Controllers
 			return View();
 		}
 
-        [HttpPost]
-        public string Departments(DepartamentoMirror departamentoMirror)
-        {
-            ServiceClient service = new ServiceClient();
+		[HttpPost]
+		public string Departments(DepartamentoMirror departamentoMirror)
+		{
+			ServiceClient service = new ServiceClient();
+		    departamentoMirror.Activo = true;
 
-            service.CreateDepartment(departamentoMirror);
+			service.CreateDepartment(departamentoMirror);
 
-            service.Close();
+			service.Close();
 
-            return "El departamento ha sido creado";
-        }
+			return "El departamento ha sido creado";
+		}
 
 		
 		[HttpGet]
