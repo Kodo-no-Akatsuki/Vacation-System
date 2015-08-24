@@ -48,5 +48,18 @@ namespace Vacation_System.Controllers
 
             return "Se ha creado el usuario con exito";
         }
+
+        [HttpGet]
+        public ViewResult CreateDepartment()
+        {
+            //@Kelvin, ahi le especificas el view que tendra el formulario de Departamentos.
+            return View();
+        }
+
+        [HttpPost]
+        public string CreateDepartment(DepartamentoMirror departamentoMirror)
+        {
+            
+        }
     }
 }
