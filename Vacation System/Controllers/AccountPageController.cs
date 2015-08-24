@@ -51,7 +51,6 @@ namespace Vacation_System.Controllers
         }
 
         [HttpPost]
-<<<<<<< HEAD
         public string CreateRole(RolesMirror rol)
         {
             ServiceClient service = new ServiceClient();
@@ -64,13 +63,7 @@ namespace Vacation_System.Controllers
         }
 
         [HttpPost]
-=======
-<<<<<<< HEAD
->>>>>>> create department
         public string Register(Empleado emp)
-=======
-        public string RegisterUser(Empleado emp)
->>>>>>> create department
         {
             ServiceClient service = new ServiceClient();
 
