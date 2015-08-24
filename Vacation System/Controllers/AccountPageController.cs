@@ -31,7 +31,8 @@ namespace Vacation_System.Controllers
             return View();
         }
 
-        public string RegisterUser(Empleado emp)
+        [HttpPost]
+        public string Register(Empleado emp)
         {
             ServiceClient service = new ServiceClient();
 
