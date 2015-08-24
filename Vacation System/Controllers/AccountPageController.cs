@@ -25,6 +25,19 @@ namespace Vacation_System.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public string Departments(DepartamentoMirror departamentoMirror)
+        {
+            ServiceClient service = new ServiceClient();
+
+            service.CreateDepartment(departamentoMirror);
+
+            service.Close();
+
+            return "El departamento ha sido creado";
+        }
+		
         public RedirectToRouteResult LogOut()
         {
             Session["User"] = null;
