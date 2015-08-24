@@ -51,6 +51,18 @@ namespace Vacation_System.Controllers
         }
 
         [HttpPost]
+        public string CreateRole(RolesMirror rol)
+        {
+            ServiceClient service = new ServiceClient();
+
+            service.CreateRol(rol);
+
+            service.Close();
+
+            return "Rol creado exitosamente.";
+        }
+
+        [HttpPost]
         public string Register(Empleado emp)
         {
             ServiceClient service = new ServiceClient();
