@@ -54,7 +54,7 @@ namespace Vacation_System.Controllers
 		}
 
 		[HttpPost]
-		public string Roles(RolesMirror rol)
+		public RedirectToRouteResult Roles(RolesMirror rol)
 		{
 			ServiceClient service = new ServiceClient();
 			rol.Activo = true;
@@ -63,7 +63,7 @@ namespace Vacation_System.Controllers
 
 			service.Close();
 
-			return "Rol creado exitosamente.";
+		    return RedirectToAction("Roles");
 		}
 		
 		
