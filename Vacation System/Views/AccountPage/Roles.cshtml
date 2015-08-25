@@ -81,7 +81,7 @@
                             <h3>None</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a href="#"><i class="fa fa-home"></i>Inicio</a>
+                                    <a href="@Url.Action("Dashboard")"><i class="fa fa-home"></i>Inicio</a>
 
                                 </li>
                                 <li>
@@ -94,12 +94,18 @@
                                     <a href="#"><i class="fa fa-gear"></i>Ajustes<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li>
-                                            <a href="#"><i class="fa fa-building pull-left"></i>Editar departamentos</a>
+                                            <a href="@Url.Action("Departments")"><i class="fa fa-building pull-left"></i>Editar departamentos</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Roles")"><i class="fa fa-list-alt pull-left"></i>Editar roles</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Register")"><i class="fa fa-user pull-left"></i>Registrar Usuario</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-sign-out"></i>Cerrar Sesion</a>
+                                    <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out"></i>Cerrar Sesion</a>
                                 </li>
                             </ul>
                         </div>
@@ -125,7 +131,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                                     <li>
-                                        <a href="#">
+                                        <a href="@Url.Action("Profile")">
                                             <span class="fa fa-user pull-right"></span>
                                             <span>Perfil</span>
                                         </a>
@@ -145,7 +151,7 @@
                                     </li>
                                     <li>
                                         <!--<a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>-->
-                                        <a href="#"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesion</a>
+                                        <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesion</a>
                                 </ul>
                             </li>
                             <li role="presentation" class="dropdown">
@@ -228,7 +234,7 @@
                             <td>123441</td>
                             <td>Jefe Inmediato</td>
                             <td>
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-content">Editar</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-content">Editar</button>
 
                                 <div id="modal-content" class="modal fade" tabindex="-1" role="dialog">
                                     <div class="modal-dialog">
@@ -258,7 +264,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="#" class="btn" data-dismiss="modal">Close</a>
-                                                <a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-info">Guardar Cambios</a>
+                                                <a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary">Guardar Cambios</a>
                                             </div>
                                         </div>
                                     </div>
@@ -270,7 +276,7 @@
                         <tr>
                             <td>241244</td>
                             <td>Empleado</td>
-                            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-content">Editar</button></td>
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-content">Editar</button></td>
                            
                         </tr>
                       
