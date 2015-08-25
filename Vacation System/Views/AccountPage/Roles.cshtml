@@ -230,58 +230,54 @@
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>123441</td>
-                            <td>Jefe Inmediato</td>
-                            <td>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-content">Editar</button>
+                   @foreach (var departamento in Model)
+                   {
+                    <tr>
+                        <td>@departamento.Id</td>
+                        <td>@departamento.Descripcion</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-content">Editar</button>
+                        </td>
 
-                                <div id="modal-content" class="modal fade" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">×</button>
-                                                <h3>Permisos</h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="checkbox" name="permisos" value="createuser"> Crear Usuario
-                                                <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
-                                                <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
-                                                <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
-                                                <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles
+                    </tr>
+                    
+                   }
+                        <div id="modal-content" class="modal fade" tabindex="-1" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">×</button>
+                                        <h3>Permisos</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="checkbox" name="permisos" value="createuser"> Crear Usuario
+                                        <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
+                                        <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
+                                        <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
+                                        <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles
 
-                                                <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
-                                                <script language="JavaScript">
-                                                    function toggle(source) {
-                                                        checkboxes = document.getElementsByName('permisos');
-                                                        for (var i = 0, n = checkboxes.length; i < n; i++) {
-                                                            checkboxes[i].checked = source.checked;
-                                                        }
+                                        <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
+                                        <script language="JavaScript">
+                                            function toggle(source) {
+                                                checkboxes = document.getElementsByName('permisos');
+                                                for (var i = 0, n = checkboxes.length; i < n; i++) {
+                                                    checkboxes[i].checked = source.checked;
+                                                }
 
-                                                    }
-                                                </script>
+                                            }
+                                        </script>
 
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a href="#" class="btn" data-dismiss="modal">Close</a>
-                                                <a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary">Guardar Cambios</a>
-                                            </div>
-                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="#" class="btn" data-dismiss="modal">Close</a>
+                                        <a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary">Guardar Cambios</a>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
 
-                            </td>
                       
-                        </tr>
-                        <tr>
-                            <td>241244</td>
-                            <td>Empleado</td>
-                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-content">Editar</button></td>
-                           
-                        </tr>
-                      
-                       
-                       
+                                            
                     </tbody>
                 </table>
                     </div>
