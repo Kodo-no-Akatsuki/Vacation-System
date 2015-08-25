@@ -24,7 +24,9 @@ namespace Vacation_System.Controllers
 		{
 			if (Session["User"] == null) return LogOut();
 
-			return View();
+			ServiceClient service = new ServiceClient();
+
+			return View(service.LoadDepartments());
 		}
 
 		[HttpPost]
@@ -46,14 +48,16 @@ namespace Vacation_System.Controllers
 		{
 			if (Session["User"] == null) return LogOut();
 
-			return View();
+			ServiceClient service = new ServiceClient();
+
+			return View(service.LoadRoles());
 		}
 
 		[HttpPost]
 		public string Roles(RolesMirror rol)
 		{
 			ServiceClient service = new ServiceClient();
-		    rol.Activo = true;
+			rol.Activo = true;
 
 			service.CreateRol(rol);
 

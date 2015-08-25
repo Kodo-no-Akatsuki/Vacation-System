@@ -862,6 +862,12 @@
     <Content Include="Service References\ServiceReference\Vacation_System.ServiceReference.Empleado.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\ServiceReference\Vacation_System.ServiceReference.DepartamentoMirror1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference\Vacation_System.ServiceReference.RolesMirror1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ServiceReference\Web_Service.Mirror_Classes.xsd">
       <SubType>Designer</SubType>
     </None>
