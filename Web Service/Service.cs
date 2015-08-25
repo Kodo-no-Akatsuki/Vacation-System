@@ -158,6 +158,7 @@ namespace Web_Service
             user.segundo_apellido = userMirror.SegundoApellido;
             user.email = userMirror.Email;
             user.fecha_ingreso = DateTime.Parse(userMirror.FechaIngreso.ToString());
+            user.fecha_creacion = DateTime.Now;
             user.password = userMirror.Password;
             user.activo = true;
 
