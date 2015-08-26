@@ -9,7 +9,7 @@ namespace Web_Service.Mirror_Classes
         public int Id { get; set; }
 
         [DataMember]
-        public string rolname { get; set; }
+        public string Descripcion { get; set; }
 
         [DataMember]
         public bool Activo { get; set; }

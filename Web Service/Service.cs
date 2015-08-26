@@ -65,7 +65,7 @@ namespace Web_Service
                     emp.Roles.Add(new RolesMirror
                     {
                         Activo = rol.activo,
-                        rolname = rol.descripcion,
+                        Descripcion = rol.descripcion,
                         Id = rol.rolesid
                     });
                 }
@@ -166,7 +166,7 @@ namespace Web_Service
             //    Departamento depto = new Departamento();
 
             //    depto.departamentoid = deptoMirror.DepartamentoId;
-            //    depto.descripcion = deptoMirror.rolname;
+            //    depto.descripcion = deptoMirror.Descripcion;
             //    depto.activo = deptoMirror.Activo;
 
             //    user.tbl_departamento.Add(depto);
@@ -177,7 +177,7 @@ namespace Web_Service
             //    Roles rol = new Roles();
 
             //    rol.rolesid = rolMirror.Id;
-            //    rol.descripcion = rolMirror.rolname;
+            //    rol.descripcion = rolMirror.Descripcion;
             //    rol.activo = rolMirror.Activo;
 
             //    user.tbl_roles.Add(rol);
@@ -208,7 +208,7 @@ namespace Web_Service
             Roles rol = new Roles
             {
                 activo = mirror.Activo,
-                descripcion = mirror.rolname,
+                descripcion = mirror.Descripcion,
                 rolesid = mirror.Id
             };
 
@@ -260,7 +260,7 @@ namespace Web_Service
                 roles.Add(new RolesMirror
                 {
                     Activo = query[i].activo,
-                    rolname = query[i].descripcion,
+                    Descripcion = query[i].descripcion,
                     Id = query[i].rolesid
                 });
             }

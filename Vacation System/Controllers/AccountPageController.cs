@@ -59,7 +59,7 @@ namespace Vacation_System.Controllers
 		[HttpPost]
 		public RedirectToRouteResult Roles(RolesMirror rol)
 		{
-		    if (rol.rolname == null)
+		    if (rol.Descripcion == null)
 		        return RedirectToAction("Roles");
 
 			ServiceClient service = new ServiceClient();
