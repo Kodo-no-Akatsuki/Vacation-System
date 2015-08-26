@@ -81,7 +81,7 @@ namespace Vacation_System.Controllers
 		public string Register(Empleado emp)
 		{
 			ServiceClient service = new ServiceClient();
-
+            
 			service.CreateUser(emp);
 
 			service.Close();

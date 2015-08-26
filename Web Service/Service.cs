@@ -24,7 +24,7 @@ namespace Web_Service
             var userResults = (from u in entities.Usuarios
                                where u.email == email && u.password == password && u.activo
                                select u);
-
+            
             if (userResults != null && userResults.Any())
             {
                 Usuarios user = userResults.FirstOrDefault();
@@ -173,16 +173,16 @@ namespace Web_Service
                 user.tbl_departamento.Add(depto);
             }
 
-            //foreach (RolesMirror rolMirror in empleado.Roles)
-            //{
-            //    Roles rol = new Roles();
+            foreach (RolesMirror rolMirror in empleado.Roles)
+            {
+                Roles rol = new Roles();
 
-            //    rol.rolesid = rolMirror.Id;
-            //    rol.descripcion = rolMirror.Descripcion;
-            //    rol.activo = rolMirror.Activo;
+                rol.rolesid = rolMirror.Id;
+                rol.descripcion = rolMirror.Descripcion;
+                rol.activo = true;
 
-            //    user.tbl_roles.Add(rol);
-            //}
+                user.tbl_roles.Add(rol);
+            }
 
             entities.Usuarios.Add(user);
             entities.SaveChanges();
