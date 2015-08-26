@@ -1,4 +1,4 @@
-﻿@model Vacation_System.ServiceReference.RolesMirror
+﻿@model IEnumerable<Vacation_System.ServiceReference.RolesMirror>
 
 @{
     Layout = null;
@@ -191,106 +191,143 @@
             </div>
             <!-- /top navigation -->
             <!-- page content -->
-            <div class="right_col" role="main">
-             
-              
-                        <div class="clearfix"></div>
+            @using (Html.BeginForm())
+            {
+                <div class="right_col" role="main">
 
-                <script>
-                      var row;
-                      var count = 2;
-                      $(document).ready(function () {
-                          row = $('#example').dataTable({
-                              columnDefs: [{
-                                  targets: [0],
-                                  orderData: [0, 1]
-                              }, {
-                                  targets: [1],
-                                  orderData: [1, 0]
-                              }, ]
-                          });
-                      });
 
-                      function fnClickAddRow() {
-                          //Add here dynamic Mysql values
-                          row.fnAddData([count+".1", count+".2", count+".3"]);
-                          count++;
-                      }
-                </script>
+                    <div class="clearfix"></div>
 
-                <table id="example" class="display" cellspacing="0" width="100%">
+                    <script>
+                        var row;
+                        $(document).ready(function () {
+                            row = $('#example').dataTable({
+                                columnDefs: [{
+                                    targets: [0],
+                                    orderData: [0, 1]
+                                }, {
+                                    targets: [1],
+                                    orderData: [1, 0]
+                                }, ]
+                            });
+                        });
 
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Rol</th>
-                            <th>Permisos</th>
-              
-                        </tr>
-                    </thead>
+                        function fnClickAddRow() {
+                            //Add here dynamic Mysql values
+                            row.fnAddData([@Model.Count()+1, document.getElementById("Descripcion").value, document.getElementById("editbutton").innerHTML]);
+                            count++;
+                        }
+                    </script>
 
-                    <tbody>
-                        <tr>
-                            <td>123441</td>
-                            <td>Jefe Inmediato</td>
-                            <td>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-content">Editar</button>
+                    <table id="example" class="display" cellspacing="0" width="100%">
 
-                                <div id="modal-content" class="modal fade" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">×</button>
-                                                <h3>Permisos</h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="checkbox" name="permisos" value="createuser"> Crear Usuario
-                                                <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
-                                                <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
-                                                <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
-                                                <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Rol</th>
+                                <th>Permisos</th>
 
-                                                <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
-                                                <script language="JavaScript">
-                                                    function toggle(source) {
-                                                        checkboxes = document.getElementsByName('permisos');
-                                                        for (var i = 0, n = checkboxes.length; i < n; i++) {
-                                                            checkboxes[i].checked = source.checked;
-                                                        }
+                            </tr>
+                        </thead>
 
+                        <tbody>
+                            @foreach (var rol in Model)
+                            {
+                                <tr>
+                                    <td>@rol.Id</td>
+                                    <td>@rol.Descripcion</td>
+                                    <td id="editbutton">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-content">Editar</button>
+                                    </td>
+
+                                </tr>
+
+                            }
+
+                            <!--Modify Access Modal-->
+                            <div id="modal-content" class="modal fade" tabindex="-1" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">×</button>
+                                            <h3>Permisos</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="checkbox" name="permisos" value="createuser"> Crear Usuario
+                                            <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
+                                            <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
+                                            <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
+                                            <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles
+
+                                            <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
+                                            <script language="JavaScript">
+                                                function toggle(source) {
+                                                    checkboxes = document.getElementsByName('permisos');
+                                                    for (var i = 0, n = checkboxes.length; i < n; i++) {
+                                                        checkboxes[i].checked = source.checked;
                                                     }
-                                                </script>
 
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a href="#" class="btn" data-dismiss="modal">Close</a>
-                                                <a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary">Guardar Cambios</a>
-                                            </div>
+                                                }
+                                            </script>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#" class="btn" data-dismiss="modal">Close</a>
+                                            <a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary">Guardar Cambios</a>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                            </td>
-                      
-                        </tr>
-                        <tr>
-                            <td>241244</td>
-                            <td>Empleado</td>
-                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-content">Editar</button></td>
-                           
-                        </tr>
-                      
-                       
-                       
-                    </tbody>
-                </table>
-                    </div>
+                            <!--Add Rol Modal-->
 
+                            <div id="addmodal" class="modal fade" tabindex="-1" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">×</button>
+                                            <h3>Roles</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="text" id="Descripcion" name="Descripcion" placeholder="Nombre" />
+                                            <h3>Permisos</h3>
+                                            <input type="checkbox" name="permisos" value="createuser"> Crear Usuario
+                                            <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
+                                            <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
+                                            <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
+                                            <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles
+
+                                            <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
+                                            <script language="JavaScript">
+                                                function toggle(source) {
+                                                    checkboxes = document.getElementsByName('permisos');
+                                                    for (var i = 0, n = checkboxes.length; i < n; i++) {
+                                                        checkboxes[i].checked = source.checked;
+                                                    }
+
+                                                }
+                                            </script>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#" class="btn" data-dismiss="modal">Close</a>
+                                            <input type="submit" name="submit" id="submit" onclick="fnClickAddRow();" value="Guardar" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <br />
+                    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addmodal">Agregar Rol</button>
                 </div>
 
 
-            </div>
-
+            }
             <!-- /page content -->
         </div>
         <!-- footer content -->

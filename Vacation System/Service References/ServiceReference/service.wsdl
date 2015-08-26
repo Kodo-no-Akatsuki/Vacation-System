@@ -38,6 +38,18 @@
   <wsdl:message name="IService_CreateRol_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateRolResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_LoadDepartments_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoadDepartments" />
+  </wsdl:message>
+  <wsdl:message name="IService_LoadDepartments_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoadDepartmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_LoadRoles_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoadRoles" />
+  </wsdl:message>
+  <wsdl:message name="IService_LoadRoles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoadRolesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetData" message="tns:IService_GetData_InputMessage" />
@@ -58,6 +70,14 @@
     <wsdl:operation name="CreateRol">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateRol" message="tns:IService_CreateRol_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/CreateRolResponse" message="tns:IService_CreateRol_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartments">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/LoadDepartments" message="tns:IService_LoadDepartments_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/LoadDepartmentsResponse" message="tns:IService_LoadDepartments_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadRoles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/LoadRoles" message="tns:IService_LoadRoles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/LoadRolesResponse" message="tns:IService_LoadRoles_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -100,6 +120,24 @@
     </wsdl:operation>
     <wsdl:operation name="CreateRol">
       <soap:operation soapAction="http://tempuri.org/IService/CreateRol" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartments">
+      <soap:operation soapAction="http://tempuri.org/IService/LoadDepartments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadRoles">
+      <soap:operation soapAction="http://tempuri.org/IService/LoadRoles" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

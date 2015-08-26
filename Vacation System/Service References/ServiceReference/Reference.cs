@@ -1277,6 +1277,18 @@ namespace Vacation_System.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateRol", ReplyAction="http://tempuri.org/IService/CreateRolResponse")]
         System.Threading.Tasks.Task CreateRolAsync(Vacation_System.ServiceReference.RolesMirror rol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadDepartments", ReplyAction="http://tempuri.org/IService/LoadDepartmentsResponse")]
+        Vacation_System.ServiceReference.DepartamentoMirror[] LoadDepartments();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadDepartments", ReplyAction="http://tempuri.org/IService/LoadDepartmentsResponse")]
+        System.Threading.Tasks.Task<Vacation_System.ServiceReference.DepartamentoMirror[]> LoadDepartmentsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadRoles", ReplyAction="http://tempuri.org/IService/LoadRolesResponse")]
+        Vacation_System.ServiceReference.RolesMirror[] LoadRoles();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadRoles", ReplyAction="http://tempuri.org/IService/LoadRolesResponse")]
+        System.Threading.Tasks.Task<Vacation_System.ServiceReference.RolesMirror[]> LoadRolesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1344,6 +1356,22 @@ namespace Vacation_System.ServiceReference {
         
         public System.Threading.Tasks.Task CreateRolAsync(Vacation_System.ServiceReference.RolesMirror rol) {
             return base.Channel.CreateRolAsync(rol);
+        }
+        
+        public Vacation_System.ServiceReference.DepartamentoMirror[] LoadDepartments() {
+            return base.Channel.LoadDepartments();
+        }
+        
+        public System.Threading.Tasks.Task<Vacation_System.ServiceReference.DepartamentoMirror[]> LoadDepartmentsAsync() {
+            return base.Channel.LoadDepartmentsAsync();
+        }
+        
+        public Vacation_System.ServiceReference.RolesMirror[] LoadRoles() {
+            return base.Channel.LoadRoles();
+        }
+        
+        public System.Threading.Tasks.Task<Vacation_System.ServiceReference.RolesMirror[]> LoadRolesAsync() {
+            return base.Channel.LoadRolesAsync();
         }
     }
 }
