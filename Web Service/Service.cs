@@ -24,43 +24,15 @@ namespace Web_Service
             var userResults = (from u in entities.Usuarios
                                where u.email == email && u.password == password && u.activo
                                select u);
-
+            
             if (userResults != null && userResults.Any())
             {
                 Usuarios user = userResults.FirstOrDefault();
 
                 emp.User = new UserMirror(user);
 
-                var departamentos = (from j in user.tbl_jerarquia
-                    where j.talento_humano == user.talento_humano
-                    select j.tbl_departamento);
 
-                var vacaciones = (from v in user.tbl_vacaciones
-                    select v);
-
-                var estatuses = from v in user.tbl_vacaciones
-                    where v.talento_humano == user.talento_humano
-                    select v.tbl_estatus;
-
-                var calendario = from c in user.tbl_calendario
-                    select c;
-
-                var tipoDias = from d in user.tbl_calendario
-                    select d.tbl_tipo_dia;
-
-                //REVISAR ESTOS QUERIES-------------------------------------------------
-
-                var roles = from r in entities.Roles
-                            from u in r.tbl_usuarios
-                            where r.rolesid == u.talento_humano
-                            select r;
-
-                var permisos = from p in entities.Permisos
-                               from r in roles
-                               where p.permisosid == r.rolesid
-                               select p;
-
-                foreach (Roles rol in roles)
+                foreach (Roles rol in user.tbl_roles)
                 {
                     emp.Roles.Add(new RolesMirror
                     {
@@ -68,21 +40,19 @@ namespace Web_Service
                         Descripcion = rol.descripcion,
                         Id = rol.rolesid
                     });
-                }
 
-                foreach (Permisos permiso in permisos)
-                {
-                    emp.Permisos.Add(new PermisosMirror
+                    foreach(Permisos permiso in rol.tbl_permisos)
                     {
-                        Activo = permiso.activo,
-                        Descripcion = permiso.descripcion,
-                        PermisosId = permiso.permisosid
-                    });
+                        emp.Permisos.Add(new PermisosMirror
+                        {
+                            Activo = permiso.activo,
+                            Descripcion = permiso.descripcion,
+                            PermisosId = permiso.permisosid
+                        });
+                    }
                 }
 
-                //------------------------------------------------------------------------
-
-                foreach (Departamento dep in departamentos)
+                foreach (Departamento dep in user.tbl_departamento)
                 {
                     emp.Departamento.Add(new DepartamentoMirror
                     {
@@ -92,7 +62,7 @@ namespace Web_Service
                     });
                 }
 
-                foreach (Vacaciones vac in vacaciones)
+                foreach (Vacaciones vac in user.tbl_vacaciones)
                 {
                     emp.Vacaciones.Add(new VacacionesMirror
                     {
@@ -106,19 +76,17 @@ namespace Web_Service
                         VacacionesId = vac.vacacionesid,
                         Year = vac.year
                     });
-                }
 
-                foreach (Estatus estatus in estatuses)
-                {
                     emp.Status.Add(new StatusMirror
                     {
-                        Activo = estatus.activo,
-                        Descripcion = estatus.descripcion,
-                        Id = estatus.estatusid
+                        Activo = vac.tbl_estatus.activo,
+                        Descripcion = vac.tbl_estatus.descripcion,
+                        Id = vac.tbl_estatus.estatusid
                     });
+
                 }
 
-                foreach (Calendario calendar in calendario)
+                foreach (Calendario calendar in user.tbl_calendario)
                 {
                     emp.Calendar.Add(new CalendarMirror
                     {
@@ -127,15 +95,14 @@ namespace Web_Service
                         TalentoHumanoJefe = calendar.talento_humano_jefe,
                         TipoDiaId = calendar.tipo_dia_id
                     });
-                }
 
-                foreach (TipoDia dia in tipoDias)
-                {
+
                     emp.TipoDia.Add(new TipoDiaMirror
                     {
-                        Descripcion = dia.descripcion,
-                        TipoDiaId = dia.tipo_dia_id
+                       Descripcion = calendar.tbl_tipo_dia.descripcion,
+                       TipoDiaId = calendar.tbl_tipo_dia.tipo_dia_id
                     });
+
                 }
 
                 return emp;
@@ -158,30 +125,31 @@ namespace Web_Service
             user.segundo_apellido = userMirror.SegundoApellido;
             user.email = userMirror.Email;
             user.fecha_ingreso = DateTime.Parse(userMirror.FechaIngreso.ToString());
+            user.fecha_creacion = DateTime.Now;
             user.password = userMirror.Password;
             user.activo = true;
 
-            //foreach (DepartamentoMirror deptoMirror in empleado.Departamento)
-            //{
-            //    Departamento depto = new Departamento();
+            foreach (DepartamentoMirror deptoMirror in empleado.Departamento)
+            {
+                Departamento depto = new Departamento();
 
-            //    depto.departamentoid = deptoMirror.DepartamentoId;
-            //    depto.descripcion = deptoMirror.Descripcion;
-            //    depto.activo = deptoMirror.Activo;
+                depto.departamentoid = deptoMirror.DepartamentoId;
+                depto.descripcion = deptoMirror.Descripcion;
+                depto.activo = true;
 
-            //    user.tbl_departamento.Add(depto);
-            //}
+                user.tbl_departamento.Add(depto);
+            }
 
-            //foreach (RolesMirror rolMirror in empleado.Roles)
-            //{
-            //    Roles rol = new Roles();
+            foreach (RolesMirror rolMirror in empleado.Roles)
+            {
+                Roles rol = new Roles();
 
-            //    rol.rolesid = rolMirror.Id;
-            //    rol.descripcion = rolMirror.Descripcion;
-            //    rol.activo = rolMirror.Activo;
+                rol.rolesid = rolMirror.Id;
+                rol.descripcion = rolMirror.Descripcion;
+                rol.activo = true;
 
-            //    user.tbl_roles.Add(rol);
-            //}
+                user.tbl_roles.Add(rol);
+            }
 
             entities.Usuarios.Add(user);
             entities.SaveChanges();

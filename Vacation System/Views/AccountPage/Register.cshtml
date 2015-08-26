@@ -94,7 +94,7 @@
                         <div class="form-group">
                             <label for="InputDate">Fecha de Ingreso</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="datepicker" name="User.datepicker" required>
+                                <input type="text" class="form-control" id="datepicker" name="User.FechaIngreso" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
@@ -114,10 +114,20 @@
                             <label for="Departamento">Departamentos</label>
                             <div class="input-group">
 
-                                <input type="checkbox" name="motorista" value="Motorista"> Motorista
-                                <input type="checkbox" name="aseador" value=" Aseador"> Aseador
-                                <input type="checkbox" name="motorista" value="Motorista"> Motorista
-                                <input type="checkbox" name="aseador" value=" Aseador"> Aseador
+                                <input type="hidden" name="Departamento.Index" value="indx" />
+                                <input type="checkbox" name="Departamento[indx].Descripcion" value="Motorista"> Motorista
+
+                                <input type="hidden" name="Departamento.Index" value="indx1" />
+                                <input type="checkbox" name="Departamento[indx1].Descripcion" value=" Aseador"> Aseador
+
+                                <input type="hidden" name="Departamento.Index" value="indx2" />
+                                <input type="checkbox" name="Departamento[indx2].Descripcion" value="Recepcionista"> Recepcionista
+
+                                <input type="hidden" name="Departamento.Index" value="indx3" />
+                                <input type="checkbox" name="Departamento[indx3].Descripcion" value="IT"> IT
+
+                                <input type="hidden" name="Departamento.Index" value="indx4" />
+                                <input type="checkbox" name="Departamento[indx4].Descripcion" value="Administracion"> Administracion
                                 
                             </div>
                         </div>
@@ -126,12 +136,12 @@
                             <label for="Rol">Rol de Usuario</label>
                             <div class="input-group">
 
-                                <select id="combobox">
-                                    <option value="Jefe Inmediato">Jefe Inmediato</option>
-                                    <option value="Empleado">Empleado</option>
-                                </select>
+                                <input type="hidden" name="Roles.Index" value="indx" />
+                                <input type="checkbox" name="Roles[indx].Descripcion" value="Jefe Inmediato"> Jefe Inmediato
 
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                <input type="hidden" name="Roles.Index" value="indx1" />
+                                <input type="checkbox" name="Roles[indx1].Descripcion" value="Empleado"> Empleado
+
                             </div>
                         </div>
 
@@ -140,7 +150,7 @@
                             <label for="InputPass">Clave</label>
                             <div class="input-group">
 
-                                <input type="text" class="form-control" id="password" title="Clave Sugerida" value="" name="password" required>
+                                <input type="text" class="form-control" id="User.Password" title="Clave Sugerida" value="" name="User.Password" required>
 
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
