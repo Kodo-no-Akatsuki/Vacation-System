@@ -1,5 +1,6 @@
 using System.Web.Mvc;
 using Vacation_System.ServiceReference;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Vacation_System.Controllers
@@ -73,16 +74,14 @@ namespace Vacation_System.Controllers
 
 		public ViewResult Register()
 		{
-            var empleado = new Empleado();
-
-			return View(empleado);
+			return View();
 		}
 
 		[HttpPost]
 		public string Register(Empleado emp)
 		{
 			ServiceClient service = new ServiceClient();
-            
+
 			service.CreateUser(emp);
 
 			service.Close();

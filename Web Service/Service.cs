@@ -168,7 +168,7 @@ namespace Web_Service
 
                 depto.departamentoid = deptoMirror.DepartamentoId;
                 depto.descripcion = deptoMirror.Descripcion;
-                depto.activo = deptoMirror.Activo;
+                depto.activo = true;
 
                 user.tbl_departamento.Add(depto);
             }

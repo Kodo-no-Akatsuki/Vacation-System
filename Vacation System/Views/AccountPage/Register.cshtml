@@ -114,10 +114,20 @@
                             <label for="Departamento">Departamentos</label>
                             <div class="input-group">
 
-                                <input type="checkbox" id="Departamento[Departamento.Count]" name="Departamento[Departamento.Count]" value="Motorista"> Motorista
-                                <input type="checkbox" name="aseador" value=" Aseador"> Aseador
-                                <input type="checkbox" name="motorista" value="Motorista"> Motorista
-                                <input type="checkbox" name="aseador" value=" Aseador"> Aseador
+                                <input type="hidden" name="Departamento.Index" value="indx" />
+                                <input type="checkbox" name="Departamento[indx].Descripcion" value="Motorista"> Motorista
+
+                                <input type="hidden" name="Departamento.Index" value="indx1" />
+                                <input type="checkbox" name="Departamento[indx1].Descripcion" value=" Aseador"> Aseador
+
+                                <input type="hidden" name="Departamento.Index" value="indx2" />
+                                <input type="checkbox" name="Departamento[indx2].Descripcion" value="Recepcionista"> Recepcionista
+
+                                <input type="hidden" name="Departamento.Index" value="indx3" />
+                                <input type="checkbox" name="Departamento[indx3].Descripcion" value="IT"> IT
+
+                                <input type="hidden" name="Departamento.Index" value="indx4" />
+                                <input type="checkbox" name="Departamento[indx4].Descripcion" value="Administracion"> Administracion
                                 
                             </div>
                         </div>
