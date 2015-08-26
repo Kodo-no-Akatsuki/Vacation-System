@@ -26,12 +26,17 @@ namespace Vacation_System.Controllers
 		{
 			if (Session["User"] == null) return LogOut();
 
-			return View();
+			ServiceClient service = new ServiceClient();
+
+			return View(service.LoadDepartments());
 		}
 
 		[HttpPost]
-		public string Departments(DepartamentoMirror departamentoMirror)
+		public RedirectToRouteResult Departments(DepartamentoMirror departamentoMirror)
 		{
+			if(departamentoMirror.Descripcion == null)
+				return RedirectToAction("Departments");
+
 			ServiceClient service = new ServiceClient();
 			departamentoMirror.Activo = true;
 
@@ -39,7 +44,7 @@ namespace Vacation_System.Controllers
 
 			service.Close();
 
-			return "El departamento ha sido creado";
+			return RedirectToAction("Departments");
 		}
 
 		
@@ -48,20 +53,25 @@ namespace Vacation_System.Controllers
 		{
 			if (Session["User"] == null) return LogOut();
 
-			return View();
+			ServiceClient service = new ServiceClient();
+
+			return View(service.LoadRoles());
 		}
 
 		[HttpPost]
-		public string Roles(RolesMirror rol)
+		public RedirectToRouteResult Roles(RolesMirror rol)
 		{
+		    if (rol.Descripcion == null)
+		        return RedirectToAction("Roles");
+
 			ServiceClient service = new ServiceClient();
-		    rol.Activo = true;
+			rol.Activo = true;
 
 			service.CreateRol(rol);
 
 			service.Close();
 
-			return "Rol creado exitosamente.";
+			return RedirectToAction("Roles");
 		}
 		
 		

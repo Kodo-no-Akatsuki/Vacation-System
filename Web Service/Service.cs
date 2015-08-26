@@ -183,5 +183,57 @@ namespace Web_Service
             entities.Roles.Add(rol);
             entities.SaveChanges();
         }
+
+        public List<DepartamentoMirror> LoadDepartments()
+        {
+            VacationEntities entities = new VacationEntities();
+            List<DepartamentoMirror> querydepartamentos = new List<DepartamentoMirror>();
+
+            var query = (from d in entities.Departamentoes
+                group d by d.descripcion
+                into uniquedeptos
+                select uniquedeptos.FirstOrDefault()).ToList();
+
+            if (!query.Any())
+                return null;
+
+            for (int i = 0; i < query.Count; i++)
+            {
+                querydepartamentos.Add(new DepartamentoMirror
+                {
+                    Activo = query[i].activo,
+                    DepartamentoId = query[i].departamentoid,
+                    Descripcion = query[i].descripcion
+                });
+            }
+
+            return querydepartamentos;
+        }
+
+        public List<RolesMirror> LoadRoles()
+        {
+            VacationEntities entities = new VacationEntities();
+            List<RolesMirror> roles = new List<RolesMirror>();
+
+            var query = (from r in entities.Roles
+                group r by r.descripcion
+                into uniqueRoles
+                select uniqueRoles.FirstOrDefault()).ToList();
+
+            if (!query.Any())
+                return null;
+
+            for (int i = 0; i < query.Count; i++)
+            {
+                roles.Add(new RolesMirror
+                {
+                    Activo = query[i].activo,
+                    Descripcion = query[i].descripcion,
+                    Id = query[i].rolesid
+                });
+            }
+
+            return roles;
+        }
     }
 }

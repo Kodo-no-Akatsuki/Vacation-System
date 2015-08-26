@@ -67,4 +67,28 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="LoadDepartments">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoadDepartmentsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="LoadDepartmentsResult" nillable="true" type="q5:ArrayOfDepartamentoMirror" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoadRoles">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoadRolesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="LoadRolesResult" nillable="true" type="q6:ArrayOfRolesMirror" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
