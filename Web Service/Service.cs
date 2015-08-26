@@ -222,7 +222,9 @@ namespace Web_Service
             List<DepartamentoMirror> querydepartamentos = new List<DepartamentoMirror>();
 
             var query = (from d in entities.Departamentoes
-                         select d).ToList();
+                group d by d.descripcion
+                into uniquedeptos
+                select uniquedeptos.FirstOrDefault()).ToList();
 
             if (!query.Any())
                 return null;
@@ -246,7 +248,9 @@ namespace Web_Service
             List<RolesMirror> roles = new List<RolesMirror>();
 
             var query = (from r in entities.Roles
-                select r).ToList();
+                group r by r.descripcion
+                into uniqueRoles
+                select uniqueRoles.FirstOrDefault()).ToList();
 
             if (!query.Any())
                 return null;
