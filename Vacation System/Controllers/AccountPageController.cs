@@ -30,8 +30,11 @@ namespace Vacation_System.Controllers
 		}
 
 		[HttpPost]
-		public string Departments(DepartamentoMirror departamentoMirror)
+		public RedirectToRouteResult Departments(DepartamentoMirror departamentoMirror)
 		{
+			if(departamentoMirror.Descripcion == null)
+				return RedirectToAction("Departments");
+
 			ServiceClient service = new ServiceClient();
 			departamentoMirror.Activo = true;
 
@@ -39,7 +42,7 @@ namespace Vacation_System.Controllers
 
 			service.Close();
 
-			return "El departamento ha sido creado";
+			return RedirectToAction("Departments");
 		}
 
 		
@@ -56,6 +59,9 @@ namespace Vacation_System.Controllers
 		[HttpPost]
 		public RedirectToRouteResult Roles(RolesMirror rol)
 		{
+		    if (rol.rolname == null)
+		        return RedirectToAction("Roles");
+
 			ServiceClient service = new ServiceClient();
 			rol.Activo = true;
 
@@ -63,7 +69,7 @@ namespace Vacation_System.Controllers
 
 			service.Close();
 
-		    return RedirectToAction("Roles");
+			return RedirectToAction("Roles");
 		}
 		
 		

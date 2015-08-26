@@ -199,7 +199,6 @@
 
                 <script>
                       var row;
-                      var count = 2;
                       $(document).ready(function () {
                           row = $('#example').dataTable({
                               columnDefs: [{
@@ -222,27 +221,27 @@
                 <table id="example" class="display" cellspacing="0" width="100%">
 
                     <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Rol</th>
-                            <th>Permisos</th>
-              
-                        </tr>
+                    <tr>
+                        <th>Id</th>
+                        <th>Rol</th>
+                        <th>Permisos</th>
+
+                    </tr>
                     </thead>
 
                     <tbody>
-                   @foreach (var rol in Model)
-                   {
-                    <tr>
-                        <td>@rol.Id</td>
-                        <td>@rol.rolname</td>
-                        <td id="editbutton">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-content">Editar</button>
-                        </td>
+                    @foreach (var rol in Model)
+                    {
+                        <tr>
+                            <td>@rol.Id</td>
+                            <td>@rol.rolname</td>
+                            <td id="editbutton">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-content">Editar</button>
+                            </td>
 
-                    </tr>
-                    
-                   }
+                        </tr>
+
+                    }
 
                     <!--Modify Access Modal-->
                     <div id="modal-content" class="modal fade" tabindex="-1" role="dialog">
@@ -280,48 +279,50 @@
                     </div>
 
                     <!--Add Rol Modal-->
-                        
-                            <div id="addmodal" class="modal fade" tabindex="-1" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">×</button>
-                                            <h3>Permisos</h3>
-                                        </div>
-                                        <div class="modal-body">
-                                            <input type="text" id="rolname" name="rolname" placeholder="Nombre"/>
-                                            <h3>Permisos</h3>
-                                            <input type="checkbox" name="permisos" value="createuser"> Crear Usuario
-                                            <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
-                                            <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
-                                            <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
-                                            <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles
 
-                                            <input type="checkbox" onclick="toggle(this)"/> Seleccionar Todos<br/>
-                                            <script language="JavaScript">
-                                                function toggle(source) {
-                                                    checkboxes = document.getElementsByName('permisos');
-                                                    for (var i = 0, n = checkboxes.length; i < n; i++) {
-                                                        checkboxes[i].checked = source.checked;
-                                                    }
+                    <div id="addmodal" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <h3>Roles</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" id="rolname" name="rolname" placeholder="Nombre"/>
+                                    <h3>Permisos</h3>
+                                    <input type="checkbox" name="permisos" value="createuser"> Crear Usuario
+                                    <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
+                                    <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
+                                    <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
+                                    <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles
 
-                                                }
-                                            </script>
+                                    <input type="checkbox" onclick="toggle(this)"/> Seleccionar Todos<br/>
+                                    <script language="JavaScript">
+                                        function toggle(source) {
+                                            checkboxes = document.getElementsByName('permisos');
+                                            for (var i = 0, n = checkboxes.length; i < n; i++) {
+                                                checkboxes[i].checked = source.checked;
+                                            }
 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="#" class="btn" data-dismiss="modal">Close</a>
-                                            <input type="submit" name="submit" id="submit" onclick="fnClickAddRow();" value="Guardar" class="btn btn-primary"/>
-                                        </div>
-                                    </div>
+                                        }
+                                    </script>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn" data-dismiss="modal">Close</a>
+                                    <input type="submit" name="submit" id="submit" onclick="fnClickAddRow();" value="Guardar" class="btn btn-primary"/>
                                 </div>
                             </div>
-                            
+                        </div>
+                    </div>
 
-                        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addmodal">Agregar Rol</button>
+
+
 
                     </tbody>
                 </table>
+                <br/>
+                <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addmodal">Agregar Rol</button>
                     </div>
 
 
