@@ -22,7 +22,7 @@
         var charset = "abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         var result = "";
         for (var i = 0, n = charset.length; i < length; i++) {
-            result += charset.charAt(Math.floor(Math.random() * n));
+            result += charset.charAt(Math.floor(Math.random()*n));
         }
         document.forms[0].password.value = result;
 
@@ -67,7 +67,7 @@
                         <div class="form-group">
                             <label for="InputInt">Numero de talento humano</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" id="TalentoHumano" name="TalentoHumano" placeholder="Talento humano" required>
+                                <input type="number" class="form-control" id="User.TalentoHumano" name="User.TalentoHumano" placeholder="Talento humano" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
@@ -75,10 +75,10 @@
                         <div class="form-group">
                             <label for="InputName">Nombre Completo</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="PrimerNombre" name="PrimerNombre" placeholder="Primer Nombre" required>
-                                <input type="text" class="form-control" id="SegundoNombre" name="SegundoNombre" placeholder="Segundo Nombre" required>
-                                <input type="text" class="form-control" id="PrimerApellido" name="PrimerApellido" placeholder="Primer Apellido" required>
-                                <input type="text" class="form-control" id="SegundoApellido" name="SegundoApellido" placeholder="Segundo Apellido" required>
+                                <input type="text" class="form-control" id="User.PrimerNombre" name="User.PrimerNombre" placeholder="Primer Nombre" required>
+                                <input type="text" class="form-control" id="User.SegundoNombre" name="User.SegundoNombre" placeholder="Segundo Nombre" required>
+                                <input type="text" class="form-control" id="User.PrimerApellido" name="User.PrimerApellido" placeholder="Primer Apellido" required>
+                                <input type="text" class="form-control" id="User.SegundoApellido" name="User.SegundoApellido" placeholder="Segundo Apellido" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                         <div class="form-group">
                             <label for="InputEmail">Correo/Email</label>
                             <div class="input-group">
-                                <input type="email" class="form-control" id="Email" name="Email" placeholder="Correo del empleado" required>
+                                <input type="email" class="form-control" id="User.Email" name="User.Email" placeholder="Correo del empleado" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                         <div class="form-group">
                             <label for="InputDate">Fecha de Ingreso</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="datepicker" name="datepicker" required>
+                                <input type="text" class="form-control" id="datepicker" name="User.FechaIngreso" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
@@ -111,16 +111,24 @@
                         </script>
 
                         <div class="form-group">
-                            <label for="Departamento">Departamento</label>
+                            <label for="Departamento">Departamentos</label>
                             <div class="input-group">
 
-                                <select id="combobox">
+                                <input type="hidden" name="Departamento.Index" value="indx" />
+                                <input type="checkbox" name="Departamento[indx].Descripcion" value="Motorista"> Motorista
 
-                                    <option value="Motorista">Motorista</option>
-                                    <option value="Aseador">Aseador</option>
-                                </select>
+                                <input type="hidden" name="Departamento.Index" value="indx1" />
+                                <input type="checkbox" name="Departamento[indx1].Descripcion" value=" Aseador"> Aseador
 
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                <input type="hidden" name="Departamento.Index" value="indx2" />
+                                <input type="checkbox" name="Departamento[indx2].Descripcion" value="Recepcionista"> Recepcionista
+
+                                <input type="hidden" name="Departamento.Index" value="indx3" />
+                                <input type="checkbox" name="Departamento[indx3].Descripcion" value="IT"> IT
+
+                                <input type="hidden" name="Departamento.Index" value="indx4" />
+                                <input type="checkbox" name="Departamento[indx4].Descripcion" value="Administracion"> Administracion
+                                
                             </div>
                         </div>
 
@@ -128,12 +136,12 @@
                             <label for="Rol">Rol de Usuario</label>
                             <div class="input-group">
 
-                                <select id="combobox">
-                                    <option value="Jefe Inmediato">Jefe Inmediato</option>
-                                    <option value="Empleado">Empleado</option>
-                                </select>
+                                <input type="hidden" name="Roles.Index" value="indx" />
+                                <input type="checkbox" name="Roles[indx].Descripcion" value="Jefe Inmediato"> Jefe Inmediato
 
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                <input type="hidden" name="Roles.Index" value="indx1" />
+                                <input type="checkbox" name="Roles[indx1].Descripcion" value="Empleado"> Empleado
+
                             </div>
                         </div>
 
@@ -142,7 +150,7 @@
                             <label for="InputPass">Clave</label>
                             <div class="input-group">
 
-                                <input type="text" class="form-control" id="password" title="Clave Sugerida" value="" name="password" required>
+                                <input type="text" class="form-control" id="User.Password" title="Clave Sugerida" value="" name="User.Password" required>
 
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>

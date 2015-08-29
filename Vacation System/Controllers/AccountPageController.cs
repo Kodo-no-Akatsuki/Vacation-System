@@ -1,45 +1,102 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 using Vacation_System.ServiceReference;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Vacation_System.Controllers
 {
-    public class AccountPageController : Controller
-    {
-        public ActionResult Dashboard()
-        {
-            if (Session["User"] == null) return LogOut();
+	public class AccountPageController : Controller
+	{
+		public ActionResult Dashboard()
+		{
+			if (Session["User"] == null) return LogOut();
 
-            return View(Session["User"] as Empleado);
-        }
+			return View(Session["User"] as Empleado);
+		}
 
-        public ActionResult Profile()
-        {
-            if (Session["User"] == null) return LogOut();
+		public ActionResult Profile()
+		{
+			if (Session["User"] == null) return LogOut();
 
-            return View(Session["User"] as Empleado);
-        }
+			return View(Session["User"] as Empleado);
+		}
 
-        public RedirectToRouteResult LogOut()
-        {
-            Session["User"] = null;
+		[HttpGet]
+		public ActionResult Departments()
+		{
+			if (Session["User"] == null) return LogOut();
 
-            return RedirectToAction("Index", "LogIn");
-        }
+			ServiceClient service = new ServiceClient();
 
-        public ViewResult Register()
-        {
-            return View();
-        }
+			return View(service.LoadDepartments());
+		}
 
-        public string RegisterUser(Empleado emp)
-        {
-            ServiceClient service = new ServiceClient();
+		[HttpPost]
+		public RedirectToRouteResult Departments(DepartamentoMirror departamentoMirror)
+		{
+			if(departamentoMirror.Descripcion == null)
+				return RedirectToAction("Departments");
 
-            service.CreateUser(emp);
+			ServiceClient service = new ServiceClient();
+			departamentoMirror.Activo = true;
 
-            service.Close();
+			service.CreateDepartment(departamentoMirror);
 
-            return "Se ha creado el usuario con exito";
-        }
-    }
+			service.Close();
+
+			return RedirectToAction("Departments");
+		}
+
+		
+		[HttpGet]
+		public ActionResult Roles()
+		{
+			if (Session["User"] == null) return LogOut();
+
+			ServiceClient service = new ServiceClient();
+
+			return View(service.LoadRoles());
+		}
+
+		[HttpPost]
+		public RedirectToRouteResult Roles(RolesMirror rol)
+		{
+		    if (rol.Descripcion == null)
+		        return RedirectToAction("Roles");
+
+			ServiceClient service = new ServiceClient();
+			rol.Activo = true;
+
+			service.CreateRol(rol);
+
+			service.Close();
+
+			return RedirectToAction("Roles");
+		}
+		
+		
+		public RedirectToRouteResult LogOut()
+		{
+			Session["User"] = null;
+
+			return RedirectToAction("Index", "LogIn");
+		}
+
+		public ViewResult Register()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public string Register(Empleado emp)
+		{
+			ServiceClient service = new ServiceClient();
+            
+			service.CreateUser(emp);
+
+			service.Close();
+
+			return "Se ha creado el usuario con exito";
+		}
+	}
 }

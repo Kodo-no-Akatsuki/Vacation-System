@@ -27,6 +27,12 @@ namespace Web_Service
         [OperationContract]
         void CreateRol(RolesMirror rol);
 
+        [OperationContract]
+        List<DepartamentoMirror> LoadDepartments();
+
+        [OperationContract]
+        List<RolesMirror> LoadRoles();
+
     }
 
 }

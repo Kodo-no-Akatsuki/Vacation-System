@@ -42,6 +42,7 @@ namespace Web_Service
         [DataMember]
         public List<CalendarMirror> Calendar { get; set; }
 
+
         public Empleado()
         {
             Departamento = new List<DepartamentoMirror>();
