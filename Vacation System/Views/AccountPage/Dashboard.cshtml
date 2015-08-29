@@ -74,6 +74,8 @@
                                 </li>
                                 <li>
                                     <a href="#"><i class="fa fa-gear"></i>Ajustes<span class="fa fa-chevron-down"></span></a>
+                                    @*Aqui empieza las condiciones para los permisos*@
+                                    
                                     <ul class="nav child_menu" style="display: none">
                                         <li>
                                             <a href="@Url.Action("Departments")"><i class="fa fa-building pull-left"></i>Editar departamentos</a>
@@ -85,6 +87,7 @@
                                             <a href="@Url.Action("Register")"><i class="fa fa-user pull-left"></i>Registrar Usuario</a>
                                         </li>
                                     </ul>
+                                    @*Aqui terminan las condiciones*@
                                 </li>
                                 <li>
                                     <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out"></i>Cerrar Sesion</a>
