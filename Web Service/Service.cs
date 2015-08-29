@@ -43,12 +43,28 @@ namespace Web_Service
 
                     foreach(Permisos permiso in rol.tbl_permisos)
                     {
-                        emp.Permisos.Add(new PermisosMirror
+                        
+                        bool skip = false;
+
+                        foreach(PermisosMirror perm in emp.Permisos)
                         {
-                            Activo = permiso.activo,
-                            Descripcion = permiso.descripcion,
-                            PermisosId = permiso.permisosid
-                        });
+                            if (permiso.descripcion.Equals(perm.Descripcion))
+                            {
+                                skip = true;
+                                break;
+                            }
+                        }
+                            
+                        if(!skip)
+                        {
+                            emp.Permisos.Add(new PermisosMirror
+                            {
+                                Activo = permiso.activo,
+                                Descripcion = permiso.descripcion,
+                                PermisosId = permiso.permisosid
+                            });
+                        }
+                        
                     }
                 }
 
