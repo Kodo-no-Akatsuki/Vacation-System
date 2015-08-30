@@ -13,5 +13,10 @@ namespace Vacation_System.Controllers
         {
             return View();
         }
+
+        public ActionResult Error500()
+        {
+            return View();
+        }
     }
 }
