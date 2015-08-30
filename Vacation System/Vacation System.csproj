@@ -169,6 +169,7 @@
     <Content Include="Content\fonts\css\font-awesome.min.css" />
     <Content Include="Content\fonts\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\imgs\errorlogo.png" />
     <Content Include="Content\js\autocomplete\countries.js" />
     <Content Include="Content\js\autocomplete\jquery.autocomplete.js" />
     <Content Include="Content\js\bootstrap.js" />
