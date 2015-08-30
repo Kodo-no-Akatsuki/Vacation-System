@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Vacation_System.ServiceReference.DepartamentoMirror>
+﻿@using Vacation_System.ServiceReference
+@using Web_Service
+@model IEnumerable<Vacation_System.ServiceReference.DepartamentoMirror>
 
 @{
     Layout = null;
@@ -42,7 +44,11 @@
 
 <body class="nav-md">
 
-    <div class="container body">
+    @{
+        var empleado = (Session["User"] as Empleado);
+    }
+
+<div class="container body">
         <div class="main_container">
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
@@ -58,7 +64,7 @@
                         </div>
                         <div class="profile_info">
                             <span>Bienvenido,</span>
-                            <h2>@*@ViewData.Model.User.PrimerNombre*@</h2>
+                            <h2>@empleado.User.PrimerNombre</h2>
                         </div>
                     </div>
                     <!-- /menu prile quick info -->
@@ -114,7 +120,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/Content/imgs/img.png" alt="">@*@ViewData.Model.User.PrimerNombre @ViewData.Model.User.SegundoNombre*@
+                                    <img src="~/Content/imgs/img.png" alt="">@empleado.User.PrimerNombre @empleado.User.PrimerApellido
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
@@ -155,7 +161,7 @@
                                                 <img src="~/Content/images/img.png" alt="Profile Image" />
                                             </span>
                                             <span>
-                                                <span>@*@ViewData.Model.User.PrimerNombre*@  </span>
+                                                <span>@empleado.User.PrimerNombre  </span>
                                                 <span class="time">Hace 3 mins</span>
                                             </span>
                                             <span class="message">
@@ -259,7 +265,14 @@
                                                    }
                                                </script>
                                                <div class="col-md-offset-10">
-                                                   
+
+                                                   @foreach (var permiso in empleado.Permisos)
+                                                   {
+                                                       if (permiso.PermisosId == (int) PermisosEnum.CrearDepartamento)
+                                                       {
+                                                           <input type="button" class="btn btn-info pull-right" id="Des" data-toggle="modal" data-target="#deptomodal" value="Agregar Nuevo" />
+                                                       }
+                                                   }
 
                                                    @*<input type="button" class="btn btn-info pull-right" id="Des" data-toggle="modal" data-target="#deptomodal" value="Agregar Nuevo" />*@
                                                </div>
