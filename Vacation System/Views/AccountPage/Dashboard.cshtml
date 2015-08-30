@@ -1,4 +1,5 @@
-﻿@model Vacation_System.ServiceReference.Empleado
+﻿@using Web_Service
+@model Vacation_System.ServiceReference.Empleado
 
 @{
     Layout = null;
@@ -74,17 +75,45 @@
                                 </li>
                                 <li>
                                     <a href="#"><i class="fa fa-gear"></i>Ajustes<span class="fa fa-chevron-down"></span></a>
+                                    @*Aqui empieza las condiciones para los permisos*@
+
                                     <ul class="nav child_menu" style="display: none">
-                                        <li>
-                                            <a href="@Url.Action("Departments")"><i class="fa fa-building pull-left"></i>Editar departamentos</a>
-                                        </li>
-                                        <li>
-                                            <a href="@Url.Action("Roles")"><i class="fa fa-list-alt pull-left"></i>Editar roles</a>
-                                        </li>
-                                        <li>
-                                            <a href="@Url.Action("Register")"><i class="fa fa-user pull-left"></i>Registrar Usuario</a>
-                                        </li>
+                                        @{
+                                            bool depto = false;
+                                            bool rol = false;
+                                            bool usuario = false;
+                                        }
+
+                                        @foreach (var permiso in Model.Permisos)
+                                        {
+                                            if ((permiso.PermisosId == (int)PermisosEnum.EditarDepartamento || permiso.PermisosId == (int)PermisosEnum.CrearDepartamento)
+                                                && depto != true)
+                                            {
+                                                <li>
+                                                    <a href="@Url.Action("Departments")"><i class="fa fa-building pull-left"></i>Editar departamentos</a>
+                                                    @{ depto = true;}
+                                                </li>
+                                            }
+
+                                            if ((permiso.PermisosId == (int)PermisosEnum.EditarRol || permiso.PermisosId == (int)PermisosEnum.CrearRol) && rol != true)
+                                            {
+                                                <li>
+                                                    <a href="@Url.Action("Roles")"><i class="fa fa-list-alt pull-left"></i>Editar roles</a>
+                                                    @{ rol = true;}
+                                                </li>
+                                            }
+
+                                            if ((permiso.PermisosId == (int)PermisosEnum.CrearUsuario) && usuario != true)
+                                            {
+                                                <li>
+                                                    <a href="@Url.Action("Register")"><i class="fa fa-user pull-left"></i>Registrar Usuario</a>
+                                                    @{ usuario = true;}
+                                                </li>
+                                            }
+                                        }
+
                                     </ul>
+                                    @*Aqui terminan las condiciones*@
                                 </li>
                                 <li>
                                     <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out"></i>Cerrar Sesion</a>
