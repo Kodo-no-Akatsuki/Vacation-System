@@ -28,9 +28,6 @@ namespace Vacation_System.Controllers
 
 			ServiceClient service = new ServiceClient();
 
-			//ViewBag.Empleado = (Session["User"] as Empleado);
-		    ViewData["Empleado"] = (Session["User"] as Empleado);
-
 			return View(service.LoadDepartments());
 		}
 
