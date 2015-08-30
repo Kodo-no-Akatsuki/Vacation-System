@@ -82,7 +82,6 @@
     <Compile Include="Permisos.cs">
       <DependentUpon>VacationModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PermisosEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Roles.cs">
       <DependentUpon>VacationModel.tt</DependentUpon>

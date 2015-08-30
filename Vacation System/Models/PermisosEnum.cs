@@ -6,42 +6,42 @@ namespace Web_Service
     public enum PermisosEnum
     {
         [DataMember]
-        CrearDepartamento,
+        CrearDepartamento = 1,
 
         [DataMember]
-        EditarDepartamento,
+        EditarDepartamento = 2,
 
         [DataMember]
-        DesactivarDepartamento,
+        DesactivarDepartamento = 3,
 
         [DataMember]
-        CrearRol,
+        CrearRol = 4,
 
         [DataMember]
-        EditarRol,
+        EditarRol = 5,
 
         [DataMember]
-        DesactivarRol,
+        DesactivarRol = 6,
 
         [DataMember]
-        CrearUsuario,
+        CrearUsuario = 7,
 
         [DataMember]
-        EditarUsuario,
+        EditarUsuario = 8,
 
         [DataMember]
-        DesactivarUsuario,
+        DesactivarUsuario = 9,
 
         [DataMember]
-        VerPerfiles,
+        VerPerfiles = 10,
 
         [DataMember]
-        AdministrarPersonal,
+        AdministrarPersonal = 11,
 
         [DataMember]
-        DesactivarPermisosOUsuarios,
+        DesactivarPermisosOUsuarios = 12,
 
         [DataMember]
-        ProgramarVacaciones
+        ProgramarVacaciones = 13
     }
 }
