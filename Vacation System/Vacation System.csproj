@@ -169,6 +169,8 @@
     <Content Include="Content\fonts\css\font-awesome.min.css" />
     <Content Include="Content\fonts\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\imgs\bug.png" />
+    <Content Include="Content\imgs\errorlogo.png" />
     <Content Include="Content\js\autocomplete\countries.js" />
     <Content Include="Content\js\autocomplete\jquery.autocomplete.js" />
     <Content Include="Content\js\bootstrap.js" />
@@ -836,6 +838,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountPageController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -880,6 +883,8 @@
     <Content Include="Views\AccountPage\Register.cshtml" />
     <Content Include="Views\AccountPage\Departments.cshtml" />
     <Content Include="Views\AccountPage\Roles.cshtml" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\Error\Error500.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
