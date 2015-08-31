@@ -279,13 +279,16 @@
                                            {
                                                <script>
                                                    function addImg() {
+
+                          
+                                                      $("#deptomodal").modal('hide');
+                                                      
+
                                                        var deptoname = document.getElementById("Descripcion").value;
                                                        if (deptoname !== "") {
                                                            $("#imgdepto").append("<div class='col-md-55'> <div class='thumbnail'><div class='image view view-first'><img style='width: 100%; display: block;' src='../Content/imgs/iconakatsuki.png' alt='image' />" +
                                                            "<div class='mask'><p>" + deptoname + "</p></div></div></div></div>");
                                                        }
-                                                       
-
                                                        
                                                    }
                                                </script>
@@ -316,7 +319,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <a href="#" class="btn" data-dismiss="modal">Close</a>
-                                                            <input type="submit" onclick="addImg();" name="submit" id="submit" value="Guardar" class="btn btn-primary" />
+                                                            <input type="submit" onclick="addImg();" name="submit" value="Guardar" class="btn btn-primary" />
                                                         </div>
                                                     </div>
                                                 </div>

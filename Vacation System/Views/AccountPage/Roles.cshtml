@@ -244,8 +244,17 @@
 
                         function fnClickAddRow() {
                             //Add here dynamic Mysql values
+                            $(function () {
+                                $('#addmodal').modal('hide');
+                            });
                             row.fnAddData([@Model.Count()+1, document.getElementById("Descripcion").value, document.getElementById("editbutton").innerHTML]);
-                            count++;
+                                        
+                        }
+
+                        function fnClickEditRol() {
+                            $(function () {
+                                $('#modal-content').modal('hide');
+                            });
                         }
                     </script>
 
@@ -311,7 +320,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <a href="#" class="btn" data-dismiss="modal">Close</a>
-                                            <a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary">Guardar Cambios</a>
+                                            <a onclick="fnClickEditRol();" class="btn btn-primary">Guardar Cambios</a>
                                         </div>
                                     </div>
                                 </div>
@@ -349,7 +358,9 @@
                                         </div>
                                         <div class="modal-footer">
                                             <a href="#" class="btn" data-dismiss="modal">Close</a>
+                                            
                                             <input type="submit" name="submit" id="submit" onclick="fnClickAddRow();" value="Guardar" class="btn btn-primary" />
+                                            
                                         </div>
                                     </div>
                                 </div>
