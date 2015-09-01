@@ -843,6 +843,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ErrorHandler.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PermisosEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
