@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Globalization;
 using Web_Service.Mirror_Classes;
 
 namespace Web_Service
@@ -133,14 +134,16 @@ namespace Web_Service
 
             UserMirror userMirror = empleado.User;
             Usuarios user = new Usuarios();
-
+            CultureInfo provider = new CultureInfo("en-US");
+            string format = "g";
+            string datestring = userMirror.FechaIngreso.ToString("MM-dd-yyyy");
             user.talento_humano = userMirror.TalentoHumano;
             user.primer_nombre = userMirror.PrimerNombre;
             user.segundo_nombre = userMirror.SegundoNombre;
             user.primer_apellido = userMirror.PrimerApellido;
             user.segundo_apellido = userMirror.SegundoApellido;
             user.email = userMirror.Email;
-            user.fecha_ingreso = DateTime.Parse(userMirror.FechaIngreso.ToString());
+            user.fecha_ingreso = DateTime.Parse(datestring);
             user.fecha_creacion = DateTime.Now;
             user.password = userMirror.Password;
             user.activo = true;

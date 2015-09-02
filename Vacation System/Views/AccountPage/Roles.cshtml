@@ -3,420 +3,173 @@
 @model IEnumerable<Vacation_System.ServiceReference.RolesMirror>
 
 @{
-    Layout = null;
+    Layout = "~/Views/AccountPage/Layout.cshtml";
+    ViewBag.Title = "Roles";
+    var empleado = (Session["User"] as Empleado);
+    
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Roles</title>
-    <!-- Bootstrap core CSS -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/Content/fonts/css/font-awesome.min.css" rel="stylesheet">
-    <link href="~/Content/css/animate.min.css" rel="stylesheet">
-    <!-- Custom styling plus plugins -->
-    <link href="~/Content/css/custom.css" rel="stylesheet">
-    <link href="~/Content/css/icheck/flat/green.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="~/Content/css/maps/jquery-jvectormap-2.0.1.css" />
-    <link href="~/Content/css/icheck/flat/green.css" rel="stylesheet" />
-    <link href="~/Content/css/floatexamples.css" rel="stylesheet" type="text/css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="~/Content/js/jquery.min.js"></script>
-    <script src="~/Content/js/nprogress.js"></script>
+@using (Html.BeginForm())
+{
+    <div class="clearfix"></div>
+
     <script>
-        NProgress.start();
+        var row;
+        $(document).ready(function () {
+            row = $('#example').dataTable({
+                columnDefs: [{
+                    targets: [0],
+                    orderData: [0, 1]
+                }, {
+                    targets: [1],
+                    orderData: [1, 0]
+                }, ]
+            });
+        });
+
+        function fnClickAddRow() {
+            //Add here dynamic Mysql values
+     
+                $('#addmodal').modal('hide');
+            row.fnAddData([@Model.Count()+1, document.getElementById("Descripcion").value, document.getElementById("editbutton").innerHTML]);
+
+        }
+
+        function fnClickEditRol() {
+            $(function () {
+                $('#modal-content').modal('hide');
+            });
+        }
     </script>
 
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.8/css/jquery.dataTables.css">
+    <table id="example" class="display" cellspacing="0" width="100%">
 
-    <!-- jQuery -->
-    <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Rol</th>
+                <th>Permisos</th>
 
-    <!-- DataTables -->
-    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.8/js/jquery.dataTables.js"></script>
+            </tr>
+        </thead>
 
-
-    <!--[if lt IE 9]>
-        <script src="../assets/js/ie8-responsive-file-warning.js"></script>
-        <![endif]-->
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-</head>
-
-<body class="nav-md">
-
-    @{
-        var empleado = Session["User"] as Empleado;
-    }
-
-<div class="container body">
-        <div class="main_container">
-            <div class="col-md-3 left_col">
-                <div class="left_col scroll-view">
-
-                    <div class="navbar nav_title" style="border: 0;">
-                        <a href="#" class="site_title"><img src="~/Content/imgs/unilogo.png" class="uni-logo center-block" /><span></span></a>
-                    </div>
-                    <div class="clearfix"></div>
-                    <!-- menu prile quick info -->
-                    <div class="profile">
-                        <div class="profile_pic">
-                            <img src="~/Content/imgs/img.png" alt="..." class="img-circle profile_img">
-                        </div>
-                        <div class="profile_info">
-                            <span>Bienvenido,</span>
-                            <h2>@empleado.User.PrimerNombre</h2>
-                        </div>
-                    </div>
-                    <!-- /menu prile quick info -->
-                    <br />
-                    <!-- sidebar menu -->
-                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                        <div class="menu_section">
-                            <h3>None</h3>
-                            <ul class="nav side-menu">
-                                <li>
-                                    <a href="@Url.Action("Dashboard")"><i class="fa fa-home"></i>Inicio</a>
-
-                                </li>
-                                <li>
-                                    <a><i class="fa fa-edit"></i>Peticiones<span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <!--Insert child options here! :^)-->
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-gear"></i>Ajustes<span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        @{
-                                            bool depto = false;
-                                            bool rol = false;
-                                            bool usuario = false;
-                                        }
-
-                                        @foreach (var permiso in empleado.Permisos)
-                                        {
-                                            if ((permiso.PermisosId == (int)PermisosEnum.EditarDepartamento || permiso.PermisosId == (int)PermisosEnum.CrearDepartamento)
-                                                && depto != true)
-                                            {
-                                                <li>
-                                                    <a href="@Url.Action("Departments")"><i class="fa fa-building pull-left"></i>Editar departamentos</a>
-                                                    @{ depto = true;}
-                                                </li>
-                                            }
-
-                                            if ((permiso.PermisosId == (int)PermisosEnum.EditarRol || permiso.PermisosId == (int)PermisosEnum.CrearRol) && rol != true)
-                                            {
-                                                <li>
-                                                    <a href="@Url.Action("Roles")"><i class="fa fa-list-alt pull-left"></i>Editar roles</a>
-                                                    @{ rol = true;}
-                                                </li>
-                                            }
-
-                                            if ((permiso.PermisosId == (int)PermisosEnum.CrearUsuario) && usuario != true)
-                                            {
-                                                <li>
-                                                    <a href="@Url.Action("Register")"><i class="fa fa-user pull-left"></i>Registrar Usuario</a>
-                                                    @{ usuario = true;}
-                                                </li>
-                                            }
-                                        }
-
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out"></i>Cerrar Sesion</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="menu_section">
-                            <ul class="nav side-menu"></ul>
-                        </div>
-                    </div>
-                    <!-- /sidebar menu -->
-                </div>
-            </div>
-            <!-- top navigation -->
-            <div class="top_nav">
-                <div class="nav_menu">
-                    <nav class="" role="navigation">
-                        <div class="nav toggle">
-                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                        </div>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/Content/imgs/img.png" alt="">@empleado.User.PrimerNombre @empleado.User.PrimerApellido
-                                    <span class=" fa fa-angle-down"></span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                    <li>
-                                        <a href="@Url.Action("Profile")">
-                                            <span class="fa fa-user pull-right"></span>
-                                            <span>Perfil</span>
-                                        </a>
-
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <span class="fa fa-gear pull-right"></span>
-                                            <span>Opciones</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <span class="fa fa-book pull-right"></span>
-                                            <span>Ayuda</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <!--<a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>-->
-                                        <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesion</a>
-                                </ul>
-                            </li>
-                            <li role="presentation" class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-bell-o"></i>
-                                    <span class="badge bg-green">1</span>
-                                </a>
-                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
-                                    <!--Insert here intelligent notifications :^)-->
-                                    <li>
-                                        <a>
-                                            <span class="image">
-                                                <img src="~/Content/images/img.png" alt="Profile Image" />
-                                            </span>
-                                            <span>
-                                                <span>@empleado.User.PrimerNombre </span>
-                                                <span class="time">Hace 3 mins</span>
-                                            </span>
-                                            <span class="message">
-                                                Lololol...
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="text-center">
-                                            <a>
-                                                <strong><a href="#">Ver todas las notificaciones</strong>
-                                                <i class="fa fa-angle-right"></i>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <!-- /top navigation -->
-            <!-- page content -->
-            @using (Html.BeginForm())
+        <tbody>
+            @foreach (var role in Model)
             {
-                <div class="right_col" role="main">
-
-
-                    <div class="clearfix"></div>
-
-                    <script>
-                        var row;
-                        $(document).ready(function () {
-                            row = $('#example').dataTable({
-                                columnDefs: [{
-                                    targets: [0],
-                                    orderData: [0, 1]
-                                }, {
-                                    targets: [1],
-                                    orderData: [1, 0]
-                                }, ]
-                            });
-                        });
-
-                        function fnClickAddRow() {
-                            //Add here dynamic Mysql values
-                            $(function () {
-                                $('#addmodal').modal('hide');
-                            });
-                            row.fnAddData([@Model.Count()+1, document.getElementById("Descripcion").value, document.getElementById("editbutton").innerHTML]);
-                                        
-                        }
-
-                        function fnClickEditRol() {
-                            $(function () {
-                                $('#modal-content').modal('hide');
-                            });
-                        }
-                    </script>
-
-                    <table id="example" class="display" cellspacing="0" width="100%">
-
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Rol</th>
-                                <th>Permisos</th>
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach (var role in Model)
-                            {
-                                <tr>
-                                    <td>@role.Id</td>
-                                    <td>@role.Descripcion</td>
-                                    @foreach (var perm in @empleado.Permisos)
-                                    {
-                                        if (perm.PermisosId == (int)PermisosEnum.EditarRol)
-                                        {
-                                            <td id="editbutton">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-content">Editar</button>
-                                            </td>
-
-                                            break;
-                                        }
-                                    }
-
-                                </tr>
-
-                            }
-
-                            <!--Modify Access Modal-->
-                            <div id="modal-content" class="modal fade" tabindex="-1" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">×</button>
-                                            <h3>Permisos</h3>
-                                        </div>
-                                        <div class="modal-body">
-                                            <input type="checkbox" name="permisos" value="createuser"> Crear Usuario
-                                            <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
-                                            <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
-                                            <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
-                                            <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles
-
-                                            <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
-                                            <script language="JavaScript">
-                                                function toggle(source) {
-                                                    checkboxes = document.getElementsByName('permisos');
-                                                    for (var i = 0, n = checkboxes.length; i < n; i++) {
-                                                        checkboxes[i].checked = source.checked;
-                                                    }
-
-                                                }
-                                            </script>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="#" class="btn" data-dismiss="modal">Close</a>
-                                            <a onclick="fnClickEditRol();" class="btn btn-primary">Guardar Cambios</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!--Add Rol Modal-->
-
-                            <div id="addmodal" class="modal fade" tabindex="-1" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">×</button>
-                                            <h3>Roles</h3>
-                                        </div>
-                                        <div class="modal-body">
-                                            <input type="text" id="Descripcion" name="Descripcion" placeholder="Nombre" />
-                                            <h3>Permisos</h3>
-                                            <input type="checkbox" name="permisos" value="createuser"> Crear Usuario
-                                            <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
-                                            <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
-                                            <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
-                                            <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles
-
-                                            <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
-                                            <script language="JavaScript">
-                                                function toggle(source) {
-                                                    checkboxes = document.getElementsByName('permisos');
-                                                    for (var i = 0, n = checkboxes.length; i < n; i++) {
-                                                        checkboxes[i].checked = source.checked;
-                                                    }
-
-                                                }
-                                            </script>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="#" class="btn" data-dismiss="modal">Close</a>
-                                            
-                                            <input type="submit" name="submit" id="submit" onclick="fnClickAddRow();" value="Guardar" class="btn btn-primary" />
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                        </tbody>
-                    </table>
-                    <br/>
-                    @foreach (var permiso in @empleado.Permisos)
+                <tr>
+                    <td>@role.Id</td>
+                    <td>@role.Descripcion</td>
+                    @foreach(var perm in empleado.Permisos)
                     {
-                        if (permiso.PermisosId == (int) PermisosEnum.CrearRol)
+                        if (perm.PermisosId == (int)PermisosEnum.EditarRol)
                         {
-                            <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addmodal">Agregar Rol</button>
+                            <td id="editbutton">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-content">Editar</button>
+                            </td>
+
                             break;
                         }
                     }
-                    @*<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addmodal">Agregar Rol</button>*@
+
+                </tr>
+
+            }       
+     
+            <!--Modify Access Modal-->
+            <div id="modal-content" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h3>Permisos</h3>
+                        </div>
+                        <div class="modal-body">
+                            <input type="checkbox" name="permisos" value="createuser"> Crear Usuario
+                            <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
+                            <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
+                            <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
+                            <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles
+
+                            <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
+                            <script language="JavaScript">
+                                function toggle(source) {
+                                    checkboxes = document.getElementsByName('permisos');
+                                    for (var i = 0, n = checkboxes.length; i < n; i++) {
+                                        checkboxes[i].checked = source.checked;
+                                    }
+
+                                }
+                            </script>
+
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn" data-dismiss="modal">Close</a>
+                            <a onclick="fnClickEditRol();" class="btn btn-primary">Guardar Cambios</a>
+                        </div>
+                    </div>
                 </div>
-
-
-            }
-            <!-- /page content -->
-        </div>
-        <!-- footer content -->
-        <footer class="">
-            <div class="footer-cont pull-right">
-
-                <span class="pull-right">
-                    <b>Design by</b> <a href="https://github.com/Kodo-no-Akatsuki" target="_blank"><img src="~/Content/imgs/iconakatsuki.png" class="footer-img" width="50" height="40" /></a>
-                </span>
             </div>
-            <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-    </div>
-    <div id="custom_notifications" class="custom-notifications dsp_none">
-        <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group"></ul>
-        <div class="clearfix"></div>
-        <div id="notif-group" class="tabbed_notifications"></div>
-    </div>
 
-    <script src="~/Content/js/bootstrap.min.js"></script>
+            <!--Add Rol Modal-->
 
-    <!-- chart js -->
-    <script src="~/Content/js/chartjs/chart.min.js"></script>
-    <!-- bootstrap progress js -->
-    <script src="~/Contentjs/progressbar/bootstrap-progressbar.min.js"></script>
-    <script src="~/Content/js/nicescroll/jquery.nicescroll.min.js"></script>
-    <!-- icheck -->
-    <script src="~/Content/js/icheck/icheck.min.js"></script>
+            <div id="addmodal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h3>Roles</h3>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" id="Descripcion" name="Descripcion" placeholder="Nombre" />
+                            <h3>Permisos</h3>
+                            <input type="checkbox" name="permisos" value="createuser"> Crear Usuario
+                            <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
+                            <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
+                            <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
+                            <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles
 
-    <script src="~/Content/js/custom.js"></script>
+                            <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
+                            <script language="JavaScript">
+                                function toggle(source) {
+                                    checkboxes = document.getElementsByName('permisos');
+                                    for (var i = 0, n = checkboxes.length; i < n; i++) {
+                                        checkboxes[i].checked = source.checked;
+                                    }
 
-</body>
+                                }
+                            </script>
 
-</html>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn" data-dismiss="modal">Close</a>
+
+                            <input type="submit" name="submit" id="submit" onclick="fnClickAddRow();" value="Guardar" class="btn btn-primary" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+
+        </tbody>
+    </table>
+    <br />
+<div>
+    @foreach (var permiso in empleado.Permisos)
+    {
+        if (permiso.PermisosId == (int)PermisosEnum.CrearRol)
+        {
+            <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addmodal">Agregar Rol</button>
+            break;
+        }
+    }
+</div>
+     
+    
+}
+
+ 
+
+

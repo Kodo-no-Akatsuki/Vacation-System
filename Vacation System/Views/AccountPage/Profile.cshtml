@@ -1,462 +1,114 @@
-﻿@using Web_Service
+﻿@using Vacation_System.ServiceReference
+@using Web_Service
 @model Vacation_System.ServiceReference.Empleado
 @{
-    Layout = null;
+    var empleado = (Session["User"] as Empleado);
+    Layout = "~/Views/AccountPage/Layout.cshtml";
+    ViewBag.Title = "Perfil de "+empleado.User.PrimerNombre;
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WebProto</title>
-    <!-- Bootstrap core CSS -->
-    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/Content/fonts/css/font-awesome.min.css" rel="stylesheet">
-    <link href="~/Content/css/animate.min.css" rel="stylesheet">
-    <!-- Custom styling plus plugins -->
-    <link href="~/Content/css/custom.css" rel="stylesheet">
-    <link href="~/Content/css/icheck/flat/green.css" rel="stylesheet">
-
-    <script src="~/Content/js/jquery.min.js"></script>
-    <!--[if lt IE 9]>
-        <script src="../assets/js/ie8-responsive-file-warning.js"></script>
-        <![endif]-->
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-</head>
-<body class="nav-md">
-    <div class="container body">
-        <div class="main_container">
-            <div class="col-md-3 left_col">
-                <div class="left_col scroll-view">
-                    <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><img src="~/Content/imgs/unilogo.png" class="uni-logo center-block" /><span></span></a>
-                    </div>
-                    <div class="clearfix"></div>
-                    <!-- menu prile quick info -->
-                    <div class="profile">
-                        <div class="profile_pic">
-                            <img src="~/Content/imgs/img.png" alt="..." class="img-circle profile_img">
-                        </div>
-                        <div class="profile_info">
-                            <span>Bienvenido,</span>
-                            <h2>@ViewData.Model.User.PrimerNombre</h2>
-                        </div>
-                    </div>
-                    <!-- /menu prile quick info -->
-                    <br />
-                    <!-- sidebar menu -->
-                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                        <div class="menu_section">
-                            <h3>None</h3>
-                            <ul class="nav side-menu">
-                                <li>
-                                    <a href="@Url.Action("Dashboard")"><i class="fa fa-home"></i>Inicio</a>
-                                </li>
-                                <li>
-                                    <a><i class="fa fa-edit"></i>Peticiones<span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <!--Insert child options here! :^)-->
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-gear"></i>Ajustes<span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        @{
-                                            bool depto = false;
-                                            bool rol = false;
-                                            bool usuario = false;
-                                        }
-
-                                        @foreach (var permiso in Model.Permisos)
-                                        {
-                                            if ((permiso.PermisosId == (int)PermisosEnum.EditarDepartamento || permiso.PermisosId == (int)PermisosEnum.CrearDepartamento)
-                                                && depto != true)
-                                            {
-                                                <li>
-                                                    <a href="@Url.Action("Departments")"><i class="fa fa-building pull-left"></i>Editar departamentos</a>
-                                                    @{ depto = true;}
-                                                </li>
-                                            }
-
-                                            if ((permiso.PermisosId == (int)PermisosEnum.EditarRol || permiso.PermisosId == (int)PermisosEnum.CrearRol) && rol != true)
-                                            {
-                                                <li>
-                                                    <a href="@Url.Action("Roles")"><i class="fa fa-list-alt pull-left"></i>Editar roles</a>
-                                                    @{ rol = true;}
-                                                </li>
-                                            }
-
-                                            if ((permiso.PermisosId == (int)PermisosEnum.CrearUsuario) && usuario != true)
-                                            {
-                                                <li>
-                                                    <a href="@Url.Action("Register")"><i class="fa fa-user pull-left"></i>Registrar Usuario</a>
-                                                    @{ usuario = true;}
-                                                </li>
-                                            }
-                                        }
-
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out"></i>Cerrar Sesion</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="menu_section">
-                            <ul class="nav side-menu"></ul>
-                        </div>
-                    </div>
-                    <!-- /sidebar menu -->
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Perfil</h3>
+        </div>
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Ir</button>
+                    </span>
                 </div>
             </div>
-            <!-- top navigation -->
-            <div class="top_nav">
-                <div class="nav_menu">
-                    <nav class="" role="navigation">
-                        <div class="nav toggle">
-                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                        </div>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/Content/imgs/img.png" alt="">@ViewData.Model.User.PrimerNombre @ViewData.Model.User.PrimerApellido
-                                    <span class=" fa fa-angle-down"></span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                    <li>
-                                        <a href="javascript:;">
-                                            <span class="fa fa-user pull-right"></span>
-                                            <span>Perfil</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <span class="fa fa-gear pull-right"></span>
-                                            <span>Opciones</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <span class="fa fa-book pull-right"></span>
-                                            <span>Ayuda</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <!--<a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>-->
-                                        <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesion</a>
-                                </ul>
-                            </li>
-                            <li role="presentation" class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-bell-o"></i>
-                                    <span class="badge bg-green">1</span>
-                                </a>
-                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
-                                    <!--Insert here intelligent notifications :^)-->
-                                    <li>
-                                        <a>
-                                            <span class="image">
-                                                <img src="~/Content/imgs/img.png" alt="Profile Image" />
-                                            </span>
-                                            <span>
-                                                <span>@ViewData.Model.User.PrimerNombre</span>
-                                                <span class="time">3 mins ago</span>
-                                            </span>
-                                            <span class="message">
-                                                Lololol...
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="text-center">
-                                            <a>
-                                                <strong><a href="#">Ver todas las notificaciones</strong>
-                                                <i class="fa fa-angle-right"></i>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <!-- /top navigation -->
-            <!-- page content -->
-            <div class="right_col" role="main">
-                <div class="">
-                    <div class="page-title">
-                        <div class="title_left">
-                            <h3>Perfil</h3>
-                        </div>
-                        <div class="title_right">
-                            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Buscar...">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">Ir</button>
-                                    </span>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+
+                <div class="x_content">
+                    <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                        <div class="profile_img">
+                            <!-- end of image cropping -->
+                            <div id="crop-avatar">
+                                <!-- Current avatar -->
+                                <div class="avatar-view" title="Cambiar foto de perfil">
+                                    <img src="~/Content/imgs/img.png" alt="Avatar">
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-
-                                <div class="x_content">
-                                    <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-                                        <div class="profile_img">
-                                            <!-- end of image cropping -->
-                                            <div id="crop-avatar">
-                                                <!-- Current avatar -->
-                                                <div class="avatar-view" title="Cambiar foto de perfil">
-                                                    <img src="~/Content/imgs/img.png" alt="Avatar">
+                                <!-- Cropping modal -->
+                                <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <form class="avatar-form" action="crop.php" enctype="multipart/form-data" method="post">
+                                                <div class="modal-header">
+                                                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+                                                    <h4 class="modal-title" id="avatar-modal-label">Cambiar foto de perfil</h4>
                                                 </div>
-                                                <!-- Cropping modal -->
-                                                <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
-                                                    <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content">
-                                                            <form class="avatar-form" action="crop.php" enctype="multipart/form-data" method="post">
-                                                                <div class="modal-header">
-                                                                    <button class="close" data-dismiss="modal" type="button">&times;</button>
-                                                                    <h4 class="modal-title" id="avatar-modal-label">Cambiar foto de perfil</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="avatar-body">
-                                                                        <!-- Upload image and data -->
-                                                                        <div class="avatar-upload">
-                                                                            <input class="avatar-src" name="avatar_src" type="hidden">
-                                                                            <input class="avatar-data" name="avatar_data" type="hidden">
-                                                                            <label for="avatarInput">Imagen local</label>
-                                                                            <input class="avatar-input" id="avatarInput" name="avatar_file" type="file">
-                                                                        </div>
-                                                                        <!-- Crop and preview -->
-                                                                        <div class="row">
-                                                                            <div class="col-md-9">
-                                                                                <div class="avatar-wrapper"></div>
-                                                                            </div>
-                                                                            <div class="col-md-3">
-                                                                                <div class="avatar-preview preview-lg"></div>
-                                                                                <div class="avatar-preview preview-md"></div>
-                                                                                <div class="avatar-preview preview-sm"></div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row avatar-btns">
-                                                                            <div class="col-md-3 pull-right">
-                                                                                <button class="btn btn-primary btn-block avatar-save" type="submit">Guardar</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- <div class="modal-footer">
-                                                                  <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
-                                                                </div> -->
-                                                            </form>
+                                                <div class="modal-body">
+                                                    <div class="avatar-body">
+                                                        <!-- Upload image and data -->
+                                                        <div class="avatar-upload">
+                                                            <input class="avatar-src" name="avatar_src" type="hidden">
+                                                            <input class="avatar-data" name="avatar_data" type="hidden">
+                                                            <label for="avatarInput">Imagen local</label>
+                                                            <input class="avatar-input" id="avatarInput" name="avatar_file" type="file">
+                                                        </div>
+                                                        <!-- Crop and preview -->
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <div class="avatar-wrapper"></div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="avatar-preview preview-lg"></div>
+                                                                <div class="avatar-preview preview-md"></div>
+                                                                <div class="avatar-preview preview-sm"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row avatar-btns">
+                                                            <div class="col-md-3 pull-right">
+                                                                <button class="btn btn-primary btn-block avatar-save" type="submit">Guardar</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- /.modal -->
-                                                <!-- Loading state -->
-                                                <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
-                                            </div>
-                                            <!-- end of image cropping -->
+                                                <!-- <div class="modal-footer">
+                                                  <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+                                                </div> -->
+                                            </form>
                                         </div>
-                                        <h3>@ViewData.Model.User.PrimerNombre @ViewData.Model.User.SegundoNombre</h3>
-                                        <ul class="list-unstyled user_data">
-                                            <li>
-                                                <div class="fa fa-map-marker user-profile-icon"> San Francisco, California, USA </div>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-envelope user-profile-icon"> example@example.com</i>
-                                            </li>
-                                            <li class="m-top-xs">
-                                                <i class="fa fa-external-link user-profile-icon"></i>
-                                                <a href="#" target="_blank">www.ejemplolol.com</a>
-                                            </li>
-                                        </ul>
-                                        <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
-                                        <br />
-
-                                    </div>
-                                    <div class="col-md-9 col-sm-9 col-xs-12">
-                                        <!--Insert intelligent user info-->
-                                        <h2 class="center-block">Fecha de ingreso a Unitec: Date</h2>
                                     </div>
                                 </div>
+                                <!-- /.modal -->
+                                <!-- Loading state -->
+                                <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
                             </div>
+                            <!-- end of image cropping -->
                         </div>
+                        <h3>@empleado.User.PrimerNombre @empleado.User.SegundoNombre</h3>
+                        <ul class="list-unstyled user_data">
+                            <li>
+                                <div class="fa fa-map-marker user-profile-icon"> San Francisco, California, USA </div>
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope user-profile-icon"> example@example.com</i>
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa-external-link user-profile-icon"></i>
+                                <a href="#" target="_blank">www.ejemplolol.com</a>
+                            </li>
+                        </ul>
+                        <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
+                        <br />
+
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <!--Insert intelligent user info-->
+                        <h2 class="center-block">Fecha de ingreso a Unitec: Date</h2>
                     </div>
                 </div>
-
             </div>
-            <!-- /page content -->
         </div>
     </div>
-    <div id="custom_notifications" class="custom-notifications dsp_none">
-        <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group"></ul>
-        <div class="clearfix"></div>
-        <div id="notif-group" class="tabbed_notifications"></div>
-    </div>
-    <script src="~/Content/js/bootstrap.min.js"></script>
-    <!-- chart js -->
-    <script src="~/Content/js/chartjs/chart.min.js"></script>
-    <!-- bootstrap progress js -->
-    <script src="~/Content/js/progressbar/bootstrap-progressbar.min.js"></script>
-    <script src="~/Content/js/nicescroll/jquery.nicescroll.min.js"></script>
-    <!-- icheck -->
-    <script src="~/Content/js/icheck/icheck.min.js"></script>
-    <script src="~/Content/js/custom.js"></script>
-    <!-- image cropping -->
-    <script src="~/Content/js/cropping/cropper.min.js"></script>
-    <script src="~/Content/js/cropping/main.js"></script>
-
-    <!-- daterangepicker -->
-    <script type="text/javascript" src="~/Content/js/moment.min.js"></script>
-    <script type="text/javascript" src="~/Content/js/datepicker/daterangepicker.js"></script>
-    <!-- moris js -->
-    <script src="~/Content/js/moris/raphael-min.js"></script>
-    <script src="~/Content/js/moris/morris.js"></script>
-    <script>
-        $(function () {
-            var day_data = [
-                {
-                    "period": "Jan",
-                    "Hours worked": 80
-                },
-                {
-                    "period": "Feb",
-                    "Hours worked": 125
-                },
-                {
-                    "period": "Mar",
-                    "Hours worked": 176
-                },
-                {
-                    "period": "Apr",
-                    "Hours worked": 224
-                },
-                {
-                    "period": "May",
-                    "Hours worked": 265
-                },
-                {
-                    "period": "Jun",
-                    "Hours worked": 314
-                },
-                {
-                    "period": "Jul",
-                    "Hours worked": 347
-                },
-                {
-                    "period": "Aug",
-                    "Hours worked": 287
-                },
-                {
-                    "period": "Sep",
-                    "Hours worked": 240
-                },
-                {
-                    "period": "Oct",
-                    "Hours worked": 211
-                }
-            ];
-            Morris.Bar({
-                element: 'graph_bar',
-                data: day_data,
-                xkey: 'period',
-                hideHover: 'auto',
-                barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
-                ykeys: ['Hours worked', 'sorned'],
-                labels: ['Hours worked', 'SORN'],
-                xLabelAngle: 60
-            });
-        });
-    </script>
-    <!-- datepicker -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            var cb = function (start, end, label) {
-                console.log(start.toISOString(), end.toISOString(), label);
-                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                //alert("Callback has fired: [" + start.format('MMMM D, YYYY') + " to " + end.format('MMMM D, YYYY') + ", label = " + label + "]");
-            }
-
-            var optionSet1 = {
-                startDate: moment().subtract(29, 'days'),
-                endDate: moment(),
-                minDate: '01/01/2012',
-                maxDate: '12/31/2015',
-                dateLimit: {
-                    days: 60
-                },
-                showDropdowns: true,
-                showWeekNumbers: true,
-                timePicker: false,
-                timePickerIncrement: 1,
-                timePicker12Hour: true,
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                opens: 'left',
-                buttonClasses: ['btn btn-default'],
-                applyClass: 'btn-small btn-primary',
-                cancelClass: 'btn-small',
-                format: 'MM/DD/YYYY',
-                separator: ' to ',
-                locale: {
-                    applyLabel: 'Submit',
-                    cancelLabel: 'Clear',
-                    fromLabel: 'From',
-                    toLabel: 'To',
-                    customRangeLabel: 'Custom',
-                    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-                    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                    firstDay: 1
-                }
-            };
-            $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-            $('#reportrange').daterangepicker(optionSet1, cb);
-            $('#reportrange').on('show.daterangepicker', function () {
-                console.log("show event fired");
-            });
-            $('#reportrange').on('hide.daterangepicker', function () {
-                console.log("hide event fired");
-            });
-            $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
-                console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
-            });
-            $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
-                console.log("cancel event fired");
-            });
-            $('#options1').click(function () {
-                $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
-            });
-            $('#options2').click(function () {
-                $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
-            });
-            $('#destroy').click(function () {
-                $('#reportrange').data('daterangepicker').remove();
-            });
-        });
-    </script>
-    <!-- /datepicker -->
-</body>
-</html>
-
+</div>
