@@ -13,6 +13,14 @@ namespace Vacation_System
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            //GlobalFilters.Filters.Add(new HandleErrorAttribute());
         }
+
+        //protected void Application_Error(object sender, EventArgs e)
+        //{
+        //    Exception exception = Server.GetLastError();
+        //    Server.ClearError();
+        //    Response.Redirect("Error/error500");
+        //}
     }
 }
