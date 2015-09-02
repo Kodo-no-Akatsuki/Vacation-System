@@ -84,7 +84,7 @@ namespace Vacation_System.Controllers
 
 		public ViewResult Register()
 		{
-			return View();
+			return View(Session["User"] as Empleado);
 		}
 
 		[HttpPost]

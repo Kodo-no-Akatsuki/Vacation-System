@@ -886,6 +886,7 @@
     <Content Include="Views\AccountPage\Roles.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />
+    <Content Include="Views\AccountPage\Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
