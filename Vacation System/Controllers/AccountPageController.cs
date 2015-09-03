@@ -2,6 +2,7 @@ using System.Web.Mvc;
 using Vacation_System.ServiceReference;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Web_Service;
 
 namespace Vacation_System.Controllers
 {
@@ -25,6 +26,23 @@ namespace Vacation_System.Controllers
 		public ActionResult Departments()
 		{
 			if (Session["User"] == null) return LogOut();
+
+			Empleado emp = Session["User"] as Empleado;
+			bool valido = false;
+
+			foreach (var permiso in emp.Permisos)
+			{
+				if (permiso.PermisosId == (int) PermisosEnum.EditarDepartamento ||
+					permiso.PermisosId == (int) PermisosEnum.CrearDepartamento)
+				{
+					valido = true;
+				}
+			}
+
+			if (!valido)
+			{
+				return RedirectToAction("error404", "Error");
+			}
 
 			ServiceClient service = new ServiceClient();
 
@@ -52,6 +70,23 @@ namespace Vacation_System.Controllers
 		public ActionResult Roles()
 		{
 			if (Session["User"] == null) return LogOut();
+
+			Empleado emp = Session["User"] as Empleado;
+			bool valido = false;
+
+			foreach (var permiso in emp.Permisos)
+			{
+				if (permiso.PermisosId == (int)PermisosEnum.EditarRol ||
+					permiso.PermisosId == (int)PermisosEnum.CrearRol)
+				{
+					valido = true;
+				}
+			}
+
+			if (!valido)
+			{
+				return RedirectToAction("error404", "Error");
+			}
 
 			ServiceClient service = new ServiceClient();
 
@@ -82,8 +117,24 @@ namespace Vacation_System.Controllers
 			return RedirectToAction("Index", "LogIn");
 		}
 
-		public ViewResult Register()
+		public ActionResult Register()
 		{
+			Empleado emp = Session["User"] as Empleado;
+			bool valido = false;
+
+			foreach (var permiso in emp.Permisos)
+			{
+				if (permiso.PermisosId == (int)PermisosEnum.CrearUsuario)
+				{
+					valido = true;
+				}
+			}
+
+			if (!valido)
+			{
+				return RedirectToAction("error404", "Error");
+			}
+
 			return View(Session["User"] as Empleado);
 		}
 
