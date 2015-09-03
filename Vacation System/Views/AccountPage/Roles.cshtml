@@ -6,7 +6,10 @@
     Layout = "~/Views/AccountPage/Layout.cshtml";
     ViewBag.Title = "Roles";
     var empleado = (Session["User"] as Empleado);
+    ServiceClient service = new ServiceClient();
+    var permisos = service.LoadPermisosData();
     
+    service.Close();
 }
 
 @using (Html.BeginForm())
@@ -84,11 +87,16 @@
                             <h3>Permisos</h3>
                         </div>
                         <div class="modal-body">
-                            <input type="checkbox" name="permisos" value="createuser"> Crear Usuario
+                            @*<input type="checkbox" name="permisos" value="createuser"> Crear Usuario
                             <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
                             <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
                             <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
-                            <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles
+                            <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles*@
+
+                            @foreach (var p in permisos)
+                            {
+                                <input type="checkbox" name=@p value="profileviewer"> @p;
+                            }
 
                             <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
                             <script language="JavaScript">
@@ -122,11 +130,16 @@
                         <div class="modal-body">
                             <input type="text" id="Descripcion" name="Descripcion" placeholder="Nombre" />
                             <h3>Permisos</h3>
-                            <input type="checkbox" name="permisos" value="createuser"> Crear Usuario
+                            @*<input type="checkbox" name="permisos" value="createuser"> Crear Usuario
                             <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
                             <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
                             <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
-                            <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles
+                            <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles*@
+
+                            @foreach (var p in permisos)
+                            {
+                                <input type="checkbox" name=@p value="profileviewer"> @p;
+                            }
 
                             <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
                             <script language="JavaScript">
