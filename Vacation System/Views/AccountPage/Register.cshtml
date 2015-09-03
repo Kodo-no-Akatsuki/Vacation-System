@@ -151,10 +151,22 @@
                                 Roles <span class="required">*</span>
                             </label>
                             <div class="container pull-left" style=" width:300px; height: 100px; overflow-y: scroll;">
-                                <input type="hidden" name="Roles.Index" value="indx" />
+                                @*<input type="hidden" name="Roles.Index" value="indx" />
                                 <input type="checkbox" name="Roles[indx].Descripcion" value="Jefe Inmediato" /> Jefe Inmediato <br />
                                 <input type="hidden" name="Roles.Index" value="indx1" />
-                                <input type="checkbox" name="Roles[indx1].Descripcion" value="Empleado" /> Empleado <br />
+                                <input type="checkbox" name="Roles[indx1].Descripcion" value="Empleado" /> Empleado <br />*@
+
+                                @for (int i = 0; i < roles.Length; i++)
+                                {
+                                    var index = String.Format("indx{0}", i);
+                                    if (i == 0)
+                                    {
+                                        index = "indx";
+                                    }
+                                    
+                                    <input type="hidden" name="Roles.Index" value=@index />
+                                    <input type="checkbox" name="Roles[@index].Descripcion" value=@roles[i].Descripcion /> @roles[i].Descripcion <br />
+                                }
 
                             </div>
                         </div>
