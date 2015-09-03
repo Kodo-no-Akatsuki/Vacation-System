@@ -254,5 +254,13 @@ namespace Web_Service
 
             return roles;
         }
+
+        public List<string> LoadPermisosData()
+        {
+            VacationEntities entity = new VacationEntities();
+            List<string> permisos = entity.Permisos.Select(permiso => permiso.descripcion).ToList();
+
+            return permisos;
+        }
     }
 }

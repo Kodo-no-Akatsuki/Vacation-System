@@ -7,6 +7,11 @@
     Layout = "~/Views/AccountPage/Layout.cshtml";
     ViewBag.Title = "Registro de Usuario";
     var empleado = (Session["User"] as Empleado);
+    ServiceClient service = new ServiceClient();
+    var deptos = service.LoadDepartments();
+    var roles = service.LoadRoles();
+    
+    service.Close();
 }
 
 
@@ -116,7 +121,7 @@
                                 Departamentos <span class="required">*</span>
                             </label>
                             <div class="container pull-left" style="width:300px; height: 100px; overflow-y: scroll;">
-                                <input type="hidden" name="Departamento.Index" value="indx" />
+                                @*<input type="hidden" name="Departamento.Index" value="indx" />
                                 <input type="checkbox" name="Departamento[indx].Descripcion" value="Motorista" /> Motorista <br />
                                 <input type="hidden" name="Departamento.Index" value="indx1" />
                                 <input type="checkbox" name="Departamento[indx1].Descripcion" value="Aseador" /> Aseador <br />
@@ -125,7 +130,18 @@
                                 <input type="hidden" name="Departamento.Index" value="indx3" />
                                 <input type="checkbox" name="Departamento[indx3].Descripcion" value="IT" /> IT <br />
                                 <input type="hidden" name="Departamento.Index" value="indx4" />
-                                <input type="checkbox" name="Departamento[indx4].Descripcion" value="Administracion" /> Administracion <br />
+                                <input type="checkbox" name="Departamento[indx4].Descripcion" value="Administracion" /> Administracion <br />*@
+
+                                @for (int i = 0; i < deptos.Length; i++)
+                                {
+                                    var index = String.Format("indx{0}", i);
+                                    if (i == 0)
+                                    {
+                                        index = "indx";
+                                    }
+                                    <input type="hidden" name="Departamento.Index" value=@index />
+                                    <input type="checkbox" name="Departamento[@index].Descripcion" value=@deptos[i].Descripcion /> @deptos[i].Descripcion <br />
+                                }
 
                             </div>
                         </div>
@@ -135,10 +151,22 @@
                                 Roles <span class="required">*</span>
                             </label>
                             <div class="container pull-left" style=" width:300px; height: 100px; overflow-y: scroll;">
-                                <input type="hidden" name="Roles.Index" value="indx" />
+                                @*<input type="hidden" name="Roles.Index" value="indx" />
                                 <input type="checkbox" name="Roles[indx].Descripcion" value="Jefe Inmediato" /> Jefe Inmediato <br />
                                 <input type="hidden" name="Roles.Index" value="indx1" />
-                                <input type="checkbox" name="Roles[indx1].Descripcion" value="Empleado" /> Empleado <br />
+                                <input type="checkbox" name="Roles[indx1].Descripcion" value="Empleado" /> Empleado <br />*@
+
+                                @for (int i = 0; i < roles.Length; i++)
+                                {
+                                    var index = String.Format("indx{0}", i);
+                                    if (i == 0)
+                                    {
+                                        index = "indx";
+                                    }
+                                    
+                                    <input type="hidden" name="Roles.Index" value=@index />
+                                    <input type="checkbox" name="Roles[@index].Descripcion" value=@roles[i].Descripcion /> @roles[i].Descripcion <br />
+                                }
 
                             </div>
                         </div>

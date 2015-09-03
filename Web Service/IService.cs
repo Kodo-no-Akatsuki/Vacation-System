@@ -33,6 +33,9 @@ namespace Web_Service
         [OperationContract]
         List<RolesMirror> LoadRoles();
 
+        [OperationContract]
+        List<string> LoadPermisosData();
+
     }
 
 }

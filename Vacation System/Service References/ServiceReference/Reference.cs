@@ -1289,6 +1289,12 @@ namespace Vacation_System.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadRoles", ReplyAction="http://tempuri.org/IService/LoadRolesResponse")]
         System.Threading.Tasks.Task<Vacation_System.ServiceReference.RolesMirror[]> LoadRolesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadPermisosData", ReplyAction="http://tempuri.org/IService/LoadPermisosDataResponse")]
+        string[] LoadPermisosData();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadPermisosData", ReplyAction="http://tempuri.org/IService/LoadPermisosDataResponse")]
+        System.Threading.Tasks.Task<string[]> LoadPermisosDataAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1372,6 +1378,14 @@ namespace Vacation_System.ServiceReference {
         
         public System.Threading.Tasks.Task<Vacation_System.ServiceReference.RolesMirror[]> LoadRolesAsync() {
             return base.Channel.LoadRolesAsync();
+        }
+        
+        public string[] LoadPermisosData() {
+            return base.Channel.LoadPermisosData();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> LoadPermisosDataAsync() {
+            return base.Channel.LoadPermisosDataAsync();
         }
     }
 }
