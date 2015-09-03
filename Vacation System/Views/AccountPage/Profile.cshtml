@@ -89,14 +89,24 @@
                         <h3>@empleado.User.PrimerNombre @empleado.User.SegundoNombre</h3>
                         <ul class="list-unstyled user_data">
                             <li>
-                                <div class="fa fa-map-marker user-profile-icon"> San Francisco, California, USA </div>
+                                <div class="fa fa-calendar user-profile-icon">  @empleado.User.FechaIngreso.ToString("dd/MM/yyyy") </div>
                             </li>
                             <li>
-                                <i class="fa fa-envelope user-profile-icon"> example@example.com</i>
+                                <i class="fa fa-envelope user-profile-icon"> @empleado.User.Email</i>
                             </li>
                             <li class="m-top-xs">
-                                <i class="fa fa-external-link user-profile-icon"></i>
-                                <a href="#" target="_blank">www.ejemplolol.com</a>
+                                @{
+                                    if (empleado.User.Activo) 
+                                    { 
+                                        <i class="fa fa-check user-profile-icon">Activo</i>
+                                        
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-close user-profile-icon">Inactivo</i>
+                                        
+                                    }
+                                }
                             </li>
                         </ul>
                         <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
@@ -105,7 +115,7 @@
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         <!--Insert intelligent user info-->
-                        <h2 class="center-block">Fecha de ingreso a Unitec: Date</h2>
+                        <h2 class="center-block"></h2>
                     </div>
                 </div>
             </div>
