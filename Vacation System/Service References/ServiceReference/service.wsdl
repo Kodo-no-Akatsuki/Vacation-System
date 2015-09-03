@@ -6,6 +6,7 @@
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Web_Service" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IService_GetData_InputMessage">
@@ -50,6 +51,12 @@
   <wsdl:message name="IService_LoadRoles_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoadRolesResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_LoadPermisosData_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoadPermisosData" />
+  </wsdl:message>
+  <wsdl:message name="IService_LoadPermisosData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoadPermisosDataResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetData" message="tns:IService_GetData_InputMessage" />
@@ -78,6 +85,10 @@
     <wsdl:operation name="LoadRoles">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/LoadRoles" message="tns:IService_LoadRoles_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/LoadRolesResponse" message="tns:IService_LoadRoles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadPermisosData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/LoadPermisosData" message="tns:IService_LoadPermisosData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/LoadPermisosDataResponse" message="tns:IService_LoadPermisosData_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -138,6 +149,15 @@
     </wsdl:operation>
     <wsdl:operation name="LoadRoles">
       <soap:operation soapAction="http://tempuri.org/IService/LoadRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadPermisosData">
+      <soap:operation soapAction="http://tempuri.org/IService/LoadPermisosData" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
