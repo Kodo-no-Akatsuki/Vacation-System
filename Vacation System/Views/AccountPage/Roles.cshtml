@@ -102,8 +102,8 @@
 
                         @foreach (var p in permisos)
                         {
-                            <input type="hidden" name="empleado.Permisos.Index" value=@index />
-                            <input type="checkbox" id="empleado.Permisos[@index].Descripcion" name='permisos' value=@p> @p;
+                            <input type="hidden" name="Permisos.Index" value=@index />
+                            <input type="checkbox" class="permisos"  name="Permisos[@index].Descripcion" value=@p> @p;
                             <br />
                             index++;
                         }
@@ -112,7 +112,7 @@
 
                         <script language="JavaScript">
                             function toggle(source) {
-                                checkboxes = document.getElementsByName('permisos');
+                                checkboxes = document.getElementsByClassName("permisos");
                                 for (var i = 0, n = checkboxes.length; i < n; i++) {
                                     checkboxes[i].checked = source.checked;
                                 }
@@ -145,16 +145,27 @@
                     <h3>Permisos</h3>
                     
                     <div class="container" style="width:500px; height: 250px; overflow-y: scroll;">
+                        
+                        @{ var i = 0; }
+
                         @foreach (var p in permisos)
                         {
-                            <input type="checkbox" id=@p name="permisos" value="profileviewer"> @p
+                            var indx = String.Format("indx{0}", i);
+                            if (i == 0)
+                            {
+                                indx = "indx";
+                            }
+                            
+                            <input type="hidden" name="Permisos.Index" value=@indx />
+                            <input type="checkbox" class="permisos" name="Permisos[@indx].Descripcion" value=@p> @p;
                             <br />
+                            i++;
                         }
 
                         <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
                         <script language="JavaScript">
                             function toggle(source) {
-                                checkboxes = document.getElementsByName('permisos');
+                                checkboxes = document.getElementsByClassName("permisos");
                                 for (var i = 0, n = checkboxes.length; i < n; i++) {
                                     checkboxes[i].checked = source.checked;
                                 }
