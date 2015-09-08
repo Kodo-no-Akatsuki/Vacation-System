@@ -1,4 +1,4 @@
-﻿@using Vacation_System.ServiceReference
+@using Vacation_System.ServiceReference
 @using Web_Service
 @model IEnumerable<Vacation_System.ServiceReference.RolesMirror>
 
@@ -39,7 +39,7 @@
         }
 
         function fnClickEditRol() {
-                $('#modal-content').modal('hide');
+                $('#editmodal').modal('hide');
         }
     </script>
 
@@ -143,24 +143,26 @@
                 <div class="modal-body">
                     <input type="text" id="Descripcion" name="Descripcion" placeholder="Nombre" />
                     <h3>Permisos</h3>
-
-                    @foreach (var p in permisos)
-                    {
-                        <input type="checkbox" name=@p value="profileviewer"> @p;
-                    }
-
-                    <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
-                    <script language="JavaScript">
-                        function toggle(source) {
-                            checkboxes = document.getElementsByName('permisos');
-                            for (var i = 0, n = checkboxes.length; i < n; i++) {
-                                checkboxes[i].checked = source.checked;
-                            }
-
+                    
+                    <div class="container" style="width:500px; height: 250px; overflow-y: scroll;">
+                        @foreach (var p in permisos)
+                        {
+                            <input type="checkbox" id=@p name="permisos" value="profileviewer"> @p
+                            <br />
                         }
-                    </script>
 
-                </div>
+                        <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
+                        <script language="JavaScript">
+                            function toggle(source) {
+                                checkboxes = document.getElementsByName('permisos');
+                                for (var i = 0, n = checkboxes.length; i < n; i++) {
+                                    checkboxes[i].checked = source.checked;
+                                }
+
+                            }
+                        </script>
+                        </div>
+                    </div>
                 <div class="modal-footer">
                     <a href="#" class="btn" data-dismiss="modal">Close</a>
 
