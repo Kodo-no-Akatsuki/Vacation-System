@@ -39,7 +39,7 @@
         }
 
         function fnClickEditRol() {
-                $('#modal-content').modal('hide');
+                $('#editmodal').modal('hide');
         }
     </script>
 
@@ -96,7 +96,7 @@
                     <div class="container" style="width:500px; height: 250px; overflow-y: scroll;">
                         @foreach (var p in permisos)
                         {
-                            <input type="checkbox" id=@p name='permisos' value="profileviewer"> @p;
+                            <input type="checkbox" id=@p name='permisos' value="profileviewer"> @p
                             <br />
                         }
 
@@ -139,24 +139,26 @@
                         <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
                         <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
                         <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles*@
-
-                    @foreach (var p in permisos)
-                    {
-                        <input type="checkbox" name=@p value="profileviewer"> @p;
-                    }
-
-                    <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
-                    <script language="JavaScript">
-                        function toggle(source) {
-                            checkboxes = document.getElementsByName('permisos');
-                            for (var i = 0, n = checkboxes.length; i < n; i++) {
-                                checkboxes[i].checked = source.checked;
-                            }
+                    <div class="container" style="width:500px; height: 250px; overflow-y: scroll;">
+                        @foreach (var p in permisos)
+                        {
+                            <input type="checkbox" id=@p name="permisos" value="profileviewer"> @p
+                            <br />
 
                         }
-                    </script>
 
-                </div>
+                        <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
+                        <script language="JavaScript">
+                            function toggle(source) {
+                                checkboxes = document.getElementsByName('permisos');
+                                for (var i = 0, n = checkboxes.length; i < n; i++) {
+                                    checkboxes[i].checked = source.checked;
+                                }
+
+                            }
+                        </script>
+                        </div>
+                    </div>
                 <div class="modal-footer">
                     <a href="#" class="btn" data-dismiss="modal">Close</a>
 
