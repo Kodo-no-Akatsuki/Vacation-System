@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using System.Collections.Generic;
 
 namespace Web_Service.Mirror_Classes
 {
@@ -13,5 +14,8 @@ namespace Web_Service.Mirror_Classes
 
         [DataMember]
         public bool Activo { get; set; }
+
+        [DataMember]
+        public List<PermisosMirror> Permisos { get; set; }
     }
 }
