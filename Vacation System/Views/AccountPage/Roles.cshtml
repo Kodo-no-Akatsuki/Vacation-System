@@ -65,7 +65,7 @@
                         if (perm.PermisosId == (int)PermisosEnum.EditarRol)
                         {
                             <td id="editbutton">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-content">Editar</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal">Editar</button>
                             </td>
 
                             break;
@@ -75,101 +75,98 @@
                 </tr>
 
             }       
-     
-            <!--Modify Access Modal-->
-            <div id="modal-content" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">×</button>
-                            <h3>Permisos</h3>
-                        </div>
-                        <div class="modal-body">
-                            @*<input type="checkbox" name="permisos" value="createuser"> Crear Usuario
-                            <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
-                            <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
-                            <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
-                            <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles*@
-
-                            <div class="container" style="width:500px; height: 250px; overflow-y: scroll;">
-                                @foreach (var p in permisos)
-                                {
-                                    <input type="checkbox" id=@p name='permisos' value="profileviewer"> @p;
-                                    <br />
-                                }
-
-                                <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
-                                
-                                <script language="JavaScript">
-                                    function toggle(source) {
-                                        checkboxes = document.getElementsByName('permisos');
-                                        for (var i = 0, n = checkboxes.length; i < n; i++) {
-                                            checkboxes[i].checked = source.checked;
-                                        }
-
-                                    }
-                                </script>
-
-
-                            </div>
-                        <div class="modal-footer">
-                            <a href="#" class="btn" data-dismiss="modal">Close</a>
-                            <a onclick="fnClickEditRol();" class="btn btn-primary">Guardar Cambios</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Add Rol Modal-->
-
-            <div id="addmodal" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">×</button>
-                            <h3>Roles</h3>
-                        </div>
-                        <div class="modal-body">
-                            <input type="text" id="Descripcion" name="Descripcion" placeholder="Nombre" />
-                            <h3>Permisos</h3>
-                            @*<input type="checkbox" name="permisos" value="createuser"> Crear Usuario
-                            <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
-                            <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
-                            <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
-                            <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles*@
-
-                            @foreach (var p in permisos)
-                            {
-                                <input type="checkbox" name=@p value="profileviewer"> @p;
-                            }
-
-                            <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
-                            <script language="JavaScript">
-                                function toggle(source) {
-                                    checkboxes = document.getElementsByName('permisos');
-                                    for (var i = 0, n = checkboxes.length; i < n; i++) {
-                                        checkboxes[i].checked = source.checked;
-                                    }
-
-                                }
-                            </script>
-
-                        </div>
-                        <div class="modal-footer">
-                            <a href="#" class="btn" data-dismiss="modal">Close</a>
-
-                            <input type="submit" name="submit" id="submit" onclick="fnClickAddRow();" value="Guardar" class="btn btn-primary" />
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            
-
 
         </tbody>
     </table>
+    <!--Modify Access Modal-->
+    <div id="editmodal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h3>Permisos</h3>
+                </div>
+                <div class="modal-body">
+                    @*<input type="checkbox" name="permisos" value="createuser"> Crear Usuario
+                        <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
+                        <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
+                        <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
+                        <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles*@
+
+                    <div class="container" style="width:500px; height: 250px; overflow-y: scroll;">
+                        @foreach (var p in permisos)
+                        {
+                            <input type="checkbox" id=@p name='permisos' value="profileviewer"> @p;
+                            <br />
+                        }
+
+                        <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
+
+                        <script language="JavaScript">
+                            function toggle(source) {
+                                checkboxes = document.getElementsByName('permisos');
+                                for (var i = 0, n = checkboxes.length; i < n; i++) {
+                                    checkboxes[i].checked = source.checked;
+                                }
+
+                            }
+                        </script>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn" data-dismiss="modal">Close</a>
+                        <a onclick="fnClickEditRol();" class="btn btn-primary">Guardar Cambios</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            <!--Add Rol Modal-->
+
+    <div id="addmodal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h3>Roles</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="Descripcion" name="Descripcion" placeholder="Nombre" />
+                    <h3>Permisos</h3>
+                    @*<input type="checkbox" name="permisos" value="createuser"> Crear Usuario
+                        <input type="checkbox" name="permisos" value="moduser"> Modificar Usuario
+                        <input type="checkbox" name="permisos" value="transmitter"> Crear Peticiones
+                        <input type="checkbox" name="permisos" value="acceptor"> Aceptar Peticiones
+                        <input type="checkbox" name="permisos" value="profileviewer"> Ver Perfiles*@
+
+                    @foreach (var p in permisos)
+                    {
+                        <input type="checkbox" name=@p value="profileviewer"> @p;
+                    }
+
+                    <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
+                    <script language="JavaScript">
+                        function toggle(source) {
+                            checkboxes = document.getElementsByName('permisos');
+                            for (var i = 0, n = checkboxes.length; i < n; i++) {
+                                checkboxes[i].checked = source.checked;
+                            }
+
+                        }
+                    </script>
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn" data-dismiss="modal">Close</a>
+
+                    <input type="submit" name="submit" id="submit" onclick="fnClickAddRow();" value="Guardar" class="btn btn-primary" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <br />
 <div>
     @foreach (var permiso in empleado.Permisos)
