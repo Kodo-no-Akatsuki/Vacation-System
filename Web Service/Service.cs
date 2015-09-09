@@ -199,6 +199,18 @@ namespace Web_Service
                 rolesid = mirror.Id
             };
 
+            foreach(PermisosMirror permiso in mirror.Permisos)
+            {
+                Permisos perm = new Permisos
+                {
+                    activo = permiso.Activo,
+                    descripcion = permiso.Descripcion,
+                    permisosid = permiso.PermisosId
+                };
+
+                rol.tbl_permisos.Add(perm);
+            }
+
             entities.Roles.Add(rol);
             entities.SaveChanges();
         }

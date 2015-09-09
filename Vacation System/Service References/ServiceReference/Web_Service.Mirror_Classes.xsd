@@ -86,6 +86,7 @@
       <xs:element minOccurs="0" name="Activo" type="xs:boolean" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Permisos" nillable="true" type="tns:ArrayOfPermisosMirror" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RolesMirror" nillable="true" type="tns:RolesMirror" />
