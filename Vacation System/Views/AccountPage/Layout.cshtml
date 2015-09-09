@@ -257,6 +257,28 @@
         <script src="@Url.Content("~/Content/js/custom.js")"></script>
         <script src="@Url.Content("~/Content/js/moment.min.js")"></script>
         <script src="@Url.Content("~/Content/js/calendar/fullcalendar.min.js")"></script>
+        <!-- form wizard -->
+        <script type="text/javascript" src="@Url.Content("~/Content/js/wizard/jquery.smartWizard.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Smart Wizard
+            $('#wizard').smartWizard();
+
+            function onFinishCallback() {
+                $('#wizard').smartWizard('showMessage', 'Finish Clicked');
+                //alert('Finish Clicked');
+            }
+        });
+
+        $(document).ready(function () {
+            // Smart Wizard
+            $('#wizard_verticle').smartWizard({
+                transitionEffect: 'slide'
+            });
+
+        });
+    </script>
+
         <!-- image cropping -->
         <script src="~/Content/js/cropping/cropper.min.js"></script>
         <script src="~/Content/js/cropping/main.js"></script>
