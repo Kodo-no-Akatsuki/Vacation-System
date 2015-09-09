@@ -256,11 +256,24 @@ namespace Web_Service
 
             for (int i = 0; i < query.Count; i++)
             {
+                List<PermisosMirror> permisos = new List<PermisosMirror>();
+
+                foreach(Permisos p in query[i].tbl_permisos)
+                {
+                      permisos.Add(new PermisosMirror
+                      {
+                          Activo = p.activo,
+                          Descripcion = p.descripcion,
+                          PermisosId = p.permisosid
+                      });
+                }
+
                 roles.Add(new RolesMirror
                 {
                     Activo = query[i].activo,
                     Descripcion = query[i].descripcion,
-                    Id = query[i].rolesid
+                    Id = query[i].rolesid,
+                    Permisos = permisos
                 });
             }
 
