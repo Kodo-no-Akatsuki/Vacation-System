@@ -22,11 +22,11 @@ function SmartWizard(target, options) {
     this.loader = $('<div>Loading</div>').addClass("loader");
     this.buttons = {
         next : $('<a>'+options.labelNext+'</a>').attr("href","#").addClass("btn btn-success"),
-        previous : $('<a>'+options.labelPrevious+'</a>').attr("href","#").addClass("btn btn-primary"),
-        finish  : $('<a>'+options.labelFinish+'</a>').attr("href","#").addClass("btn btn-default")
+        previous : $('<a style="background:#193b69">'+options.labelPrevious+'</a>').attr("href","#").addClass("btn btn-primary"),
+        finish  : $('<a style="background:#193b69">'+options.labelFinish+'</a>').attr("href","#").addClass("btn btn-primary")
     };
 
-    /*
+    /*  
      * Private functions
      */
 
