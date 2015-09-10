@@ -3,6 +3,7 @@ using Vacation_System.ServiceReference;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Web_Service;
+using Vacation_System.Models;
 
 namespace Vacation_System.Controllers
 {
@@ -88,9 +89,7 @@ namespace Vacation_System.Controllers
 				return RedirectToAction("error404", "Error");
 			}
 
-			ServiceClient service = new ServiceClient();
-
-			return View(service.LoadRoles());
+			return View(new CreateRoleModel());
 		}
 
 		[HttpPost]
