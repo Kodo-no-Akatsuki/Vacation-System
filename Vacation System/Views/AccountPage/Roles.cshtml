@@ -13,6 +13,7 @@
     var contienePermiso = false;
 
     var canEdit = false;
+    var canAdd = false;
 
     var rolIndex = 0;
 
@@ -26,11 +27,10 @@
     
     foreach (var permiso in empleado.Permisos)
     {
-        if (permiso.PermisosId == (int)PermisosEnum.EditarRol)
-        {
-            canEdit = true;
-            break;
-        }
+        canEdit = !canEdit && permiso.PermisosId == (int)PermisosEnum.EditarRol;
+        canAdd = !canAdd && permiso.PermisosId == (int)PermisosEnum.CrearRol;
+
+        if (canAdd && canEdit) { break; }
     }
 
     service.Close();
@@ -115,57 +115,116 @@
     </table>
         
     <!--Modify Access Modal-->
-    
-    rolIndex = 0;
-    
-    foreach(RolesMirror rol in Model.Roles)
-    {
-        Model.RolActual = Model.Roles.ElementAt(rolIndex);
-        editModalId = String.Format("editmodal{0}", rolIndex);
-        editDataTarget = String.Format("#editmodal{0}", rolIndex);
 
-        <div id=@editModalId class="modal fade" tabindex="-1" role="dialog">
+    if (canEdit)
+    {
+        rolIndex = 0;
+
+        foreach (RolesMirror rol in Model.Roles)
+        {
+            Model.RolActual = Model.Roles.ElementAt(rolIndex);
+            editModalId = String.Format("editmodal{0}", rolIndex);
+            editDataTarget = String.Format("#editmodal{0}", rolIndex);
+
+            <div id=@editModalId class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">X</button>
+                            <h3>@Model.RolActual.Descripcion</h3>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="container" style="width:500px; height: 250px; overflow-y: scroll;">
+
+                                @foreach (var p in permisos)
+                                {
+                                    contienePermiso = false;
+
+                                    <input type="hidden" id=@index name="Permisos.Index" value=@index />
+
+                                    for (int i = 0; i < Model.RolActual.Permisos.Length; i++)
+                                    {
+                                        if (Model.RolActual.Permisos[i].Descripcion == p)
+                                        {
+                                            contienePermiso = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (contienePermiso)
+                                    {
+                                        <input type="checkbox" class="permisos" name="Permisos[@index].Descripcion" value=@p checked> @p;
+                                    }
+
+                                    else
+                                    {
+                                        <input type="checkbox" class="permisos" name="Permisos[@index].Descripcion" value=@p> @p;
+                                    }
+
+                                    <br />
+                                    index++;
+                                }
+
+                                <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
+
+                                <script language="JavaScript">
+                                    function toggle(source) {
+                                        checkboxes = document.getElementsByClassName("permisos");
+                                        for (var i = 0, n = checkboxes.length; i < n; i++) {
+                                            checkboxes[i].checked = source.checked;
+                                        }
+
+                                    }
+                                </script>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#" class="btn" data-dismiss="modal">Close</a>
+                                <a id=@rolIndex onclick="fnClickEditRol(this);" class="btn btn-primary">Guardar Cambios</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           rolIndex++;
+        }
+        
+    }
+            <!--Add Rol Modal-->
+
+    if (canAdd)
+    {
+        <div id="addmodal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">X</button>
-                        <h3>@Model.RolActual.Descripcion</h3>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h3>Roles</h3>
                     </div>
                     <div class="modal-body">
+                        <input type="text" id="Descripcion" name="Descripcion" placeholder="Nombre" />
+                        <h3>Permisos</h3>
 
                         <div class="container" style="width:500px; height: 250px; overflow-y: scroll;">
 
-                        @foreach (var p in permisos)
-                        {
-                            contienePermiso = false;
-                            
-                            <input type="hidden" id=@index name="Permisos.Index" value=@index />
-
-                            for (int i = 0; i < Model.RolActual.Permisos.Length; i++)
+                            @foreach (var p in permisos)
                             {
-                                if (Model.RolActual.Permisos[i].Descripcion == p)
+                                var indx = String.Format("indx{0}", j);
+                                if (j == 0)
                                 {
-                                     contienePermiso = true;
-                                     break;
+                                    indx = "indx";
                                 }
-                            }
 
-                            if (contienePermiso)
-                            {
-                                <input type="checkbox" class="permisos" name="Permisos[@index].Descripcion" value=@p checked> @p;
+                                <input type="hidden" name="Permisos.Index" value=@indx />
+                                <input type="checkbox" class="permisos" name="Permisos[@indx].Descripcion" value=@p> @p;
+                                <br />
+                                                                                                                   j++;
                             }
-
-                            else
-                            {
-                                <input type="checkbox" class="permisos" name="Permisos[@index].Descripcion" value=@p> @p;
-                            }
-
-                            <br />
-                            index++;
-                        }
 
                             <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
-
                             <script language="JavaScript">
                                 function toggle(source) {
                                     checkboxes = document.getElementsByClassName("permisos");
@@ -175,86 +234,25 @@
 
                                 }
                             </script>
-
-
                         </div>
-                        <div class="modal-footer">
-                            <a href="#" class="btn" data-dismiss="modal">Close</a>
-                            <a id=@rolIndex onclick="fnClickEditRol(this);" class="btn btn-primary">Guardar Cambios</a>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn" data-dismiss="modal">Close</a>
+
+                        <input type="submit" name="submit" id="submit" onclick="fnClickAddRow();" value="Guardar" class="btn btn-primary" />
+
                     </div>
                 </div>
             </div>
         </div>
-        
-        rolIndex++;
-    }
 
-            <!--Add Rol Modal-->
+        <br />
 
-    <div id="addmodal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h3>Roles</h3>
-                </div>
-                <div class="modal-body">
-                    <input type="text" id="Descripcion" name="Descripcion" placeholder="Nombre" />
-                    <h3>Permisos</h3>
-                    
-                    <div class="container" style="width:500px; height: 250px; overflow-y: scroll;">
-
-                        @foreach (var p in permisos)
-                        {
-                            var indx = String.Format("indx{0}", j);
-                            if (j == 0)
-                            {
-                                indx = "indx";
-                            }
-                            
-                            <input type="hidden" name="Permisos.Index" value=@indx />
-                            <input type="checkbox" class="permisos" name="Permisos[@indx].Descripcion" value=@p> @p;
-                            <br />
-                            j++;
-                        }
-
-                        <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
-                        <script language="JavaScript">
-                            function toggle(source) {
-                                checkboxes = document.getElementsByClassName("permisos");
-                                for (var i = 0, n = checkboxes.length; i < n; i++) {
-                                    checkboxes[i].checked = source.checked;
-                                }
-
-                            }
-                        </script>
-                        </div>
-                    </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn" data-dismiss="modal">Close</a>
-
-                    <input type="submit" name="submit" id="submit" onclick="fnClickAddRow();" value="Guardar" class="btn btn-primary" />
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <br />
-    
-<div>
-    @foreach (var permiso in empleado.Permisos)
-    {
-        if (permiso.PermisosId == (int)PermisosEnum.CrearRol)
-        {
+        <div>
             <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addmodal">Agregar Rol</button>
-            break;
-        }
+        </div>
     }
-</div>
-     
-    
+
 }
 
  
