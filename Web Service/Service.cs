@@ -282,8 +282,21 @@ namespace Web_Service
 
         public List<string> LoadPermisosData()
         {
-            VacationEntities entity = new VacationEntities();
-            List<string> permisos = entity.Permisos.Select(permiso => permiso.descripcion).ToList();
+            VacationEntities entities = new VacationEntities();
+            List<string> permisos = new List<string>();
+
+            var query = (from p in entities.Permisos
+                         group p by p.descripcion
+                             into uniquePermisos
+                             select uniquePermisos.FirstOrDefault()).ToList();
+
+            if (!query.Any())
+                return null;
+
+            foreach(Permisos permiso in query)
+            {
+                permisos.Add(permiso.descripcion);
+            }
 
             return permisos;
         }
