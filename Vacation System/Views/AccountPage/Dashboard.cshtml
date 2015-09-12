@@ -129,11 +129,10 @@
                         <div id="step-2">
                             <div class="form-horizontal form-label-left">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                        Fecha
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12 glyphicon glyphicon-calendar">
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" class="form-control col-md-7 col-xs-12" width="50" name="daterange" value="01/01/2015 - 01/31/2015" />
+                                        <input type="text" class="form-control col-md-7 col-xs-12" width="50" name="daterange" />
                                     </div>
                                     
                                 </div>
@@ -142,7 +141,17 @@
                               
                                 <script type="text/javascript">
                                     $(function () {
-                                        $('input[name="daterange"]').daterangepicker();
+                                        $('input[name="daterange"]').daterangepicker({
+                                            locale: {
+                                                applyLabel: 'Aplicar', cancelLabel: 'Cancelar', fromLabel: "Salida", toLabel: "Regreso" ,separator: ' / '
+                                                , "daysOfWeek": ["Dom", "Lu", "Mar", "Mie", "Jue", "Vie", "Sab"],
+                                                "monthNames": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
+                                                               "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+                                            }
+                                        });
+                                        $('input[name="daterange"]').data('daterangepicker').setStartDate('01/01/2015');
+                                        $('input[name="daterange"]').data('daterangepicker').setEndDate('09/12/2015');
+
                                     });
                                 </script>
                             </div>
