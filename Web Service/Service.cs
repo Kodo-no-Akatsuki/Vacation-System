@@ -179,7 +179,7 @@ namespace Web_Service
             VacationEntities entities = new VacationEntities();
             Departamento departamento = new Departamento
             {
-                activo = depto.Activo,
+                activo = true,
                 departamentoid = depto.DepartamentoId,
                 descripcion = depto.Descripcion
             };
@@ -194,7 +194,7 @@ namespace Web_Service
 
             Roles rol = new Roles
             {
-                activo = mirror.Activo,
+                activo = true,
                 descripcion = mirror.Descripcion,
                 rolesid = mirror.Id
             };
@@ -247,9 +247,9 @@ namespace Web_Service
             List<RolesMirror> roles = new List<RolesMirror>();
 
             var query = (from r in entities.Roles
-                group r by r.descripcion
-                into uniqueRoles
-                select uniqueRoles.FirstOrDefault()).ToList();
+                         group r by r.descripcion
+                             into uniqueRoles
+                             select uniqueRoles.FirstOrDefault()).ToList();
 
             if (!query.Any())
                 return null;
@@ -258,14 +258,14 @@ namespace Web_Service
             {
                 List<PermisosMirror> permisos = new List<PermisosMirror>();
 
-                foreach(Permisos p in query[i].tbl_permisos)
+                foreach (Permisos p in query[i].tbl_permisos)
                 {
-                      permisos.Add(new PermisosMirror
-                      {
-                          Activo = p.activo,
-                          Descripcion = p.descripcion,
-                          PermisosId = p.permisosid
-                      });
+                    permisos.Add(new PermisosMirror
+                    {
+                        Activo = p.activo,
+                        Descripcion = p.descripcion,
+                        PermisosId = p.permisosid
+                    });
                 }
 
                 roles.Add(new RolesMirror
