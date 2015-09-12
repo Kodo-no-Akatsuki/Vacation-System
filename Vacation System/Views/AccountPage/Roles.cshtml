@@ -9,7 +9,7 @@
     ServiceClient service = new ServiceClient();
     var permisos = service.LoadPermisosData();
     var index = 0;
-    var j = 0;
+    var indx = 0;
     var contienePermiso = false;
 
     var canEdit = false;
@@ -22,13 +22,19 @@
     var tdId = "editbutton";
     
     
-    Model.Roles = service.LoadRoles();
+    Model.Roles = service.LoadRoles().ToList();
     Model.RolActual = Model.Roles.ElementAt(rolIndex);
+    Model.NuevoRol = new RolesMirror();
+    Model.NuevoRol.Descripcion = "";
+    Model.NuevoRol.Permisos = new PermisosMirror[13];
     
     foreach (var permiso in empleado.Permisos)
     {
-        canEdit = !canEdit && permiso.PermisosId == (int)PermisosEnum.EditarRol;
-        canAdd = !canAdd && permiso.PermisosId == (int)PermisosEnum.CrearRol;
+        if (!canEdit && permiso.PermisosId == (int)PermisosEnum.EditarRol)
+        { canEdit = true; }
+
+        else if (!canAdd && permiso.PermisosId == (int)PermisosEnum.CrearRol)
+        { canAdd = true; }
 
         if (canAdd && canEdit) { break; }
     }
@@ -141,7 +147,7 @@
                                 {
                                     contienePermiso = false;
 
-                                    <input type="hidden" id=@index name="Permisos.Index" value=@index />
+                                    <input type="hidden" id=@index name="RolActual.Permisos.Index" value=@index />
 
                                     for (int i = 0; i < Model.RolActual.Permisos.Length; i++)
                                     {
@@ -151,15 +157,15 @@
                                             break;
                                         }
                                     }
-
+                                    
                                     if (contienePermiso)
                                     {
-                                        <input type="checkbox" class="permisos" name="Permisos[@index].Descripcion" value=@p checked> @p;
+                                        <input type="checkbox" class="permisos" name="RolActual.Permisos[@index].Descripcion" value="@p" checked> @p;
                                     }
 
                                     else
                                     {
-                                        <input type="checkbox" class="permisos" name="Permisos[@index].Descripcion" value=@p> @p;
+                                        <input type="checkbox" class="permisos" name="RolActual.Permisos[@index].Descripcion" value="@p"> @p;
                                     }
 
                                     <br />
@@ -205,23 +211,18 @@
                         <h3>Roles</h3>
                     </div>
                     <div class="modal-body">
-                        <input type="text" id="Descripcion" name="Descripcion" placeholder="Nombre" />
+                        <input type="text" id="NuevoRol.Descripcion" name="NuevoRol.Descripcion" placeholder="Nombre" />
                         <h3>Permisos</h3>
 
                         <div class="container" style="width:500px; height: 250px; overflow-y: scroll;">
 
                             @foreach (var p in permisos)
                             {
-                                var indx = String.Format("indx{0}", j);
-                                if (j == 0)
-                                {
-                                    indx = "indx";
-                                }
-
-                                <input type="hidden" name="Permisos.Index" value=@indx />
-                                <input type="checkbox" class="permisos" name="Permisos[@indx].Descripcion" value=@p> @p;
+                                <input type="hidden" id=@indx name="NuevoRol.Permisos.Index" value=@indx />
+                                <input type="checkbox" class="permisos" name="NuevoRol.Permisos[@indx].Descripcion" value="@p"> @p;
                                 <br />
-                                                                                                                   j++;
+                                
+                                indx++;
                             }
 
                             <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />

@@ -93,15 +93,14 @@ namespace Vacation_System.Controllers
 		}
 
 		[HttpPost]
-		public RedirectToRouteResult Roles(RolesMirror rol)
+		public RedirectToRouteResult Roles(CreateRoleModel crm)
 		{
-			if (rol.Descripcion == null)
-				return RedirectToAction("Roles");
+            if (crm.NuevoRol.Descripcion == null)
+                return RedirectToAction("Roles");
 
-			ServiceClient service = new ServiceClient();
-			rol.Activo = true;
+            ServiceClient service = new ServiceClient();
 
-			service.CreateRol(rol);
+			service.CreateRol(crm.NuevoRol);
 
 			service.Close();
 

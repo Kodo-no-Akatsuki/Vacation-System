@@ -8,9 +8,11 @@ namespace Vacation_System.Models
 {
     public class CreateRoleModel
     {
-        public IEnumerable<RolesMirror> Roles { get; set; }
+        public List<RolesMirror> Roles { get; set; }
 
         public RolesMirror RolActual { get; set; }
+
+        public RolesMirror NuevoRol { get; set; }
 
     }
 }

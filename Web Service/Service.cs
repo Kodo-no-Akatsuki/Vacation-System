@@ -150,22 +150,18 @@ namespace Web_Service
 
             foreach (DepartamentoMirror deptoMirror in empleado.Departamento)
             {
-                Departamento depto = new Departamento();
-
-                depto.departamentoid = deptoMirror.DepartamentoId;
-                depto.descripcion = deptoMirror.Descripcion;
-                depto.activo = true;
+                Departamento depto = (from d in entities.Departamentoes
+                                      where d.descripcion == deptoMirror.Descripcion
+                                      select d).FirstOrDefault();
 
                 user.tbl_departamento.Add(depto);
             }
 
             foreach (RolesMirror rolMirror in empleado.Roles)
             {
-                Roles rol = new Roles();
-
-                rol.rolesid = rolMirror.Id;
-                rol.descripcion = rolMirror.Descripcion;
-                rol.activo = true;
+                Roles rol = (from r in entities.Roles
+                             where r.descripcion == rolMirror.Descripcion
+                             select r).FirstOrDefault();
 
                 user.tbl_roles.Add(rol);
             }
@@ -201,12 +197,9 @@ namespace Web_Service
 
             foreach(PermisosMirror permiso in mirror.Permisos)
             {
-                Permisos perm = new Permisos
-                {
-                    activo = permiso.Activo,
-                    descripcion = permiso.Descripcion,
-                    permisosid = permiso.PermisosId
-                };
+                Permisos perm = (from p in entities.Permisos
+                                where p.descripcion == permiso.Descripcion
+                                select p).FirstOrDefault();
 
                 rol.tbl_permisos.Add(perm);
             }
