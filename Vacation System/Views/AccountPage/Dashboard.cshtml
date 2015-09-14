@@ -1,4 +1,5 @@
-﻿@using Web_Service
+﻿@using Vacation_System.ServiceReference
+@using Web_Service
 @model Vacation_System.ServiceReference.Empleado
 
 @{
@@ -6,214 +7,208 @@
     ViewBag.Title = "Inicio";
 }
 
-<div class="">
-    <div class="page-title">
-        <div class="title_left">
-            <h3>Solicitud de Vacaciones</h3>
-        </div>
-
-        <div class="title_right">
-            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                </div>
-            </div>
-        </div>
+<div class=""/>
+<div class="page-title">
+    <div class="title_left">
+        <h3>Solicitud de Vacaciones</h3>
     </div>
-    <div class="clearfix"></div>
-
-    <div class="row">
-
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Formulario de solicitud</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li>
-                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                          
-                        </li>
-                        <li>
-                            <a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-
-
-                    <!-- Smart Wizard -->
-                    <p>Con esta sencilla herramienta puedes mandar tu solicitud de vacaciones en 4 sencillos pasos.</p>
-                    <div id="wizard" class="form_wizard wizard_horizontal">
-                        <ul class="wizard_steps">
-                            <li>
-                                <a href="#step-1">
-                                    <span class="step_no">1</span>
-                                    <span class="step_descr">
-                                        Paso 1<br />
-                                        <small>Revisa tus datos</small>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#step-2">
-                                    <span class="step_no">2</span>
-                                    <span class="step_descr">
-                                        Paso 2<br />
-                                        <small>Elige la fecha</small>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#step-3">
-                                    <span class="step_no">3</span>
-                                    <span class="step_descr">
-                                        Paso 3<br />
-                                        <small>Observaciones</small>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#step-4">
-                                    <span class="step_no">4</span>
-                                    <span class="step_descr">
-                                        Paso 4<br />
-                                        <small>Revisa tu solicitud</small>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div id="step-1">
-                            <form class="form-horizontal form-label-left">
-
-                                <div class="form-group">
-                                    <!--Hardcoded year-->
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                        Dias correspondientes /
-                                        1 año
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        
-                                        <input type="number" placeholder="23" class="form-control col-md-7 col-xs-12" disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                        Dias tomados anteriormente
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="number" placeholder="10" class="form-control col-md-7 col-xs-12" disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Dias pendientes de tomar</label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input placeholder="5" class="form-control col-md-7 col-xs-12" type="number" disabled>
-                                    </div>
-                                </div>
-                           
-
-                            </form>
-
-                        </div>
-                        <div id="step-2">
-                            <div class="form-horizontal form-label-left">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12 glyphicon glyphicon-calendar">
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" class="form-control col-md-7 col-xs-12" width="50" name="daterange" />
-                                    </div>
-                                    
-                                </div>
-                                
-                            </div>
-                              
-                                <script type="text/javascript">
-                                    $(function () {
-                                        $('input[name="daterange"]').daterangepicker({
-                                            locale: {
-                                                applyLabel: 'Aplicar', cancelLabel: 'Cancelar', fromLabel: "Salida", toLabel: "Regreso" ,separator: ' / '
-                                                , "daysOfWeek": ["Dom", "Lu", "Mar", "Mie", "Jue", "Vie", "Sab"],
-                                                "monthNames": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
-                                                               "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-                                            }
-                                        });
-                                        $('input[name="daterange"]').data('daterangepicker').setStartDate('01/01/2015');
-                                        $('input[name="daterange"]').data('daterangepicker').setEndDate('09/12/2015');
-
-                                    });
-                                </script>
-                            </div>
-                        <div id="step-3">
-                            <div class="form-horizontal form-label-left">
-                                <div class="form-group">
-                                    <h2 class="control-label col-md-3 col-sm-3 ">Observaciones
-                                    </h2>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <textarea class="form-control col-md-7 col-xs-12" rows="2" id="comment"></textarea>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div id="step-4">
-                            <form class="form-horizontal form-label-left">
-
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                        Dias solicitados
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="number" placeholder="10" class="form-control col-md-7 col-xs-12" disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                        Fecha de Salida
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="date" placeholder="20/07/2015" class="form-control col-md-7 col-xs-12" disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de Regreso</label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input placeholder="05/08/2015" class="form-control col-md-7 col-xs-12" type="date" disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Firma</label>
-                                    <div class="col-md-5 col-sm-6 col-xs-12">
-                                        <input placeholder="@Model.User.PrimerNombre @Model.User.PrimerApellido" class="form-control col-md-7 col-xs-12" type="date" disabled/>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
-                    <!-- End SmartWizard Content -->
-
-
-
-                </div>
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+<button class="btn btn-default" type="button">Go!</button>
+</span>
             </div>
         </div>
-
     </div>
 </div>
 
+@{
+    int yearC = (int)((DateTime.Now - Model.User.FechaIngreso).TotalDays)/365;
+    int dias_tomados_anteriormente = Model.Vacaciones.Where(vacacion => vacacion.Year == DateTime.Now.Year && vacacion.EstatusId == 1).Sum(vacacion => vacacion.DiasSolicitados);
+    int dias_pendientes_tomar = 23 - dias_tomados_anteriormente;
+}
 
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Formulario de solicitud</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="close-link">
+                            <i class="fa fa-close"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+
+                <!-- Smart Wizard -->
+                <p>Con esta sencilla herramienta puedes mandar tu solicitud de vacaciones en 4 sencillos pasos.</p>
+                <div id="wizard" class="form_wizard wizard_horizontal">
+                    <ul class="wizard_steps">
+                        <li>
+                            <a href="#step-1">
+                                <span class="step_no">1</span>
+                                <span class="step_descr">
+                                        Paso 1
+<br />
+<small>Revisa tus datos</small>
+</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#step-2">
+                                <span class="step_no">2</span>
+                                <span class="step_descr">
+                                        Paso 2
+<br />
+<small>Elige la fecha</small>
+</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#step-3">
+                                <span class="step_no">3</span>
+                                <span class="step_descr">
+                                        Paso 3
+<br />
+<small>Observaciones</small>
+</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#step-4">
+                                <span class="step_no">4</span>
+                                <span class="step_descr">
+                                        Paso 4
+<br />
+<small>Revisa tu solicitud</small>
+</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div id="step-1">
+                        <form class="form-horizontal form-label-left">
+                            <div class="form-group">
+                                <!--Hardcoded year-->
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Dias correspondientes /
+                                    @yearC año
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" placeholder="23" class="form-control col-md-7 col-xs-12" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Dias tomados anteriormente
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" placeholder="@dias_tomados_anteriormente" class="form-control col-md-7 col-xs-12" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Dias pendientes de tomar</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input placeholder="@dias_pendientes_tomar" class="form-control col-md-7 col-xs-12" type="number" disabled>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="step-2">
+                        <div class="form-horizontal form-label-left">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12 glyphicon glyphicon-calendar">
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" class="form-control col-md-7 col-xs-12" width="50" name="daterange" />
+                                </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('input[name="daterange"]').daterangepicker({
+                                    locale: {
+                                        applyLabel: 'Aplicar', cancelLabel: 'Cancelar', fromLabel: "Salida", toLabel: "Regreso" ,separator: ' / '
+                                        , "daysOfWeek": ["Dom", "Lu", "Mar", "Mie", "Jue", "Vie", "Sab"],
+                                        "monthNames": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
+                                            "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+                                    }
+                                });
+                                $('input[name="daterange"]').data('daterangepicker').setStartDate('01/01/2015');
+                                $('input[name="daterange"]').data('daterangepicker').setEndDate('09/12/2015');
+
+                            });
+                        </script>
+                    </div>
+                    <div id="step-3">
+                        <div class="form-horizontal form-label-left">
+                            <div class="form-group">
+                                <h2 class="control-label col-md-3 col-sm-3 ">Observaciones
+                                </h2>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <textarea class="form-control col-md-7 col-xs-12" rows="2" id="comment"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="step-4">
+                        <form class="form-horizontal form-label-left">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Dias solicitados
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" placeholder="10" class="form-control col-md-7 col-xs-12" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Fecha de Salida
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="year" type="text" value="Hola" class="form-control col-md-7 col-xs-12" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de Regreso</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input placeholder="05/08/2015" class="form-control col-md-7 col-xs-12" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Firma</label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <input placeholder="@Model.User.PrimerNombre @Model.User.PrimerApellido" class="form-control col-md-7 col-xs-12" type="text" disabled/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- End SmartWizard Content -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!--Calendar implementation-->
 <div class="">
-
     <div class="page-title">
         <div class="title_left">
             <h3>
@@ -223,54 +218,55 @@
                 </small>
             </h3>
         </div>
-
         <div class="title_right">
             <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                    </span>
+<button class="btn btn-default" type="button">Go!</button>
+</span>
                 </div>
             </div>
         </div>
     </div>
     <div class="clearfix"></div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Calender Events <small>Sessions</small></h2>
+                    <h2>Calender Events
+                        <small>Sessions</small>
+                    </h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li>
-                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <i class="fa fa-wrench"></i>
+                            </a>
                         </li>
                         <li>
-                            <a class="close-link"><i class="fa fa-close"></i></a>
+                            <a class="close-link">
+                                <i class="fa fa-close"></i>
+                            </a>
                         </li>
                     </ul>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-
                     <div id='calendar'></div>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <!--Calendar modal here :^)-->
 <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel">New Calender Entry</h4>
@@ -303,13 +299,11 @@
 <div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel2">Edit Calender Entry</h4>
             </div>
             <div class="modal-body">
-
                 <div id="testmodal2" style="padding: 5px 20px;">
                     <form id="antoform2" class="form-horizontal calender" role="form">
                         <div class="form-group">
@@ -324,7 +318,6 @@
                                 <textarea class="form-control" style="height:55px;" id="descr2" name="descr"></textarea>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -335,8 +328,6 @@
         </div>
     </div>
 </div>
-
 <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
 <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
-
 <!--End of calendar modal :^)-->
