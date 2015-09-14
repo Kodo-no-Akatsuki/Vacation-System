@@ -112,7 +112,7 @@
                                     @yearC año
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" placeholder="23" class="form-control col-md-7 col-xs-12" disabled>
+                                    <input type="number" value="23" class="form-control col-md-7 col-xs-12" disabled>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -120,13 +120,13 @@
                                     Dias tomados anteriormente
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" placeholder="@dias_tomados_anteriormente" class="form-control col-md-7 col-xs-12" disabled>
+                                    <input type="number" value="@dias_tomados_anteriormente" class="form-control col-md-7 col-xs-12" disabled>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Dias pendientes de tomar</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input placeholder="@dias_pendientes_tomar" class="form-control col-md-7 col-xs-12" type="number" disabled>
+                                    <input value="@dias_pendientes_tomar" class="form-control col-md-7 col-xs-12" type="number" disabled>
                                 </div>
                             </div>
                         </form>
@@ -137,7 +137,9 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12 glyphicon glyphicon-calendar">
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" class="form-control col-md-7 col-xs-12" width="50" name="daterange" />
+                                        <input id="fecha" type="text" class="form-control col-md-7 col-xs-12" width="50" name="daterange" />
+                                        <br /><br />
+                                        <input id="availability" style="background:#193b69;"type="button" class="btn btn-primary pull-right" name="confirm" value="Ver disponibilidad" />
                                 </div>
                             </div>
                         </div>
@@ -145,16 +147,25 @@
                             $(function () {
                                 $('input[name="daterange"]').daterangepicker({
                                     locale: {
-                                        applyLabel: 'Aplicar', cancelLabel: 'Cancelar', fromLabel: "Salida", toLabel: "Regreso" ,separator: ' / '
+                                        applyLabel: 'Aplicar', cancelLabel: 'Cancelar', fromLabel: "Salida", toLabel: "Regreso"
                                         , "daysOfWeek": ["Dom", "Lu", "Mar", "Mie", "Jue", "Vie", "Sab"],
                                         "monthNames": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
                                             "Septiembre", "Octubre", "Noviembre", "Diciembre"]
                                     }
+                                    
                                 });
-                                $('input[name="daterange"]').data('daterangepicker').setStartDate('01/01/2015');
-                                $('input[name="daterange"]').data('daterangepicker').setEndDate('09/12/2015');
-
+                                
                             });
+
+                            $("#availability").click(function () {
+                                //Check if date is available logic here!
+                                var datevalues = document.getElementById('fecha').value;
+                                var res = datevalues.split(" - ");
+
+                                document.getElementById('fsalida').value = res[0];
+                                document.getElementById('fregreso').value = res[1];
+                                 
+                            })
                         </script>
                     </div>
                     <div id="step-3">
@@ -176,7 +187,7 @@
                                     Dias solicitados
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" placeholder="10" class="form-control col-md-7 col-xs-12" disabled>
+                                    <input type="number" id="diassolic" value="15" class="form-control col-md-7 col-xs-12" disabled>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -184,19 +195,19 @@
                                     Fecha de Salida
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="year" type="text" value="Hola" class="form-control col-md-7 col-xs-12" disabled>
+                                    <input id="fsalida" type="text" class="form-control col-md-7 col-xs-12" disabled>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de Regreso</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input placeholder="05/08/2015" class="form-control col-md-7 col-xs-12" type="text" disabled>
+                                    <input id="fregreso" class="form-control col-md-7 col-xs-12" type="text" disabled>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Firma</label>
                                 <div class="col-md-5 col-sm-6 col-xs-12">
-                                    <input placeholder="@Model.User.PrimerNombre @Model.User.PrimerApellido" class="form-control col-md-7 col-xs-12" type="text" disabled/>
+                                    <input value="@Model.User.PrimerNombre @Model.User.PrimerApellido" class="form-control col-md-7 col-xs-12" type="text" disabled/>
                                 </div>
                             </div>
                         </form>
