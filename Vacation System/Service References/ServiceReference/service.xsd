@@ -104,4 +104,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SaveRoleChanges">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="rolMirror" nillable="true" type="q8:RolesMirror" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveRoleChangesResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

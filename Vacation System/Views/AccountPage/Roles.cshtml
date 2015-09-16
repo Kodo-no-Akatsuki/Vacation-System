@@ -17,16 +17,17 @@
 
     var rolIndex = 0;
 
+    var tr = true;
+    var fl = false;
+
     var editDataTarget = "#editmodal";
     var editModalId = "editmodal";
     var tdId = "editbutton";
     
     
     Model.Roles = service.LoadRoles().ToList();
-    Model.RolActual = Model.Roles.ElementAt(rolIndex);
-    Model.NuevoRol = new RolesMirror();
-    Model.NuevoRol.Descripcion = "";
-    Model.NuevoRol.Permisos = new PermisosMirror[13];
+
+    var currentRole = Model.Roles.ElementAt(rolIndex);
     
     foreach (var permiso in empleado.Permisos)
     {
@@ -42,8 +43,6 @@
     service.Close();
 }
 
-@using (Html.BeginForm())
-{
     <div class="clearfix"></div>
 
     <script>
@@ -77,102 +76,112 @@
 
     </script>
 
-    <table id="example" class="display" cellspacing="0" width="100%">
+<table id="example" class="display" cellspacing="0" width="100%">
 
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Rol</th>
-                <th>Permisos</th>
-            </tr>
-        </thead>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Rol</th>
+        <th>Permisos</th>
+    </tr>
+    </thead>
 
-        <tbody>
+    <tbody>
 
-            @foreach (var role in Model.Roles)
+    @foreach (var role in Model.Roles)
+    {
+        editDataTarget = String.Format("#editmodal{0}", rolIndex);
+        tdId = String.Format("editbutton{0}", rolIndex);
+
+        <tr>
+
+            <td>@role.Id</td>
+
+            <td>@role.Descripcion</td>
+
+            @if (canEdit)
             {
-                editDataTarget = String.Format("#editmodal{0}", rolIndex);
-                tdId = String.Format("editbutton{0}", rolIndex);
-                
-                <tr>
+                <td id=@tdId>
 
-                    <td>@role.Id</td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=@editDataTarget> Editar </button>
 
-                    <td>@role.Descripcion</td>
-                        
-                     @if (canEdit)
-                     {
-                        <td id=@tdId>
+                </td>
 
-                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=@editDataTarget> Editar </button>
+            }
 
-                        </td>
+        </tr>
 
-                     }
+        rolIndex++;
+    }
 
-                </tr>
-                
-                rolIndex++;
-            }   
-               
 
-        </tbody>
+    </tbody>
 
-    </table>
-        
+</table>
+
     <!--Modify Access Modal-->
 
-    if (canEdit)
+    @if (canEdit)
     {
         rolIndex = 0;
 
         foreach (RolesMirror rol in Model.Roles)
         {
-            Model.RolActual = Model.Roles.ElementAt(rolIndex);
-            editModalId = String.Format("editmodal{0}", rolIndex);
-            editDataTarget = String.Format("#editmodal{0}", rolIndex);
+            using (Html.BeginForm("EditRole", "AccountPage"))
+            {
+                index = 0;
+                currentRole = Model.Roles.ElementAt(rolIndex);
+                editModalId = String.Format("editmodal{0}", rolIndex);
+                editDataTarget = String.Format("#editmodal{0}", rolIndex);
+
 
             <div id=@editModalId class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">X</button>
-                            <h3>@Model.RolActual.Descripcion</h3>
+                            <h3>@currentRole.Descripcion</h3>
                         </div>
                         <div class="modal-body">
 
                             <div class="container" style="width:500px; height: 250px; overflow-y: scroll;">
 
-                                @foreach (var p in permisos)
-                                {
-                                    contienePermiso = false;
-
-                                    <input type="hidden" id=@index name="RolActual.Permisos.Index" value=@index />
-
-                                    for (int i = 0; i < Model.RolActual.Permisos.Length; i++)
+                                
+                                    @foreach (var p in permisos)
                                     {
-                                        if (Model.RolActual.Permisos[i].Descripcion == p)
+                                        contienePermiso = false;
+
+                                        <input type="hidden" id=@index name="Permisos.Index" value=@index />
+
+                                        for (int i = 0; i < currentRole.Permisos.Length; i++)
                                         {
-                                            contienePermiso = true;
-                                            break;
+                                            if (currentRole.Permisos[i].Descripcion == p)
+                                            {
+                                                contienePermiso = true;
+                                                break;
+                                            }
                                         }
-                                    }
-                                    
-                                    if (contienePermiso)
-                                    {
-                                        <input type="checkbox" class="permisos" name="RolActual.Permisos[@index].Descripcion" value="@p" checked> @p;
+
+                                        if (contienePermiso)
+                                        {
+                                            <input type="checkbox" class="permisos" name="Permisos[@index].Descripcion" value="@p" checked> @p;
+                                        }
+
+                                        else
+                                        {
+                                            <input type="checkbox" class="permisos" name="Permisos[@index].Descripcion" value="@p">
+                                            if (p != null)
+                                            {
+                                                @p
+                                            }
+
+                                        }
+
+                                        <br />
+                                        index++;
                                     }
 
-                                    else
-                                    {
-                                        <input type="checkbox" class="permisos" name="RolActual.Permisos[@index].Descripcion" value="@p"> @p;
-                                    }
-
-                                    <br />
-                                    index++;
-                                }
-
-                                <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos<br />
+                                    <input type="checkbox" onclick="toggle(this)" /> Seleccionar Todos <br/>
 
                                 <script language="JavaScript">
                                     function toggle(source) {
@@ -188,7 +197,8 @@
                             </div>
                             <div class="modal-footer">
                                 <a href="#" class="btn" data-dismiss="modal">Close</a>
-                                <a id=@rolIndex onclick="fnClickEditRol(this);" class="btn btn-primary">Guardar Cambios</a>
+                                <button type="submit" id=@rolIndex name="Descripcion" onclick="fnClickEditRol(this);" 
+                                        class="btn btn-primary" value="@rol.Descripcion">Guardar Cambios</button>
                             </div>
                         </div>
                     </div>
@@ -196,9 +206,15 @@
             </div>
 
            rolIndex++;
+           }
         }
-        
-    }
+
+
+}
+
+
+@using (Html.BeginForm("CreateRole", "AccountPage")) 
+{ 
             <!--Add Rol Modal-->
 
     if (canAdd)
@@ -211,15 +227,15 @@
                         <h3>Roles</h3>
                     </div>
                     <div class="modal-body">
-                        <input type="text" id="NuevoRol.Descripcion" name="NuevoRol.Descripcion" placeholder="Nombre" />
+                        <input type="text" name="Descripcion" placeholder="Nombre" />
                         <h3>Permisos</h3>
 
                         <div class="container" style="width:500px; height: 250px; overflow-y: scroll;">
 
                             @foreach (var p in permisos)
                             {
-                                <input type="hidden" id=@indx name="NuevoRol.Permisos.Index" value=@indx />
-                                <input type="checkbox" class="permisos" name="NuevoRol.Permisos[@indx].Descripcion" value="@p"> @p;
+                                <input type="hidden" id=@indx name="Permisos.Index" value=@indx />
+                                <input type="checkbox" class="permisos" name="Permisos[@indx].Descripcion" value="@p"> @p;
                                 <br />
                                 
                                 indx++;
@@ -240,7 +256,7 @@
                     <div class="modal-footer">
                         <a href="#" class="btn" data-dismiss="modal">Close</a>
 
-                        <input type="submit" name="submit" id="submit" onclick="fnClickAddRow();" value="Guardar" class="btn btn-primary" />
+                        <button type="submit" onclick="fnClickAddRow();" class="btn btn-primary">Guardar Cambios</button>
 
                     </div>
                 </div>

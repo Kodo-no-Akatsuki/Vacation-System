@@ -2,6 +2,7 @@ using System.Web.Mvc;
 using Vacation_System.ServiceReference;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using Web_Service;
 using Vacation_System.Models;
 
@@ -93,19 +94,32 @@ namespace Vacation_System.Controllers
 		}
 
 		[HttpPost]
-		public RedirectToRouteResult Roles(CreateRoleModel crm)
+		public RedirectToRouteResult CreateRole(RolesMirror rolCreado)
 		{
-            if (crm.NuevoRol.Descripcion == null)
-                return RedirectToAction("Roles");
+            if (rolCreado == null) return RedirectToAction("Error500", "Error");
 
             ServiceClient service = new ServiceClient();
 
-			service.CreateRol(crm.NuevoRol);
+            service.CreateRol(rolCreado);
 
-			service.Close();
+            service.Close();
 
-			return RedirectToAction("Roles");
+            return RedirectToAction("Roles");
 		}
+
+	    [HttpPost]
+	    public RedirectToRouteResult EditRole(RolesMirror rolEditado)
+	    {
+	        if (rolEditado == null) return RedirectToAction("Error500", "Error");
+
+	        ServiceClient service = new ServiceClient();
+
+            service.SaveRoleChanges(rolEditado);
+
+            service.Close();
+
+	        return RedirectToAction("Roles");
+	    }
 		
 		
 		public RedirectToRouteResult LogOut()

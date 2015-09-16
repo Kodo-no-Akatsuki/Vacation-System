@@ -14,5 +14,7 @@ namespace Vacation_System.Models
 
         public RolesMirror NuevoRol { get; set; }
 
+        public bool Add { get; set; }
+
     }
 }

@@ -1311,6 +1311,12 @@ namespace Vacation_System.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadPermisosData", ReplyAction="http://tempuri.org/IService/LoadPermisosDataResponse")]
         System.Threading.Tasks.Task<string[]> LoadPermisosDataAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SaveRoleChanges", ReplyAction="http://tempuri.org/IService/SaveRoleChangesResponse")]
+        void SaveRoleChanges(Vacation_System.ServiceReference.RolesMirror rolMirror);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SaveRoleChanges", ReplyAction="http://tempuri.org/IService/SaveRoleChangesResponse")]
+        System.Threading.Tasks.Task SaveRoleChangesAsync(Vacation_System.ServiceReference.RolesMirror rolMirror);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1402,6 +1408,14 @@ namespace Vacation_System.ServiceReference {
         
         public System.Threading.Tasks.Task<string[]> LoadPermisosDataAsync() {
             return base.Channel.LoadPermisosDataAsync();
+        }
+        
+        public void SaveRoleChanges(Vacation_System.ServiceReference.RolesMirror rolMirror) {
+            base.Channel.SaveRoleChanges(rolMirror);
+        }
+        
+        public System.Threading.Tasks.Task SaveRoleChangesAsync(Vacation_System.ServiceReference.RolesMirror rolMirror) {
+            return base.Channel.SaveRoleChangesAsync(rolMirror);
         }
     }
 }
