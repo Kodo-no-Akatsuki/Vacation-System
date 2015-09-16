@@ -293,5 +293,31 @@ namespace Web_Service
 
             return permisos;
         }
+
+        public void SaveRoleChanges(RolesMirror rolMirror)
+        {
+            VacationEntities entities = new VacationEntities();
+
+            Roles rol = (from r in entities.Roles
+                         where r.descripcion == rolMirror.Descripcion
+                         select r).FirstOrDefault();
+
+            rol.descripcion = rolMirror.Descripcion;
+            rol.activo = rolMirror.Activo;
+
+            rol.tbl_permisos.Clear();
+
+            foreach(var p in rolMirror.Permisos)
+            {
+                var perm = (from permiso in entities.Permisos
+                                 where p.Descripcion == permiso.descripcion
+                                 select permiso).FirstOrDefault();
+
+                rol.tbl_permisos.Add(perm);
+            }
+
+            entities.SaveChanges();
+        }
     }
+
 }
