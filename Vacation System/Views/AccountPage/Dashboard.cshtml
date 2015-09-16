@@ -1,10 +1,18 @@
-﻿@using Vacation_System.ServiceReference
+﻿@using Newtonsoft.Json
+@using Newtonsoft.Json.Converters
+@using Vacation_System.ServiceReference
 @using Web_Service
 @model Vacation_System.ServiceReference.Empleado
 
 @{
     Layout = "~/Views/AccountPage/Layout.cshtml";
     ViewBag.Title = "Inicio";
+    int yearC = (int)((DateTime.Now - Model.User.FechaIngreso).TotalDays) / 365;
+    int dias_tomados_anteriormente = Model.Vacaciones.Where(vacacion => vacacion.Year == DateTime.Now.Year && vacacion.EstatusId == 1).Sum(vacacion => vacacion.DiasSolicitados);
+    int dias_pendientes_tomar = 23 - dias_tomados_anteriormente;
+    var fechasNoDisponibles = Model.Calendar.Select(x => x.fecha).ToList();
+
+    var jsonFechas = JsonConvert.SerializeObject(fechasNoDisponibles, new IsoDateTimeConverter());
 }
 
 <div class=""/>
@@ -23,12 +31,6 @@
         </div>
     </div>
 </div>
-
-@{
-    int yearC = (int)((DateTime.Now - Model.User.FechaIngreso).TotalDays)/365;
-    int dias_tomados_anteriormente = Model.Vacaciones.Where(vacacion => vacacion.Year == DateTime.Now.Year && vacacion.EstatusId == 1).Sum(vacacion => vacacion.DiasSolicitados);
-    int dias_pendientes_tomar = 23 - dias_tomados_anteriormente;
-}
 
 <div class="clearfix"></div>
 <div class="row">
@@ -137,36 +139,97 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12 glyphicon glyphicon-calendar">
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="fecha" type="text" class="form-control col-md-7 col-xs-12" width="50" name="daterange" />
-                                        <br /><br />
-                                        <input id="availability" style="background:#193b69;"type="button" class="btn btn-primary pull-right" name="confirm" value="Ver disponibilidad" />
+                                    <input id="fecha" type="text" class="form-control col-md-7 col-xs-12" width="50" name="daterange"/>
+                                    <br/><br/>
+                                    <input id="availability" style="background: #193b69;"type="button" class="btn btn-primary pull-right" name="confirm" value="Ver disponibilidad"/>
                                 </div>
                             </div>
                         </div>
+
+                        <input id="fechasHidden" name="fechasHidden" type="text" value="@jsonFechas"/> @*Cambiar a Hidden*@
+                        <input id="fechas" name="fechas" type="text" /> @*Borrar*@
+
                         <script type="text/javascript">
-                            $(function () {
+                            $(function() {
                                 $('input[name="daterange"]').daterangepicker({
                                     locale: {
-                                        applyLabel: 'Aplicar', cancelLabel: 'Cancelar', fromLabel: "Salida", toLabel: "Regreso"
-                                        , "daysOfWeek": ["Dom", "Lu", "Mar", "Mie", "Jue", "Vie", "Sab"],
-                                        "monthNames": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
-                                            "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+                                        applyLabel: 'Aplicar',
+                                        cancelLabel: 'Cancelar',
+                                        fromLabel: "Salida",
+                                        toLabel: "Regreso",
+                                        "daysOfWeek": ["Dom", "Lu", "Mar", "Mie", "Jue", "Vie", "Sab"],
+                                        "monthNames": [
+                                            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
+                                            "Septiembre", "Octubre", "Noviembre", "Diciembre"
+                                        ]
                                     }
-                                    
+
                                 });
-                                
+
                             });
 
-                            $("#availability").click(function () {
+                            $("#availability").click(function() {
                                 //Check if date is available logic here!
                                 var datevalues = document.getElementById('fecha').value;
                                 var res = datevalues.split(" - ");
+                                var invaliddates = document.getElementById('fechasHidden').value.replace('["', "").replace('"]', "").replace("T00:00:00", "");
+                                console.log(invaliddates);
+                                console.log(invaliddates.length);
 
                                 document.getElementById('fsalida').value = res[0];
                                 document.getElementById('fregreso').value = res[1];
-                                 
-                            })
+
+                                var dateInvalid = getFormattedDate(invaliddates);
+                                document.getElementById('fechas').value = dateInvalid;
+
+                                checkDates(dateInvalid, res[0], res[1]);
+
+                            });
                         </script>
+
+                        <script type="text/javascript">
+                            function getFormattedDate(input) {
+                                var parts = input.split('-');
+
+                                var date = new Date(parts[0], parts[1] - 1, parts[2]);
+
+                                var year = date.getFullYear();
+                                var month = (1 + date.getMonth()).toString();
+                                month = month.length > 1 ? month : '0' + month;
+                                var day = date.getDate().toString();
+                                day = day.length > 1 ? day : '0' + day;
+                                return year + '/' + month + '/' + day;
+                            }
+                        </script>
+
+                        <script>
+                            function checkDates(invalidDate, startDate, endDate) {
+                                startDate = startDate.split('/');
+                                endDate = endDate.split('/');
+                                invalidDate = invalidDate.split('/');
+                                var invalid = new Date(invalidDate[0], invalidDate[1]-1, invalidDate[2])
+                                var begin = new Date(startDate[2], startDate[0] - 1, startDate[1]);
+                                var end = new Date(endDate[2], endDate[0] - 1, endDate[1]);
+                                console.log(invalid.getFullYear());
+
+                                if (new Date().getFullYear() !== begin.getFullYear()) {
+                                    alert("Solo puede escoger dias del año vigente!");
+                                    //Analizar mejor esta condicion
+                                }
+
+                                else if (invalid.getMonth() === begin.getMonth()) {
+                                    if (invalid.getDate() >= begin.getDate() && invalid.getDate() <= end.getDate()) {
+                                        alert("La fecha " + (invalid.getMonth()+1).toString() + '/' + invalid.getDate().toString() + '/'
+                                                    + invalid.getFullYear() + " no esta disponible");
+
+                                        return;
+                                    }
+                                }
+
+                                alert("Los dias seleccionados estan disponibles");
+                            }
+                        </script>
+
                     </div>
                     <div id="step-3">
                         <div class="form-horizontal form-label-left">
