@@ -20,7 +20,7 @@ namespace Web_Service
         }
     
         public int tipo_dia_id { get; set; }
-        public int descripcion { get; set; }
+        public string descripcion { get; set; }
     
         public virtual ICollection<Calendario> tbl_calendario { get; set; }
     }
