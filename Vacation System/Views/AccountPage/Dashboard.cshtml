@@ -128,7 +128,7 @@
                             <div class="form-group">
                                 <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Dias pendientes de tomar</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input value="@dias_pendientes_tomar" class="form-control col-md-7 col-xs-12" type="number" disabled>
+                                    <input id="diasportomar" value="@dias_pendientes_tomar" class="form-control col-md-7 col-xs-12" type="number" disabled>
                                 </div>
                             </div>
                         </form>
@@ -172,22 +172,51 @@
                                 //Check if date is available logic here!
                                 var datevalues = document.getElementById('fecha').value;
                                 var res = datevalues.split(" - ");
-                                var invaliddates = document.getElementById('fechasHidden').value.replace('["', "").replace('"]', "").replace("T00:00:00", "");
-                                console.log(invaliddates);
-                                console.log(invaliddates.length);
+                                var invaliddates = JSON.parse(document.getElementById('fechasHidden').value, new Date());
+                                var daysAccepted = false;
+                                var range = daysInBetween(new Date(res[0]), new Date(res[1]));
 
                                 document.getElementById('fsalida').value = res[0];
                                 document.getElementById('fregreso').value = res[1];
+                                document.getElementById('diassolic').value = range;
 
-                                var dateInvalid = getFormattedDate(invaliddates);
-                                document.getElementById('fechas').value = dateInvalid;
+                                if (range > document.getElementById('diasportomar').value)
+                                    alert("No puede tomar mas dias de los que le quedan!");
 
-                                checkDates(dateInvalid, res[0], res[1]);
+                                for (var i = 0; i < invaliddates.length; i++) {
+                                    var date = invaliddates[i].replace("T00:00:00", "");
+                                    var y = date.split('-');
+                                    var dateInvalid = new Date(y[0], y[1] - 1, y[2]);
+
+                                    daysAccepted = checkDates(dateInvalid, res[0], res[1]);
+                                    if (!daysAccepted)
+                                        break;
+                                }
+
+                                if (daysAccepted)
+                                    alert("Los dias seleccionados estan disponibles");
 
                             });
                         </script>
 
                         <script type="text/javascript">
+                            function daysInBetween(firstDate, secondDate) {
+                                // The number of milliseconds in one day
+                                var oneDay = 1000 * 60 * 60 * 24
+
+                                // Convert both dates to milliseconds
+                                var date1Ms = firstDate.getTime();
+                                var date2Ms = secondDate.getTime();
+
+                                // Calculate the difference in milliseconds
+                                var differenceMs = Math.abs(date1Ms - date2Ms);
+
+                                // Convert back to days and return
+                                return Math.round(differenceMs / oneDay);
+                            }
+                        </script>
+
+                        @*<script type="text/javascript">
                             function getFormattedDate(input) {
                                 var parts = input.split('-');
 
@@ -200,33 +229,32 @@
                                 day = day.length > 1 ? day : '0' + day;
                                 return year + '/' + month + '/' + day;
                             }
-                        </script>
+                        </script>*@
 
-                        <script>
+                        <script type="text/javascript">
                             function checkDates(invalidDate, startDate, endDate) {
                                 startDate = startDate.split('/');
                                 endDate = endDate.split('/');
-                                invalidDate = invalidDate.split('/');
-                                var invalid = new Date(invalidDate[0], invalidDate[1]-1, invalidDate[2])
+                                var invalid = invalidDate;
                                 var begin = new Date(startDate[2], startDate[0] - 1, startDate[1]);
                                 var end = new Date(endDate[2], endDate[0] - 1, endDate[1]);
-                                console.log(invalid.getFullYear());
 
                                 if (new Date().getFullYear() !== begin.getFullYear()) {
                                     alert("Solo puede escoger dias del año vigente!");
+                                    return false;
                                     //Analizar mejor esta condicion
                                 }
 
                                 else if (invalid.getMonth() === begin.getMonth()) {
                                     if (invalid.getDate() >= begin.getDate() && invalid.getDate() <= end.getDate()) {
                                         alert("La fecha " + (invalid.getMonth()+1).toString() + '/' + invalid.getDate().toString() + '/'
-                                                    + invalid.getFullYear() + " no esta disponible");
+                                            + invalid.getFullYear() + " no esta disponible");
 
-                                        return;
+                                        return false;
                                     }
                                 }
 
-                                alert("Los dias seleccionados estan disponibles");
+                                return true;
                             }
                         </script>
 
@@ -250,7 +278,7 @@
                                     Dias solicitados
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="diassolic" value="15" class="form-control col-md-7 col-xs-12" disabled>
+                                    <input type="number" id="diassolic"  class="form-control col-md-7 col-xs-12" disabled>
                                 </div>
                             </div>
                             <div class="form-group">

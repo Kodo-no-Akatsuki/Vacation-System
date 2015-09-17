@@ -112,7 +112,7 @@
   <xs:element name="ArrayOfTipoDiaMirror" nillable="true" type="tns:ArrayOfTipoDiaMirror" />
   <xs:complexType name="TipoDiaMirror">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Descripcion" type="xs:int" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TipoDiaId" type="xs:int" />
     </xs:sequence>
   </xs:complexType>

@@ -3,6 +3,6 @@
     public class TipoDiaMirror
     {
         public int TipoDiaId { get; set; }
-        public int Descripcion { get; set; }//Cambiar a string
+        public string Descripcion { get; set; }
     }
 }

@@ -1036,7 +1036,7 @@ namespace Vacation_System.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int DescripcionField;
+        private string DescripcionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int TipoDiaIdField;
@@ -1052,12 +1052,12 @@ namespace Vacation_System.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Descripcion {
+        public string Descripcion {
             get {
                 return this.DescripcionField;
             }
             set {
-                if ((this.DescripcionField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.DescripcionField, value) != true)) {
                     this.DescripcionField = value;
                     this.RaisePropertyChanged("Descripcion");
                 }
