@@ -5,6 +5,17 @@
     ViewBag.Title = "Departamentos";
 }
 
+<script>
+    
+    function closeModals(source) {
+        var val = source.id;
+        var text = "";
+        var res = text.concat(val.toString());
+        $(res).modal('hide');
+    }
+
+</script>
+
 <div class="">
     <div class="page-title">
         <div class="title_left">
@@ -111,7 +122,8 @@
                     </div>
                     <div class="modal-footer">
                         <a href="#" class="btn" data-dismiss="modal">Close</a>
-                        <input type="submit" name="submit" value="Guardar Cambios"
+                        <input type="submit" id="@departamento.Descripcion" onclick="closeModals(this)" 
+                               name="submit" value="Guardar Cambios"
                                class="btn btn-primary" />
 
                     </div>
@@ -171,6 +183,7 @@
                                     "<div class='mask'><p>" + deptoname + "</p></div></div></div></div>");
                             }
                         }
+
                     </script>
 
                     <div class="col-md-offset-10">
