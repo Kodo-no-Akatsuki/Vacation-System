@@ -179,11 +179,22 @@ namespace Vacation_System.Controllers
 				return RedirectToAction("error404", "Error");
 			}
 
-			return View(Session["User"] as Empleado);
+            ServiceClient service = new ServiceClient();
+
+		    RegisterViewModel rvm = new RegisterViewModel
+		    {
+		        Empleado = emp,
+		        Departamentos = service.LoadDepartments().ToList(),
+		        Roles = service.LoadRoles().ToList()
+		    };
+
+		    service.Close();
+
+			return View(rvm);
 		}
 
 		[HttpPost]
-		public string Register(Empleado emp)
+		public RedirectToRouteResult Register(Empleado emp)
 		{
 			ServiceClient service = new ServiceClient();
 			
@@ -191,7 +202,7 @@ namespace Vacation_System.Controllers
 
 			service.Close();
 
-			return "Se ha creado el usuario con exito";
+		    return RedirectToAction("Dashboard");
 		}
 	}
 }
