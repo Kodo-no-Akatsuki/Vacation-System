@@ -34,7 +34,10 @@
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+                               aria-expanded="false">
+                                <i class="fa fa-wrench"></i>
+                            </a>
                             <ul class="dropdown-menu" role="menu"></ul>
                         </li>
                         <li>
@@ -64,43 +67,90 @@
                                                 </strong>
                                             </p>
 
-                                            <a href="#"><i class="fa fa-pencil" style="color: #fff"></i></a>
-                                            <a href="#"><i class="fa fa-times" style="color: #fff"></i></a>
+                                            <a href="#" data-target="#@departamento.Descripcion" data-toggle="modal">
+                                                <i class="fa fa-pencil" style="color: #fff"></i>
+                                            </a>
+
+                                            @if (Model.AllowDeactivate)
+                                            {
+                                                <a href="#"><i class="fa fa-times" style="color: #fff"></i></a>
+                                            }
+
                                         </div>
 
                                     </div>
 
                                 </div>
                             </div>
+
+
+    <div id="@departamento.Descripcion" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">X</button>
+                    <h3>Editar Departamento</h3>
+                </div>
+
+                @using (Html.BeginForm("EditDepartment", "AccountPage"))
+                {
+
+                    <div class="modal-body">
+
+                        <input type="hidden" name="DepartamentoId" value="@departamento.DepartamentoId"/>
+                        <input type="hidden" name="Activo" value="@departamento.Activo.ToString()"/>
+                        
+                        <h4>@departamento.Descripcion</h4>
+
+                        <input type="text" name="Descripcion" class="form-control pull-right"
+                               placeholder="Nuevo Nombre">
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn" data-dismiss="modal">Close</a>
+                        <input type="submit" name="submit" value="Guardar Cambios"
+                               class="btn btn-primary" />
+
+                    </div>
+
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+
                         }
 
                     </div>
 
                     <script>
+                        
                         function addImg() {
-
-
                             $("#deptomodal").modal('hide');
-
-
                             var deptoname = document.getElementById("Descripcion").value;
                             if (deptoname !== "") {
-                                $("#imgdepto").append("<div class='col-md-55'> <div class='thumbnail'><div class='image view view-first'><img style='width: 100%; display: block;' src='../Content/imgs/iconakatsuki.png' alt='image' />" +
+                                $("#imgdepto").append("<div class='col-md-55'> <div class='thumbnail'>" +
+                                    "<div class='image view view-first'><img style='width: 100%; display: " +
+                                    "block;' src='../Content/imgs/iconakatsuki.png' alt='image' />" +
                                     "<div class='mask'><p>" + deptoname + "</p></div></div></div></div>");
                             }
-
                         }
                     </script>
 
                     <div class="col-md-offset-10">
-                          <input type="button" hidden="@Model.DisplayCreate" class="btn btn-primary" id="Des" data-toggle="modal" data-target="#deptomodal" value="Agregar Nuevo"/>
+                        <input type="@Model.DisplayCreate" class="btn btn-primary" id="Des" data-toggle="modal" 
+                               data-target="#deptomodal" value="Agregar Nuevo"/>
                     </div>
 
                         <div id="deptomodal" class="modal fade" tabindex="-1" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">×</button>
+                                        <button type="button" class="close" data-dismiss="modal">X</button>
                                         <h3>Agregar Departamento</h3>
                                     </div>
 
@@ -109,13 +159,15 @@
 
                                     <div class="modal-body">
 
-                                        <input type="text" id="Descripcion" name="Descripcion" class="form-control pull-right" placeholder="Nombre">
+                                        <input type="text" name="Descripcion" class="form-control pull-right" 
+                                               placeholder="Nombre">
 
 
                                     </div>
                                          <div class="modal-footer">
                                              <a href="#" class="btn" data-dismiss="modal">Close</a>
-                                             <input type="submit" onclick="addImg();" name="submit" value="Guardar" class="btn btn-primary"/>
+                                             <input type="submit" onclick="addImg();" name="submit" value="Guardar" 
+                                                    class="btn btn-primary"/>
 
                                          </div>
                                          

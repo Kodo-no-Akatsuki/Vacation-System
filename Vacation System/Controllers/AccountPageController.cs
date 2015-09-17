@@ -37,10 +37,18 @@ namespace Vacation_System.Controllers
 
 			foreach (var permiso in emp.Permisos)
 			{
-				if (permiso.PermisosId == (int) PermisosEnum.EditarDepartamento)
-                    valido = true;
-                else if (permiso.PermisosId == (int) PermisosEnum.CrearDepartamento)
-                    dvm.DisplayCreate = true;
+				switch (permiso.PermisosId)
+				{
+				    case (int) PermisosEnum.EditarDepartamento:
+				        valido = true;
+				        break;
+				    case (int) PermisosEnum.CrearDepartamento:
+				        dvm.DisplayCreate = "button";
+				        break;
+				    case (int) PermisosEnum.DesactivarDepartamento:
+				        dvm.AllowDeactivate = true;
+				        break;
+				}
 			}
 
 			if (!valido)

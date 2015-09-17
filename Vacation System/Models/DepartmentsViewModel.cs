@@ -7,12 +7,15 @@ namespace Vacation_System.Models
     {
        public List<DepartamentoMirror> Departamentos { get; set; }
 
-       public bool DisplayCreate { get; set; }
+       public string DisplayCreate { get; set; }
+
+       public bool AllowDeactivate { get; set; }
 
         public DepartmentsViewModel()
         {
             Departamentos = new List<DepartamentoMirror>();
-            DisplayCreate = false;
+            DisplayCreate = "hidden";
+            AllowDeactivate = false;
         }
     }
 }

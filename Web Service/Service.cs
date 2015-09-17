@@ -187,10 +187,12 @@ namespace Web_Service
         public void EditDepartment(DepartamentoMirror depto)
         {
             VacationEntities entities = new VacationEntities();
-
+            
             var d = (from dpt in entities.Departamentoes
-                where depto.Descripcion == dpt.descripcion
+                where depto.DepartamentoId == dpt.departamentoid
                 select dpt).FirstOrDefault();
+
+            if (d == null) return;
 
             d.activo = depto.Activo;
             d.descripcion = depto.Descripcion;
