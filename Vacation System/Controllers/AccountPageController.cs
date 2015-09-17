@@ -87,6 +87,11 @@ namespace Vacation_System.Controllers
 
             ServiceClient service = new ServiceClient();
 
+	        if (Request.Form["DesactivarDepto"] != null)
+	        {
+	            deptoEditado.Activo = Request.Form["DesactivarDepto"] != "Si";
+	        }
+
             service.EditDepartment(deptoEditado);
 
             service.Close();
