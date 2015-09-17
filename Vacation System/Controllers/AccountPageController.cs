@@ -2,6 +2,7 @@ using System.Web.Mvc;
 using Vacation_System.ServiceReference;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Web_Service;
 using Vacation_System.Models;
@@ -29,16 +30,17 @@ namespace Vacation_System.Controllers
 		{
 			if (Session["User"] == null) return LogOut();
 
-			Empleado emp = Session["User"] as Empleado;
-			bool valido = false;
+			var emp = Session["User"] as Empleado;
+            var dvm = new DepartmentsViewModel();
+
+		    var valido = false;
 
 			foreach (var permiso in emp.Permisos)
 			{
-				if (permiso.PermisosId == (int) PermisosEnum.EditarDepartamento ||
-					permiso.PermisosId == (int) PermisosEnum.CrearDepartamento)
-				{
-					valido = true;
-				}
+				if (permiso.PermisosId == (int) PermisosEnum.EditarDepartamento)
+                    valido = true;
+                else if (permiso.PermisosId == (int) PermisosEnum.CrearDepartamento)
+                    dvm.DisplayCreate = true;
 			}
 
 			if (!valido)
@@ -48,7 +50,11 @@ namespace Vacation_System.Controllers
 
 			ServiceClient service = new ServiceClient();
 
-			return View(service.LoadDepartments());
+		    dvm.Departamentos = service.LoadDepartments().ToList();
+
+            service.Close();
+
+			return View(dvm);
 		}
 
 		[HttpPost]

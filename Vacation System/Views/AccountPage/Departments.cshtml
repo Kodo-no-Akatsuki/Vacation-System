@@ -1,11 +1,8 @@
-﻿@using Vacation_System.ServiceReference
-@using Web_Service
-@model IEnumerable<Vacation_System.ServiceReference.DepartamentoMirror>
+﻿@model Vacation_System.Models.DepartmentsViewModel
 
 @{
     Layout = "~/Views/AccountPage/Layout.cshtml";
     ViewBag.Title = "Departamentos";
-    var empleado = (Session["User"] as Empleado);
 }
 
 <div class="">
@@ -50,7 +47,7 @@
 
                     <div id="imgdepto" class="row">
 
-                        @foreach (var departamento in Model)
+                        @foreach (var departamento in Model.Departamentos)
                         {
 
                             <div class="col-md-55">
@@ -94,16 +91,9 @@
 
                         }
                     </script>
+
                     <div class="col-md-offset-10">
-
-                        @foreach (var permiso in empleado.Permisos)
-                        {
-                            if (permiso.PermisosId == (int) PermisosEnum.CrearDepartamento)
-                            {
-                                <input type="button" class="btn btn-primary" id="Des" data-toggle="modal" data-target="#deptomodal" value="Agregar Nuevo"/>
-                            }
-                        }
-
+                          <input type="button" hidden="@Model.DisplayCreate" class="btn btn-primary" id="Des" data-toggle="modal" data-target="#deptomodal" value="Agregar Nuevo"/>
                     </div>
 
                         <div id="deptomodal" class="modal fade" tabindex="-1" role="dialog">
@@ -114,7 +104,7 @@
                                         <h3>Agregar Departamento</h3>
                                     </div>
 
-                                     @using (Html.BeginForm())
+                                     @using (Html.BeginForm("CreateDepartment", "AccountPage"))
                                      {
 
                                     <div class="modal-body">
