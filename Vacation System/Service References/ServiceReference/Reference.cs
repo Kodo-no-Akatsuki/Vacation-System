@@ -1288,6 +1288,12 @@ namespace Vacation_System.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateDepartment", ReplyAction="http://tempuri.org/IService/CreateDepartmentResponse")]
         System.Threading.Tasks.Task CreateDepartmentAsync(Vacation_System.ServiceReference.DepartamentoMirror depto);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditDepartment", ReplyAction="http://tempuri.org/IService/EditDepartmentResponse")]
+        void EditDepartment(Vacation_System.ServiceReference.DepartamentoMirror depto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditDepartment", ReplyAction="http://tempuri.org/IService/EditDepartmentResponse")]
+        System.Threading.Tasks.Task EditDepartmentAsync(Vacation_System.ServiceReference.DepartamentoMirror depto);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateRol", ReplyAction="http://tempuri.org/IService/CreateRolResponse")]
         void CreateRol(Vacation_System.ServiceReference.RolesMirror rol);
         
@@ -1376,6 +1382,14 @@ namespace Vacation_System.ServiceReference {
         
         public System.Threading.Tasks.Task CreateDepartmentAsync(Vacation_System.ServiceReference.DepartamentoMirror depto) {
             return base.Channel.CreateDepartmentAsync(depto);
+        }
+        
+        public void EditDepartment(Vacation_System.ServiceReference.DepartamentoMirror depto) {
+            base.Channel.EditDepartment(depto);
+        }
+        
+        public System.Threading.Tasks.Task EditDepartmentAsync(Vacation_System.ServiceReference.DepartamentoMirror depto) {
+            return base.Channel.EditDepartmentAsync(depto);
         }
         
         public void CreateRol(Vacation_System.ServiceReference.RolesMirror rol) {

@@ -56,10 +56,22 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="EditDepartment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="depto" nillable="true" type="q4:DepartamentoMirror" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditDepartmentResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CreateRol">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="rol" nillable="true" type="q4:RolesMirror" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="rol" nillable="true" type="q5:RolesMirror" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -76,7 +88,7 @@
   <xs:element name="LoadDepartmentsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="LoadDepartmentsResult" nillable="true" type="q5:ArrayOfDepartamentoMirror" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="LoadDepartmentsResult" nillable="true" type="q6:ArrayOfDepartamentoMirror" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -88,7 +100,7 @@
   <xs:element name="LoadRolesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="LoadRolesResult" nillable="true" type="q6:ArrayOfRolesMirror" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="LoadRolesResult" nillable="true" type="q7:ArrayOfRolesMirror" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -100,14 +112,14 @@
   <xs:element name="LoadPermisosDataResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="LoadPermisosDataResult" nillable="true" type="q7:ArrayOfstring" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="LoadPermisosDataResult" nillable="true" type="q8:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveRoleChanges">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="rolMirror" nillable="true" type="q8:RolesMirror" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="rolMirror" nillable="true" type="q9:RolesMirror" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

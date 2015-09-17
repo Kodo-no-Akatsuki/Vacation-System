@@ -184,6 +184,21 @@ namespace Web_Service
             entities.SaveChanges();
         }
 
+        public void EditDepartment(DepartamentoMirror depto)
+        {
+            VacationEntities entities = new VacationEntities();
+
+            var d = (from dpt in entities.Departamentoes
+                where depto.Descripcion == dpt.descripcion
+                select dpt).FirstOrDefault();
+
+            d.activo = depto.Activo;
+            d.descripcion = depto.Descripcion;
+            d.departamentoid = depto.DepartamentoId;
+
+            entities.SaveChanges();
+        }
+
         public void CreateRol(RolesMirror mirror)
         {
             VacationEntities entities = new VacationEntities();

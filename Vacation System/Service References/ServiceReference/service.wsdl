@@ -33,6 +33,12 @@
   <wsdl:message name="IService_CreateDepartment_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateDepartmentResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_EditDepartment_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditDepartment" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditDepartment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditDepartmentResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_CreateRol_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateRol" />
   </wsdl:message>
@@ -79,6 +85,10 @@
     <wsdl:operation name="CreateDepartment">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateDepartment" message="tns:IService_CreateDepartment_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/CreateDepartmentResponse" message="tns:IService_CreateDepartment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditDepartment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/EditDepartment" message="tns:IService_EditDepartment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/EditDepartmentResponse" message="tns:IService_EditDepartment_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateRol">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateRol" message="tns:IService_CreateRol_InputMessage" />
@@ -132,6 +142,15 @@
     </wsdl:operation>
     <wsdl:operation name="CreateDepartment">
       <soap:operation soapAction="http://tempuri.org/IService/CreateDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditDepartment">
+      <soap:operation soapAction="http://tempuri.org/IService/EditDepartment" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

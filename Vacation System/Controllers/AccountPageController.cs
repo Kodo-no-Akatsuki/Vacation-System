@@ -52,13 +52,12 @@ namespace Vacation_System.Controllers
 		}
 
 		[HttpPost]
-		public RedirectToRouteResult Departments(DepartamentoMirror departamentoMirror)
+		public RedirectToRouteResult CreateDepartment(DepartamentoMirror departamentoMirror)
 		{
 			if(departamentoMirror.Descripcion == null)
 				return RedirectToAction("Departments");
 
 			ServiceClient service = new ServiceClient();
-			departamentoMirror.Activo = true;
 
 			service.CreateDepartment(departamentoMirror);
 
@@ -66,6 +65,20 @@ namespace Vacation_System.Controllers
 
 			return RedirectToAction("Departments");
 		}
+
+	    [HttpPost]
+	    public RedirectToRouteResult EditDepartment(DepartamentoMirror deptoEditado)
+	    {
+	        if (deptoEditado == null) return RedirectToAction("Departments");
+
+            ServiceClient service = new ServiceClient();
+
+            service.EditDepartment(deptoEditado);
+
+            service.Close();
+
+            return RedirectToAction("Departments");
+	    }
 
 		
 		[HttpGet]
