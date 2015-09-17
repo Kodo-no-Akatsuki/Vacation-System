@@ -7,12 +7,8 @@
 @{
     Layout = "~/Views/AccountPage/Layout.cshtml";
     ViewBag.Title = "Inicio";
-    int yearC = (int)((DateTime.Now - Model.User.FechaIngreso).TotalDays) / 365;
-    int dias_tomados_anteriormente = Model.Vacaciones.Where(vacacion => vacacion.Year == DateTime.Now.Year && vacacion.EstatusId == 1).Sum(vacacion => vacacion.DiasSolicitados);
-    int dias_pendientes_tomar = 23 - dias_tomados_anteriormente;
-    var fechasNoDisponibles = Model.Calendar.Select(x => x.fecha).ToList();
 
-    var jsonFechas = JsonConvert.SerializeObject(fechasNoDisponibles, new IsoDateTimeConverter());
+    var jsonFechas = JsonConvert.SerializeObject(Model.FechasNoDisponibles, new IsoDateTimeConverter());
 }
 
 <div class=""/>
@@ -111,7 +107,7 @@
                                 <!--Hardcoded year-->
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                     Dias correspondientes /
-                                    @yearC año
+                                    @Model.YearC año
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="number" value="23" class="form-control col-md-7 col-xs-12" disabled>
@@ -122,13 +118,13 @@
                                     Dias tomados anteriormente
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" value="@dias_tomados_anteriormente" class="form-control col-md-7 col-xs-12" disabled>
+                                    <input type="number" value="@Model.DiasTomadosAnteriormente" class="form-control col-md-7 col-xs-12" disabled>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Dias pendientes de tomar</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="diasportomar" value="@dias_pendientes_tomar" class="form-control col-md-7 col-xs-12" type="number" disabled>
+                                    <input id="diasportomar" value="@Model.DiasPendientesPorTomar" class="form-control col-md-7 col-xs-12" type="number" disabled>
                                 </div>
                             </div>
                         </form>
@@ -178,6 +174,7 @@
                                 document.getElementById('fsalida').value = res[0];
                                 document.getElementById('fregreso').value = res[1];
                                 document.getElementById('diassolic').value = range;
+                                console.log(range);
 
                                 if (range > document.getElementById('diasportomar').value) {
                                     alert("No puede tomar mas dias de los que le quedan!");

@@ -29,6 +29,15 @@ namespace Vacation_System.ServiceReference {
         private Vacation_System.ServiceReference.DepartamentoMirror[] DepartamentoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int DiasPendientesPorTomarField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int DiasTomadosAnteriormenteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime[] FechasNoDisponiblesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Vacation_System.ServiceReference.JerarquiaMirror[] JerarquiasField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -51,6 +60,9 @@ namespace Vacation_System.ServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Vacation_System.ServiceReference.VacacionesMirror[] VacacionesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int YearCField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -84,6 +96,45 @@ namespace Vacation_System.ServiceReference {
                 if ((object.ReferenceEquals(this.DepartamentoField, value) != true)) {
                     this.DepartamentoField = value;
                     this.RaisePropertyChanged("Departamento");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DiasPendientesPorTomar {
+            get {
+                return this.DiasPendientesPorTomarField;
+            }
+            set {
+                if ((this.DiasPendientesPorTomarField.Equals(value) != true)) {
+                    this.DiasPendientesPorTomarField = value;
+                    this.RaisePropertyChanged("DiasPendientesPorTomar");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DiasTomadosAnteriormente {
+            get {
+                return this.DiasTomadosAnteriormenteField;
+            }
+            set {
+                if ((this.DiasTomadosAnteriormenteField.Equals(value) != true)) {
+                    this.DiasTomadosAnteriormenteField = value;
+                    this.RaisePropertyChanged("DiasTomadosAnteriormente");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime[] FechasNoDisponibles {
+            get {
+                return this.FechasNoDisponiblesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FechasNoDisponiblesField, value) != true)) {
+                    this.FechasNoDisponiblesField = value;
+                    this.RaisePropertyChanged("FechasNoDisponibles");
                 }
             }
         }
@@ -188,6 +239,19 @@ namespace Vacation_System.ServiceReference {
                 if ((object.ReferenceEquals(this.VacacionesField, value) != true)) {
                     this.VacacionesField = value;
                     this.RaisePropertyChanged("Vacaciones");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int YearC {
+            get {
+                return this.YearCField;
+            }
+            set {
+                if ((this.YearCField.Equals(value) != true)) {
+                    this.YearCField = value;
+                    this.RaisePropertyChanged("YearC");
                 }
             }
         }

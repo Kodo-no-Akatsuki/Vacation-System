@@ -1,7 +1,9 @@
+using System;
 using System.Web.Mvc;
 using Vacation_System.ServiceReference;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Web_Service;
 
 namespace Vacation_System.Controllers
@@ -10,9 +12,16 @@ namespace Vacation_System.Controllers
 	{
 		public ActionResult Dashboard()
 		{
-			if (Session["User"] == null) return LogOut();
+			Empleado user = Session["User"] as Empleado;
 
-			return View(Session["User"] as Empleado);
+			if (user == null) return LogOut();
+
+			user.YearC = (int)((DateTime.Now - user.User.FechaIngreso).TotalDays) / 365;
+			user.DiasTomadosAnteriormente = user.Vacaciones.Where(vacacion => vacacion.Year == DateTime.Now.Year && vacacion.EstatusId == 1).Sum(vacacion => vacacion.DiasSolicitados);
+			user.DiasPendientesPorTomar = 23 - user.DiasTomadosAnteriormente;
+			user.FechasNoDisponibles = user.Calendar.Select(x => x.fecha).ToArray();
+
+			return View(user);
 		}
 
 		public ActionResult Profile()

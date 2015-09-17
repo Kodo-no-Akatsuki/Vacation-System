@@ -42,6 +42,18 @@ namespace Web_Service
         [DataMember]
         public List<CalendarMirror> Calendar { get; set; }
 
+        [DataMember]
+        public int DiasTomadosAnteriormente { get; set; }
+
+        [DataMember]
+        public int DiasPendientesPorTomar { get; set; }
+
+        [DataMember]
+        public List<DateTime> FechasNoDisponibles { get; set; }
+
+        [DataMember]
+        public int YearC { get; set; }
+
 
         public Empleado()
         {
@@ -54,6 +66,11 @@ namespace Web_Service
             TipoDia = new List<TipoDiaMirror>();
             Vacaciones = new List<VacacionesMirror>();
             Calendar = new List<CalendarMirror>();
+
+            YearC = 0;
+            FechasNoDisponibles = null;
+            DiasTomadosAnteriormente = 0;
+            DiasPendientesPorTomar = 0;
 
         }
     }
