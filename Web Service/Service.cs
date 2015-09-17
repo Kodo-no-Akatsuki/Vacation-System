@@ -117,7 +117,7 @@ namespace Web_Service
                     emp.TipoDia.Add(new TipoDiaMirror
                     {
                        Descripcion = calendar.tbl_tipo_dia.descripcion,
-                       TipoDiaId = calendar.tbl_tipo_dia.tipo_dia_id
+                       TipoDiaId = calendar.tipo_dia_id
                     });
 
                 }
