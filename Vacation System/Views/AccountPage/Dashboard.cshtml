@@ -146,8 +146,7 @@
                             </div>
                         </div>
 
-                        <input id="fechasHidden" name="fechasHidden" type="text" value="@jsonFechas"/> @*Cambiar a Hidden*@
-                        <input id="fechas" name="fechas" type="text" /> @*Borrar*@
+                        <input id="fechasHidden" name="fechasHidden" type="hidden" value="@jsonFechas"/> @*Cambiar a Hidden*@
 
                         <script type="text/javascript">
                             $(function() {
@@ -180,8 +179,10 @@
                                 document.getElementById('fregreso').value = res[1];
                                 document.getElementById('diassolic').value = range;
 
-                                if (range > document.getElementById('diasportomar').value)
+                                if (range > document.getElementById('diasportomar').value) {
                                     alert("No puede tomar mas dias de los que le quedan!");
+                                    return;
+                                }
 
                                 for (var i = 0; i < invaliddates.length; i++) {
                                     var date = invaliddates[i].replace("T00:00:00", "");
@@ -202,7 +203,7 @@
                         <script type="text/javascript">
                             function daysInBetween(firstDate, secondDate) {
                                 // The number of milliseconds in one day
-                                var oneDay = 1000 * 60 * 60 * 24
+                                var oneDay = 1000 * 60 * 60 * 24;
 
                                 // Convert both dates to milliseconds
                                 var date1Ms = firstDate.getTime();
@@ -215,21 +216,6 @@
                                 return Math.round(differenceMs / oneDay);
                             }
                         </script>
-
-                        @*<script type="text/javascript">
-                            function getFormattedDate(input) {
-                                var parts = input.split('-');
-
-                                var date = new Date(parts[0], parts[1] - 1, parts[2]);
-
-                                var year = date.getFullYear();
-                                var month = (1 + date.getMonth()).toString();
-                                month = month.length > 1 ? month : '0' + month;
-                                var day = date.getDate().toString();
-                                day = day.length > 1 ? day : '0' + day;
-                                return year + '/' + month + '/' + day;
-                            }
-                        </script>*@
 
                         <script type="text/javascript">
                             function checkDates(invalidDate, startDate, endDate) {
