@@ -23,7 +23,7 @@ function SmartWizard(target, options) {
     this.buttons = {
         next : $('<a>'+options.labelNext+'</a>').attr("href","#").addClass("btn btn-success"),
         previous : $('<a style="background:#193b69">'+options.labelPrevious+'</a>').attr("href","#").addClass("btn btn-primary"),
-        finish  : $('<a style="background:#193b69">'+options.labelFinish+'</a>').attr("href","#").addClass("btn btn-primary")
+        finish  : $('<a onclick="EnviarDatos();" style="background:#193b69">'+options.labelFinish+'</a>').addClass("btn btn-primary")
     };
 
     /*  
@@ -78,8 +78,8 @@ function SmartWizard(target, options) {
             elmActionBar.append($this.buttons.finish)
         }
 
-        elmActionBar.append($this.buttons.next)
-            .append($this.buttons.previous);
+        elmActionBar.append($this.buttons.previous)
+            .append($this.buttons.next);
         $this.target.append(elmActionBar);
         this.contentWidth = $this.elmStepContainer.width();
 
