@@ -228,6 +228,11 @@
                                     //Analizar mejor esta condicion
                                 }
 
+                                else if (begin.getDate() < new Date().getDate() || begin.getMonth() < new Date().getMonth()) {
+                                    alert("No puede seleccionar dias del pasado");
+                                    return false;
+                                }
+
                                 else if (invalid.getDate() < begin.getDate()) {
                                     return true;
                                 }
