@@ -100,8 +100,7 @@
                             </a>
                         </li>
                     </ul>
-                    <div id="step-1">
-                        
+                    <div id="step-1">                               
                         <form class="form-horizontal form-label-left">
                             <div class="form-group">
                                 <!--Hardcoded year-->
@@ -308,16 +307,16 @@
                             </div>
                         </form>
                         <div id="msg"></div>
+
                         <script>
                             function EnviarDatos() {
-                                var SuccessContent = "<div id='successmsg' style='background:#193b69; outline:none;' width='60' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>Enhorabuena!</strong> La peticion ha sido enviada, te notificaremos cuando sea aprobada.</div>";
-                                var IncorrectContent = "<div id='errormsg' style='background:red; outline:none;' width='60' class='alert alert-error'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>Oops!</strong> Algunos datos estan incorrectos o no satisfacen las fechas correspondientes para generar la solicitud.</div>";
+                                new PNotify({
+                                    title: 'Enhorabuena!',
+                                    text: 'La solicitud ha sido enviada! Te notificaremos cuando haya sido aceptada.',
+                                    type: 'success'
+                                });
+
                                 //Validate if all data in form is correct! Before showing success
-                                $('#msg').after(SuccessContent);
-                                SuccessContent = ' ';
-                               
-                                //$('#msg').after(IncorrectContent);
-                                //IncorrectContent = ' ';
                             }
                         </script>
                     </div>
