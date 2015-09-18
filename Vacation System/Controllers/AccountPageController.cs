@@ -22,7 +22,8 @@ namespace Vacation_System.Controllers
 		    ProfileViewModel pvm = new ProfileViewModel
 		    {
                 ProfileEmpleado = Session["User"] as Empleado,
-                DisplayEditStatusBtn = false
+                DisplayEditStatusBtn = false,
+                DisplayEditBtn = true
 		    };
 
 			return View(pvm);
@@ -231,8 +232,15 @@ namespace Vacation_System.Controllers
             ProfileViewModel pvm = new ProfileViewModel
             {
                 ProfileEmpleado = service.LoadEmpleado(talentoHumano),
-                DisplayEditStatusBtn = true
             };
+
+            pvm.DisplayEditStatusBtn = (from p in pvm.ProfileEmpleado.Permisos
+                                  where p.PermisosId == (int)PermisosEnum.DesactivarUsuario
+                                  select p).FirstOrDefault() != null;
+
+            pvm.DisplayEditBtn = (from p in pvm.ProfileEmpleado.Permisos
+                where p.PermisosId == (int) PermisosEnum.EditarUsuario
+                select p).FirstOrDefault() != null;
             
             service.Close();
 

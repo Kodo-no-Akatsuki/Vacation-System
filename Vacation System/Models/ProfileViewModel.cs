@@ -8,5 +8,7 @@ namespace Vacation_System.Models
         public Empleado ProfileEmpleado { get; set; }
 
         public bool DisplayEditStatusBtn { get; set; }
+
+        public bool DisplayEditBtn { get; set; }
     }
 }

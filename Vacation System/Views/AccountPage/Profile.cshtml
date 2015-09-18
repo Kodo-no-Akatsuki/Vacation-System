@@ -114,7 +114,12 @@
                                 }
                             </li>
                         </ul>
-                        <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
+
+                        @if (Model.DisplayEditBtn)
+                        {
+                            <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
+                        }
+
 
                         @if (Model.DisplayEditStatusBtn)
                         {
