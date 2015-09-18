@@ -1323,6 +1323,18 @@ namespace Vacation_System.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SaveRoleChanges", ReplyAction="http://tempuri.org/IService/SaveRoleChangesResponse")]
         System.Threading.Tasks.Task SaveRoleChangesAsync(Vacation_System.ServiceReference.RolesMirror rolMirror);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadEmpleado", ReplyAction="http://tempuri.org/IService/LoadEmpleadoResponse")]
+        Vacation_System.ServiceReference.Empleado LoadEmpleado(int talentoHumano);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadEmpleado", ReplyAction="http://tempuri.org/IService/LoadEmpleadoResponse")]
+        System.Threading.Tasks.Task<Vacation_System.ServiceReference.Empleado> LoadEmpleadoAsync(int talentoHumano);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadUsers", ReplyAction="http://tempuri.org/IService/LoadUsersResponse")]
+        Vacation_System.ServiceReference.UserMirror[] LoadUsers(string sessionUser);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadUsers", ReplyAction="http://tempuri.org/IService/LoadUsersResponse")]
+        System.Threading.Tasks.Task<Vacation_System.ServiceReference.UserMirror[]> LoadUsersAsync(string sessionUser);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1430,6 +1442,22 @@ namespace Vacation_System.ServiceReference {
         
         public System.Threading.Tasks.Task SaveRoleChangesAsync(Vacation_System.ServiceReference.RolesMirror rolMirror) {
             return base.Channel.SaveRoleChangesAsync(rolMirror);
+        }
+        
+        public Vacation_System.ServiceReference.Empleado LoadEmpleado(int talentoHumano) {
+            return base.Channel.LoadEmpleado(talentoHumano);
+        }
+        
+        public System.Threading.Tasks.Task<Vacation_System.ServiceReference.Empleado> LoadEmpleadoAsync(int talentoHumano) {
+            return base.Channel.LoadEmpleadoAsync(talentoHumano);
+        }
+        
+        public Vacation_System.ServiceReference.UserMirror[] LoadUsers(string sessionUser) {
+            return base.Channel.LoadUsers(sessionUser);
+        }
+        
+        public System.Threading.Tasks.Task<Vacation_System.ServiceReference.UserMirror[]> LoadUsersAsync(string sessionUser) {
+            return base.Channel.LoadUsersAsync(sessionUser);
         }
     }
 }

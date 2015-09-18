@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
 using Web_Service.Mirror_Classes;
 
 namespace Web_Service
@@ -41,6 +37,12 @@ namespace Web_Service
 
         [OperationContract]
         void SaveRoleChanges(RolesMirror rolMirror);
+
+        [OperationContract]
+        Empleado LoadEmpleado(int talentoHumano);
+
+        [OperationContract]
+        List<UserMirror> LoadUsers(string sessionUser);
 
     }
 

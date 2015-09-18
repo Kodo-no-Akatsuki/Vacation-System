@@ -1,10 +1,8 @@
-﻿@using Vacation_System.ServiceReference
-@using Web_Service
-@model Vacation_System.ServiceReference.Empleado
+﻿@model Vacation_System.ServiceReference.Empleado
+
 @{
-    var empleado = (Session["User"] as Empleado);
     Layout = "~/Views/AccountPage/Layout.cshtml";
-    ViewBag.Title = "Perfil de "+empleado.User.PrimerNombre;
+    ViewBag.Title = "Perfil de "+@Model.User.PrimerNombre;
 }
 
 <div class="">
@@ -86,17 +84,17 @@
                             </div>
                             <!-- end of image cropping -->
                         </div>
-                        <h3>@empleado.User.PrimerNombre @empleado.User.SegundoNombre</h3>
+                        <h3>@Model.User.PrimerNombre @Model.User.SegundoNombre</h3>
                         <ul class="list-unstyled user_data">
                             <li>
-                                <div class="fa fa-calendar user-profile-icon">  @empleado.User.FechaIngreso.ToString("dd/MM/yyyy") </div>
+                                <div class="fa fa-calendar user-profile-icon">  @Model.User.FechaIngreso.ToString("dd/MM/yyyy") </div>
                             </li>
                             <li>
-                                <i class="fa fa-envelope user-profile-icon"> @empleado.User.Email</i>
+                                <i class="fa fa-envelope user-profile-icon"> @Model.User.Email</i>
                             </li>
                             <li class="m-top-xs">
                                 @{
-                                    if (empleado.User.Activo) 
+                                    if (Model.User.Activo) 
                                     { 
                                         <i class="fa fa-check user-profile-icon">Activo</i>
                                         

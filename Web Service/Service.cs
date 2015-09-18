@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
 using System.Globalization;
 using Web_Service.Mirror_Classes;
 
@@ -335,6 +332,131 @@ namespace Web_Service
 
             entities.SaveChanges();
         }
+
+        //Hay que encapsular esto de cargar el usuario en algun lado
+        public Empleado LoadEmpleado(int talentoHumano)
+        {
+            VacationEntities entities = new VacationEntities();
+            Empleado empleado = new Empleado();
+
+            var userData = (from u in entities.Usuarios
+                where talentoHumano == u.talento_humano
+                select u).FirstOrDefault();
+
+            if (userData == null) return null;
+
+            empleado.User = new UserMirror(userData);
+
+            foreach (Roles rol in userData.tbl_roles)
+            {
+                empleado.Roles.Add(new RolesMirror
+                {
+                    Activo = rol.activo,
+                    Descripcion = rol.descripcion,
+                    Id = rol.rolesid
+                });
+
+                foreach (Permisos permiso in rol.tbl_permisos)
+                {
+
+                    bool skip = false;
+
+                    foreach (PermisosMirror perm in empleado.Permisos)
+                    {
+                        if (permiso.descripcion.Equals(perm.Descripcion))
+                        {
+                            skip = true;
+                            break;
+                        }
+                    }
+
+                    if (!skip)
+                    {
+                        empleado.Permisos.Add(new PermisosMirror
+                        {
+                            Activo = permiso.activo,
+                            Descripcion = permiso.descripcion,
+                            PermisosId = permiso.permisosid
+                        });
+                    }
+
+                }
+            }
+
+            foreach (Departamento dep in userData.tbl_departamento)
+            {
+                empleado.Departamento.Add(new DepartamentoMirror
+                {
+                    Activo = dep.activo,
+                    DepartamentoId = dep.departamentoid,
+                    Descripcion = dep.descripcion
+                });
+            }
+
+            foreach (Vacaciones vac in userData.tbl_vacaciones)
+            {
+                empleado.Vacaciones.Add(new VacacionesMirror
+                {
+                    DiasSolicitados = vac.dias_solicitados,
+                    EstatusId = vac.estatusid,
+                    FechaAprobacion = vac.fecha_de_aprobacion,
+                    FechaEntrada = vac.fecha_entrada,
+                    FechaSalida = vac.fecha_salida,
+                    FechaSolicitud = vac.fecha_solicitud,
+                    TalentoHumano = vac.talento_humano,
+                    VacacionesId = vac.vacacionesid,
+                    Year = vac.year
+                });
+
+                empleado.Status.Add(new StatusMirror
+                {
+                    Activo = vac.tbl_estatus.activo,
+                    Descripcion = vac.tbl_estatus.descripcion,
+                    Id = vac.tbl_estatus.estatusid
+                });
+
+            }
+
+            foreach (Calendario calendar in userData.tbl_calendario)
+            {
+                empleado.Calendar.Add(new CalendarMirror
+                {
+                    fecha = calendar.fecha,
+                    TalentoHumanoEmpleado = calendar.talento_humano_empleado,
+                    TalentoHumanoJefe = calendar.talento_humano_jefe,
+                    TipoDiaId = calendar.tipo_dia_id
+                });
+
+
+                empleado.TipoDia.Add(new TipoDiaMirror
+                {
+                    Descripcion = calendar.tbl_tipo_dia.descripcion,
+                    TipoDiaId = calendar.tipo_dia_id
+                });
+
+            }
+            
+            return empleado;
+        }
+
+        public List<UserMirror> LoadUsers(string sessionUser)
+        {
+            List<UserMirror> users = new List<UserMirror>();
+
+            VacationEntities entities = new VacationEntities();
+
+            var userResults = (from u in entities.Usuarios
+                               where u.email != sessionUser
+                select u);
+
+            foreach (var user in userResults)
+            {
+                users.Add(new UserMirror(user));
+            }
+
+            return users;
+        }
+
     }
 
 }

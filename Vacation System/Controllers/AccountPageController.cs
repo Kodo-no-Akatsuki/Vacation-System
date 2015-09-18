@@ -1,9 +1,6 @@
 using System.Web.Mvc;
 using Vacation_System.ServiceReference;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Web_Service;
 using Vacation_System.Models;
 
@@ -204,5 +201,32 @@ namespace Vacation_System.Controllers
 
 		    return RedirectToAction("Dashboard");
 		}
+
+	    [HttpGet]
+	    public ActionResult Users()
+	    {
+            ServiceClient client = new ServiceClient();
+
+            UsersViewModel uvm = new UsersViewModel();
+
+	        uvm.Users = client.LoadUsers((Session["User"] as Empleado).User.Email).ToList();
+
+            client.Close();
+
+	        return View(uvm);
+	    }
+
+        public ActionResult UserProfile(int talentoHumano)
+        {
+            if (Session["User"] == null) return LogOut();
+
+            ServiceClient service = new ServiceClient();
+
+            Empleado e = service.LoadEmpleado(talentoHumano);
+            
+            service.Close();
+
+            return View("Profile",e);
+        }
 	}
 }

@@ -128,4 +128,32 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="LoadEmpleado">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="talentoHumano" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoadEmpleadoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Web_Service" minOccurs="0" name="LoadEmpleadoResult" nillable="true" type="q10:Empleado" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoadUsers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionUser" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoadUsersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="LoadUsersResult" nillable="true" type="q11:ArrayOfUserMirror" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
