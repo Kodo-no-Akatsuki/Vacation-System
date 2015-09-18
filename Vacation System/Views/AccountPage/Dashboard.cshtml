@@ -228,8 +228,24 @@
                                     //Analizar mejor esta condicion
                                 }
 
-                                else if (invalid.getMonth() === begin.getMonth()) {
+                                else if (invalid.getDate() < begin.getDate()) {
+                                    return true;
+                                }
+
+                                else if (invalid.getMonth() < begin.getMonth()) {
+                                    return true;
+                                }
+
+                                else if (invalid.getMonth() < end.getMonth()) {
+                                    alert("La fecha " + (invalid.getMonth() + 1).toString() + '/' + invalid.getDate().toString() + '/'
+                                            + invalid.getFullYear() + " no esta disponible");
+
+                                    return false;
+                                }
+
+                                else if (invalid.getFullYear() === begin.getFullYear()) {
                                     if (invalid.getDate() >= begin.getDate() && invalid.getDate() <= end.getDate()) {
+                                        console.log("entro");
                                         alert("La fecha " + (invalid.getMonth()+1).toString() + '/' + invalid.getDate().toString() + '/'
                                             + invalid.getFullYear() + " no esta disponible");
 
