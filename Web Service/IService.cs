@@ -44,6 +44,9 @@ namespace Web_Service
         [OperationContract]
         List<UserMirror> LoadUsers(string sessionUser);
 
+        [OperationContract]
+        void EditUserStatus(int talentoHumano, bool status);
+
     }
 
 }

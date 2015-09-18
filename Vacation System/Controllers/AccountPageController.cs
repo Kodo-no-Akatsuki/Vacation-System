@@ -19,7 +19,13 @@ namespace Vacation_System.Controllers
 		{
 			if (Session["User"] == null) return LogOut();
 
-			return View(Session["User"] as Empleado);
+		    ProfileViewModel pvm = new ProfileViewModel
+		    {
+                ProfileEmpleado = Session["User"] as Empleado,
+                DisplayEditStatusBtn = false
+		    };
+
+			return View(pvm);
 		}
 
 		[HttpGet]
@@ -222,11 +228,27 @@ namespace Vacation_System.Controllers
 
             ServiceClient service = new ServiceClient();
 
-            Empleado e = service.LoadEmpleado(talentoHumano);
+            ProfileViewModel pvm = new ProfileViewModel
+            {
+                ProfileEmpleado = service.LoadEmpleado(talentoHumano),
+                DisplayEditStatusBtn = true
+            };
             
             service.Close();
 
-            return View("Profile",e);
+            return View("Profile", pvm);
         }
+
+        [HttpPost]
+	    public RedirectToRouteResult DesactivarUsuario(int talentoHumano, string edit)
+	    {
+            ServiceClient service = new ServiceClient();
+
+            service.EditUserStatus(talentoHumano, edit == "Activar");
+
+            service.Close();
+
+            return RedirectToAction("UserProfile", new { talentoHumano });
+	    }
 	}
 }

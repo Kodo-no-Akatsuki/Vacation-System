@@ -457,6 +457,19 @@ namespace Web_Service
             return users;
         }
 
+        public void EditUserStatus(int talentoHumano, bool status)
+        {
+            VacationEntities entities = new VacationEntities();
+
+            var user = (from u in entities.Usuarios
+                where u.talento_humano == talentoHumano
+                select u).FirstOrDefault();
+
+            user.activo = status;
+
+            entities.SaveChanges();
+        }
+
     }
 
 }
