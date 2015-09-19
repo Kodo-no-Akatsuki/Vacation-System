@@ -11,7 +11,7 @@
     var jsonFechas = JsonConvert.SerializeObject(Model.FechasNoDisponibles, new IsoDateTimeConverter());
 }
 
-<div class=""/>
+<div class="" />
 <div class="page-title">
     <div class="title_left">
         <h3>Solicitud de Vacaciones</h3>
@@ -21,8 +21,8 @@
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search for...">
                 <span class="input-group-btn">
-<button class="btn btn-default" type="button">Go!</button>
-</span>
+                    <button class="btn btn-default" type="button">Go!</button>
+                </span>
             </div>
         </div>
     </div>
@@ -63,53 +63,66 @@
                             <a href="#step-1">
                                 <span class="step_no">1</span>
                                 <span class="step_descr">
-                                        Paso 1
-<br />
-<small>Revisa tus datos</small>
-</span>
+                                    Paso 1
+                                    <br />
+                                    <small>Revisa tus datos</small>
+                                </span>
                             </a>
                         </li>
                         <li>
                             <a href="#step-2">
                                 <span class="step_no">2</span>
                                 <span class="step_descr">
-                                        Paso 2
-<br />
-<small>Elige la fecha</small>
-</span>
+                                    Paso 2
+                                    <br />
+                                    <small>Elige la fecha</small>
+                                </span>
                             </a>
                         </li>
                         <li>
                             <a href="#step-3">
                                 <span class="step_no">3</span>
                                 <span class="step_descr">
-                                        Paso 3
-<br />
-<small>Observaciones</small>
-</span>
+                                    Paso 3
+                                    <br />
+                                    <small>Observaciones</small>
+                                </span>
                             </a>
                         </li>
                         <li>
                             <a href="#step-4">
                                 <span class="step_no">4</span>
                                 <span class="step_descr">
-                                        Paso 4
-<br />
-<small>Revisa tu solicitud</small>
-</span>
+                                    Paso 4
+                                    <br />
+                                    <small>Revisa tu solicitud</small>
+                                </span>
                             </a>
                         </li>
                     </ul>
-                    <div id="step-1">                               
+                    <div id="step-1">
                         <form class="form-horizontal form-label-left">
                             <div class="form-group">
                                 <!--Hardcoded year-->
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                    Dias correspondientes /
-                                    @Model.YearC año
+                                    <br />
+                                    Dias correspondientes
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" value="23" class="form-control col-md-7 col-xs-12" disabled>
+                                    <table class="table table-striped table-condensed table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Año 1</th>
+                                                <th>Año 2</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>23</td>
+                                                <td>23</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -134,17 +147,18 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12 glyphicon glyphicon-calendar">
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="fecha" type="text" class="form-control col-md-7 col-xs-12" width="50" name="daterange"/>
-                                    <br/><br/>
-                                    <input id="availability" style="background: #193b69;"type="button" class="btn btn-primary pull-right" name="confirm" value="Ver disponibilidad"/>
+                                    <input id="fecha" type="text" class="form-control col-md-7 col-xs-12" width="50" name="daterange" />
+                                    <br />
+                                    <br />
+                                    <input id="availability" style="background: #193b69;" type="button" class="btn btn-primary pull-right" name="confirm" value="Ver disponibilidad" />
                                 </div>
                             </div>
                         </div>
 
-                        <input id="fechasHidden" name="fechasHidden" type="hidden" value="@jsonFechas"/> @*Cambiar a Hidden*@
+                        <input id="fechasHidden" name="fechasHidden" type="hidden" value="@jsonFechas" /> @*Cambiar a Hidden*@
 
                         <script type="text/javascript">
-                            $(function() {
+                            $(function () {
                                 $('input[name="daterange"]').daterangepicker({
                                     locale: {
                                         applyLabel: 'Aplicar',
@@ -162,7 +176,7 @@
 
                             });
 
-                            $("#availability").click(function() {
+                            $("#availability").click(function () {
                                 //Check if date is available logic here!
                                 var datevalues = document.getElementById('fecha').value;
                                 var res = datevalues.split(" - ");
@@ -251,7 +265,7 @@
                                 else if (invalid.getFullYear() === begin.getFullYear()) {
                                     if (invalid.getDate() >= begin.getDate() && invalid.getDate() <= end.getDate()) {
                                         console.log("entro");
-                                        alert("La fecha " + (invalid.getMonth()+1).toString() + '/' + invalid.getDate().toString() + '/'
+                                        alert("La fecha " + (invalid.getMonth() + 1).toString() + '/' + invalid.getDate().toString() + '/'
                                             + invalid.getFullYear() + " no esta disponible");
 
                                         return false;
@@ -266,7 +280,8 @@
                     <div id="step-3">
                         <div class="form-horizontal form-label-left">
                             <div class="form-group">
-                                <h2 class="control-label col-md-3 col-sm-3 ">Observaciones
+                                <h2 class="control-label col-md-3 col-sm-3 ">
+                                    Observaciones
                                 </h2>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <textarea class="form-control col-md-7 col-xs-12" rows="2" id="comment"></textarea>
@@ -282,7 +297,7 @@
                                     Dias solicitados
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="diassolic"  class="form-control col-md-7 col-xs-12" disabled>
+                                    <input type="number" id="diassolic" class="form-control col-md-7 col-xs-12" disabled>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -302,7 +317,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Firma</label>
                                 <div class="col-md-5 col-sm-6 col-xs-12">
-                                    <input value="@Model.User.PrimerNombre @Model.User.PrimerApellido" class="form-control col-md-7 col-xs-12" type="text" disabled/>
+                                    <input value="@Model.User.PrimerNombre @Model.User.PrimerApellido" class="form-control col-md-7 col-xs-12" type="text" disabled />
                                 </div>
                             </div>
                         </form>
@@ -317,6 +332,8 @@
                                 });
 
                                 //Validate if all data in form is correct! Before showing success
+
+
                             }
                         </script>
                     </div>
@@ -342,8 +359,8 @@
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-<button class="btn btn-default" type="button">Go!</button>
-</span>
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
                 </div>
             </div>
         </div>
@@ -353,7 +370,8 @@
         <div class="col-md-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Calender Events
+                    <h2>
+                        Calender Events
                         <small>Sessions</small>
                     </h2>
                     <ul class="nav navbar-right panel_toolbox">
