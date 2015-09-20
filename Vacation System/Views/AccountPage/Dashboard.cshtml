@@ -191,6 +191,7 @@
 
                                 if (range > document.getElementById('diasportomar').value) {
                                     alert("No puede tomar mas dias de los que le quedan!");
+                                    $("#nextBtn").attr("disabled", true);
                                     return;
                                 }
 
@@ -204,8 +205,11 @@
                                         break;
                                 }
 
-                                if (daysAccepted)
+                                if (daysAccepted) {
                                     alert("Los dias seleccionados estan disponibles");
+                                    $("#nextBtn").attr("disabled", false);
+                                }
+                                    
 
                             });
                         </script>
@@ -238,12 +242,14 @@
 
                                 if (new Date().getFullYear() !== begin.getFullYear()) {
                                     alert("Solo puede escoger dias del año vigente!");
+                                    $("#nextBtn").attr("disabled", true);
                                     return false;
                                     //Analizar mejor esta condicion
                                 }
 
                                 else if (begin.getDate() < new Date().getDate() || begin.getMonth() < new Date().getMonth()) {
                                     alert("No puede seleccionar dias del pasado");
+                                    $("#nextBtn").attr("disabled", true);
                                     return false;
                                 }
 
@@ -258,7 +264,7 @@
                                 else if (invalid.getMonth() < end.getMonth()) {
                                     alert("La fecha " + (invalid.getMonth() + 1).toString() + '/' + invalid.getDate().toString() + '/'
                                             + invalid.getFullYear() + " no esta disponible");
-
+                                    $("#nextBtn").attr("disabled", true);
                                     return false;
                                 }
 
@@ -267,7 +273,7 @@
                                         console.log("entro");
                                         alert("La fecha " + (invalid.getMonth() + 1).toString() + '/' + invalid.getDate().toString() + '/'
                                             + invalid.getFullYear() + " no esta disponible");
-
+                                        $("#nextBtn").attr("disabled", true);
                                         return false;
                                     }
                                 }
