@@ -25,15 +25,15 @@ namespace Web_Service
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Calendario> Calendarios { get; set; }
         public DbSet<Departamento> Departamentoes { get; set; }
         public DbSet<Estatus> Estatus { get; set; }
         public DbSet<Jerarquia> Jerarquias { get; set; }
         public DbSet<LogVacaciones> LogVacaciones { get; set; }
         public DbSet<Permisos> Permisos { get; set; }
         public DbSet<Roles> Roles { get; set; }
-        public DbSet<TipoDia> TipoDias { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<Vacaciones> Vacaciones { get; set; }
+        public DbSet<Calendario> Calendarios { get; set; }
+        public DbSet<TipoDia> TipoDias { get; set; }
     }
 }

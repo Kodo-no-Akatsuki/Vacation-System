@@ -1,135 +1,264 @@
-﻿@using Vacation_System.ServiceReference
-@using Web_Service
-@model IEnumerable<Vacation_System.ServiceReference.DepartamentoMirror>
+﻿@model Vacation_System.Models.DepartmentsViewModel
 
 @{
     Layout = "~/Views/AccountPage/Layout.cshtml";
     ViewBag.Title = "Departamentos";
-    var empleado = (Session["User"] as Empleado);
-        
-    
-    
 }
-@using (Html.BeginForm())
-{
-    <div class="">
-        <div class="page-title">
-            <div class="title_left">
-                <h3> Editar Departamentos </h3>
-            </div>
 
-            <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar...">
-                        <span class="input-group-btn">
+<script>
+    
+    function closeModals(source) {
+        var val = source.id;
+        var text = "";
+        var res = text.concat(val.toString());
+        $(res).modal('hide');
+    }
+
+</script>
+
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3> Editar Departamentos </h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar...">
+                    <span class="input-group-btn">
                             <button class="btn btn-default" type="button">Go!</button>
                         </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>Departamentos</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li>
-                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                <ul class="dropdown-menu" role="menu"></ul>
-                            </li>
-                            <li>
-                                <a class="close-link"><i class="fa fa-close"></i></a>
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-
-                        <div id="imgdepto" class="row">
-
-                            @foreach (var departamento in Model)
-                            {
-
-                                <div class="col-md-55">
-                                    <div class="thumbnail">
-                                        <div class="image view view-first">
-                                            <img style="width: 100%; display: block;" src="~/Content/imgs/iconakatsuki.png" alt="image" />
-                                            <div class="mask">
-                                                <p>@departamento.Descripcion</p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-
-                        </div>
-
-                        @using (Html.BeginForm())
-                        {
-                            <script>
-                                function addImg() {
-
-
-                                    $("#deptomodal").modal('hide');
-
-
-                                    var deptoname = document.getElementById("Descripcion").value;
-                                    if (deptoname !== "") {
-                                        $("#imgdepto").append("<div class='col-md-55'> <div class='thumbnail'><div class='image view view-first'><img style='width: 100%; display: block;' src='../Content/imgs/iconakatsuki.png' alt='image' />" +
-                                        "<div class='mask'><p>" + deptoname + "</p></div></div></div></div>");
-                                    }
-
-                                }
-                            </script>
-                            <div class="col-md-offset-10">
-
-                                @foreach (var permiso in empleado.Permisos)
-                                {
-                                    if (permiso.PermisosId == (int)PermisosEnum.CrearDepartamento)
-                                    {
-                                        <input type="button" class="btn btn-info pull-right" id="Des" data-toggle="modal" data-target="#deptomodal" value="Agregar Nuevo" />
-                                    }
-                                }
-
-                                @*<input type="button" class="btn btn-info pull-right" id="Des" data-toggle="modal" data-target="#deptomodal" value="Agregar Nuevo" />*@
-                            </div>
-
-                            <div id="deptomodal" class="modal fade" tabindex="-1" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">×</button>
-                                            <h3>Agregar Departamento</h3>
-                                        </div>
-                                        <div class="modal-body">
-                                            <input type="text" id="Descripcion" name="Descripcion" class="form-control pull-right" placeholder="Nombre">
-
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="#" class="btn" data-dismiss="modal">Close</a>
-                                            <input type="submit" onclick="addImg();" name="submit" value="Guardar" class="btn btn-primary" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-
-
-
-                    </div>
-
                 </div>
             </div>
         </div>
     </div>
+    <div class="clearfix"></div>
 
-}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Departamentos</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+                               aria-expanded="false">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu"></ul>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <div id="imgdepto" class="row">
+
+                        @foreach (var departamento in Model.Departamentos)
+                        {
+
+                            <div class="col-md-55">
+                                <div class="thumbnail">
+
+                                    <div class="image view view-first">
+                                        <img style="width: 130%;" src="~/Content/imgs/iconakatsuki.png" alt="image"/>
+
+                                        <div class="mask" style="height: 100%">
+
+                                            <p>
+                                                <strong>
+                                                    @departamento.Descripcion
+                                                </strong>
+                                            </p>
+
+                                            <a href="#" data-target="#@departamento.Descripcion" data-toggle="modal">
+                                                <i class="fa fa-pencil" style="color: #fff"></i>
+                                            </a>
+
+                                            @if (Model.AllowDeactivate)
+                                            {
+                                                if (departamento.Activo)
+                                                {
+                                                    <a href="#" data-target="#deac-@departamento.DepartamentoId" 
+                                                       data-toggle="modal">
+                                                        <i class="fa fa-times" style="color: #fff"></i>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#" data-target="#deac-@departamento.DepartamentoId" 
+                                                       data-toggle="modal">
+                                                        <i class="fa fa-check" style="color: #fff"></i>
+                                                    </a>
+                                                }
+                                            }
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+    <div id="@departamento.Descripcion" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">X</button>
+                    <h3>Editar Departamento</h3>
+                </div>
+
+                @using (Html.BeginForm("EditDepartment", "AccountPage"))
+                {
+
+                    <div class="modal-body">
+
+                        <input type="hidden" name="DepartamentoId" value="@departamento.DepartamentoId"/>
+                        <input type="hidden" name="Activo" value="@departamento.Activo.ToString()"/>
+                        
+                        <h4>@departamento.Descripcion</h4>
+
+                        <input type="text" name="Descripcion" class="form-control pull-right"
+                               placeholder="Nuevo Nombre">
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn" data-dismiss="modal">Close</a>
+                        <input type="submit" id="@departamento.Descripcion" onclick="closeModals(this)" 
+                               name="submit" value="Guardar Cambios"
+                               class="btn btn-primary" />
+
+                    </div>
+
+                }
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="deac-@departamento.DepartamentoId" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">X</button>
+
+                    @if (departamento.Activo)
+                    {
+                        <h3>Estas seguro de desactivar este departamento?</h3>
+                    }
+                    else
+                    {
+                        <h3>Estas seguro de re-activar este departamento?</h3>
+                    }
+
+                </div>
+
+                @using (Html.BeginForm("EditDepartment", "AccountPage"))
+                {
+                    <div class="modal-footer">
+                        
+                        <input type="hidden" name="DepartamentoId" value="@departamento.DepartamentoId"/>
+                        <input type="hidden" name="Descripcion" value="@departamento.Descripcion"/>
+
+                        <button class="btn btn-primary" data-dismiss="modal">No</button>
+
+                        @if (departamento.Activo)
+                        {
+                            <input type="submit" name="DesactivarDepto" value="Desactivar"
+                                   class="btn btn-primary" />
+                        }
+
+                        else
+                        {
+                            <input type="submit" name="DesactivarDepto" value="Activar"
+                                   class="btn btn-primary" />
+                        }
+
+
+                    </div>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+                        }
+
+                    </div>
+
+                    <script>
+                        
+                        function addImg() {
+                            $("#deptomodal").modal('hide');
+                            var deptoname = document.getElementById("Descripcion").value;
+                            if (deptoname !== "") {
+                                $("#imgdepto").append("<div class='col-md-55'> <div class='thumbnail'>" +
+                                    "<div class='image view view-first'><img style='width: 100%; display: " +
+                                    "block;' src='../Content/imgs/iconakatsuki.png' alt='image' />" +
+                                    "<div class='mask'><p>" + deptoname + "</p></div></div></div></div>");
+                            }
+                        }
+
+                    </script>
+
+                    <div class="col-md-offset-10">
+                        <input type="@Model.DisplayCreate" class="btn btn-primary" id="Des" data-toggle="modal" 
+                               data-target="#deptomodal" value="Agregar Nuevo"/>
+                    </div>
+
+                        <div id="deptomodal" class="modal fade" tabindex="-1" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">X</button>
+                                        <h3>Agregar Departamento</h3>
+                                    </div>
+
+                                     @using (Html.BeginForm("CreateDepartment", "AccountPage"))
+                                     {
+
+                                    <div class="modal-body">
+
+                                        <input type="text" name="Descripcion" class="form-control pull-right" 
+                                               placeholder="Nombre">
+
+
+                                    </div>
+                                         <div class="modal-footer">
+                                             <a href="#" class="btn" data-dismiss="modal">Close</a>
+                                             <input type="submit" onclick="addImg();" name="submit" value="Guardar" 
+                                                    class="btn btn-primary"/>
+
+                                         </div>
+                                         
+                                     }
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
 using Web_Service.Mirror_Classes;
 
 namespace Web_Service
@@ -25,6 +21,9 @@ namespace Web_Service
         void CreateDepartment(DepartamentoMirror depto);
 
         [OperationContract]
+        void EditDepartment(DepartamentoMirror depto);
+
+        [OperationContract]
         void CreateRol(RolesMirror rol);
 
         [OperationContract]
@@ -35,6 +34,21 @@ namespace Web_Service
 
         [OperationContract]
         List<string> LoadPermisosData();
+
+        [OperationContract]
+        void SaveRoleChanges(RolesMirror rolMirror);
+
+        [OperationContract]
+        Empleado LoadEmpleado(int talentoHumano);
+
+        [OperationContract]
+        List<UserMirror> LoadUsers(string sessionUser);
+
+        [OperationContract]
+        void EditUserStatus(int talentoHumano, bool status);
+
+        [OperationContract]
+        void EditUser(Empleado empleado);
 
     }
 
