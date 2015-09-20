@@ -1,0 +1,18 @@
+﻿@model Vacation_System.Models.UsersViewModel
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/AccountPage/Layout.cshtml";
+}
+
+    @foreach (var user in Model.Users)
+    {
+        <li>
+            <a href="@Url.Action("UserProfile", new {talentoHumano = user.TalentoHumano})">
+                @user.PrimerNombre @user.PrimerApellido
+            </a>
+        </li>
+        <br/>
+        <br/>
+    }
+

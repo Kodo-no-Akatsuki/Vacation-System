@@ -6,6 +6,7 @@
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Web_Service" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IService_GetData_InputMessage">
@@ -32,6 +33,12 @@
   <wsdl:message name="IService_CreateDepartment_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateDepartmentResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_EditDepartment_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditDepartment" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditDepartment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditDepartmentResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_CreateRol_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateRol" />
   </wsdl:message>
@@ -50,6 +57,42 @@
   <wsdl:message name="IService_LoadRoles_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoadRolesResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_LoadPermisosData_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoadPermisosData" />
+  </wsdl:message>
+  <wsdl:message name="IService_LoadPermisosData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoadPermisosDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_SaveRoleChanges_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveRoleChanges" />
+  </wsdl:message>
+  <wsdl:message name="IService_SaveRoleChanges_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveRoleChangesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_LoadEmpleado_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoadEmpleado" />
+  </wsdl:message>
+  <wsdl:message name="IService_LoadEmpleado_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoadEmpleadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_LoadUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoadUsers" />
+  </wsdl:message>
+  <wsdl:message name="IService_LoadUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoadUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditUserStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditUserStatus" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditUserStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditUserStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditUser" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditUserResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetData" message="tns:IService_GetData_InputMessage" />
@@ -67,6 +110,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateDepartment" message="tns:IService_CreateDepartment_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/CreateDepartmentResponse" message="tns:IService_CreateDepartment_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="EditDepartment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/EditDepartment" message="tns:IService_EditDepartment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/EditDepartmentResponse" message="tns:IService_EditDepartment_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateRol">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateRol" message="tns:IService_CreateRol_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/CreateRolResponse" message="tns:IService_CreateRol_OutputMessage" />
@@ -78,6 +125,30 @@
     <wsdl:operation name="LoadRoles">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/LoadRoles" message="tns:IService_LoadRoles_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/LoadRolesResponse" message="tns:IService_LoadRoles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadPermisosData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/LoadPermisosData" message="tns:IService_LoadPermisosData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/LoadPermisosDataResponse" message="tns:IService_LoadPermisosData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveRoleChanges">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/SaveRoleChanges" message="tns:IService_SaveRoleChanges_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/SaveRoleChangesResponse" message="tns:IService_SaveRoleChanges_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadEmpleado">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/LoadEmpleado" message="tns:IService_LoadEmpleado_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/LoadEmpleadoResponse" message="tns:IService_LoadEmpleado_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/LoadUsers" message="tns:IService_LoadUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/LoadUsersResponse" message="tns:IService_LoadUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditUserStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/EditUserStatus" message="tns:IService_EditUserStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/EditUserStatusResponse" message="tns:IService_EditUserStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/EditUser" message="tns:IService_EditUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/EditUserResponse" message="tns:IService_EditUser_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -118,6 +189,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="EditDepartment">
+      <soap:operation soapAction="http://tempuri.org/IService/EditDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateRol">
       <soap:operation soapAction="http://tempuri.org/IService/CreateRol" style="document" />
       <wsdl:input>
@@ -138,6 +218,60 @@
     </wsdl:operation>
     <wsdl:operation name="LoadRoles">
       <soap:operation soapAction="http://tempuri.org/IService/LoadRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadPermisosData">
+      <soap:operation soapAction="http://tempuri.org/IService/LoadPermisosData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveRoleChanges">
+      <soap:operation soapAction="http://tempuri.org/IService/SaveRoleChanges" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadEmpleado">
+      <soap:operation soapAction="http://tempuri.org/IService/LoadEmpleado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadUsers">
+      <soap:operation soapAction="http://tempuri.org/IService/LoadUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditUserStatus">
+      <soap:operation soapAction="http://tempuri.org/IService/EditUserStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditUser">
+      <soap:operation soapAction="http://tempuri.org/IService/EditUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

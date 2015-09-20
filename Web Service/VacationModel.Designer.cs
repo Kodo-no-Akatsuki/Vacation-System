@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Alejandro\Documents\GitHub\Proyecto Programacion IV\Vacation System\Web Service\VacationModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Juan\Documents\Visual Studio 2013\Projects\Progra. IV\Project\Vacation System\Vacation-System\Web Service\VacationModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

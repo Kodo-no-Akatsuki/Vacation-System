@@ -8,6 +8,7 @@ using Vacation_System.ServiceReference;
 
 namespace Vacation_System.Controllers
 {
+   
     public class LogInController : Controller
     {
         // GET: LogIn
@@ -24,7 +25,7 @@ namespace Vacation_System.Controllers
         [HttpPost]
         public RedirectToRouteResult Index(LoginModel log)
         {
-            ServiceClient service = new ServiceClient();
+            ServiceClient service = new ServiceClient(); 
 
             Empleado emp = service.LogIn(log.Email, log.Password);
 

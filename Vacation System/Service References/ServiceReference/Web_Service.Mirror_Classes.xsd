@@ -86,6 +86,7 @@
       <xs:element minOccurs="0" name="Activo" type="xs:boolean" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Permisos" nillable="true" type="tns:ArrayOfPermisosMirror" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RolesMirror" nillable="true" type="tns:RolesMirror" />
@@ -111,7 +112,7 @@
   <xs:element name="ArrayOfTipoDiaMirror" nillable="true" type="tns:ArrayOfTipoDiaMirror" />
   <xs:complexType name="TipoDiaMirror">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Descripcion" type="xs:int" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TipoDiaId" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
@@ -151,4 +152,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="VacacionesMirror" nillable="true" type="tns:VacacionesMirror" />
+  <xs:complexType name="ArrayOfUserMirror">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserMirror" nillable="true" type="tns:UserMirror" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserMirror" nillable="true" type="tns:ArrayOfUserMirror" />
 </xs:schema>
