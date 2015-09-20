@@ -93,7 +93,7 @@ namespace Vacation_System.Controllers
 
 	        if (Request.Form["DesactivarDepto"] != null)
 	        {
-	            deptoEditado.Activo = Request.Form["DesactivarDepto"] != "Si";
+	            deptoEditado.Activo = Request.Form["DesactivarDepto"] != "Desactivar";
 	        }
 
             service.EditDepartment(deptoEditado);

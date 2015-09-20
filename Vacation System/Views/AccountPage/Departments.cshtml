@@ -82,11 +82,22 @@
                                                 <i class="fa fa-pencil" style="color: #fff"></i>
                                             </a>
 
-                                            @if (Model.AllowDeactivate &&  departamento.Activo)
+                                            @if (Model.AllowDeactivate)
                                             {
-                                                <a href="#" data-target="#deac-@departamento.DepartamentoId" data-toggle="modal">
-                                                    <i class="fa fa-times" style="color: #fff"></i>
-                                                </a>
+                                                if (departamento.Activo)
+                                                {
+                                                    <a href="#" data-target="#deac-@departamento.DepartamentoId" 
+                                                       data-toggle="modal">
+                                                        <i class="fa fa-times" style="color: #fff"></i>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#" data-target="#deac-@departamento.DepartamentoId" 
+                                                       data-toggle="modal">
+                                                        <i class="fa fa-check" style="color: #fff"></i>
+                                                    </a>
+                                                }
                                             }
 
                                         </div>
@@ -144,7 +155,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">X</button>
-                    <h3>Estas seguro de desactivar este departamento?</h3>
+
+                    @if (departamento.Activo)
+                    {
+                        <h3>Estas seguro de desactivar este departamento?</h3>
+                    }
+                    else
+                    {
+                        <h3>Estas seguro de re-activar este departamento?</h3>
+                    }
+
                 </div>
 
                 @using (Html.BeginForm("EditDepartment", "AccountPage"))
@@ -155,8 +175,20 @@
                         <input type="hidden" name="Descripcion" value="@departamento.Descripcion"/>
 
                         <button class="btn btn-primary" data-dismiss="modal">No</button>
-                        <input type="submit" name="DesactivarDepto" value="Si"
-                               class="btn btn-primary"/>
+
+                        @if (departamento.Activo)
+                        {
+                            <input type="submit" name="DesactivarDepto" value="Desactivar"
+                                   class="btn btn-primary" />
+                        }
+
+                        else
+                        {
+                            <input type="submit" name="DesactivarDepto" value="Activar"
+                                   class="btn btn-primary" />
+                        }
+
+
                     </div>
                 }
 
