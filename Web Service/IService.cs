@@ -47,6 +47,9 @@ namespace Web_Service
         [OperationContract]
         void EditUserStatus(int talentoHumano, bool status);
 
+        [OperationContract]
+        void EditUser(Empleado empleado);
+
     }
 
 }

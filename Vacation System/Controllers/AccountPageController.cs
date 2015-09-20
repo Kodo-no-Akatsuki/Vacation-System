@@ -234,11 +234,11 @@ namespace Vacation_System.Controllers
                 ProfileEmpleado = service.LoadEmpleado(talentoHumano),
             };
 
-            pvm.DisplayEditStatusBtn = (from p in pvm.ProfileEmpleado.Permisos
+            pvm.DisplayEditStatusBtn = (from p in (Session["User"] as Empleado).Permisos
                                   where p.PermisosId == (int)PermisosEnum.DesactivarUsuario
                                   select p).FirstOrDefault() != null;
 
-            pvm.DisplayEditBtn = (from p in pvm.ProfileEmpleado.Permisos
+            pvm.DisplayEditBtn = (from p in (Session["User"] as Empleado).Permisos
                 where p.PermisosId == (int) PermisosEnum.EditarUsuario
                 select p).FirstOrDefault() != null;
             
@@ -257,6 +257,41 @@ namespace Vacation_System.Controllers
             service.Close();
 
             return RedirectToAction("UserProfile", new { talentoHumano });
+	    }
+
+	    public ActionResult EditUser(int talentoHumano)
+	    {
+            ServiceClient service = new ServiceClient();
+
+	        EditUserViewModel euvm = new EditUserViewModel
+	        {
+	            Empleado = service.LoadEmpleado(talentoHumano),
+	            Departamentos = service.LoadDepartments().ToList(),
+	            Roles = service.LoadRoles().ToList()
+	        };
+
+            euvm.DisplayRolesAndDepartments = (Session["User"] as Empleado).User.TalentoHumano != 
+                euvm.Empleado.User.TalentoHumano && 
+                (from p in (Session["User"] as Empleado).Permisos
+                                  where p.PermisosId == (int)PermisosEnum.EditarUsuario
+                                  select p).FirstOrDefault() != null;
+
+            service.Close();
+
+	        return View(euvm);
+	    }
+
+	    public RedirectToRouteResult EditarUser(Empleado empleado, string status)
+	    {
+            ServiceClient service = new ServiceClient();
+
+	        empleado.User.Activo = status == "Activo";
+
+            service.EditUser(empleado);
+
+            service.Close();
+
+	        return RedirectToAction("Dashboard");
 	    }
 	}
 }

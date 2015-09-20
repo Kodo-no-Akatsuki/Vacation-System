@@ -87,6 +87,12 @@
   <wsdl:message name="IService_EditUserStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:EditUserStatusResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_EditUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditUser" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditUserResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetData" message="tns:IService_GetData_InputMessage" />
@@ -139,6 +145,10 @@
     <wsdl:operation name="EditUserStatus">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/EditUserStatus" message="tns:IService_EditUserStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/EditUserStatusResponse" message="tns:IService_EditUserStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/EditUser" message="tns:IService_EditUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/EditUserResponse" message="tns:IService_EditUser_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -253,6 +263,15 @@
     </wsdl:operation>
     <wsdl:operation name="EditUserStatus">
       <soap:operation soapAction="http://tempuri.org/IService/EditUserStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditUser">
+      <soap:operation soapAction="http://tempuri.org/IService/EditUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

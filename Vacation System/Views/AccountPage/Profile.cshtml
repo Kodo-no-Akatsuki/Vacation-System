@@ -117,7 +117,12 @@
 
                         @if (Model.DisplayEditBtn)
                         {
-                            <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
+                            <a class="btn btn-success" href="@Url.Action("EditUser",
+                                                                 new { talentoHumano = Model.ProfileEmpleado.User.TalentoHumano })">
+
+                                <i class="fa fa-edit m-right-xs"></i>Editar Perfil
+
+                            </a>
                         }
 
 

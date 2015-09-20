@@ -1,0 +1,239 @@
+﻿@model Vacation_System.Models.EditUserViewModel
+@{
+    Layout = "~/Views/AccountPage/Layout.cshtml";
+    ViewBag.Title = "Editar Usuario";
+}
+
+
+<div class="">
+
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Editar Usuario</h3>
+        </div>
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Datos</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br />
+
+                    @using (Html.BeginForm("EditarUser", "AccountPage",
+                        FormMethod.Post, new
+                          {
+                              @id = "demo-form2",
+                              @class = "form-horizontal form-label-left",
+                              data_toggle = "validator"
+                          }))
+                    {
+                        
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="inputName">
+                                Nombre <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="User.PrimerNombre"
+                                       required="required" class="form-control col-md-7 col-xs-12" 
+                                       value="@Model.Empleado.User.PrimerNombre">
+                                <input type="text" name="User.SegundoNombre"
+                                       required="required" class="form-control col-md-7 col-xs-12"
+                                       value="@Model.Empleado.User.SegundoNombre">
+                                <input type="text" name="User.PrimerApellido"
+                                       required="required" class="form-control col-md-7 col-xs-12"
+                                       value="@Model.Empleado.User.PrimerApellido">
+                                <input type="text" name="User.SegundoApellido"
+                                       required="required" class="form-control col-md-7 col-xs-12"
+                                       value="@Model.Empleado.User.SegundoApellido">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="inputEmail">
+                                Correo/Email <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input name="User.Email" class="form-control col-md-7 col-xs-12"
+                                       required="required" type="email" value="@Model.Empleado.User.Email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="inputPassword">
+                                Clave <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="inputPassword" name="User.Password" class="form-control col-md-7 col-xs-12"
+                                       required="required" type="password" value="@Model.Empleado.User.Password">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ConfirmPassword">
+                                Confirmar clave <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="confirmpass" data-match="#inputPassword" data-match-error="Whoops, these don't match"
+                                       class="form-control col-md-7 col-xs-12" required="required" type="password"
+                                       value="@Model.Empleado.User.Password">
+                            </div>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <br />
+
+                        if (Model.DisplayRolesAndDepartments)
+                        {
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Departamentos <span class="required">*</span>
+                                </label>
+                                <div class="container pull-left" style="width: 300px; height: 100px; overflow-y: scroll;">
+
+                                    @for (int i = 0; i < Model.Departamentos.Count; i++)
+                                    {
+                                        <input type="hidden" id=@i name="Departamento.Index" value=@i />
+
+                                        if ((from d in Model.Empleado.Departamento
+                                             where d.Descripcion == Model.Departamentos[i].Descripcion
+                                             select d).FirstOrDefault() != null)
+                                        {
+                                            <input type="checkbox" name="Departamento[@i].Descripcion"
+                                                   value="@Model.Departamentos[i].Descripcion" checked/>
+                                        }
+
+                                        else
+                                        {
+                                            <input type="checkbox" name="Departamento[@i].Descripcion"
+                                                   value="@Model.Departamentos[i].Descripcion"/>
+                                        }
+
+                                        @Model.Departamentos[i].Descripcion
+                                        <br/>
+                                    }
+
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Roles <span class="required">*</span>
+                                </label>
+                                <div class="container pull-left" style="width: 300px; height: 100px; overflow-y: scroll;">
+
+                                    @for (int i = 0; i < Model.Roles.Count; i++)
+                                    {
+                                        <input type="hidden" id=@i name ="Roles.Index" value=@i />
+
+                                        if ((from r in Model.Empleado.Roles
+                                             where r.Descripcion == Model.Roles[i].Descripcion
+                                             select r).FirstOrDefault() != null)
+                                        {
+                                            <input type="checkbox" name="Roles[@i].Descripcion"
+                                                   value="@Model.Roles[i].Descripcion" checked/>
+                                        }
+
+                                        else
+                                        {
+                                            <input type="checkbox" name="Roles[@i].Descripcion"
+                                                   value="@Model.Roles[i].Descripcion"/>
+                                        }
+
+                                        @Model.Roles[i].Descripcion
+                                        <br/>
+                                    }
+
+                                </div>
+                            </div>
+                        }
+
+                        else
+                        {
+                            var i = 0;
+                            foreach (var rol in Model.Empleado.Roles)
+                            {
+                                <input type="hidden" name="Roles[@i].Descripcion"
+                                       value="@Model.Roles[i].Descripcion"/>
+                                i++;
+                            }
+
+                            i = 0;
+
+                            foreach (var depto in Model.Empleado.Departamento)
+                            {
+                                <input type="hidden" name="Departamento[@i].Descripcion"
+                                       value="@Model.Departamentos[i].Descripcion"/>
+                                i++;
+                            }
+
+                        }
+
+                        <input type="hidden" name="User.TalentoHumano" value="@Model.Empleado.User.TalentoHumano"/>
+
+                        if (Model.Empleado.User.Activo)
+                        {
+                            <input type="hidden" name="status" value="Activo" />
+                        }
+                        else
+                        {
+                            <input type="hidden" name="status" value="Inactivo" />
+                        }
+                        
+                        <input type="hidden" name="User.FechaIngreso" value="@Model.Empleado.User.FechaIngreso" />
+                        <input type="hidden" name="User.FechaCreacion" value="@Model.Empleado.User.FechaCreacion" />
+
+                        <div class="ln_solid"></div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <input type="submit" class="btn btn-success" value="Guardar Cambios" />
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#fdate').daterangepicker({
+            singleDatePicker: true,
+            calender_style: "picker_4"
+        }, function (start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+    });
+</script>
+
+

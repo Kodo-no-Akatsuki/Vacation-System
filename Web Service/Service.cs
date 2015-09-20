@@ -470,6 +470,51 @@ namespace Web_Service
             entities.SaveChanges();
         }
 
+        public void EditUser(Empleado empleado)
+        {
+            VacationEntities entities = new VacationEntities();
+
+            UserMirror eUser = empleado.User;
+
+            var user = (from u in entities.Usuarios
+                where u.talento_humano == eUser.TalentoHumano
+                select u).FirstOrDefault();
+
+            user.email = eUser.Email;
+            user.password = eUser.Password;
+            user.primer_apellido = eUser.PrimerApellido;
+            user.primer_nombre = eUser.PrimerNombre;
+            user.segundo_apellido = eUser.SegundoApellido;
+            user.segundo_nombre = eUser.SegundoNombre;
+
+            user.tbl_departamento.Clear();
+
+            if (empleado.Departamento != null && empleado.Departamento.Any())
+            {
+                foreach (var depto in empleado.Departamento)
+                {
+                    user.tbl_departamento.Add((from d in entities.Departamentoes
+                                               where depto.Descripcion == d.descripcion
+                                               select d).FirstOrDefault());
+                }
+            }
+
+            user.tbl_roles.Clear();
+
+            if (empleado.Roles != null && empleado.Roles.Any())
+            {
+                foreach (var rol in empleado.Roles)
+                {
+                    user.tbl_roles.Add((from r in entities.Roles
+                                        where rol.Descripcion == r.descripcion
+                                        select r).FirstOrDefault());
+                }
+            }
+
+
+            entities.SaveChanges();
+        }
+
     }
 
 }

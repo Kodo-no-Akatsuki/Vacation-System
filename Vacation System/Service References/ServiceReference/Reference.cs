@@ -1341,6 +1341,12 @@ namespace Vacation_System.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditUserStatus", ReplyAction="http://tempuri.org/IService/EditUserStatusResponse")]
         System.Threading.Tasks.Task EditUserStatusAsync(int talentoHumano, bool status);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditUser", ReplyAction="http://tempuri.org/IService/EditUserResponse")]
+        void EditUser(Vacation_System.ServiceReference.Empleado empleado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditUser", ReplyAction="http://tempuri.org/IService/EditUserResponse")]
+        System.Threading.Tasks.Task EditUserAsync(Vacation_System.ServiceReference.Empleado empleado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1472,6 +1478,14 @@ namespace Vacation_System.ServiceReference {
         
         public System.Threading.Tasks.Task EditUserStatusAsync(int talentoHumano, bool status) {
             return base.Channel.EditUserStatusAsync(talentoHumano, status);
+        }
+        
+        public void EditUser(Vacation_System.ServiceReference.Empleado empleado) {
+            base.Channel.EditUser(empleado);
+        }
+        
+        public System.Threading.Tasks.Task EditUserAsync(Vacation_System.ServiceReference.Empleado empleado) {
+            return base.Channel.EditUserAsync(empleado);
         }
     }
 }
