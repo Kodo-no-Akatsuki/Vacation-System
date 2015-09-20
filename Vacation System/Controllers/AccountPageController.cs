@@ -4,6 +4,7 @@ using Vacation_System.ServiceReference;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Vacation_System.Models;
 using Web_Service;
 
 namespace Vacation_System.Controllers
@@ -13,6 +14,7 @@ namespace Vacation_System.Controllers
 		public ActionResult Dashboard()
 		{
 			Empleado user = Session["User"] as Empleado;
+			List<PendingVacations> pendientes = new List<PendingVacations>();
 
 			if (user == null) return LogOut();
 
@@ -20,6 +22,20 @@ namespace Vacation_System.Controllers
 			user.DiasTomadosAnteriormente = user.Vacaciones.Where(vacacion => vacacion.Year == DateTime.Now.Year && vacacion.EstatusId == 1).Sum(vacacion => vacacion.DiasSolicitados);
 			user.DiasPendientesPorTomar = 23 - user.DiasTomadosAnteriormente;
 			user.FechasNoDisponibles = user.Calendar.Select(x => x.fecha).ToArray();
+
+			foreach (var year in user.Vacaciones)
+			{
+				if (year.DiasSolicitados < 23)
+				{
+					pendientes.Add(new PendingVacations
+					{
+						PendingDays = 23 - year.DiasSolicitados,
+						PendingYear = year.Year
+					});
+				}
+			}
+
+		    ViewBag.VacacionesPendientes = pendientes;
 
 			return View(user);
 		}

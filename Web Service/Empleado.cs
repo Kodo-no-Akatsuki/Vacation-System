@@ -42,6 +42,8 @@ namespace Web_Service
         [DataMember]
         public List<CalendarMirror> Calendar { get; set; }
 
+        //-------------------------Datos relacionados a las vacaciones del empleado (No pueden ir en VacacionesMirror)------------------------
+
         [DataMember]
         public int DiasTomadosAnteriormente { get; set; }
 

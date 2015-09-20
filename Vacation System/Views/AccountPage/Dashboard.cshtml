@@ -1,5 +1,6 @@
 ﻿@using Newtonsoft.Json
 @using Newtonsoft.Json.Converters
+@using Vacation_System.Models
 @using Vacation_System.ServiceReference
 @using Web_Service
 @model Vacation_System.ServiceReference.Empleado
@@ -112,14 +113,18 @@
                                     <table class="table table-striped table-condensed table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Año 1</th>
-                                                <th>Año 2</th>
+                                                @foreach (PendingVacations pendiente in @ViewBag.VacacionesPendientes)
+                                                {
+                                                    <td>Año @pendiente.PendingYear</td>
+                                                }
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>23</td>
-                                                <td>23</td>
+                                                @foreach (PendingVacations pendiente in @ViewBag.VacacionesPendientes)
+                                                {
+                                                    <td> @pendiente.PendingDays</td>
+                                                }
                                             </tr>
                                         </tbody>
                                     </table>
