@@ -36,6 +36,7 @@ namespace Vacation_System.Controllers
 			}
 
 		    ViewBag.VacacionesPendientes = pendientes;
+		    ViewBag.NotificationScript = "new PNotify({title: 'Enhorabuena', text: 'La solicitud ha sido enviada!', type: 'success'});";
 
 			return View(user);
 		}

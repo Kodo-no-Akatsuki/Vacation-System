@@ -1176,7 +1176,7 @@ namespace Vacation_System.ServiceReference {
         private System.DateTime FechaSalidaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int FechaSolicitudField;
+        private System.DateTime FechaSolicitudField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int TalentoHumanoField;
@@ -1263,7 +1263,7 @@ namespace Vacation_System.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int FechaSolicitud {
+        public System.DateTime FechaSolicitud {
             get {
                 return this.FechaSolicitudField;
             }

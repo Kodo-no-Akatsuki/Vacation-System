@@ -336,13 +336,7 @@
 
                         <script>
                             function EnviarDatos() {
-                                new PNotify({
-                                    title: 'Enhorabuena!',
-                                    text: 'La solicitud ha sido enviada! Te notificaremos cuando haya sido aceptada.',
-                                    type: 'success'
-                                });
-
-                                //Validate if all data in form is correct! Before showing success
+                                @Html.Raw(ViewBag.NotificationScript);
 
 
                             }

@@ -12,16 +12,12 @@
         <EntityTypeShape EntityType="vsystem_akatsukiModel.Permisos" Width="1.5" PointX="1.5" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="vsystem_akatsukiModel.Roles" Width="1.5" PointX="3.75" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="vsystem_akatsukiModel.Usuarios" Width="1.5" PointX="6" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="vsystem_akatsukiModel.Vacaciones" Width="1.5" PointX="8.25" PointY="2.5" IsExpanded="true" />
         <AssociationConnector Association="vsystem_akatsukiModel.fk_j_d" ManuallyRouted="false" />
         <AssociationConnector Association="vsystem_akatsukiModel.fk_lv_e_ac" ManuallyRouted="false" />
         <AssociationConnector Association="vsystem_akatsukiModel.fk_lv_e_an" ManuallyRouted="false" />
-        <AssociationConnector Association="vsystem_akatsukiModel.fk_v_e" ManuallyRouted="false" />
         <AssociationConnector Association="vsystem_akatsukiModel.fk_j_th" ManuallyRouted="false" />
         <AssociationConnector Association="vsystem_akatsukiModel.fk_j_thj" ManuallyRouted="false" />
         <AssociationConnector Association="vsystem_akatsukiModel.fk_lv_th" ManuallyRouted="false" />
-        <AssociationConnector Association="vsystem_akatsukiModel.fk_lv_v" ManuallyRouted="false" />
-        <AssociationConnector Association="vsystem_akatsukiModel.fk_v_th" ManuallyRouted="false" />
         <AssociationConnector Association="vsystem_akatsukiModel.tbl_roles_permisos" ManuallyRouted="false" />
         <AssociationConnector Association="vsystem_akatsukiModel.tbl_usuarios_departamento" ManuallyRouted="false" />
         <AssociationConnector Association="vsystem_akatsukiModel.tbl_usuarios_roles" ManuallyRouted="false" />
@@ -30,6 +26,10 @@
         <AssociationConnector Association="vsystem_akatsukiModel.fk_c_td" />
         <AssociationConnector Association="vsystem_akatsukiModel.fk_c_th_e" />
         <AssociationConnector Association="vsystem_akatsukiModel.fk_c_th_j" />
+        <EntityTypeShape EntityType="vsystem_akatsukiModel.Vacaciones" Width="1.5" PointX="8.25" PointY="4.5" />
+        <AssociationConnector Association="vsystem_akatsukiModel.fk_v_e" />
+        <AssociationConnector Association="vsystem_akatsukiModel.fk_lv_v" />
+        <AssociationConnector Association="vsystem_akatsukiModel.fk_v_th" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

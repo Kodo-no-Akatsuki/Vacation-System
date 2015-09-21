@@ -32,8 +32,8 @@ namespace Web_Service
         public DbSet<Permisos> Permisos { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
-        public DbSet<Vacaciones> Vacaciones { get; set; }
         public DbSet<TipoDia> TipoDias { get; set; }
         public DbSet<Calendario> Calendarios { get; set; }
+        public DbSet<Vacaciones> Vacaciones { get; set; }
     }
 }

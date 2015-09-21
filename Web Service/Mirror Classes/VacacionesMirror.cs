@@ -25,7 +25,7 @@ namespace Web_Service.Mirror_Classes
         public int DiasSolicitados { get; set; }
 
         [DataMember]
-        public int FechaSolicitud { get; set; }//En la BaseDatos esta como int
+        public DateTime FechaSolicitud { get; set; }
 
         [DataMember]
         public DateTime FechaAprobacion { get; set; }

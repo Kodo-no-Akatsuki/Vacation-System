@@ -145,7 +145,7 @@
       <xs:element minOccurs="0" name="FechaAprobacion" type="xs:dateTime" />
       <xs:element minOccurs="0" name="FechaEntrada" type="xs:dateTime" />
       <xs:element minOccurs="0" name="FechaSalida" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="FechaSolicitud" type="xs:int" />
+      <xs:element minOccurs="0" name="FechaSolicitud" type="xs:dateTime" />
       <xs:element minOccurs="0" name="TalentoHumano" type="xs:int" />
       <xs:element minOccurs="0" name="VacacionesId" type="xs:int" />
       <xs:element minOccurs="0" name="Year" type="xs:int" />
