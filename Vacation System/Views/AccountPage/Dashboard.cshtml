@@ -264,6 +264,10 @@
                                         alert("No puede seleccionar dias del pasado");
                                         $("#nextBtn").attr("disabled", true);
                                         return false;
+                                    } else if ((begin.getMonth()) == new Date().getMonth() && begin.getDate() < new Date().getDate()) {
+                                        alert("No puede seleccionar dias del pasado");
+                                        $("#nextBtn").attr("disabled", true);
+                                        return false;
                                     }
 
                                     else if (invalid.getDate() < begin.getDate()) {
