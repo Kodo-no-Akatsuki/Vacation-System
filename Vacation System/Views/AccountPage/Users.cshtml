@@ -4,8 +4,46 @@
     ViewBag.Title = "Users";
     Layout = "~/Views/AccountPage/Layout.cshtml";
 }
+<div class="clearfix"></div>
 
-    @foreach (var user in Model.Users)
+<script>
+    var row;
+    $(document).ready(function () {
+        row = $('#example').dataTable({
+            columnDefs: [{
+                targets: [0],
+                orderData: [0, 0]
+            }, ]
+        });
+    });
+</script>
+<table id="example" class="display" cellspacing="0" width="100%">
+
+    <thead>
+        <tr>
+            <th>Nombre</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+
+
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("UserProfile", new {talentoHumano = user.TalentoHumano})">
+                        @user.PrimerNombre @user.PrimerApellido
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+@*@foreach (var user in Model.Users)
     {
         <li>
             <a href="@Url.Action("UserProfile", new {talentoHumano = user.TalentoHumano})">
@@ -14,5 +52,5 @@
         </li>
         <br/>
         <br/>
-    }
+    }*@
 
