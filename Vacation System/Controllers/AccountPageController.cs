@@ -80,12 +80,12 @@ namespace Vacation_System.Controllers
 		{
 			if (Session["User"] == null) return LogOut();
 
-		    ProfileViewModel pvm = new ProfileViewModel
-		    {
-                ProfileEmpleado = Session["User"] as Empleado,
-                DisplayEditStatusBtn = false,
-                DisplayEditBtn = true
-		    };
+			ProfileViewModel pvm = new ProfileViewModel
+			{
+				ProfileEmpleado = Session["User"] as Empleado,
+				DisplayEditStatusBtn = false,
+				DisplayEditBtn = true
+			};
 
 			return View(pvm);
 		}
@@ -96,23 +96,23 @@ namespace Vacation_System.Controllers
 			if (Session["User"] == null) return LogOut();
 
 			var emp = Session["User"] as Empleado;
-            var dvm = new DepartmentsViewModel();
+			var dvm = new DepartmentsViewModel();
 
-		    var valido = false;
+			var valido = false;
 
 			foreach (var permiso in emp.Permisos)
 			{
 				switch (permiso.PermisosId)
 				{
-				    case (int) PermisosEnum.EditarDepartamento:
-				        valido = true;
-				        break;
-				    case (int) PermisosEnum.CrearDepartamento:
-				        dvm.DisplayCreate = "button";
-				        break;
-				    case (int) PermisosEnum.DesactivarDepartamento:
-				        dvm.AllowDeactivate = true;
-				        break;
+					case (int) PermisosEnum.EditarDepartamento:
+						valido = true;
+						break;
+					case (int) PermisosEnum.CrearDepartamento:
+						dvm.DisplayCreate = "button";
+						break;
+					case (int) PermisosEnum.DesactivarDepartamento:
+						dvm.AllowDeactivate = true;
+						break;
 				}
 			}
 
@@ -123,9 +123,9 @@ namespace Vacation_System.Controllers
 
 			ServiceClient service = new ServiceClient();
 
-		    dvm.Departamentos = service.LoadDepartments().ToList();
+			dvm.Departamentos = service.LoadDepartments().ToList();
 
-            service.Close();
+			service.Close();
 
 			return View(dvm);
 		}
@@ -145,24 +145,24 @@ namespace Vacation_System.Controllers
 			return RedirectToAction("Departments");
 		}
 
-	    [HttpPost]
-	    public RedirectToRouteResult EditDepartment(DepartamentoMirror deptoEditado)
-	    {
-	        if (deptoEditado == null) return RedirectToAction("Departments");
+		[HttpPost]
+		public RedirectToRouteResult EditDepartment(DepartamentoMirror deptoEditado, string estatus)
+		{
+			if (deptoEditado == null) return RedirectToAction("Departments");
 
-            ServiceClient service = new ServiceClient();
+			ServiceClient service = new ServiceClient();
 
-	        if (Request.Form["DesactivarDepto"] != null)
-	        {
-	            deptoEditado.Activo = Request.Form["DesactivarDepto"] != "Desactivar";
-	        }
+			if (estatus != null)
+			{
+			    deptoEditado.Activo = !(estatus.Equals("True"));
+			}
 
-            service.EditDepartment(deptoEditado);
+			service.EditDepartment(deptoEditado);
 
-            service.Close();
+			service.Close();
 
-            return RedirectToAction("Departments");
-	    }
+			return RedirectToAction("Departments");
+		}
 
 		
 		[HttpGet]
@@ -193,30 +193,30 @@ namespace Vacation_System.Controllers
 		[HttpPost]
 		public RedirectToRouteResult CreateRole(RolesMirror rolCreado)
 		{
-            if (rolCreado == null) return RedirectToAction("Error500", "Error");
+			if (rolCreado == null) return RedirectToAction("Error500", "Error");
 
-            ServiceClient service = new ServiceClient();
+			ServiceClient service = new ServiceClient();
 
-            service.CreateRol(rolCreado);
+			service.CreateRol(rolCreado);
 
-            service.Close();
+			service.Close();
 
-            return RedirectToAction("Roles");
+			return RedirectToAction("Roles");
 		}
 
-	    [HttpPost]
-	    public RedirectToRouteResult EditRole(RolesMirror rolEditado)
-	    {
-	        if (rolEditado == null) return RedirectToAction("Error500", "Error");
-            
-	        ServiceClient service = new ServiceClient();
+		[HttpPost]
+		public RedirectToRouteResult EditRole(RolesMirror rolEditado)
+		{
+			if (rolEditado == null) return RedirectToAction("Error500", "Error");
+			
+			ServiceClient service = new ServiceClient();
 
-            service.SaveRoleChanges(rolEditado);
+			service.SaveRoleChanges(rolEditado);
 
-            service.Close();
+			service.Close();
 
-	        return RedirectToAction("Roles");
-	    }
+			return RedirectToAction("Roles");
+		}
 		
 		
 		public RedirectToRouteResult LogOut()
@@ -244,16 +244,16 @@ namespace Vacation_System.Controllers
 				return RedirectToAction("error404", "Error");
 			}
 
-            ServiceClient service = new ServiceClient();
+			ServiceClient service = new ServiceClient();
 
-		    RegisterViewModel rvm = new RegisterViewModel
-		    {
-		        Empleado = emp,
-		        Departamentos = service.LoadDepartments().ToList(),
-		        Roles = service.LoadRoles().ToList()
-		    };
+			RegisterViewModel rvm = new RegisterViewModel
+			{
+				Empleado = emp,
+				Departamentos = service.LoadDepartments().ToList(),
+				Roles = service.LoadRoles().ToList()
+			};
 
-		    service.Close();
+			service.Close();
 
 			return View(rvm);
 		}
@@ -267,92 +267,92 @@ namespace Vacation_System.Controllers
 
 			service.Close();
 
-		    return RedirectToAction("Dashboard");
+			return RedirectToAction("Dashboard");
 		}
 
-	    [HttpGet]
-	    public ActionResult Users()
-	    {
-            ServiceClient client = new ServiceClient();
+		[HttpGet]
+		public ActionResult Users()
+		{
+			ServiceClient client = new ServiceClient();
 
-            UsersViewModel uvm = new UsersViewModel();
+			UsersViewModel uvm = new UsersViewModel();
 
-	        uvm.Users = client.LoadUsers((Session["User"] as Empleado).User.Email).ToList();
+			uvm.Users = client.LoadUsers((Session["User"] as Empleado).User.Email).ToList();
 
-            client.Close();
+			client.Close();
 
-	        return View(uvm);
-	    }
+			return View(uvm);
+		}
 
-        public ActionResult UserProfile(int talentoHumano)
-        {
-            if (Session["User"] == null) return LogOut();
+		public ActionResult UserProfile(int talentoHumano)
+		{
+			if (Session["User"] == null) return LogOut();
 
-            ServiceClient service = new ServiceClient();
+			ServiceClient service = new ServiceClient();
 
-            ProfileViewModel pvm = new ProfileViewModel
-            {
-                ProfileEmpleado = service.LoadEmpleado(talentoHumano),
-            };
+			ProfileViewModel pvm = new ProfileViewModel
+			{
+				ProfileEmpleado = service.LoadEmpleado(talentoHumano),
+			};
 
-            pvm.DisplayEditStatusBtn = (from p in (Session["User"] as Empleado).Permisos
-                                  where p.PermisosId == (int)PermisosEnum.DesactivarUsuario
-                                  select p).FirstOrDefault() != null;
+			pvm.DisplayEditStatusBtn = (from p in (Session["User"] as Empleado).Permisos
+								  where p.PermisosId == (int)PermisosEnum.DesactivarUsuario
+								  select p).FirstOrDefault() != null;
 
-            pvm.DisplayEditBtn = (from p in (Session["User"] as Empleado).Permisos
-                where p.PermisosId == (int) PermisosEnum.EditarUsuario
-                select p).FirstOrDefault() != null;
-            
-            service.Close();
+			pvm.DisplayEditBtn = (from p in (Session["User"] as Empleado).Permisos
+				where p.PermisosId == (int) PermisosEnum.EditarUsuario
+				select p).FirstOrDefault() != null;
+			
+			service.Close();
 
-            return View("Profile", pvm);
-        }
+			return View("Profile", pvm);
+		}
 
-        [HttpPost]
-	    public RedirectToRouteResult DesactivarUsuario(int talentoHumano, string edit)
-	    {
-            ServiceClient service = new ServiceClient();
+		[HttpPost]
+		public RedirectToRouteResult DesactivarUsuario(int talentoHumano, string edit)
+		{
+			ServiceClient service = new ServiceClient();
 
-            service.EditUserStatus(talentoHumano, edit == "Activar");
+			service.EditUserStatus(talentoHumano, edit == "Activar");
 
-            service.Close();
+			service.Close();
 
-            return RedirectToAction("UserProfile", new { talentoHumano });
-	    }
+			return RedirectToAction("UserProfile", new { talentoHumano });
+		}
 
-	    public ActionResult EditUser(int talentoHumano)
-	    {
-            ServiceClient service = new ServiceClient();
+		public ActionResult EditUser(int talentoHumano)
+		{
+			ServiceClient service = new ServiceClient();
 
-	        EditUserViewModel euvm = new EditUserViewModel
-	        {
-	            Empleado = service.LoadEmpleado(talentoHumano),
-	            Departamentos = service.LoadDepartments().ToList(),
-	            Roles = service.LoadRoles().ToList()
-	        };
+			EditUserViewModel euvm = new EditUserViewModel
+			{
+				Empleado = service.LoadEmpleado(talentoHumano),
+				Departamentos = service.LoadDepartments().ToList(),
+				Roles = service.LoadRoles().ToList()
+			};
 
-            euvm.DisplayRolesAndDepartments = (Session["User"] as Empleado).User.TalentoHumano != 
-                euvm.Empleado.User.TalentoHumano && 
-                (from p in (Session["User"] as Empleado).Permisos
-                                  where p.PermisosId == (int)PermisosEnum.EditarUsuario
-                                  select p).FirstOrDefault() != null;
+			euvm.DisplayRolesAndDepartments = (Session["User"] as Empleado).User.TalentoHumano != 
+				euvm.Empleado.User.TalentoHumano && 
+				(from p in (Session["User"] as Empleado).Permisos
+								  where p.PermisosId == (int)PermisosEnum.EditarUsuario
+								  select p).FirstOrDefault() != null;
 
-            service.Close();
+			service.Close();
 
-	        return View(euvm);
-	    }
+			return View(euvm);
+		}
 
-	    public RedirectToRouteResult EditarUser(Empleado empleado, string status)
-	    {
-            ServiceClient service = new ServiceClient();
+		public RedirectToRouteResult EditarUser(Empleado empleado, string status)
+		{
+			ServiceClient service = new ServiceClient();
 
-	        empleado.User.Activo = status == "Activo";
+			empleado.User.Activo = status == "Activo";
 
-            service.EditUser(empleado);
+			service.EditUser(empleado);
 
-            service.Close();
+			service.Close();
 
-	        return RedirectToAction("Dashboard");
-	    }
+			return RedirectToAction("Dashboard");
+		}
 	}
 }

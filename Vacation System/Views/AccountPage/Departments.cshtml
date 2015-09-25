@@ -173,20 +173,11 @@
                         
                         <input type="hidden" name="DepartamentoId" value="@departamento.DepartamentoId"/>
                         <input type="hidden" name="Descripcion" value="@departamento.Descripcion"/>
+                        <input type="hidden" name="estatus" value="@departamento.Activo.ToString()" />
 
                         <button class="btn btn-primary" data-dismiss="modal">No</button>
-
-                        @if (departamento.Activo)
-                        {
-                            <input type="submit" name="DesactivarDepto" value="Desactivar"
-                                   class="btn btn-primary" />
-                        }
-
-                        else
-                        {
-                            <input type="submit" name="DesactivarDepto" value="Activar"
-                                   class="btn btn-primary" />
-                        }
+                        <input type="submit" name="DesactivarDepto" value="Si"
+                               class="btn btn-primary" />
 
 
                     </div>
