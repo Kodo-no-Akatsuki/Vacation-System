@@ -1503,9 +1503,11 @@ namespace Vacation_System.ServiceReference {
         public void AddVacation(Vacation_System.ServiceReference.VacacionesMirror vacaciones) {
             base.Channel.AddVacation(vacaciones);
         }
-        
-        public System.Threading.Tasks.Task AddVacationAsync(Vacation_System.ServiceReference.VacacionesMirror vacaciones) {
+
+        public System.Threading.Tasks.Task AddVacationAsync(Vacation_System.ServiceReference.VacacionesMirror vacaciones)
+        {
             return base.Channel.AddVacationAsync(vacaciones);
+        }
 
         public void EditDepartment(Vacation_System.ServiceReference.DepartamentoMirror depto) {
             base.Channel.EditDepartment(depto);
@@ -1551,9 +1553,12 @@ namespace Vacation_System.ServiceReference {
         public Vacation_System.ServiceReference.Empleado LoadVacaciones(Vacation_System.ServiceReference.Empleado empleado) {
             return base.Channel.LoadVacaciones(empleado);
         }
-        
-        public System.Threading.Tasks.Task<Vacation_System.ServiceReference.Empleado> LoadVacacionesAsync(Vacation_System.ServiceReference.Empleado empleado) {
+
+        public System.Threading.Tasks.Task<Vacation_System.ServiceReference.Empleado> LoadVacacionesAsync(
+            Vacation_System.ServiceReference.Empleado empleado)
+        {
             return base.Channel.LoadVacacionesAsync(empleado);
+        }
 
         public void SaveRoleChanges(Vacation_System.ServiceReference.RolesMirror rolMirror) {
             base.Channel.SaveRoleChanges(rolMirror);

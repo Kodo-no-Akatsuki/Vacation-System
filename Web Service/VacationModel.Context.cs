@@ -35,7 +35,5 @@ namespace Web_Service
         public DbSet<TipoDia> TipoDias { get; set; }
         public DbSet<Calendario> Calendarios { get; set; }
         public DbSet<Vacaciones> Vacaciones { get; set; }
-        public DbSet<Calendario> Calendarios { get; set; }
-        public DbSet<TipoDia> TipoDias { get; set; }
     }
 }

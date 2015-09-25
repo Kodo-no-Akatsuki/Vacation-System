@@ -463,24 +463,6 @@ namespace Web_Service
 
             foreach (Vacaciones vac in userData.tbl_vacaciones)
             {
-                empleado.Vacaciones.Add(new VacacionesMirror
-                {
-                    DiasSolicitados = vac.dias_solicitados,
-                    EstatusId = vac.estatusid,
-                    FechaAprobacion = vac.fecha_de_aprobacion,
-                    FechaEntrada = vac.fecha_entrada,
-                    FechaSalida = vac.fecha_salida,
-                    FechaSolicitud = vac.fecha_solicitud,
-                    TalentoHumano = vac.talento_humano,
-                    VacacionesId = vac.vacacionesid,
-                    Year = vac.year
-                });
-            }
-
-            return empleado;
-        }
-                    Year = vac.year
-                });
 
                 empleado.Status.Add(new StatusMirror
                 {
@@ -489,6 +471,18 @@ namespace Web_Service
                     Id = vac.tbl_estatus.estatusid
                 });
 
+                empleado.Vacaciones.Add(new VacacionesMirror
+                {
+                    DiasSolicitados = vac.dias_solicitados,
+                    Estatus = empleado.Status.Last(),
+                    FechaAprobacion = vac.fecha_de_aprobacion,
+                    FechaEntrada = vac.fecha_entrada,
+                    FechaSalida = vac.fecha_salida,
+                    FechaSolicitud = vac.fecha_solicitud,
+                    TalentoHumano = vac.talento_humano,
+                    VacacionesId = vac.vacacionesid,
+                    Year = vac.year
+                });
             }
 
             foreach (Calendario calendar in userData.tbl_calendario)
