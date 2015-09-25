@@ -25,7 +25,7 @@ namespace Web_Service
         public System.DateTime fecha_salida { get; set; }
         public System.DateTime fecha_entrada { get; set; }
         public int dias_solicitados { get; set; }
-        public int fecha_solicitud { get; set; }
+        public System.DateTime fecha_solicitud { get; set; }
         public System.DateTime fecha_de_aprobacion { get; set; }
         public int estatusid { get; set; }
     

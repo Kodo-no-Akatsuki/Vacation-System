@@ -37,6 +37,9 @@
     <!-- DataTables -->
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.8/js/jquery.dataTables.js"></script>
 
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
     <!--[if lt IE 9]>
         <script src="../assets/js/ie8-responsive-file-warning.js"></script>
@@ -65,7 +68,7 @@
                     <!-- menu prile quick info -->
                     <div class="profile">
                         <div class="profile_pic">
-                            <a href="@Url.Action("Profile")">"<img src="@Url.Content("~/Content/imgs/img.png")" alt="..." class="img-circle profile_img"></a>
+                            <a href="@Url.Action("Profile")"><img src="@Url.Content("~/Content/imgs/img.png")" alt="..." class="img-circle profile_img"></a>
                         </div>
                         <div class="profile_info">
                             <span>Bienvenido,</span>
@@ -77,7 +80,7 @@
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                            <h3>None</h3>
+                            <h3>&nbsp;</h3>
                             <ul class="nav side-menu">
                                 <li>
                                     <a href="@Url.Action("Dashboard")"><i class="fa fa-home"></i>Inicio</a>
@@ -263,6 +266,80 @@
         <script src="@Url.Content("~/Content/js/custom.js")"></script>
         <script src="@Url.Content("~/Content/js/moment.min.js")"></script>
         <script src="@Url.Content("~/Content/js/calendar/fullcalendar.min.js")"></script>
+    <!-- PNotify -->
+    <script type="text/javascript" src="@Url.Content("~/Content/js/notify/pnotify.core.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/notify/pnotify.buttons.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/notify/pnotify.nonblock.js")"></script>
+
+    <script>
+    $(function () {
+        var cnt = 10; //$("#custom_notifications ul.notifications li").length + 1;
+        TabbedNotification = function (options) {
+            var message = "<div id='ntf" + cnt + "' class='text alert-" + options.type + "' style='display:none'><h2><i class='fa fa-bell'></i> " + options.title + "</h2><div class='close'><a href='javascript:;' class='notification_close'><i class='fa fa-close'></i></a></div><p>" + options.text + "</p></div>";
+
+            if (document.getElementById('custom_notifications') == null) {
+                alert('doesnt exists');
+            } else {
+                $('#custom_notifications ul.notifications').append("<li><a id='ntlink" + cnt + "' class='alert-" + options.type + "' href='#ntf" + cnt + "'><i class='fa fa-bell animated shake'></i></a></li>");
+                $('#custom_notifications #notif-group').append(message);
+                cnt++;
+                CustomTabs(options);
+            }
+        }
+
+        CustomTabs = function (options) {
+            $('.tabbed_notifications > div').hide();
+            $('.tabbed_notifications > div:first-of-type').show();
+            $('#custom_notifications').removeClass('dsp_none');
+            $('.notifications a').click(function (e) {
+                e.preventDefault();
+                var $this = $(this),
+                    tabbed_notifications = '#' + $this.parents('.notifications').data('tabbed_notifications'),
+                    others = $this.closest('li').siblings().children('a'),
+                    target = $this.attr('href');
+                others.removeClass('active');
+                $this.addClass('active');
+                $(tabbed_notifications).children('div').hide();
+                $(target).show();
+            });
+        }
+
+        CustomTabs();
+
+        var tabid = idname = '';
+        $(document).on('click', '.notification_close', function (e) {
+            idname = $(this).parent().parent().attr("id");
+            tabid = idname.substr(-2);
+            $('#ntf' + tabid).remove();
+            $('#ntlink' + tabid).parent().remove();
+            $('.notifications a').first().addClass('active');
+            $('#notif-group div').first().css('display', 'block');
+        });
+    })
+    </script>
+
+        <!-- form wizard -->
+        <script type="text/javascript" src="@Url.Content("~/Content/js/wizard/jquery.smartWizard.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Smart Wizard
+            $('#wizard').smartWizard();
+
+            function onFinishCallback() {
+                $('#wizard').smartWizard('showMessage', 'Finish Clicked');
+                //alert('Finish Clicked');
+            }
+        });
+
+        $(document).ready(function () {
+            // Smart Wizard
+            $('#wizard_verticle').smartWizard({
+                transitionEffect: 'slide'
+            });
+
+        });
+    </script>
+
         <!-- image cropping -->
         <script src="~/Content/js/cropping/cropper.min.js"></script>
         <script src="~/Content/js/cropping/main.js"></script>
@@ -628,6 +705,7 @@
         NProgress.done();
         </script>
         <!-- /datepicker -->
+
         <!-- /footer content -->
 </body>
 </html>

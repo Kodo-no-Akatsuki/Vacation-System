@@ -106,13 +106,15 @@ body.nav-sm .profile {
 }
 
 .menu_section h3 {
-    padding-left: 50px;
-    color: transparent;
+    padding-left: 23px;
+    color: white;
     text-transform: uppercase;
     letter-spacing: .5px;
-    font-size: 0px;
+    font-weight: bold;
+    font-size: 11px;
     margin-bottom: 0;
     margin-top: 0;
+    text-shadow: 1px 1px #000;
 }
 
 .menu_section >ul {
@@ -6325,6 +6327,7 @@ body {
 .tooltip-inner {
   white-space: normal;
 }
+
 
 .btn-upload .tooltip-inner {
   white-space: nowrap;

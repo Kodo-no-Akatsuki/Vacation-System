@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Metadata.Edm;
 using System.Linq;
 using System.Globalization;
 using Web_Service.Mirror_Classes;
@@ -28,6 +29,7 @@ namespace Web_Service
                 Usuarios user = userResults.FirstOrDefault();
 
                 emp.User = new UserMirror(user);
+                emp.Notification = false;
 
 
                 foreach (Roles rol in user.tbl_roles)
@@ -78,18 +80,6 @@ namespace Web_Service
 
                 foreach (Vacaciones vac in user.tbl_vacaciones)
                 {
-                    emp.Vacaciones.Add(new VacacionesMirror
-                    {
-                        DiasSolicitados = vac.dias_solicitados,
-                        EstatusId = vac.estatusid,
-                        FechaAprobacion = vac.fecha_de_aprobacion,
-                        FechaEntrada = vac.fecha_entrada,
-                        FechaSalida = vac.fecha_salida,
-                        FechaSolicitud = vac.fecha_solicitud,
-                        TalentoHumano = vac.talento_humano,
-                        VacacionesId = vac.vacacionesid,
-                        Year = vac.year
-                    });
 
                     emp.Status.Add(new StatusMirror
                     {
@@ -98,6 +88,18 @@ namespace Web_Service
                         Id = vac.tbl_estatus.estatusid
                     });
 
+                    emp.Vacaciones.Add(new VacacionesMirror
+                    {
+                        DiasSolicitados = vac.dias_solicitados,
+                        Estatus = emp.Status.Last(),
+                        FechaAprobacion = vac.fecha_de_aprobacion,
+                        FechaEntrada = vac.fecha_entrada,
+                        FechaSalida = vac.fecha_salida,
+                        FechaSolicitud = vac.fecha_solicitud,
+                        TalentoHumano = vac.talento_humano,
+                        VacacionesId = vac.vacacionesid,
+                        Year = vac.year,
+                    });
                 }
 
                 foreach (Calendario calendar in user.tbl_calendario)
@@ -222,6 +224,33 @@ namespace Web_Service
             entities.SaveChanges();
         }
 
+        public void AddVacation(VacacionesMirror vacaciones)
+        {
+            VacationEntities entities = new VacationEntities();
+
+            Estatus status = new Estatus
+            {
+                descripcion = "Pendiente",
+                activo = false,
+            };
+
+            Vacaciones vac = new Vacaciones
+            {
+                dias_solicitados = vacaciones.DiasSolicitados,
+                fecha_de_aprobacion = new DateTime(),
+                fecha_entrada = vacaciones.FechaEntrada,
+                fecha_salida = vacaciones.FechaSalida,
+                fecha_solicitud = vacaciones.FechaSolicitud,
+                talento_humano = vacaciones.TalentoHumano,
+                year = vacaciones.Year,
+                tbl_estatus = status
+            };
+
+
+            entities.Vacaciones.Add(vac);
+            entities.SaveChanges();
+        }
+
         public List<DepartamentoMirror> LoadDepartments()
         {
             VacationEntities entities = new VacationEntities();
@@ -306,6 +335,45 @@ namespace Web_Service
             }
 
             return permisos;
+        }
+
+        public Empleado LoadVacaciones(Empleado empleado)
+        {
+            VacationEntities entities = new VacationEntities();
+            empleado.Vacaciones = new List<VacacionesMirror>();
+            empleado.Status = new List<StatusMirror>();
+
+            var userResults = (from u in entities.Usuarios
+                               where u.email == empleado.User.Email && u.password == empleado.User.Password && u.activo
+                               select u);
+
+            Usuarios user = userResults.FirstOrDefault();
+
+            foreach (Vacaciones vac in user.tbl_vacaciones)
+            {
+
+                empleado.Status.Add(new StatusMirror
+                {
+                    Activo = vac.tbl_estatus.activo,
+                    Descripcion = vac.tbl_estatus.descripcion,
+                    Id = vac.tbl_estatus.estatusid
+                });
+
+                empleado.Vacaciones.Add(new VacacionesMirror
+                {
+                    DiasSolicitados = vac.dias_solicitados,
+                    Estatus = empleado.Status.Last(),
+                    FechaAprobacion = vac.fecha_de_aprobacion,
+                    FechaEntrada = vac.fecha_entrada,
+                    FechaSalida = vac.fecha_salida,
+                    FechaSolicitud = vac.fecha_solicitud,
+                    TalentoHumano = vac.talento_humano,
+                    VacacionesId = vac.vacacionesid,
+                    Year = vac.year
+                });
+            }
+
+            return empleado;
         }
 
         public void SaveRoleChanges(RolesMirror rolMirror)
@@ -395,18 +463,6 @@ namespace Web_Service
 
             foreach (Vacaciones vac in userData.tbl_vacaciones)
             {
-                empleado.Vacaciones.Add(new VacacionesMirror
-                {
-                    DiasSolicitados = vac.dias_solicitados,
-                    EstatusId = vac.estatusid,
-                    FechaAprobacion = vac.fecha_de_aprobacion,
-                    FechaEntrada = vac.fecha_entrada,
-                    FechaSalida = vac.fecha_salida,
-                    FechaSolicitud = vac.fecha_solicitud,
-                    TalentoHumano = vac.talento_humano,
-                    VacacionesId = vac.vacacionesid,
-                    Year = vac.year
-                });
 
                 empleado.Status.Add(new StatusMirror
                 {
@@ -415,6 +471,18 @@ namespace Web_Service
                     Id = vac.tbl_estatus.estatusid
                 });
 
+                empleado.Vacaciones.Add(new VacacionesMirror
+                {
+                    DiasSolicitados = vac.dias_solicitados,
+                    Estatus = empleado.Status.Last(),
+                    FechaAprobacion = vac.fecha_de_aprobacion,
+                    FechaEntrada = vac.fecha_entrada,
+                    FechaSalida = vac.fecha_salida,
+                    FechaSolicitud = vac.fecha_solicitud,
+                    TalentoHumano = vac.talento_humano,
+                    VacacionesId = vac.vacacionesid,
+                    Year = vac.year
+                });
             }
 
             foreach (Calendario calendar in userData.tbl_calendario)
@@ -514,7 +582,6 @@ namespace Web_Service
 
             entities.SaveChanges();
         }
-
     }
 
 }

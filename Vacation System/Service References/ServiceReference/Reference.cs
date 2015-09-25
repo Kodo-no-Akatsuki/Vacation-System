@@ -29,10 +29,22 @@ namespace Vacation_System.ServiceReference {
         private Vacation_System.ServiceReference.DepartamentoMirror[] DepartamentoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int DiasPendientesPorTomarField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int DiasTomadosAnteriormenteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime[] FechasNoDisponiblesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Vacation_System.ServiceReference.JerarquiaMirror[] JerarquiasField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Vacation_System.ServiceReference.LogVacacionesMirror[] LogVacacionesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool NotificationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Vacation_System.ServiceReference.PermisosMirror[] PermisosField;
@@ -51,6 +63,9 @@ namespace Vacation_System.ServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Vacation_System.ServiceReference.VacacionesMirror[] VacacionesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int YearCField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -89,6 +104,45 @@ namespace Vacation_System.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DiasPendientesPorTomar {
+            get {
+                return this.DiasPendientesPorTomarField;
+            }
+            set {
+                if ((this.DiasPendientesPorTomarField.Equals(value) != true)) {
+                    this.DiasPendientesPorTomarField = value;
+                    this.RaisePropertyChanged("DiasPendientesPorTomar");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DiasTomadosAnteriormente {
+            get {
+                return this.DiasTomadosAnteriormenteField;
+            }
+            set {
+                if ((this.DiasTomadosAnteriormenteField.Equals(value) != true)) {
+                    this.DiasTomadosAnteriormenteField = value;
+                    this.RaisePropertyChanged("DiasTomadosAnteriormente");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime[] FechasNoDisponibles {
+            get {
+                return this.FechasNoDisponiblesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FechasNoDisponiblesField, value) != true)) {
+                    this.FechasNoDisponiblesField = value;
+                    this.RaisePropertyChanged("FechasNoDisponibles");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public Vacation_System.ServiceReference.JerarquiaMirror[] Jerarquias {
             get {
                 return this.JerarquiasField;
@@ -110,6 +164,19 @@ namespace Vacation_System.ServiceReference {
                 if ((object.ReferenceEquals(this.LogVacacionesField, value) != true)) {
                     this.LogVacacionesField = value;
                     this.RaisePropertyChanged("LogVacaciones");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Notification {
+            get {
+                return this.NotificationField;
+            }
+            set {
+                if ((this.NotificationField.Equals(value) != true)) {
+                    this.NotificationField = value;
+                    this.RaisePropertyChanged("Notification");
                 }
             }
         }
@@ -188,6 +255,19 @@ namespace Vacation_System.ServiceReference {
                 if ((object.ReferenceEquals(this.VacacionesField, value) != true)) {
                     this.VacacionesField = value;
                     this.RaisePropertyChanged("Vacaciones");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int YearC {
+            get {
+                return this.YearCField;
+            }
+            set {
+                if ((this.YearCField.Equals(value) != true)) {
+                    this.YearCField = value;
+                    this.RaisePropertyChanged("YearC");
                 }
             }
         }
@@ -1100,7 +1180,7 @@ namespace Vacation_System.ServiceReference {
         private int DiasSolicitadosField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int EstatusIdField;
+        private Vacation_System.ServiceReference.StatusMirror EstatusField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime FechaAprobacionField;
@@ -1112,7 +1192,7 @@ namespace Vacation_System.ServiceReference {
         private System.DateTime FechaSalidaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int FechaSolicitudField;
+        private System.DateTime FechaSolicitudField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int TalentoHumanoField;
@@ -1147,14 +1227,14 @@ namespace Vacation_System.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int EstatusId {
+        public Vacation_System.ServiceReference.StatusMirror Estatus {
             get {
-                return this.EstatusIdField;
+                return this.EstatusField;
             }
             set {
-                if ((this.EstatusIdField.Equals(value) != true)) {
-                    this.EstatusIdField = value;
-                    this.RaisePropertyChanged("EstatusId");
+                if ((object.ReferenceEquals(this.EstatusField, value) != true)) {
+                    this.EstatusField = value;
+                    this.RaisePropertyChanged("Estatus");
                 }
             }
         }
@@ -1199,7 +1279,7 @@ namespace Vacation_System.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int FechaSolicitud {
+        public System.DateTime FechaSolicitud {
             get {
                 return this.FechaSolicitudField;
             }
@@ -1288,6 +1368,12 @@ namespace Vacation_System.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateDepartment", ReplyAction="http://tempuri.org/IService/CreateDepartmentResponse")]
         System.Threading.Tasks.Task CreateDepartmentAsync(Vacation_System.ServiceReference.DepartamentoMirror depto);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddVacation", ReplyAction="http://tempuri.org/IService/AddVacationResponse")]
+        void AddVacation(Vacation_System.ServiceReference.VacacionesMirror vacaciones);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddVacation", ReplyAction="http://tempuri.org/IService/AddVacationResponse")]
+        System.Threading.Tasks.Task AddVacationAsync(Vacation_System.ServiceReference.VacacionesMirror vacaciones);
+
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditDepartment", ReplyAction="http://tempuri.org/IService/EditDepartmentResponse")]
         void EditDepartment(Vacation_System.ServiceReference.DepartamentoMirror depto);
         
@@ -1318,6 +1404,12 @@ namespace Vacation_System.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadPermisosData", ReplyAction="http://tempuri.org/IService/LoadPermisosDataResponse")]
         System.Threading.Tasks.Task<string[]> LoadPermisosDataAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadVacaciones", ReplyAction="http://tempuri.org/IService/LoadVacacionesResponse")]
+        Vacation_System.ServiceReference.Empleado LoadVacaciones(Vacation_System.ServiceReference.Empleado empleado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadVacaciones", ReplyAction="http://tempuri.org/IService/LoadVacacionesResponse")]
+        System.Threading.Tasks.Task<Vacation_System.ServiceReference.Empleado> LoadVacacionesAsync(Vacation_System.ServiceReference.Empleado empleado);
+
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SaveRoleChanges", ReplyAction="http://tempuri.org/IService/SaveRoleChangesResponse")]
         void SaveRoleChanges(Vacation_System.ServiceReference.RolesMirror rolMirror);
         
@@ -1408,12 +1500,22 @@ namespace Vacation_System.ServiceReference {
             return base.Channel.CreateDepartmentAsync(depto);
         }
         
+        public void AddVacation(Vacation_System.ServiceReference.VacacionesMirror vacaciones) {
+            base.Channel.AddVacation(vacaciones);
+        }
+
+        public System.Threading.Tasks.Task AddVacationAsync(Vacation_System.ServiceReference.VacacionesMirror vacaciones)
+        {
+            return base.Channel.AddVacationAsync(vacaciones);
+        }
+
         public void EditDepartment(Vacation_System.ServiceReference.DepartamentoMirror depto) {
             base.Channel.EditDepartment(depto);
         }
         
         public System.Threading.Tasks.Task EditDepartmentAsync(Vacation_System.ServiceReference.DepartamentoMirror depto) {
             return base.Channel.EditDepartmentAsync(depto);
+
         }
         
         public void CreateRol(Vacation_System.ServiceReference.RolesMirror rol) {
@@ -1448,6 +1550,16 @@ namespace Vacation_System.ServiceReference {
             return base.Channel.LoadPermisosDataAsync();
         }
         
+        public Vacation_System.ServiceReference.Empleado LoadVacaciones(Vacation_System.ServiceReference.Empleado empleado) {
+            return base.Channel.LoadVacaciones(empleado);
+        }
+
+        public System.Threading.Tasks.Task<Vacation_System.ServiceReference.Empleado> LoadVacacionesAsync(
+            Vacation_System.ServiceReference.Empleado empleado)
+        {
+            return base.Channel.LoadVacacionesAsync(empleado);
+        }
+
         public void SaveRoleChanges(Vacation_System.ServiceReference.RolesMirror rolMirror) {
             base.Channel.SaveRoleChanges(rolMirror);
         }
@@ -1486,6 +1598,7 @@ namespace Vacation_System.ServiceReference {
         
         public System.Threading.Tasks.Task EditUserAsync(Vacation_System.ServiceReference.Empleado empleado) {
             return base.Channel.EditUserAsync(empleado);
+            
         }
     }
 }
