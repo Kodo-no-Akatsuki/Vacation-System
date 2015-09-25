@@ -1,17 +1,7 @@
-﻿@using Vacation_System.ServiceReference
-@using Web_Service
-
-@model Vacation_System.ServiceReference.Empleado
-
+﻿@model Vacation_System.Models.RegisterViewModel
 @{
     Layout = "~/Views/AccountPage/Layout.cshtml";
     ViewBag.Title = "Registro de Usuario";
-    var empleado = (Session["User"] as Empleado);
-    ServiceClient service = new ServiceClient();
-    var deptos = service.LoadDepartments();
-    var roles = service.LoadRoles();
-    
-    service.Close();
 }
 
 
@@ -43,7 +33,10 @@
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+                               aria-expanded="false">
+                                <i class="fa fa-wrench"></i>
+                            </a>
 
                         </li>
                         <li>
@@ -55,14 +48,17 @@
                 <div class="x_content">
                     <br />
                    
-                      @using (Html.BeginForm("Register", "AccountPage", FormMethod.Post, new { @id = "demo-form2", @class="form-horizontal form-label-left", data_toggle="validator"}))
+                      @using (Html.BeginForm("Register", "AccountPage", 
+                          FormMethod.Post, new { @id = "demo-form2", @class="form-horizontal form-label-left", 
+                              data_toggle="validator"}))
                       {
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="inputNumber">
                                 Talento Humano <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="number" id="User.TalentoHumano" name="User.TalentoHumano" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="number" name="User.TalentoHumano" 
+                                       required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                         </div>
 
@@ -71,10 +67,14 @@
                                 Nombre <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="User.PrimerNombre" name="User.PrimerNombre" required="required" class="form-control col-md-7 col-xs-12" placeholder="Primer Nombre">
-                                <input type="text" id="User.SegundoNombre" name="User.SegundoNombre" required="required" class="form-control col-md-7 col-xs-12" placeholder="Segundo Nombre">
-                                <input type="text" id="User.PrimerApellido" name="User.PrimerApellido" required="required" class="form-control col-md-7 col-xs-12" placeholder="Primer Apellido">
-                                <input type="text" id="User.SegundoApellido" name="User.SegundoApellido" required="required" class="form-control col-md-7 col-xs-12" placeholder="Segundo Apellido">
+                                <input type="text" name="User.PrimerNombre" 
+                                       required="required" class="form-control col-md-7 col-xs-12" placeholder="Primer Nombre">
+                                <input type="text" name="User.SegundoNombre" 
+                                       required="required" class="form-control col-md-7 col-xs-12" placeholder="Segundo Nombre">
+                                <input type="text" name="User.PrimerApellido" 
+                                       required="required" class="form-control col-md-7 col-xs-12" placeholder="Primer Apellido">
+                                <input type="text" name="User.SegundoApellido" 
+                                       required="required" class="form-control col-md-7 col-xs-12" placeholder="Segundo Apellido">
                             </div>
                         </div>
 
@@ -84,7 +84,8 @@
                                 Correo/Email <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="User.Email" name="User.Email" class="form-control col-md-7 col-xs-12" required="required" type="email">
+                                <input name="User.Email" class="form-control col-md-7 col-xs-12" 
+                                       required="required" type="email">
                             </div>
                         </div>
 
@@ -93,7 +94,8 @@
                                 Fecha de Ingreso <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="fdate" name="User.FechaIngreso" class="form-control col-md-7 col-xs-12" required="required" type="date">
+                                <input id="fdate" name="User.FechaIngreso" class="form-control col-md-7 col-xs-12" 
+                                       required="required" type="date">
                             </div>
                         </div>
 
@@ -102,7 +104,8 @@
                                 Clave <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="inputPassword" name="User.Password" class="form-control col-md-7 col-xs-12" required="required" type="password">
+                                <input id="inputPassword" name="User.Password" class="form-control col-md-7 col-xs-12" 
+                                       required="required" type="password">
                             </div>
                         </div>
 
@@ -111,7 +114,8 @@
                                 Confirmar clave <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="confirmpass" data-match="#inputPassword" data-match-error="Whoops, these don't match" class="form-control col-md-7 col-xs-12" required="required" type="password">
+                                <input id="confirmpass" data-match="#inputPassword" data-match-error="Whoops, these don't match" 
+                                       class="form-control col-md-7 col-xs-12" required="required" type="password">
                             </div>
                             <div class="help-block with-errors"></div>
                         </div>
@@ -121,26 +125,13 @@
                                 Departamentos <span class="required">*</span>
                             </label>
                             <div class="container pull-left" style="width:300px; height: 100px; overflow-y: scroll;">
-                                @*<input type="hidden" name="Departamento.Index" value="indx" />
-                                <input type="checkbox" name="Departamento[indx].Descripcion" value="Motorista" /> Motorista <br />
-                                <input type="hidden" name="Departamento.Index" value="indx1" />
-                                <input type="checkbox" name="Departamento[indx1].Descripcion" value="Aseador" /> Aseador <br />
-                                <input type="hidden" name="Departamento.Index" value="indx2" />
-                                <input type="checkbox" name="Departamento[indx2].Descripcion" value="Recepcionista" /> Recepcionista <br />
-                                <input type="hidden" name="Departamento.Index" value="indx3" />
-                                <input type="checkbox" name="Departamento[indx3].Descripcion" value="IT" /> IT <br />
-                                <input type="hidden" name="Departamento.Index" value="indx4" />
-                                <input type="checkbox" name="Departamento[indx4].Descripcion" value="Administracion" /> Administracion <br />*@
 
-                                @for (int i = 0; i < deptos.Length; i++)
+                               @for (int i = 0; i < Model.Departamentos.Count; i++)
                                 {
-                                    var index = String.Format("indx{0}", i);
-                                    if (i == 0)
-                                    {
-                                        index = "indx";
-                                    }
-                                    <input type="hidden" name="Departamento.Index" value=@index />
-                                    <input type="checkbox" name="Departamento[@index].Descripcion" value=@deptos[i].Descripcion /> @deptos[i].Descripcion <br />
+                                    <input type="hidden" name="Departamento.Index" value=@i />
+                                    <input type="checkbox" name="Departamento[@i].Descripcion" 
+                                           value="@Model.Departamentos[i].Descripcion" /> 
+                                    @Model.Departamentos[i].Descripcion <br />
                                 }
 
                             </div>
@@ -151,21 +142,13 @@
                                 Roles <span class="required">*</span>
                             </label>
                             <div class="container pull-left" style=" width:300px; height: 100px; overflow-y: scroll;">
-                                @*<input type="hidden" name="Roles.Index" value="indx" />
-                                <input type="checkbox" name="Roles[indx].Descripcion" value="Jefe Inmediato" /> Jefe Inmediato <br />
-                                <input type="hidden" name="Roles.Index" value="indx1" />
-                                <input type="checkbox" name="Roles[indx1].Descripcion" value="Empleado" /> Empleado <br />*@
 
-                                @for (int i = 0; i < roles.Length; i++)
+                                @for (int i = 0; i < Model.Roles.Count; i++)
                                 {
-                                    var index = String.Format("indx{0}", i);
-                                    if (i == 0)
-                                    {
-                                        index = "indx";
-                                    }
-                                    
-                                    <input type="hidden" name="Roles.Index" value=@index />
-                                    <input type="checkbox" name="Roles[@index].Descripcion" value=@roles[i].Descripcion /> @roles[i].Descripcion <br />
+                                    <input type="hidden" name="Roles.Index" value=@i />
+                                    <input type="checkbox" name="Roles[@i].Descripcion" 
+                                           value="@Model.Roles[i].Descripcion" /> @Model.Roles[i].Descripcion
+                                     <br />
                                 }
 
                             </div>

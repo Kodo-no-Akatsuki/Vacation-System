@@ -1373,6 +1373,12 @@ namespace Vacation_System.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddVacation", ReplyAction="http://tempuri.org/IService/AddVacationResponse")]
         System.Threading.Tasks.Task AddVacationAsync(Vacation_System.ServiceReference.VacacionesMirror vacaciones);
+
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditDepartment", ReplyAction="http://tempuri.org/IService/EditDepartmentResponse")]
+        void EditDepartment(Vacation_System.ServiceReference.DepartamentoMirror depto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditDepartment", ReplyAction="http://tempuri.org/IService/EditDepartmentResponse")]
+        System.Threading.Tasks.Task EditDepartmentAsync(Vacation_System.ServiceReference.DepartamentoMirror depto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateRol", ReplyAction="http://tempuri.org/IService/CreateRolResponse")]
         void CreateRol(Vacation_System.ServiceReference.RolesMirror rol);
@@ -1403,6 +1409,36 @@ namespace Vacation_System.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadVacaciones", ReplyAction="http://tempuri.org/IService/LoadVacacionesResponse")]
         System.Threading.Tasks.Task<Vacation_System.ServiceReference.Empleado> LoadVacacionesAsync(Vacation_System.ServiceReference.Empleado empleado);
+
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SaveRoleChanges", ReplyAction="http://tempuri.org/IService/SaveRoleChangesResponse")]
+        void SaveRoleChanges(Vacation_System.ServiceReference.RolesMirror rolMirror);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SaveRoleChanges", ReplyAction="http://tempuri.org/IService/SaveRoleChangesResponse")]
+        System.Threading.Tasks.Task SaveRoleChangesAsync(Vacation_System.ServiceReference.RolesMirror rolMirror);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadEmpleado", ReplyAction="http://tempuri.org/IService/LoadEmpleadoResponse")]
+        Vacation_System.ServiceReference.Empleado LoadEmpleado(int talentoHumano);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadEmpleado", ReplyAction="http://tempuri.org/IService/LoadEmpleadoResponse")]
+        System.Threading.Tasks.Task<Vacation_System.ServiceReference.Empleado> LoadEmpleadoAsync(int talentoHumano);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadUsers", ReplyAction="http://tempuri.org/IService/LoadUsersResponse")]
+        Vacation_System.ServiceReference.UserMirror[] LoadUsers(string sessionUser);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadUsers", ReplyAction="http://tempuri.org/IService/LoadUsersResponse")]
+        System.Threading.Tasks.Task<Vacation_System.ServiceReference.UserMirror[]> LoadUsersAsync(string sessionUser);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditUserStatus", ReplyAction="http://tempuri.org/IService/EditUserStatusResponse")]
+        void EditUserStatus(int talentoHumano, bool status);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditUserStatus", ReplyAction="http://tempuri.org/IService/EditUserStatusResponse")]
+        System.Threading.Tasks.Task EditUserStatusAsync(int talentoHumano, bool status);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditUser", ReplyAction="http://tempuri.org/IService/EditUserResponse")]
+        void EditUser(Vacation_System.ServiceReference.Empleado empleado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditUser", ReplyAction="http://tempuri.org/IService/EditUserResponse")]
+        System.Threading.Tasks.Task EditUserAsync(Vacation_System.ServiceReference.Empleado empleado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1470,6 +1506,14 @@ namespace Vacation_System.ServiceReference {
         
         public System.Threading.Tasks.Task AddVacationAsync(Vacation_System.ServiceReference.VacacionesMirror vacaciones) {
             return base.Channel.AddVacationAsync(vacaciones);
+
+        public void EditDepartment(Vacation_System.ServiceReference.DepartamentoMirror depto) {
+            base.Channel.EditDepartment(depto);
+        }
+        
+        public System.Threading.Tasks.Task EditDepartmentAsync(Vacation_System.ServiceReference.DepartamentoMirror depto) {
+            return base.Channel.EditDepartmentAsync(depto);
+
         }
         
         public void CreateRol(Vacation_System.ServiceReference.RolesMirror rol) {
@@ -1510,6 +1554,46 @@ namespace Vacation_System.ServiceReference {
         
         public System.Threading.Tasks.Task<Vacation_System.ServiceReference.Empleado> LoadVacacionesAsync(Vacation_System.ServiceReference.Empleado empleado) {
             return base.Channel.LoadVacacionesAsync(empleado);
+
+        public void SaveRoleChanges(Vacation_System.ServiceReference.RolesMirror rolMirror) {
+            base.Channel.SaveRoleChanges(rolMirror);
+        }
+        
+        public System.Threading.Tasks.Task SaveRoleChangesAsync(Vacation_System.ServiceReference.RolesMirror rolMirror) {
+            return base.Channel.SaveRoleChangesAsync(rolMirror);
+        }
+        
+        public Vacation_System.ServiceReference.Empleado LoadEmpleado(int talentoHumano) {
+            return base.Channel.LoadEmpleado(talentoHumano);
+        }
+        
+        public System.Threading.Tasks.Task<Vacation_System.ServiceReference.Empleado> LoadEmpleadoAsync(int talentoHumano) {
+            return base.Channel.LoadEmpleadoAsync(talentoHumano);
+        }
+        
+        public Vacation_System.ServiceReference.UserMirror[] LoadUsers(string sessionUser) {
+            return base.Channel.LoadUsers(sessionUser);
+        }
+        
+        public System.Threading.Tasks.Task<Vacation_System.ServiceReference.UserMirror[]> LoadUsersAsync(string sessionUser) {
+            return base.Channel.LoadUsersAsync(sessionUser);
+        }
+        
+        public void EditUserStatus(int talentoHumano, bool status) {
+            base.Channel.EditUserStatus(talentoHumano, status);
+        }
+        
+        public System.Threading.Tasks.Task EditUserStatusAsync(int talentoHumano, bool status) {
+            return base.Channel.EditUserStatusAsync(talentoHumano, status);
+        }
+        
+        public void EditUser(Vacation_System.ServiceReference.Empleado empleado) {
+            base.Channel.EditUser(empleado);
+        }
+        
+        public System.Threading.Tasks.Task EditUserAsync(Vacation_System.ServiceReference.Empleado empleado) {
+            return base.Channel.EditUserAsync(empleado);
+            
         }
     }
 }

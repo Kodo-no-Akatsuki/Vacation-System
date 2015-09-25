@@ -47,3 +47,4 @@ namespace Web_Service
         public virtual ICollection<Vacaciones> tbl_vacaciones { get; set; }
     }
 }
+

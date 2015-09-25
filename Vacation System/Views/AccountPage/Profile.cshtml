@@ -1,10 +1,8 @@
-﻿@using Vacation_System.ServiceReference
-@using Web_Service
-@model Vacation_System.ServiceReference.Empleado
+﻿@model Vacation_System.Models.ProfileViewModel
+
 @{
-    var empleado = (Session["User"] as Empleado);
     Layout = "~/Views/AccountPage/Layout.cshtml";
-    ViewBag.Title = "Perfil de "+empleado.User.PrimerNombre;
+    ViewBag.Title = "Perfil de "+@Model.ProfileEmpleado.User.PrimerNombre;
 }
 
 <div class="">
@@ -38,13 +36,16 @@
                                     <img src="~/Content/imgs/img.png" alt="Avatar">
                                 </div>
                                 <!-- Cropping modal -->
-                                <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+                                <div class="modal fade" id="avatar-modal" aria-hidden="true" 
+                                     aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
-                                            <form class="avatar-form" action="crop.php" enctype="multipart/form-data" method="post">
+                                            <form class="avatar-form" action="crop.php" 
+                                                  enctype="multipart/form-data" method="post">
                                                 <div class="modal-header">
                                                     <button class="close" data-dismiss="modal" type="button">&times;</button>
-                                                    <h4 class="modal-title" id="avatar-modal-label">Cambiar foto de perfil</h4>
+                                                    <h4 class="modal-title" 
+                                                        id="avatar-modal-label">Cambiar foto de perfil</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="avatar-body">
@@ -53,7 +54,8 @@
                                                             <input class="avatar-src" name="avatar_src" type="hidden">
                                                             <input class="avatar-data" name="avatar_data" type="hidden">
                                                             <label for="avatarInput">Imagen local</label>
-                                                            <input class="avatar-input" id="avatarInput" name="avatar_file" type="file">
+                                                            <input class="avatar-input" id="avatarInput" 
+                                                                   name="avatar_file" type="file">
                                                         </div>
                                                         <!-- Crop and preview -->
                                                         <div class="row">
@@ -68,7 +70,8 @@
                                                         </div>
                                                         <div class="row avatar-btns">
                                                             <div class="col-md-3 pull-right">
-                                                                <button class="btn btn-primary btn-block avatar-save" type="submit">Guardar</button>
+                                                                <button class="btn btn-primary btn-block avatar-save" 
+                                                                        type="submit">Guardar</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -86,17 +89,19 @@
                             </div>
                             <!-- end of image cropping -->
                         </div>
-                        <h3>@empleado.User.PrimerNombre @empleado.User.SegundoNombre</h3>
+                        <h3>@Model.ProfileEmpleado.User.PrimerNombre @Model.ProfileEmpleado.User.SegundoNombre</h3>
                         <ul class="list-unstyled user_data">
                             <li>
-                                <div class="fa fa-calendar user-profile-icon">  @empleado.User.FechaIngreso.ToString("dd/MM/yyyy") </div>
+                                <div class="fa fa-calendar user-profile-icon">
+                                     @Model.ProfileEmpleado.User.FechaIngreso.ToString("dd/MM/yyyy")
+                                </div>
                             </li>
                             <li>
-                                <i class="fa fa-envelope user-profile-icon"> @empleado.User.Email</i>
+                                <i class="fa fa-envelope user-profile-icon"> @Model.ProfileEmpleado.User.Email</i>
                             </li>
                             <li class="m-top-xs">
                                 @{
-                                    if (empleado.User.Activo) 
+                                    if (Model.ProfileEmpleado.User.Activo) 
                                     { 
                                         <i class="fa fa-check user-profile-icon">Activo</i>
                                         
@@ -109,7 +114,35 @@
                                 }
                             </li>
                         </ul>
-                        <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
+
+                        @if (Model.DisplayEditBtn)
+                        {
+                            <a class="btn btn-success" href="@Url.Action("EditUser",
+                                                                 new { talentoHumano = Model.ProfileEmpleado.User.TalentoHumano })">
+
+                                <i class="fa fa-edit m-right-xs"></i>Editar Perfil
+
+                            </a>
+                        }
+
+
+                        @if (Model.DisplayEditStatusBtn)
+                        {
+                            using (Html.BeginForm("DesactivarUsuario", "AccountPage"))
+                            {
+                                <input type="hidden" name="talentoHumano" value="@Model.ProfileEmpleado.User.TalentoHumano" />
+
+                                if (Model.ProfileEmpleado.User.Activo)
+                                {
+                                    <input class="btn btn-danger" type="submit" name="edit" value="Desactivar" />
+                                }
+                                else
+                                {
+                                    <input class="btn btn-primary" type="submit" name="edit" value="Activar" />
+                                }
+                            }
+                        }
+
                         <br />
 
                     </div>
