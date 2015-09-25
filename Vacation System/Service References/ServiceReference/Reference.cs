@@ -1164,7 +1164,7 @@ namespace Vacation_System.ServiceReference {
         private int DiasSolicitadosField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int EstatusIdField;
+        private Vacation_System.ServiceReference.StatusMirror EstatusField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime FechaAprobacionField;
@@ -1211,14 +1211,14 @@ namespace Vacation_System.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int EstatusId {
+        public Vacation_System.ServiceReference.StatusMirror Estatus {
             get {
-                return this.EstatusIdField;
+                return this.EstatusField;
             }
             set {
-                if ((this.EstatusIdField.Equals(value) != true)) {
-                    this.EstatusIdField = value;
-                    this.RaisePropertyChanged("EstatusId");
+                if ((object.ReferenceEquals(this.EstatusField, value) != true)) {
+                    this.EstatusField = value;
+                    this.RaisePropertyChanged("Estatus");
                 }
             }
         }
@@ -1352,6 +1352,12 @@ namespace Vacation_System.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateDepartment", ReplyAction="http://tempuri.org/IService/CreateDepartmentResponse")]
         System.Threading.Tasks.Task CreateDepartmentAsync(Vacation_System.ServiceReference.DepartamentoMirror depto);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddVacation", ReplyAction="http://tempuri.org/IService/AddVacationResponse")]
+        void AddVacation(Vacation_System.ServiceReference.VacacionesMirror vacaciones);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddVacation", ReplyAction="http://tempuri.org/IService/AddVacationResponse")]
+        System.Threading.Tasks.Task AddVacationAsync(Vacation_System.ServiceReference.VacacionesMirror vacaciones);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateRol", ReplyAction="http://tempuri.org/IService/CreateRolResponse")]
         void CreateRol(Vacation_System.ServiceReference.RolesMirror rol);
         
@@ -1434,6 +1440,14 @@ namespace Vacation_System.ServiceReference {
         
         public System.Threading.Tasks.Task CreateDepartmentAsync(Vacation_System.ServiceReference.DepartamentoMirror depto) {
             return base.Channel.CreateDepartmentAsync(depto);
+        }
+        
+        public void AddVacation(Vacation_System.ServiceReference.VacacionesMirror vacaciones) {
+            base.Channel.AddVacation(vacaciones);
+        }
+        
+        public System.Threading.Tasks.Task AddVacationAsync(Vacation_System.ServiceReference.VacacionesMirror vacaciones) {
+            return base.Channel.AddVacationAsync(vacaciones);
         }
         
         public void CreateRol(Vacation_System.ServiceReference.RolesMirror rol) {

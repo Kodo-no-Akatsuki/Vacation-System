@@ -25,6 +25,9 @@ namespace Web_Service
         void CreateDepartment(DepartamentoMirror depto);
 
         [OperationContract]
+        void AddVacation(VacacionesMirror vacaciones);
+
+        [OperationContract]
         void CreateRol(RolesMirror rol);
 
         [OperationContract]

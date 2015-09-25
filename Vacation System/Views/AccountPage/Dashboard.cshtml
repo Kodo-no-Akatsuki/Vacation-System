@@ -10,6 +10,7 @@
     ViewBag.Title = "Inicio";
 
     var jsonFechas = JsonConvert.SerializeObject(Model.FechasNoDisponibles, new IsoDateTimeConverter());
+    var date = new DateTime();
 }
 
 <div class="" />
@@ -57,293 +58,312 @@
             <div class="x_content">
 
                 <!-- Smart Wizard -->
-                <p>Con esta sencilla herramienta puedes mandar tu solicitud de vacaciones en 4 sencillos pasos.</p>
-                <div id="wizard" class="form_wizard wizard_horizontal">
-                    <ul class="wizard_steps">
-                        <li>
-                            <a href="#step-1">
-                                <span class="step_no">1</span>
-                                <span class="step_descr">
-                                    Paso 1
-                                    <br />
-                                    <small>Revisa tus datos</small>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#step-2">
-                                <span class="step_no">2</span>
-                                <span class="step_descr">
-                                    Paso 2
-                                    <br />
-                                    <small>Elige la fecha</small>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#step-3">
-                                <span class="step_no">3</span>
-                                <span class="step_descr">
-                                    Paso 3
-                                    <br />
-                                    <small>Observaciones</small>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#step-4">
-                                <span class="step_no">4</span>
-                                <span class="step_descr">
-                                    Paso 4
-                                    <br />
-                                    <small>Revisa tu solicitud</small>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <div id="step-1">
-                        <form class="form-horizontal form-label-left">
-                            <div class="form-group">
-                                <!--Hardcoded year-->
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                    <br />
-                                    Dias correspondientes
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <table class="table table-striped table-condensed table-hover">
-                                        <thead>
-                                            <tr>
-                                                @foreach (PendingVacations pendiente in @ViewBag.VacacionesPendientes)
+                @if (!Model.Vacaciones.Any() || Model.Vacaciones.Last().Estatus.Activo)
+                {
+                    <p>Con esta sencilla herramienta puedes mandar tu solicitud de vacaciones en 4 sencillos pasos.</p>
+                    <div id="wizard" class="form_wizard wizard_horizontal">
+                        <ul class="wizard_steps">
+                            <li>
+                                <a href="#step-1">
+                                    <span class="step_no">1</span>
+                                    <span class="step_descr">
+                                        Paso 1
+                                        <br />
+                                        <small>Revisa tus datos</small>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#step-2">
+                                    <span class="step_no">2</span>
+                                    <span class="step_descr">
+                                        Paso 2
+                                        <br />
+                                        <small>Elige la fecha</small>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#step-3">
+                                    <span class="step_no">3</span>
+                                    <span class="step_descr">
+                                        Paso 3
+                                        <br />
+                                        <small>Observaciones</small>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#step-4">
+                                    <span class="step_no">4</span>
+                                    <span class="step_descr">
+                                        Paso 4
+                                        <br />
+                                        <small>Revisa tu solicitud</small>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div id="step-1">
+                            <form class="form-horizontal form-label-left">
+                                <div class="form-group">
+                                    <!--Hardcoded year-->
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                        <br />
+                                        Dias correspondientes
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <table class="table table-striped table-condensed table-hover">
+                                            <thead>
+                                                <tr>
+                                                    @foreach (PendingVacations pendiente in @ViewBag.VacacionesPendientes)
                                                 {
-                                                    <td>Año @pendiente.PendingYear</td>
+                                                        <td>Año @pendiente.PendingYear</td>
                                                 }
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                @foreach (PendingVacations pendiente in @ViewBag.VacacionesPendientes)
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    @foreach (PendingVacations pendiente in @ViewBag.VacacionesPendientes)
                                                 {
-                                                    <td> @pendiente.PendingDays</td>
+                                                        <td> @pendiente.PendingDays</td>
                                                 }
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                    Dias tomados anteriormente
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" value="@Model.DiasTomadosAnteriormente" class="form-control col-md-7 col-xs-12" disabled>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                        Dias tomados anteriormente
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="number" value="@Model.DiasTomadosAnteriormente" class="form-control col-md-7 col-xs-12" disabled>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Dias pendientes de tomar</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="diasportomar" value="@Model.DiasPendientesPorTomar" class="form-control col-md-7 col-xs-12" type="number" disabled>
+                                <div class="form-group">
+                                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Dias pendientes de tomar</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="diasportomar" value="@Model.DiasPendientesPorTomar" class="form-control col-md-7 col-xs-12" type="number" disabled>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div id="step-2">
-                        <div class="form-horizontal form-label-left">
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12 glyphicon glyphicon-calendar">
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="fecha" type="text" class="form-control col-md-7 col-xs-12" width="50" name="daterange" />
-                                    <br />
-                                    <br />
-                                    <input id="availability" style="background: #193b69;" type="button" class="btn btn-primary pull-right" name="confirm" value="Ver disponibilidad" />
-                                </div>
-                            </div>
+                            </form>
                         </div>
+                        <div id="step-2">
+                            <div class="form-horizontal form-label-left">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12 glyphicon glyphicon-calendar">
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="fecha" type="text" class="form-control col-md-7 col-xs-12" width="50" name="daterange" />
+                                        <br />
+                                        <br />
+                                        <input id="availability" style="background: #193b69;" type="button" class="btn btn-primary pull-right" name="confirm" value="Ver disponibilidad" />
+                                    </div>
+                                </div>
+                            </div>
 
-                        <input id="fechasHidden" name="fechasHidden" type="hidden" value="@jsonFechas" /> @*Cambiar a Hidden*@
+                            <input id="fechasHidden" name="fechasHidden" type="hidden" value="@jsonFechas" /> @*Cambiar a Hidden*@
 
-                        <script type="text/javascript">
-                            $(function () {
-                                $('input[name="daterange"]').daterangepicker({
-                                    locale: {
-                                        applyLabel: 'Aplicar',
-                                        cancelLabel: 'Cancelar',
-                                        fromLabel: "Salida",
-                                        toLabel: "Regreso",
-                                        "daysOfWeek": ["Dom", "Lu", "Mar", "Mie", "Jue", "Vie", "Sab"],
-                                        "monthNames": [
-                                            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
-                                            "Septiembre", "Octubre", "Noviembre", "Diciembre"
-                                        ]
-                                    }
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('input[name="daterange"]').daterangepicker({
+                                        locale: {
+                                            applyLabel: 'Aplicar',
+                                            cancelLabel: 'Cancelar',
+                                            fromLabel: "Salida",
+                                            toLabel: "Regreso",
+                                            "daysOfWeek": ["Dom", "Lu", "Mar", "Mie", "Jue", "Vie", "Sab"],
+                                            "monthNames": [
+                                                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
+                                                "Septiembre", "Octubre", "Noviembre", "Diciembre"
+                                            ]
+                                        }
+
+                                    });
 
                                 });
 
-                            });
+                                $("#availability").click(function () {
+                                    //Check if date is available logic here!
+                                    var datevalues = document.getElementById('fecha').value;
+                                    var res = datevalues.split(" - ");
+                                    var invaliddates = JSON.parse(document.getElementById('fechasHidden').value, new Date());
+                                    var daysAccepted = false;
+                                    var range = daysInBetween(new Date(res[0]), new Date(res[1]));
 
-                            $("#availability").click(function () {
-                                //Check if date is available logic here!
-                                var datevalues = document.getElementById('fecha').value;
-                                var res = datevalues.split(" - ");
-                                var invaliddates = JSON.parse(document.getElementById('fechasHidden').value, new Date());
-                                var daysAccepted = false;
-                                var range = daysInBetween(new Date(res[0]), new Date(res[1]));
+                                    document.getElementById('fsalida').value = res[0];
+                                    document.getElementById('fregreso').value = res[1];
+                                    document.getElementById('diassolic').value = range;
 
-                                document.getElementById('fsalida').value = res[0];
-                                document.getElementById('fregreso').value = res[1];
-                                document.getElementById('diassolic').value = range;
-                                console.log(range);
+                                    if (range > document.getElementById('diasportomar').value) {
+                                        alert("No puede tomar mas dias de los que le quedan!");
+                                        $("#nextBtn").attr("disabled", true);
+                                        return;
+                                    }
 
-                                if (range > document.getElementById('diasportomar').value) {
-                                    alert("No puede tomar mas dias de los que le quedan!");
-                                    $("#nextBtn").attr("disabled", true);
-                                    return;
+                                    for (var i = 0; i < invaliddates.length; i++) {
+                                        var date = invaliddates[i].replace("T00:00:00", "");
+                                        var y = date.split('-');
+                                        var dateInvalid = new Date(y[0], y[1] - 1, y[2]);
+
+                                        daysAccepted = checkDates(dateInvalid, res[0], res[1]);
+                                        if (!daysAccepted)
+                                            break;
+                                    }
+
+                                    if (daysAccepted) {
+                                        alert("Los dias seleccionados estan disponibles");
+                                        $("#nextBtn").attr("disabled", false);
+                                    }
+
+
+                                });
+                            </script>
+
+                            <script type="text/javascript">
+                                function daysInBetween(firstDate, secondDate) {
+                                    // The number of milliseconds in one day
+                                    var oneDay = 1000 * 60 * 60 * 24;
+
+                                    // Convert both dates to milliseconds
+                                    var date1Ms = firstDate.getTime();
+                                    var date2Ms = secondDate.getTime();
+
+                                    // Calculate the difference in milliseconds
+                                    var differenceMs = Math.abs(date1Ms - date2Ms);
+
+                                    // Convert back to days and return
+                                    return Math.round(differenceMs / oneDay);
                                 }
 
-                                for (var i = 0; i < invaliddates.length; i++) {
-                                    var date = invaliddates[i].replace("T00:00:00", "");
-                                    var y = date.split('-');
-                                    var dateInvalid = new Date(y[0], y[1] - 1, y[2]);
+                            </script>
 
-                                    daysAccepted = checkDates(dateInvalid, res[0], res[1]);
-                                    if (!daysAccepted)
-                                        break;
-                                }
+                            <script type="text/javascript">
+                                function checkDates(invalidDate, startDate, endDate) {
+                                    startDate = startDate.split('/');
+                                    endDate = endDate.split('/');
+                                    var invalid = invalidDate;
+                                    var begin = new Date(startDate[2], startDate[0] - 1, startDate[1]);
+                                    var end = new Date(endDate[2], endDate[0] - 1, endDate[1]);
 
-                                if (daysAccepted) {
-                                    alert("Los dias seleccionados estan disponibles");
-                                    $("#nextBtn").attr("disabled", false);
-                                }
-                                    
+                                    if (new Date().getFullYear() !== begin.getFullYear()) {
+                                        alert("Solo puede escoger dias del año vigente!");
+                                        $("#nextBtn").attr("disabled", true);
+                                        return false;
+                                        //Analizar mejor esta condicion
+                                    }
 
-                            });
-                        </script>
-
-                        <script type="text/javascript">
-                            function daysInBetween(firstDate, secondDate) {
-                                // The number of milliseconds in one day
-                                var oneDay = 1000 * 60 * 60 * 24;
-
-                                // Convert both dates to milliseconds
-                                var date1Ms = firstDate.getTime();
-                                var date2Ms = secondDate.getTime();
-
-                                // Calculate the difference in milliseconds
-                                var differenceMs = Math.abs(date1Ms - date2Ms);
-
-                                // Convert back to days and return
-                                return Math.round(differenceMs / oneDay);
-                            }
-
-                        </script>
-
-                        <script type="text/javascript">
-                            function checkDates(invalidDate, startDate, endDate) {
-                                startDate = startDate.split('/');
-                                endDate = endDate.split('/');
-                                var invalid = invalidDate;
-                                var begin = new Date(startDate[2], startDate[0] - 1, startDate[1]);
-                                var end = new Date(endDate[2], endDate[0] - 1, endDate[1]);
-
-                                if (new Date().getFullYear() !== begin.getFullYear()) {
-                                    alert("Solo puede escoger dias del año vigente!");
-                                    $("#nextBtn").attr("disabled", true);
-                                    return false;
-                                    //Analizar mejor esta condicion
-                                }
-
-                                else if (begin.getDate() < new Date().getDate() || begin.getMonth() < new Date().getMonth()) {
-                                    alert("No puede seleccionar dias del pasado");
-                                    $("#nextBtn").attr("disabled", true);
-                                    return false;
-                                }
-
-                                else if (invalid.getDate() < begin.getDate()) {
-                                    return true;
-                                }
-
-                                else if (invalid.getMonth() < begin.getMonth()) {
-                                    return true;
-                                }
-
-                                else if (invalid.getMonth() < end.getMonth()) {
-                                    alert("La fecha " + (invalid.getMonth() + 1).toString() + '/' + invalid.getDate().toString() + '/'
-                                            + invalid.getFullYear() + " no esta disponible");
-                                    $("#nextBtn").attr("disabled", true);
-                                    return false;
-                                }
-
-                                else if (invalid.getFullYear() === begin.getFullYear()) {
-                                    if (invalid.getDate() >= begin.getDate() && invalid.getDate() <= end.getDate()) {
-                                        console.log("entro");
-                                        alert("La fecha " + (invalid.getMonth() + 1).toString() + '/' + invalid.getDate().toString() + '/'
-                                            + invalid.getFullYear() + " no esta disponible");
+                                    else if (begin.getDate() < new Date().getDate() || begin.getMonth() < new Date().getMonth()) {
+                                        alert("No puede seleccionar dias del pasado");
                                         $("#nextBtn").attr("disabled", true);
                                         return false;
                                     }
+
+                                    else if (invalid.getDate() < begin.getDate()) {
+                                        return true;
+                                    }
+
+                                    else if (invalid.getMonth() < begin.getMonth()) {
+                                        return true;
+                                    }
+
+                                    else if (invalid.getMonth() < end.getMonth()) {
+                                        alert("La fecha " + (invalid.getMonth() + 1).toString() + '/' + invalid.getDate().toString() + '/'
+                                                + invalid.getFullYear() + " no esta disponible");
+                                        $("#nextBtn").attr("disabled", true);
+                                        return false;
+                                    }
+
+                                    else if (invalid.getFullYear() === begin.getFullYear()) {
+                                        if (invalid.getDate() >= begin.getDate() && invalid.getDate() <= end.getDate()) {
+                                            console.log("entro");
+                                            alert("La fecha " + (invalid.getMonth() + 1).toString() + '/' + invalid.getDate().toString() + '/'
+                                                + invalid.getFullYear() + " no esta disponible");
+                                            $("#nextBtn").attr("disabled", true);
+                                            return false;
+                                        }
+                                    }
+
+                                    return true;
                                 }
+                            </script>
 
-                                return true;
-                            }
-                        </script>
-
-                    </div>
-                    <div id="step-3">
-                        <div class="form-horizontal form-label-left">
-                            <div class="form-group">
-                                <h2 class="control-label col-md-3 col-sm-3 ">
-                                    Observaciones
-                                </h2>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <textarea class="form-control col-md-7 col-xs-12" rows="2" id="comment"></textarea>
+                        </div>
+                        <div id="step-3">
+                            <div class="form-horizontal form-label-left">
+                                <div class="form-group">
+                                    <h2 class="control-label col-md-3 col-sm-3 ">
+                                        Observaciones
+                                    </h2>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <textarea class="form-control col-md-7 col-xs-12" rows="2" id="comment"></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div id="step-4">
-                        <form class="form-horizontal form-label-left">
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                    Dias solicitados
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="diassolic" class="form-control col-md-7 col-xs-12" disabled>
+                        <div id="step-4">
+                            @*<form class="form-horizontal form-label-left">*@
+                            @using (Html.BeginForm("Dashboard", "AccountPage", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+                            {
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                        Dias solicitados
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="number" id="diassolic" name="DiasSolicitados" class="form-control col-md-7 col-xs-12" readonly>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                    Fecha de Salida
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="fsalida" type="text" class="form-control col-md-7 col-xs-12" disabled>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                        Fecha de Salida
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="fsalida" type="text" name="FechaSalida" class="form-control col-md-7 col-xs-12" readonly>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de Regreso</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="fregreso" class="form-control col-md-7 col-xs-12" type="text" disabled>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de Regreso</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="fregreso" name="FechaEntrada" class="form-control col-md-7 col-xs-12" type="text" readonly>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Firma</label>
-                                <div class="col-md-5 col-sm-6 col-xs-12">
-                                    <input value="@Model.User.PrimerNombre @Model.User.PrimerApellido" class="form-control col-md-7 col-xs-12" type="text" disabled />
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Firma</label>
+                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                        <input value="@Model.User.PrimerNombre @Model.User.PrimerApellido" class="form-control col-md-7 col-xs-12" type="text" readonly />
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                        <div id="msg"></div>
 
-                        <script>
-                            function EnviarDatos() {
-                                @Html.Raw(ViewBag.NotificationScript);
+                                @*<input type="hidden" name="TalentoHumano" value="@Model.User.TalentoHumano" />
+                                    <input type="hidden" name="FechaSolicitud" value="@date" />
+                                    <input type="hidden" name="Year" value="@date.Year"/>*@
 
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input style="margin: 0 auto; background: #193b69;" type="submit" class="btn btn-primary pull-right" name="confirm" value="Enviar" />
 
+                                    </div>
+                                </div>
                             }
-                        </script>
+                            @*</form>*@
+                            <div id="msg"></div>
+
+                            <script>
+                                function EnviarDatos() {
+                                    @Html.Raw(ViewBag.NotificationScript);
+                                }
+                            </script>
+                        </div>
+                        <!-- End SmartWizard Content -->
                     </div>
-                    <!-- End SmartWizard Content -->
-                </div>
+                }
+
+                else
+                {
+                    <p>Su solicitud esta en espera de ser revisada.</p>
+                }
             </div>
         </div>
     </div>

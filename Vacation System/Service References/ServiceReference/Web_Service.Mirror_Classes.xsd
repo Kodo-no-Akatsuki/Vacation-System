@@ -141,7 +141,7 @@
   <xs:complexType name="VacacionesMirror">
     <xs:sequence>
       <xs:element minOccurs="0" name="DiasSolicitados" type="xs:int" />
-      <xs:element minOccurs="0" name="EstatusId" type="xs:int" />
+      <xs:element minOccurs="0" name="Estatus" nillable="true" type="tns:StatusMirror" />
       <xs:element minOccurs="0" name="FechaAprobacion" type="xs:dateTime" />
       <xs:element minOccurs="0" name="FechaEntrada" type="xs:dateTime" />
       <xs:element minOccurs="0" name="FechaSalida" type="xs:dateTime" />

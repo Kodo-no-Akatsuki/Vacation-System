@@ -31,6 +31,6 @@ namespace Web_Service.Mirror_Classes
         public DateTime FechaAprobacion { get; set; }
 
         [DataMember]
-        public int EstatusId { get; set; }
+        public StatusMirror Estatus { get; set; }
     }
 }

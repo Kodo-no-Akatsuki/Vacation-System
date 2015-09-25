@@ -11,6 +11,7 @@ namespace Vacation_System.Controllers
 {
 	public class AccountPageController : Controller
 	{
+		[HttpGet]
 		public ActionResult Dashboard()
 		{
 			Empleado user = Session["User"] as Empleado;
@@ -19,26 +20,52 @@ namespace Vacation_System.Controllers
 			if (user == null) return LogOut();
 
 			user.YearC = (int)((DateTime.Now - user.User.FechaIngreso).TotalDays) / 365;
-			user.DiasTomadosAnteriormente = user.Vacaciones.Where(vacacion => vacacion.Year == DateTime.Now.Year && vacacion.EstatusId == 1).Sum(vacacion => vacacion.DiasSolicitados);
+			user.DiasTomadosAnteriormente = user.Vacaciones.Where(vacacion => vacacion.Year == DateTime.Now.Year && vacacion.Estatus.Descripcion.Equals("Aprobado")).Sum(vacacion => vacacion.DiasSolicitados);
+
 			user.DiasPendientesPorTomar = 23 - user.DiasTomadosAnteriormente;
 			user.FechasNoDisponibles = user.Calendar.Select(x => x.fecha).ToArray();
 
-			foreach (var year in user.Vacaciones)
+			user.Vacaciones = user.Vacaciones.OrderBy(x => x.Year).ToArray();
+
+			for (int i = 0; i < user.Vacaciones.Length; i++)
 			{
-				if (year.DiasSolicitados < 23)
+				int available = 23;
+
+				if (user.Vacaciones[i].DiasSolicitados < 23 && user.Vacaciones[i].Estatus.Descripcion.Equals("Aprobado"))
 				{
+					available -= user.Vacaciones[i].DiasSolicitados;
+					while (i != (user.Vacaciones.Length - 1) && user.Vacaciones[i + 1].Year == user.Vacaciones[i].Year)
+					{
+						available -= user.Vacaciones[i + 1].DiasSolicitados;
+						i++;
+					}
+
 					pendientes.Add(new PendingVacations
 					{
-						PendingDays = 23 - year.DiasSolicitados,
-						PendingYear = year.Year
+						PendingDays = available,
+						PendingYear = user.Vacaciones[i].Year
 					});
 				}
 			}
 
-		    ViewBag.VacacionesPendientes = pendientes;
-		    ViewBag.NotificationScript = "new PNotify({title: 'Enhorabuena', text: 'La solicitud ha sido enviada!', type: 'success'});";
+			ViewBag.VacacionesPendientes = pendientes;
+			ViewBag.NotificationScript = "new PNotify({title: 'Enhorabuena', text: 'La solicitud ha sido enviada!', type: 'success'});";
 
 			return View(user);
+		}
+
+		[HttpPost]
+		public RedirectToRouteResult Dashboard(VacacionesMirror vacaciones)
+		{
+			ServiceClient service = new ServiceClient();
+
+			vacaciones.TalentoHumano = (Session["User"] as Empleado).User.TalentoHumano;
+			vacaciones.FechaSolicitud = DateTime.Now;
+			vacaciones.Year = DateTime.Today.Year;
+
+			service.AddVacation(vacaciones);
+
+			return RedirectToAction("Dashboard");
 		}
 
 		public ActionResult Profile()
