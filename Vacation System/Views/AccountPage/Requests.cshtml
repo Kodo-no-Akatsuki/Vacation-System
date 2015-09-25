@@ -1,0 +1,76 @@
+﻿@model Vacation_System.ServiceReference.Empleado
+
+@{
+    ViewBag.Title = "Solicitudes";
+    Layout = "~/Views/AccountPage/Layout.cshtml";
+}
+
+<div class="clearfix"></div>
+
+<script>
+    var row;
+    $(document).ready(function () {
+            row = $('#example').dataTable();
+
+    });
+</script>
+
+<table id="example" class="display" cellspacing="0" width="100%">
+
+    <thead>
+        <tr>
+            <th>Solicitud</th>
+            <th></th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+
+        <tr>
+            <td>Hola</td>
+            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#requestmodal">Revisar</button></td>
+        </tr>
+
+        @*<tr>
+            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#requestmodal">Revisar</button></td>
+        </tr>*@
+        @*@foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("UserProfile", new {talentoHumano = user.TalentoHumano})">
+                        @user.PrimerNombre @user.PrimerApellido
+                    </a>
+                </td>
+            </tr>
+        }*@
+
+    </tbody>
+
+</table>
+
+<!--Request Modal-->
+<div id="requestmodal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Revisar Solicitud</h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="container" style="width:500px; height: 250px; overflow-y: scroll;">
+                    <!--Ingresar datos aqui-->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal">Close</a>
+
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+
+            </div>
+        </div>
+    </div>
+</div>

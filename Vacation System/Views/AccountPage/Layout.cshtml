@@ -21,6 +21,8 @@
     <!--Calendar CSS-->
     <link href="@Url.Content("~/Content/css/calendar/fullcalendar.css")" rel="stylesheet">
     <link href="@Url.Content("~/Content/css/calendar/fullcalendar.print.css")" rel="stylesheet" media="print">
+    <!--Favicon-->
+    <link rel="icon" href="@Url.Content("~/Content/imgs/unilogo.png")">
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="@Url.Content("~/Content/js/jquery.min.js")"></script>
@@ -54,8 +56,8 @@
 <body class="nav-md">
     @{
         var empleado = (Session["User"] as Empleado);
-        
-    
+
+
     }
     <div class="container body">
         <div class="main_container">
@@ -87,168 +89,178 @@
 
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-edit"></i>Peticiones<span class="fa fa-chevron-down"></span></a>
+                                    <a href="#"><i class="fa fa-edit"></i>Peticiones<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <!--Insert child options here! :^)-->
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-gear"></i>Ajustes<span class="fa fa-chevron-down"></span></a>
-                                    @*Aqui empieza las condiciones para los permisos*@
-
-                                    <ul class="nav child_menu" style="display: none">
-                                        @{
-                                            bool depto = false;
-                                            bool rol = false;
-                                            bool usuario = false;
-                                        }
-
-                                        @foreach (var permiso in empleado.Permisos)
+                                        @foreach (var p in empleado.Permisos)
                                         {
-                                            if ((permiso.PermisosId == (int)PermisosEnum.EditarDepartamento || permiso.PermisosId == (int)PermisosEnum.CrearDepartamento)
-                                                && depto != true)
+                                            if((p.PermisosId == (int)PermisosEnum.ProgramarVacaciones))
                                             {
                                                 <li>
-                                                    <a href="@Url.Action("Departments")"><i class="fa fa-building pull-left"></i>Editar departamentos</a>
-                                                    @{ depto = true;}
-                                                </li>
-                                            }
-
-                                            else if ((permiso.PermisosId == (int)PermisosEnum.EditarRol || permiso.PermisosId == (int)PermisosEnum.CrearRol) && rol != true)
-                                            {
-                                                <li>
-                                                    <a href="@Url.Action("Roles")"><i class="fa fa-list-alt pull-left"></i>Editar roles</a>
-                                                    @{ rol = true;}
-                                                </li>
-                                            }
-
-                                            else if ((permiso.PermisosId == (int)PermisosEnum.CrearUsuario) && usuario != true)
-                                            {
-                                                <li>
-                                                    <a href="@Url.Action("Register")"><i class="fa fa-user pull-left"></i>Registrar Usuario</a>
-                                                    @{ usuario = true;}
-                                                </li>
-                                            }
-
-                                            else if ((permiso.PermisosId == (int)PermisosEnum.VerPerfiles))
-                                            {
-                                                <li>
-                                                    <a href="@Url.Action("Users")"><i class="fa fa-user  fa-eye"></i>Ver Usuarios</a>
+                                                    <a href="@Url.Action("Requests")"><i class="fa fa-paper-plane"></i>Solicitudes</a>
                                                 </li>
                                             }
                                         }
-
                                     </ul>
-                                    @*Aqui terminan las condiciones*@
+
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-gear"></i>Ajustes<span class="fa fa-chevron-down"></span></a>
+                                        @*Aqui empieza las condiciones para los permisos*@
+
+                                        <ul class="nav child_menu" style="display: none">
+                                            @{
+                                                bool depto = false;
+                                                bool rol = false;
+                                                bool usuario = false;
+                                            }
+
+                                            @foreach (var permiso in empleado.Permisos)
+                                            {
+                                                if ((permiso.PermisosId == (int)PermisosEnum.EditarDepartamento || permiso.PermisosId == (int)PermisosEnum.CrearDepartamento)
+                                                    && depto != true)
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Action("Departments")"><i class="fa fa-building pull-left"></i>Editar departamentos</a>
+                                                        @{ depto = true;}
+                                                    </li>
+                                                }
+
+                                                else if ((permiso.PermisosId == (int)PermisosEnum.EditarRol || permiso.PermisosId == (int)PermisosEnum.CrearRol) && rol != true)
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Action("Roles")"><i class="fa fa-list-alt pull-left"></i>Editar roles</a>
+                                                        @{ rol = true;}
+                                                    </li>
+                                                }
+
+                                                else if ((permiso.PermisosId == (int)PermisosEnum.CrearUsuario) && usuario != true)
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Action("Register")"><i class="fa fa-user pull-left"></i>Registrar Usuario</a>
+                                                        @{ usuario = true;}
+                                                    </li>
+                                                }
+
+                                                else if ((permiso.PermisosId == (int)PermisosEnum.VerPerfiles))
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Action("Users")"><i class="fa fa-user  fa-eye"></i>Ver Usuarios</a>
+                                                    </li>
+                                                }
+                                            }
+
+                                        </ul>
+                                        @*Aqui terminan las condiciones*@
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out"></i>Cerrar Sesion</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="menu_section">
+                                <ul class="nav side-menu"></ul>
+                            </div>
+                        </div>
+                        <!-- /sidebar menu -->
+                    </div>
+                </div>
+                <!-- top navigation -->
+                <div class="top_nav">
+                    <div class="nav_menu">
+                        <nav class="" role="navigation">
+                            <div class="nav toggle">
+                                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                            </div>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="">
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <img src="@Url.Content("~/Content/imgs/img.png")" alt="">@empleado.User.PrimerNombre @empleado.User.PrimerApellido
+                                        <span class=" fa fa-angle-down"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
+                                        <li>
+                                            <a href="@Url.Action("Profile")">
+                                                <span class="fa fa-user pull-right"></span>
+                                                <span>Perfil</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="fa fa-gear pull-right"></span>
+                                                <span>Opciones</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="fa fa-book pull-right"></span>
+                                                <span>Ayuda</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <!--<a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>-->
+                                            <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesion</a>
+                                    </ul>
                                 </li>
-                                <li>
-                                    <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out"></i>Cerrar Sesion</a>
+                                <li role="presentation" class="dropdown">
+                                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-bell-o"></i>
+                                        <span class="badge bg-green">1</span>
+                                    </a>
+                                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
+                                        <!--Insert here intelligent notifications :^)-->
+                                        <li>
+                                            <a>
+                                                <span class="image">
+                                                    <img src="@Url.Content("~/Content/images/img.png")" alt="Profile Image" />
+                                                </span>
+                                                <span>
+                                                    <span>@empleado.User.PrimerNombre  </span>
+                                                    <span class="time">Hace 3 mins</span>
+                                                </span>
+                                                <span class="message">
+                                                    Lololol...
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="text-center">
+                                                <a>
+                                                    <strong><a href="#">Ver todas las notificaciones</a></strong>
+                                                    <i class="fa fa-angle-right"></i>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
-                        </div>
-                        <div class="menu_section">
-                            <ul class="nav side-menu"></ul>
-                        </div>
+                        </nav>
                     </div>
-                    <!-- /sidebar menu -->
                 </div>
+                <!-- /top navigation -->
+                <!-- page content -->
+                <div class="right_col" role="main">
+                    @RenderBody()
+
+                </div>
+
+
+                <!--Data Page here :^)-->
+
             </div>
-            <!-- top navigation -->
-            <div class="top_nav">
-                <div class="nav_menu">
-                    <nav class="" role="navigation">
-                        <div class="nav toggle">
-                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                        </div>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="@Url.Content("~/Content/imgs/img.png")" alt="">@empleado.User.PrimerNombre @empleado.User.PrimerApellido
-                                    <span class=" fa fa-angle-down"></span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                    <li>
-                                        <a href="@Url.Action("Profile")">
-                                            <span class="fa fa-user pull-right"></span>
-                                            <span>Perfil</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <span class="fa fa-gear pull-right"></span>
-                                            <span>Opciones</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <span class="fa fa-book pull-right"></span>
-                                            <span>Ayuda</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <!--<a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>-->
-                                        <a href="@Url.Action("LogOut")"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesion</a>
-                                </ul>
-                            </li>
-                            <li role="presentation" class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-bell-o"></i>
-                                    <span class="badge bg-green">1</span>
-                                </a>
-                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
-                                    <!--Insert here intelligent notifications :^)-->
-                                    <li>
-                                        <a>
-                                            <span class="image">
-                                                <img src="@Url.Content("~/Content/images/img.png")" alt="Profile Image" />
-                                            </span>
-                                            <span>
-                                                <span>@empleado.User.PrimerNombre  </span>
-                                                <span class="time">Hace 3 mins</span>
-                                            </span>
-                                            <span class="message">
-                                                Lololol...
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="text-center">
-                                            <a>
-                                                <strong><a href="#">Ver todas las notificaciones</a></strong>
-                                                <i class="fa fa-angle-right"></i>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+            <!-- /page content -->
+        </div>
+        <!-- footer content -->
+        <footer class="">
+            <div class="footer-cont pull-right">
+
+                <span class="pull-right">
+                    <b>Design by</b> <a href="https://github.com/Kodo-no-Akatsuki" target="_blank"><img src="@Url.Content("~/Content/imgs/iconakatsuki.png")" class="footer-img" width="50" height="40" /></a>
+                </span>
             </div>
-            <!-- /top navigation -->
-            <!-- page content -->
-            <div class="right_col" role="main">
-               @RenderBody()
-
-             </div>
-
-
-                    <!--Data Page here :^)-->
-
-                </div>
-                <!-- /page content -->
-            </div>
-            <!-- footer content -->
-            <footer class="">
-                <div class="footer-cont pull-right">
-
-                    <span class="pull-right">
-                        <b>Design by</b> <a href="https://github.com/Kodo-no-Akatsuki" target="_blank"><img src="@Url.Content("~/Content/imgs/iconakatsuki.png")" class="footer-img" width="50" height="40" /></a>
-                    </span>
-                </div>
-                <div class="clearfix"></div>
-            </footer>
-            <!-- /footer content -->
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
         <div id="custom_notifications" class="custom-notifications dsp_none">
             <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group"></ul>
             <div class="clearfix"></div>
@@ -266,79 +278,79 @@
         <script src="@Url.Content("~/Content/js/custom.js")"></script>
         <script src="@Url.Content("~/Content/js/moment.min.js")"></script>
         <script src="@Url.Content("~/Content/js/calendar/fullcalendar.min.js")"></script>
-    <!-- PNotify -->
-    <script type="text/javascript" src="@Url.Content("~/Content/js/notify/pnotify.core.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/notify/pnotify.buttons.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/notify/pnotify.nonblock.js")"></script>
+        <!-- PNotify -->
+        <script type="text/javascript" src="@Url.Content("~/Content/js/notify/pnotify.core.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/notify/pnotify.buttons.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/notify/pnotify.nonblock.js")"></script>
 
-    <script>
-    $(function () {
-        var cnt = 10; //$("#custom_notifications ul.notifications li").length + 1;
-        TabbedNotification = function (options) {
-            var message = "<div id='ntf" + cnt + "' class='text alert-" + options.type + "' style='display:none'><h2><i class='fa fa-bell'></i> " + options.title + "</h2><div class='close'><a href='javascript:;' class='notification_close'><i class='fa fa-close'></i></a></div><p>" + options.text + "</p></div>";
+        <script>
+            $(function () {
+                var cnt = 10; //$("#custom_notifications ul.notifications li").length + 1;
+                TabbedNotification = function (options) {
+                    var message = "<div id='ntf" + cnt + "' class='text alert-" + options.type + "' style='display:none'><h2><i class='fa fa-bell'></i> " + options.title + "</h2><div class='close'><a href='javascript:;' class='notification_close'><i class='fa fa-close'></i></a></div><p>" + options.text + "</p></div>";
 
-            if (document.getElementById('custom_notifications') == null) {
-                alert('doesnt exists');
-            } else {
-                $('#custom_notifications ul.notifications').append("<li><a id='ntlink" + cnt + "' class='alert-" + options.type + "' href='#ntf" + cnt + "'><i class='fa fa-bell animated shake'></i></a></li>");
-                $('#custom_notifications #notif-group').append(message);
-                cnt++;
-                CustomTabs(options);
-            }
-        }
+                    if (document.getElementById('custom_notifications') == null) {
+                        alert('doesnt exists');
+                    } else {
+                        $('#custom_notifications ul.notifications').append("<li><a id='ntlink" + cnt + "' class='alert-" + options.type + "' href='#ntf" + cnt + "'><i class='fa fa-bell animated shake'></i></a></li>");
+                        $('#custom_notifications #notif-group').append(message);
+                        cnt++;
+                        CustomTabs(options);
+                    }
+                }
 
-        CustomTabs = function (options) {
-            $('.tabbed_notifications > div').hide();
-            $('.tabbed_notifications > div:first-of-type').show();
-            $('#custom_notifications').removeClass('dsp_none');
-            $('.notifications a').click(function (e) {
-                e.preventDefault();
-                var $this = $(this),
-                    tabbed_notifications = '#' + $this.parents('.notifications').data('tabbed_notifications'),
-                    others = $this.closest('li').siblings().children('a'),
-                    target = $this.attr('href');
-                others.removeClass('active');
-                $this.addClass('active');
-                $(tabbed_notifications).children('div').hide();
-                $(target).show();
-            });
-        }
+                CustomTabs = function (options) {
+                    $('.tabbed_notifications > div').hide();
+                    $('.tabbed_notifications > div:first-of-type').show();
+                    $('#custom_notifications').removeClass('dsp_none');
+                    $('.notifications a').click(function (e) {
+                        e.preventDefault();
+                        var $this = $(this),
+                            tabbed_notifications = '#' + $this.parents('.notifications').data('tabbed_notifications'),
+                            others = $this.closest('li').siblings().children('a'),
+                            target = $this.attr('href');
+                        others.removeClass('active');
+                        $this.addClass('active');
+                        $(tabbed_notifications).children('div').hide();
+                        $(target).show();
+                    });
+                }
 
-        CustomTabs();
+                CustomTabs();
 
-        var tabid = idname = '';
-        $(document).on('click', '.notification_close', function (e) {
-            idname = $(this).parent().parent().attr("id");
-            tabid = idname.substr(-2);
-            $('#ntf' + tabid).remove();
-            $('#ntlink' + tabid).parent().remove();
-            $('.notifications a').first().addClass('active');
-            $('#notif-group div').first().css('display', 'block');
-        });
-    })
-    </script>
+                var tabid = idname = '';
+                $(document).on('click', '.notification_close', function (e) {
+                    idname = $(this).parent().parent().attr("id");
+                    tabid = idname.substr(-2);
+                    $('#ntf' + tabid).remove();
+                    $('#ntlink' + tabid).parent().remove();
+                    $('.notifications a').first().addClass('active');
+                    $('#notif-group div').first().css('display', 'block');
+                });
+            })
+        </script>
 
         <!-- form wizard -->
         <script type="text/javascript" src="@Url.Content("~/Content/js/wizard/jquery.smartWizard.js")"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Smart Wizard
-            $('#wizard').smartWizard();
+        <script type="text/javascript">
+            $(document).ready(function () {
+                // Smart Wizard
+                $('#wizard').smartWizard();
 
-            function onFinishCallback() {
-                $('#wizard').smartWizard('showMessage', 'Finish Clicked');
-                //alert('Finish Clicked');
-            }
-        });
-
-        $(document).ready(function () {
-            // Smart Wizard
-            $('#wizard_verticle').smartWizard({
-                transitionEffect: 'slide'
+                function onFinishCallback() {
+                    $('#wizard').smartWizard('showMessage', 'Finish Clicked');
+                    //alert('Finish Clicked');
+                }
             });
 
-        });
-    </script>
+            $(document).ready(function () {
+                // Smart Wizard
+                $('#wizard_verticle').smartWizard({
+                    transitionEffect: 'slide'
+                });
+
+            });
+        </script>
 
         <!-- image cropping -->
         <script src="~/Content/js/cropping/cropper.min.js"></script>
@@ -353,125 +365,125 @@
         <script type="~/Content/text/javascript" src="@Url.Content("~/Content/js/gauge/gauge.min.js")"></script>
         <script type="~/Content/text/javascript" src="@Url.Content("~/Content/js/gauge/gauge_demo.js")"></script>
 
-    <script>
-    $(window).load(function () {
+        <script>
+            $(window).load(function () {
 
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-        var started;
-        var categoryClass;
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth();
+                var y = date.getFullYear();
+                var started;
+                var categoryClass;
 
-        var calendar = $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            selectable: true,
-            selectHelper: true,
-            select: function (start, end, allDay) {
-                $('#fc_create').click();
+                var calendar = $('#calendar').fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    selectable: true,
+                    selectHelper: true,
+                    select: function (start, end, allDay) {
+                        $('#fc_create').click();
 
-                started = start;
-                ended = end
-
-                $(".antosubmit").on("click", function () {
-                    var title = $("#title").val();
-                    if (end) {
+                        started = start;
                         ended = end
-                    }
-                    categoryClass = $("#event_type").val();
 
-                    if (title) {
-                        calendar.fullCalendar('renderEvent', {
-                            title: title,
-                            start: started,
-                            end: end,
-                            allDay: allDay
+                        $(".antosubmit").on("click", function () {
+                            var title = $("#title").val();
+                            if (end) {
+                                ended = end
+                            }
+                            categoryClass = $("#event_type").val();
+
+                            if (title) {
+                                calendar.fullCalendar('renderEvent', {
+                                    title: title,
+                                    start: started,
+                                    end: end,
+                                    allDay: allDay
+                                },
+                                    true // make the event "stick"
+                                );
+                            }
+                            $('#title').val('');
+                            calendar.fullCalendar('unselect');
+
+                            $('.antoclose').click();
+
+                            return false;
+                        });
+                    },
+                    eventClick: function (calEvent, jsEvent, view) {
+                        //alert(calEvent.title, jsEvent, view);
+
+                        $('#fc_edit').click();
+                        $('#title2').val(calEvent.title);
+                        categoryClass = $("#event_type").val();
+
+                        $(".antosubmit2").on("click", function () {
+                            calEvent.title = $("#title2").val();
+
+                            calendar.fullCalendar('updateEvent', calEvent);
+                            $('.antoclose2').click();
+                        });
+                        calendar.fullCalendar('unselect');
+                    },
+                    editable: true,
+                    events: [
+                        {
+                            title: 'All Day Event',
+                            start: new Date(y, m, 1)
                         },
-                            true // make the event "stick"
-                        );
-                    }
-                    $('#title').val('');
-                    calendar.fullCalendar('unselect');
-
-                    $('.antoclose').click();
-
-                    return false;
+                        {
+                            title: 'Long Event',
+                            start: new Date(y, m, d - 5),
+                            end: new Date(y, m, d - 2)
+                        },
+                        {
+                            title: 'Meeting',
+                            start: new Date(y, m, d, 10, 30),
+                            allDay: false
+                        },
+                        {
+                            title: 'Lunch',
+                            start: new Date(y, m, d + 14, 12, 0),
+                            end: new Date(y, m, d, 14, 0),
+                            allDay: false
+                        },
+                        {
+                            title: 'Birthday Party',
+                            start: new Date(y, m, d + 1, 19, 0),
+                            end: new Date(y, m, d + 1, 22, 30),
+                            allDay: false
+                        },
+                        {
+                            title: 'Click for Google',
+                            start: new Date(y, m, 28),
+                            end: new Date(y, m, 29),
+                            url: 'http://google.com/'
+                        }
+                    ]
                 });
-            },
-            eventClick: function (calEvent, jsEvent, view) {
-                //alert(calEvent.title, jsEvent, view);
-
-                $('#fc_edit').click();
-                $('#title2').val(calEvent.title);
-                categoryClass = $("#event_type").val();
-
-                $(".antosubmit2").on("click", function () {
-                    calEvent.title = $("#title2").val();
-
-                    calendar.fullCalendar('updateEvent', calEvent);
-                    $('.antoclose2').click();
-                });
-                calendar.fullCalendar('unselect');
-            },
-            editable: true,
-            events: [
-                {
-                    title: 'All Day Event',
-                    start: new Date(y, m, 1)
-                },
-                {
-                    title: 'Long Event',
-                    start: new Date(y, m, d - 5),
-                    end: new Date(y, m, d - 2)
-                },
-                {
-                    title: 'Meeting',
-                    start: new Date(y, m, d, 10, 30),
-                    allDay: false
-                },
-                {
-                    title: 'Lunch',
-                    start: new Date(y, m, d + 14, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false
-                },
-                {
-                    title: 'Birthday Party',
-                    start: new Date(y, m, d + 1, 19, 0),
-                    end: new Date(y, m, d + 1, 22, 30),
-                    allDay: false
-                },
-                {
-                    title: 'Click for Google',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'http://google.com/'
-                }
-            ]
-        });
-    });
-    </script>
+            });
+        </script>
 
         <!-- flot js -->
-    <!-- tags -->
-    <script src="@Url.Content("~/Content/js/tags/jquery.tagsinput.min.js")"></script>
-    <!-- switchery -->
-    <script src="@Url.Content("~/Content/js/switchery/switchery.min.js")"></script>
-    <!-- daterangepicker -->
-    <script type="text/javascript" src="@Url.Content("~/Content/js/moment.min2.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/datepicker/daterangepicker.js")"></script>
-    <!-- richtext editor -->
-    <script src="@Url.Content("~/Content/js/editor/bootstrap-wysiwyg.js")"></script>
-    <script src="@Url.Content("~/Content/js/editor/external/jquery.hotkeys.js")"></script>
-    <script src="@Url.Content("~/Content/js/editor/external/google-code-prettify/prettify.js")"></script>
-    <!-- select2 -->
-    <script src="@Url.Content("~/Content/js/select/select2.full.js")"></script>
-    <!-- textarea resize -->
-    <script src="@Url.Content("~/Content/js/textarea/autosize.min.js")"></script>
+        <!-- tags -->
+        <script src="@Url.Content("~/Content/js/tags/jquery.tagsinput.min.js")"></script>
+        <!-- switchery -->
+        <script src="@Url.Content("~/Content/js/switchery/switchery.min.js")"></script>
+        <!-- daterangepicker -->
+        <script type="text/javascript" src="@Url.Content("~/Content/js/moment.min2.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/datepicker/daterangepicker.js")"></script>
+        <!-- richtext editor -->
+        <script src="@Url.Content("~/Content/js/editor/bootstrap-wysiwyg.js")"></script>
+        <script src="@Url.Content("~/Content/js/editor/external/jquery.hotkeys.js")"></script>
+        <script src="@Url.Content("~/Content/js/editor/external/google-code-prettify/prettify.js")"></script>
+        <!-- select2 -->
+        <script src="@Url.Content("~/Content/js/select/select2.full.js")"></script>
+        <!-- textarea resize -->
+        <script src="@Url.Content("~/Content/js/textarea/autosize.min.js")"></script>
         <!--[if lte IE 8]><script type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
         <script type="~/Content/text/javascript" src="@Url.Content("~/Content/js/flot/jquery.flot.pie.js")"></script>
         <script type="~/Content/text/javascript" src="@Url.Content("~/Content/js/flot/jquery.flot.js")"></script>
@@ -483,64 +495,64 @@
         <script type="~/Content/text/javascript" src="@Url.Content("~/Content/js/flot/curvedLines.js")"></script>
         <script type="~/Content/text/javascript" src="@Url.Content("~/Content/js/flot/jquery.flot.resize.js")"></script>
         <script>
-        $(document).ready(function () {
-            // [17, 74, 6, 39, 20, 85, 7]
-            //[82, 23, 66, 9, 99, 6, 2]
-            var data1 = [[gd(2012, 1, 1), 17], [gd(2012, 1, 2), 74], [gd(2012, 1, 3), 6], [gd(2012, 1, 4), 39], [gd(2012, 1, 5), 20], [gd(2012, 1, 6), 85], [gd(2012, 1, 7), 7]];
+            $(document).ready(function () {
+                // [17, 74, 6, 39, 20, 85, 7]
+                //[82, 23, 66, 9, 99, 6, 2]
+                var data1 = [[gd(2012, 1, 1), 17], [gd(2012, 1, 2), 74], [gd(2012, 1, 3), 6], [gd(2012, 1, 4), 39], [gd(2012, 1, 5), 20], [gd(2012, 1, 6), 85], [gd(2012, 1, 7), 7]];
 
-            var data2 = [[gd(2012, 1, 1), 82], [gd(2012, 1, 2), 23], [gd(2012, 1, 3), 66], [gd(2012, 1, 4), 9], [gd(2012, 1, 5), 119], [gd(2012, 1, 6), 6], [gd(2012, 1, 7), 9]];
-            $("#canvas_dahs").length && $.plot($("#canvas_dahs"), [
-                data1, data2
-            ], {
-                series: {
-                    lines: {
-                        show: false,
-                        fill: true
+                var data2 = [[gd(2012, 1, 1), 82], [gd(2012, 1, 2), 23], [gd(2012, 1, 3), 66], [gd(2012, 1, 4), 9], [gd(2012, 1, 5), 119], [gd(2012, 1, 6), 6], [gd(2012, 1, 7), 9]];
+                $("#canvas_dahs").length && $.plot($("#canvas_dahs"), [
+                    data1, data2
+                ], {
+                    series: {
+                        lines: {
+                            show: false,
+                            fill: true
+                        },
+                        splines: {
+                            show: true,
+                            tension: 0.4,
+                            lineWidth: 1,
+                            fill: 0.4
+                        },
+                        points: {
+                            radius: 0,
+                            show: true
+                        },
+                        shadowSize: 2
                     },
-                    splines: {
-                        show: true,
-                        tension: 0.4,
-                        lineWidth: 1,
-                        fill: 0.4
+                    grid: {
+                        verticalLines: true,
+                        hoverable: true,
+                        clickable: true,
+                        tickColor: "#d5d5d5",
+                        borderWidth: 1,
+                        color: '#fff'
                     },
-                    points: {
-                        radius: 0,
-                        show: true
+                    colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
+                    xaxis: {
+                        tickColor: "rgba(51, 51, 51, 0.06)",
+                        mode: "time",
+                        tickSize: [1, "day"],
+                        //tickLength: 10,
+                        axisLabel: "Date",
+                        axisLabelUseCanvas: true,
+                        axisLabelFontSizePixels: 12,
+                        axisLabelFontFamily: 'Verdana, Arial',
+                        axisLabelPadding: 10
+                        //mode: "time", timeformat: "%m/%d/%y", minTickSize: [1, "day"]
                     },
-                    shadowSize: 2
-                },
-                grid: {
-                    verticalLines: true,
-                    hoverable: true,
-                    clickable: true,
-                    tickColor: "#d5d5d5",
-                    borderWidth: 1,
-                    color: '#fff'
-                },
-                colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
-                xaxis: {
-                    tickColor: "rgba(51, 51, 51, 0.06)",
-                    mode: "time",
-                    tickSize: [1, "day"],
-                    //tickLength: 10,
-                    axisLabel: "Date",
-                    axisLabelUseCanvas: true,
-                    axisLabelFontSizePixels: 12,
-                    axisLabelFontFamily: 'Verdana, Arial',
-                    axisLabelPadding: 10
-                    //mode: "time", timeformat: "%m/%d/%y", minTickSize: [1, "day"]
-                },
-                yaxis: {
-                    ticks: 8,
-                    tickColor: "rgba(51, 51, 51, 0.06)",
-                },
-                tooltip: false
+                    yaxis: {
+                        ticks: 8,
+                        tickColor: "rgba(51, 51, 51, 0.06)",
+                    },
+                    tooltip: false
+                });
+
+                function gd(year, month, day) {
+                    return new Date(year, month - 1, day).getTime();
+                }
             });
-
-            function gd(year, month, day) {
-                return new Date(year, month - 1, day).getTime();
-            }
-        });
         </script>
         <!-- worldmap -->
         <script type="text/javascript" src="@Url.Content("~/Content/js/maps/jquery-jvectormap-2.0.1.min.js")"></script>
@@ -548,164 +560,161 @@
         <script type="text/javascript" src="@Url.Content("~/Content/js/maps/jquery-jvectormap-world-mill-en.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/maps/jquery-jvectormap-us-aea-en.js")"></script>
         <script>
-        $(function () {
-            $('#world-map-gdp').vectorMap({
-                map: 'world_mill_en',
-                backgroundColor: 'transparent',
-                zoomOnScroll: false,
-                series: {
-                    regions: [{
-                        values: gdpData,
-                        scale: ['#E6F2F0', '#149B7E'],
-                        normalizeFunction: 'polynomial'
-                    }]
-                },
-                onRegionTipShow: function (e, el, code) {
-                    el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
-                }
+            $(function () {
+                $('#world-map-gdp').vectorMap({
+                    map: 'world_mill_en',
+                    backgroundColor: 'transparent',
+                    zoomOnScroll: false,
+                    series: {
+                        regions: [{
+                            values: gdpData,
+                            scale: ['#E6F2F0', '#149B7E'],
+                            normalizeFunction: 'polynomial'
+                        }]
+                    },
+                    onRegionTipShow: function (e, el, code) {
+                        el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
+                    }
+                });
             });
-        });
         </script>
         <!-- skycons -->
         <script src="~/Content/js/skycons/skycons.js"></script>
         <script>
-        var icons = new Skycons({
-            "color": "#73879C"
-        }),
-            list = [
-                "clear-day", "clear-night", "partly-cloudy-day",
-                "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
-                "fog"
-            ],
-            i;
+            var icons = new Skycons({
+                "color": "#73879C"
+            }),
+                list = [
+                    "clear-day", "clear-night", "partly-cloudy-day",
+                    "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+                    "fog"
+                ],
+                i;
 
-        for (i = list.length; i--;)
-            icons.set(list[i], list[i]);
+            for (i = list.length; i--;)
+                icons.set(list[i], list[i]);
 
-        icons.play();
+            icons.play();
         </script>
         <!-- dashbord linegraph -->
         <script>
-        var doughnutData = [
-            {
-                value: 30,
-                color: "#455C73"
-            },
-            {
-                value: 30,
-                color: "#9B59B6"
-            },
-            {
-                value: 60,
-                color: "#BDC3C7"
-            },
-            {
-                value: 100,
-                color: "#26B99A"
-            },
-            {
-                value: 120,
-                color: "#3498DB"
-            }
-        ];
-        var myDoughnut = new Chart(document.getElementById("canvas1").getContext("2d")).Doughnut(doughnutData);
+            var doughnutData = [
+                {
+                    value: 30,
+                    color: "#455C73"
+                },
+                {
+                    value: 30,
+                    color: "#9B59B6"
+                },
+                {
+                    value: 60,
+                    color: "#BDC3C7"
+                },
+                {
+                    value: 100,
+                    color: "#26B99A"
+                },
+                {
+                    value: 120,
+                    color: "#3498DB"
+                }
+            ];
+            var myDoughnut = new Chart(document.getElementById("canvas1").getContext("2d")).Doughnut(doughnutData);
         </script>
         <!-- /dashbord linegraph -->
         <script>
-        $(document).ready(function () {
-            $(".select2_single").select2({
-                placeholder: "Select a state",
-                allowClear: true
+            $(document).ready(function () {
+                $(".select2_single").select2({
+                    placeholder: "Select a state",
+                    allowClear: true
+                });
+                $(".select2_group").select2({});
+                $(".select2_multiple").select2({
+                    maximumSelectionLength: 4,
+                    placeholder: "With Max Selection limit 4",
+                    allowClear: true
+                });
             });
-            $(".select2_group").select2({});
-            $(".select2_multiple").select2({
-                maximumSelectionLength: 4,
-                placeholder: "With Max Selection limit 4",
-                allowClear: true
-            });
-        });
         </script>
-    <!-- /select2 -->
-
-
+        <!-- /select2 -->
         <!-- datepicker -->
         <script type="text/javascript">
-        $(document).ready(function () {
+            $(document).ready(function () {
 
-            var cb = function (start, end, label) {
-                console.log(start.toISOString(), end.toISOString(), label);
-                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                //alert("Callback has fired: [" + start.format('MMMM D, YYYY') + " to " + end.format('MMMM D, YYYY') + ", label = " + label + "]");
-            }
-
-            var optionSet1 = {
-                startDate: moment().subtract(29, 'days'),
-                endDate: moment(),
-                minDate: '01/01/2012',
-                maxDate: '12/31/2015',
-                dateLimit: {
-                    days: 60
-                },
-                showDropdowns: true,
-                showWeekNumbers: true,
-                timePicker: false,
-                timePickerIncrement: 1,
-                timePicker12Hour: true,
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                opens: 'left',
-                buttonClasses: ['btn btn-default'],
-                applyClass: 'btn-small btn-primary',
-                cancelClass: 'btn-small',
-                format: 'MM/DD/YYYY',
-                separator: ' to ',
-                locale: {
-                    applyLabel: 'Submit',
-                    cancelLabel: 'Clear',
-                    fromLabel: 'From',
-                    toLabel: 'To',
-                    customRangeLabel: 'Custom',
-                    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-                    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                    firstDay: 1
+                var cb = function (start, end, label) {
+                    console.log(start.toISOString(), end.toISOString(), label);
+                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                    //alert("Callback has fired: [" + start.format('MMMM D, YYYY') + " to " + end.format('MMMM D, YYYY') + ", label = " + label + "]");
                 }
-            };
-            $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-            $('#reportrange').daterangepicker(optionSet1, cb);
-            $('#reportrange').on('show.daterangepicker', function () {
-                console.log("show event fired");
+
+                var optionSet1 = {
+                    startDate: moment().subtract(29, 'days'),
+                    endDate: moment(),
+                    minDate: '01/01/2012',
+                    maxDate: '12/31/2015',
+                    dateLimit: {
+                        days: 60
+                    },
+                    showDropdowns: true,
+                    showWeekNumbers: true,
+                    timePicker: false,
+                    timePickerIncrement: 1,
+                    timePicker12Hour: true,
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    opens: 'left',
+                    buttonClasses: ['btn btn-default'],
+                    applyClass: 'btn-small btn-primary',
+                    cancelClass: 'btn-small',
+                    format: 'MM/DD/YYYY',
+                    separator: ' to ',
+                    locale: {
+                        applyLabel: 'Submit',
+                        cancelLabel: 'Clear',
+                        fromLabel: 'From',
+                        toLabel: 'To',
+                        customRangeLabel: 'Custom',
+                        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                        firstDay: 1
+                    }
+                };
+                $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+                $('#reportrange').daterangepicker(optionSet1, cb);
+                $('#reportrange').on('show.daterangepicker', function () {
+                    console.log("show event fired");
+                });
+                $('#reportrange').on('hide.daterangepicker', function () {
+                    console.log("hide event fired");
+                });
+                $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+                    console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+                });
+                $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
+                    console.log("cancel event fired");
+                });
+                $('#options1').click(function () {
+                    $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+                });
+                $('#options2').click(function () {
+                    $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+                });
+                $('#destroy').click(function () {
+                    $('#reportrange').data('daterangepicker').remove();
+                });
             });
-            $('#reportrange').on('hide.daterangepicker', function () {
-                console.log("hide event fired");
-            });
-            $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
-                console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
-            });
-            $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
-                console.log("cancel event fired");
-            });
-            $('#options1').click(function () {
-                $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
-            });
-            $('#options2').click(function () {
-                $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
-            });
-            $('#destroy').click(function () {
-                $('#reportrange').data('daterangepicker').remove();
-            });
-        });
         </script>
         <script>
-        NProgress.done();
+            NProgress.done();
         </script>
         <!-- /datepicker -->
-
         <!-- /footer content -->
-</body>
+    </body>
 </html>

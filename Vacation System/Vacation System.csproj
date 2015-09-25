@@ -906,6 +906,7 @@
     <Content Include="Views\AccountPage\Layout.cshtml" />
     <Content Include="Views\AccountPage\Users.cshtml" />
     <Content Include="Views\AccountPage\EditUser.cshtml" />
+    <Content Include="Views\AccountPage\Requests.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -90,6 +90,10 @@ namespace Vacation_System.Controllers
 			return View(pvm);
 		}
 
+        public ActionResult Requests() {
+
+            return View();
+        }
 		[HttpGet]
 		public ActionResult Departments()
 		{
