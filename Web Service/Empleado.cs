@@ -56,6 +56,9 @@ namespace Web_Service
         [DataMember]
         public int YearC { get; set; }
 
+        [DataMember]
+        public bool Notification { get; set; }
+
 
         public Empleado()
         {

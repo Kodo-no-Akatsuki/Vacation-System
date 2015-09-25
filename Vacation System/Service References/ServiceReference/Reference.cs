@@ -44,6 +44,9 @@ namespace Vacation_System.ServiceReference {
         private Vacation_System.ServiceReference.LogVacacionesMirror[] LogVacacionesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool NotificationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Vacation_System.ServiceReference.PermisosMirror[] PermisosField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -161,6 +164,19 @@ namespace Vacation_System.ServiceReference {
                 if ((object.ReferenceEquals(this.LogVacacionesField, value) != true)) {
                     this.LogVacacionesField = value;
                     this.RaisePropertyChanged("LogVacaciones");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Notification {
+            get {
+                return this.NotificationField;
+            }
+            set {
+                if ((this.NotificationField.Equals(value) != true)) {
+                    this.NotificationField = value;
+                    this.RaisePropertyChanged("Notification");
                 }
             }
         }
@@ -1381,6 +1397,12 @@ namespace Vacation_System.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadPermisosData", ReplyAction="http://tempuri.org/IService/LoadPermisosDataResponse")]
         System.Threading.Tasks.Task<string[]> LoadPermisosDataAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadVacaciones", ReplyAction="http://tempuri.org/IService/LoadVacacionesResponse")]
+        Vacation_System.ServiceReference.Empleado LoadVacaciones(Vacation_System.ServiceReference.Empleado empleado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoadVacaciones", ReplyAction="http://tempuri.org/IService/LoadVacacionesResponse")]
+        System.Threading.Tasks.Task<Vacation_System.ServiceReference.Empleado> LoadVacacionesAsync(Vacation_System.ServiceReference.Empleado empleado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1480,6 +1502,14 @@ namespace Vacation_System.ServiceReference {
         
         public System.Threading.Tasks.Task<string[]> LoadPermisosDataAsync() {
             return base.Channel.LoadPermisosDataAsync();
+        }
+        
+        public Vacation_System.ServiceReference.Empleado LoadVacaciones(Vacation_System.ServiceReference.Empleado empleado) {
+            return base.Channel.LoadVacaciones(empleado);
+        }
+        
+        public System.Threading.Tasks.Task<Vacation_System.ServiceReference.Empleado> LoadVacacionesAsync(Vacation_System.ServiceReference.Empleado empleado) {
+            return base.Channel.LoadVacacionesAsync(empleado);
         }
     }
 }

@@ -14,11 +14,14 @@ namespace Vacation_System.Controllers
 		[HttpGet]
 		public ActionResult Dashboard()
 		{
+			ServiceClient service = new ServiceClient();
 			Empleado user = Session["User"] as Empleado;
 			List<PendingVacations> pendientes = new List<PendingVacations>();
 
 			if (user == null) return LogOut();
 
+			Session["User"] = service.LoadVacaciones(Session["User"] as Empleado);
+			user = Session["User"] as Empleado;
 			user.YearC = (int)((DateTime.Now - user.User.FechaIngreso).TotalDays) / 365;
 			user.DiasTomadosAnteriormente = user.Vacaciones.Where(vacacion => vacacion.Year == DateTime.Now.Year && vacacion.Estatus.Descripcion.Equals("Aprobado")).Sum(vacacion => vacacion.DiasSolicitados);
 
@@ -34,7 +37,7 @@ namespace Vacation_System.Controllers
 				if (user.Vacaciones[i].DiasSolicitados < 23 && user.Vacaciones[i].Estatus.Descripcion.Equals("Aprobado"))
 				{
 					available -= user.Vacaciones[i].DiasSolicitados;
-					while (i != (user.Vacaciones.Length - 1) && user.Vacaciones[i + 1].Year == user.Vacaciones[i].Year)
+					while (i != (user.Vacaciones.Length - 1) && user.Vacaciones[i + 1].Year == user.Vacaciones[i].Year && user.Vacaciones[i+1].Estatus.Descripcion.Equals("Aprobado"))
 					{
 						available -= user.Vacaciones[i + 1].DiasSolicitados;
 						i++;
@@ -50,6 +53,7 @@ namespace Vacation_System.Controllers
 
 			ViewBag.VacacionesPendientes = pendientes;
 			ViewBag.NotificationScript = "new PNotify({title: 'Enhorabuena', text: 'La solicitud ha sido enviada!', type: 'success'});";
+			service.Close();
 
 			return View(user);
 		}
@@ -58,12 +62,15 @@ namespace Vacation_System.Controllers
 		public RedirectToRouteResult Dashboard(VacacionesMirror vacaciones)
 		{
 			ServiceClient service = new ServiceClient();
+			Empleado emp = (Session["User"] as Empleado);
 
 			vacaciones.TalentoHumano = (Session["User"] as Empleado).User.TalentoHumano;
 			vacaciones.FechaSolicitud = DateTime.Now;
 			vacaciones.Year = DateTime.Today.Year;
+			emp.Notification = true;
 
 			service.AddVacation(vacaciones);
+			service.Close();
 
 			return RedirectToAction("Dashboard");
 		}

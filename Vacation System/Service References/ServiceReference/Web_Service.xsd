@@ -11,6 +11,7 @@
       <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FechasNoDisponibles" nillable="true" type="q3:ArrayOfdateTime" />
       <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="Jerarquias" nillable="true" type="q4:ArrayOfJerarquiaMirror" />
       <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="LogVacaciones" nillable="true" type="q5:ArrayOfLogVacacionesMirror" />
+      <xs:element minOccurs="0" name="Notification" type="xs:boolean" />
       <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="Permisos" nillable="true" type="q6:ArrayOfPermisosMirror" />
       <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="Roles" nillable="true" type="q7:ArrayOfRolesMirror" />
       <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="Status" nillable="true" type="q8:ArrayOfStatusMirror" />

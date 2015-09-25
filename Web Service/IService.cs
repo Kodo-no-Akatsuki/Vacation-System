@@ -39,6 +39,9 @@ namespace Web_Service
         [OperationContract]
         List<string> LoadPermisosData();
 
+        [OperationContract]
+        Empleado LoadVacaciones(Empleado empleado);
+
     }
 
 }

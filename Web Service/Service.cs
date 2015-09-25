@@ -32,6 +32,7 @@ namespace Web_Service
                 Usuarios user = userResults.FirstOrDefault();
 
                 emp.User = new UserMirror(user);
+                emp.Notification = false;
 
 
                 foreach (Roles rol in user.tbl_roles)
@@ -100,7 +101,7 @@ namespace Web_Service
                         FechaSolicitud = vac.fecha_solicitud,
                         TalentoHumano = vac.talento_humano,
                         VacacionesId = vac.vacacionesid,
-                        Year = vac.year
+                        Year = vac.year,
                     });
                 }
 
@@ -301,6 +302,45 @@ namespace Web_Service
             List<string> permisos = entity.Permisos.Select(permiso => permiso.descripcion).ToList();
 
             return permisos;
+        }
+
+        public Empleado LoadVacaciones(Empleado empleado)
+        {
+            VacationEntities entities = new VacationEntities();
+            empleado.Vacaciones = new List<VacacionesMirror>();
+            empleado.Status = new List<StatusMirror>();
+
+            var userResults = (from u in entities.Usuarios
+                               where u.email == empleado.User.Email && u.password == empleado.User.Password && u.activo
+                               select u);
+
+            Usuarios user = userResults.FirstOrDefault();
+
+            foreach (Vacaciones vac in user.tbl_vacaciones)
+            {
+
+                empleado.Status.Add(new StatusMirror
+                {
+                    Activo = vac.tbl_estatus.activo,
+                    Descripcion = vac.tbl_estatus.descripcion,
+                    Id = vac.tbl_estatus.estatusid
+                });
+
+                empleado.Vacaciones.Add(new VacacionesMirror
+                {
+                    DiasSolicitados = vac.dias_solicitados,
+                    Estatus = empleado.Status.Last(),
+                    FechaAprobacion = vac.fecha_de_aprobacion,
+                    FechaEntrada = vac.fecha_entrada,
+                    FechaSalida = vac.fecha_salida,
+                    FechaSolicitud = vac.fecha_solicitud,
+                    TalentoHumano = vac.talento_humano,
+                    VacacionesId = vac.vacacionesid,
+                    Year = vac.year,
+                });
+            }
+
+            return empleado;
         }
     }
 }

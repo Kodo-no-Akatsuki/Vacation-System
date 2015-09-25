@@ -63,6 +63,12 @@
   <wsdl:message name="IService_LoadPermisosData_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoadPermisosDataResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_LoadVacaciones_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoadVacaciones" />
+  </wsdl:message>
+  <wsdl:message name="IService_LoadVacaciones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoadVacacionesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetData" message="tns:IService_GetData_InputMessage" />
@@ -99,6 +105,10 @@
     <wsdl:operation name="LoadPermisosData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/LoadPermisosData" message="tns:IService_LoadPermisosData_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/LoadPermisosDataResponse" message="tns:IService_LoadPermisosData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadVacaciones">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/LoadVacaciones" message="tns:IService_LoadVacaciones_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/LoadVacacionesResponse" message="tns:IService_LoadVacaciones_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -177,6 +187,15 @@
     </wsdl:operation>
     <wsdl:operation name="LoadPermisosData">
       <soap:operation soapAction="http://tempuri.org/IService/LoadPermisosData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadVacaciones">
+      <soap:operation soapAction="http://tempuri.org/IService/LoadVacaciones" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

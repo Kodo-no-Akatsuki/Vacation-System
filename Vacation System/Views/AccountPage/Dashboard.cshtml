@@ -11,6 +11,7 @@
 
     var jsonFechas = JsonConvert.SerializeObject(Model.FechasNoDisponibles, new IsoDateTimeConverter());
     var date = new DateTime();
+    
 }
 
 <div class="" />
@@ -247,6 +248,11 @@
                                     var begin = new Date(startDate[2], startDate[0] - 1, startDate[1]);
                                     var end = new Date(endDate[2], endDate[0] - 1, endDate[1]);
 
+                                    console.log(begin.getMonth() + 1);
+                                    console.log(begin.getDate());
+                                    console.log(new Date().getMonth()+1);
+                                    console.log(new Date().getDate());
+
                                     if (new Date().getFullYear() !== begin.getFullYear()) {
                                         alert("Solo puede escoger dias del año vigente!");
                                         $("#nextBtn").attr("disabled", true);
@@ -254,7 +260,7 @@
                                         //Analizar mejor esta condicion
                                     }
 
-                                    else if (begin.getDate() < new Date().getDate() || begin.getMonth() < new Date().getMonth()) {
+                                    else if ((begin.getMonth()) < new Date().getMonth() && begin.getDate() < new Date().getDate()) {
                                         alert("No puede seleccionar dias del pasado");
                                         $("#nextBtn").attr("disabled", true);
                                         return false;
@@ -270,7 +276,7 @@
 
                                     else if (invalid.getMonth() < end.getMonth()) {
                                         alert("La fecha " + (invalid.getMonth() + 1).toString() + '/' + invalid.getDate().toString() + '/'
-                                                + invalid.getFullYear() + " no esta disponible");
+                                            + invalid.getFullYear() + " no esta disponible");
                                         $("#nextBtn").attr("disabled", true);
                                         return false;
                                     }
@@ -336,10 +342,6 @@
                                     </div>
                                 </div>
 
-                                @*<input type="hidden" name="TalentoHumano" value="@Model.User.TalentoHumano" />
-                                    <input type="hidden" name="FechaSolicitud" value="@date" />
-                                    <input type="hidden" name="Year" value="@date.Year"/>*@
-
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input style="margin: 0 auto; background: #193b69;" type="submit" class="btn btn-primary pull-right" name="confirm" value="Enviar" />
@@ -350,11 +352,6 @@
                             @*</form>*@
                             <div id="msg"></div>
 
-                            <script>
-                                function EnviarDatos() {
-                                    @Html.Raw(ViewBag.NotificationScript);
-                                }
-                            </script>
                         </div>
                         <!-- End SmartWizard Content -->
                     </div>
@@ -364,6 +361,7 @@
                 {
                     <p>Su solicitud esta en espera de ser revisada.</p>
                 }
+
             </div>
         </div>
     </div>
@@ -493,3 +491,14 @@
 <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
 <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
 <!--End of calendar modal :^)-->
+
+@if (Model.Notification)
+{
+    <script type="text/javascript">
+        $(function() {
+            @Html.Raw(ViewBag.NotificationScript);
+        })
+    </script>
+
+    Model.Notification = false;
+}
