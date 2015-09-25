@@ -21,6 +21,9 @@ namespace Web_Service
         void CreateDepartment(DepartamentoMirror depto);
 
         [OperationContract]
+        void AddVacation(VacacionesMirror vacaciones);
+
+        [OperationContract]
         void EditDepartment(DepartamentoMirror depto);
 
         [OperationContract]
@@ -34,6 +37,9 @@ namespace Web_Service
 
         [OperationContract]
         List<string> LoadPermisosData();
+
+        [OperationContract]
+        Empleado LoadVacaciones(Empleado empleado);
 
         [OperationContract]
         void SaveRoleChanges(RolesMirror rolMirror);
