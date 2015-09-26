@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
+using System.Threading;
 using Web_Service.Mirror_Classes;
 
 namespace Web_Service
@@ -55,6 +56,12 @@ namespace Web_Service
 
         [OperationContract]
         void EditUser(Empleado empleado);
+
+        [OperationContract]
+        List<Solicitud> LoadSolicitudes(int talentoHumano);
+
+        [OperationContract]
+        void UpdateSolicitud(bool estado, int id);
 
     }
 

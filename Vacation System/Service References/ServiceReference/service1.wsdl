@@ -38,6 +38,7 @@
   </wsdl:message>
   <wsdl:message name="IService_AddVacation_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddVacationResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_EditDepartment_InputMessage">
     <wsdl:part name="parameters" element="tns:EditDepartment" />
   </wsdl:message>
@@ -73,6 +74,7 @@
   </wsdl:message>
   <wsdl:message name="IService_LoadVacaciones_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoadVacacionesResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_SaveRoleChanges_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveRoleChanges" />
   </wsdl:message>
@@ -103,6 +105,18 @@
   <wsdl:message name="IService_EditUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:EditUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_LoadSolicitudes_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoadSolicitudes" />
+  </wsdl:message>
+  <wsdl:message name="IService_LoadSolicitudes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoadSolicitudesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_UpdateSolicitud_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSolicitud" />
+  </wsdl:message>
+  <wsdl:message name="IService_UpdateSolicitud_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSolicitudResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetData" message="tns:IService_GetData_InputMessage" />
@@ -123,6 +137,7 @@
     <wsdl:operation name="AddVacation">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/AddVacation" message="tns:IService_AddVacation_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/AddVacationResponse" message="tns:IService_AddVacation_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="EditDepartment">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/EditDepartment" message="tns:IService_EditDepartment_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/EditDepartmentResponse" message="tns:IService_EditDepartment_OutputMessage" />
@@ -146,6 +161,7 @@
     <wsdl:operation name="LoadVacaciones">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/LoadVacaciones" message="tns:IService_LoadVacaciones_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/LoadVacacionesResponse" message="tns:IService_LoadVacaciones_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SaveRoleChanges">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/SaveRoleChanges" message="tns:IService_SaveRoleChanges_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/SaveRoleChangesResponse" message="tns:IService_SaveRoleChanges_OutputMessage" />
@@ -165,6 +181,14 @@
     <wsdl:operation name="EditUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/EditUser" message="tns:IService_EditUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/EditUserResponse" message="tns:IService_EditUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadSolicitudes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/LoadSolicitudes" message="tns:IService_LoadSolicitudes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/LoadSolicitudesResponse" message="tns:IService_LoadSolicitudes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSolicitud">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/UpdateSolicitud" message="tns:IService_UpdateSolicitud_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/UpdateSolicitudResponse" message="tns:IService_UpdateSolicitud_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -207,6 +231,13 @@
     </wsdl:operation>
     <wsdl:operation name="AddVacation">
       <soap:operation soapAction="http://tempuri.org/IService/AddVacation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="EditDepartment">
       <soap:operation soapAction="http://tempuri.org/IService/EditDepartment" style="document" />
       <wsdl:input>
@@ -254,6 +285,13 @@
     </wsdl:operation>
     <wsdl:operation name="LoadVacaciones">
       <soap:operation soapAction="http://tempuri.org/IService/LoadVacaciones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SaveRoleChanges">
       <soap:operation soapAction="http://tempuri.org/IService/SaveRoleChanges" style="document" />
       <wsdl:input>
@@ -292,6 +330,24 @@
     </wsdl:operation>
     <wsdl:operation name="EditUser">
       <soap:operation soapAction="http://tempuri.org/IService/EditUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadSolicitudes">
+      <soap:operation soapAction="http://tempuri.org/IService/LoadSolicitudes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSolicitud">
+      <soap:operation soapAction="http://tempuri.org/IService/UpdateSolicitud" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

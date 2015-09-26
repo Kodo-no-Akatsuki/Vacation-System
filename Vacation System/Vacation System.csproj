@@ -859,6 +859,7 @@
     <Compile Include="Models\PermisosEnum.cs" />
     <Compile Include="Models\ProfileViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\RequestViewModel.cs" />
     <Compile Include="Models\UsersViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\ServiceReference\Reference.cs">
@@ -871,10 +872,7 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\LogIn\LogIn.cshtml" />
-    <None Include="Service References\ServiceReference\service.wsdl" />
-    <None Include="Service References\ServiceReference\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Service References\ServiceReference\service1.wsdl" />
     <None Include="Service References\ServiceReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -888,6 +886,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference\Vacation_System.ServiceReference.UserMirror.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ServiceReference\service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\ServiceReference\Vacation_System.ServiceReference.Solicitud.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\ServiceReference\Web_Service.Mirror_Classes.xsd">

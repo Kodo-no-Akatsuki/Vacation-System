@@ -77,6 +77,28 @@ namespace Web_Service
                         Descripcion = dep.descripcion
                     });
                 }
+                
+                foreach (var jerarquia in user.tbl_jerarquia)
+                {
+                    emp.Jerarquias.Add(new JerarquiaMirror
+                    {
+                        TalentoHumano = jerarquia.talento_humano,
+                        DepartamentoId = jerarquia.departamentoid,
+                        JefeTalentoHumano = jerarquia.jefe_talentohumano,
+                        JerarquiaId = jerarquia.jerarquiaid
+                    });
+                }
+
+                foreach (var jerarquia in user.tbl_jerarquia1)
+                {
+                    emp.Jerarquias.Add(new JerarquiaMirror
+                    {
+                        TalentoHumano = jerarquia.talento_humano,
+                        DepartamentoId = jerarquia.departamentoid,
+                        JefeTalentoHumano = jerarquia.jefe_talentohumano,
+                        JerarquiaId = jerarquia.jerarquiaid
+                    });
+                }
 
                 foreach (Vacaciones vac in user.tbl_vacaciones)
                 {
@@ -582,6 +604,73 @@ namespace Web_Service
 
             entities.SaveChanges();
         }
+
+        public List<Solicitud> LoadSolicitudes(int talentoHumano)
+        {
+            List<Solicitud> solicitudes = new List<Solicitud>();
+
+            VacationEntities entities = new VacationEntities();
+
+            var user = (from u in entities.Usuarios
+                where u.talento_humano == talentoHumano
+                select u).FirstOrDefault();
+
+            if (user != null)
+            {
+                foreach (var j in user.tbl_jerarquia)
+                {
+                    Empleado emp = LoadEmpleado(j.talento_humano);
+
+                    var vacacionesPendientes = from v in emp.Vacaciones
+                        where v.Estatus.Activo == false
+                        select v;
+
+                    if (vacacionesPendientes.Any())
+                    {
+                        solicitudes.Add(new Solicitud
+                        {
+                            EmployeeData = emp.User,
+                            VacData = vacacionesPendientes.FirstOrDefault()
+                        });
+                    }
+                }
+
+                foreach (var j in user.tbl_jerarquia1)
+                {
+                    Empleado emp = LoadEmpleado(j.talento_humano);
+
+                    var vacacionesPendientes = from v in emp.Vacaciones
+                                               where v.Estatus.Activo == false
+                                               select v;
+
+                    if (vacacionesPendientes.Any())
+                    {
+                        solicitudes.Add(new Solicitud
+                        {
+                            EmployeeData = emp.User,
+                            VacData = vacacionesPendientes.FirstOrDefault()
+                        });
+                    }
+                }
+            }
+
+            return solicitudes;
+        }
+
+        public void UpdateSolicitud(bool estado, int id)
+        {
+            VacationEntities entities = new VacationEntities();
+
+            var vac = (from v in entities.Vacaciones
+                where v.vacacionesid == id
+                select v).FirstOrDefault();
+
+            vac.tbl_estatus.activo = true;
+            vac.tbl_estatus.descripcion = estado ? "Aprobado" : "Rechazado";
+
+            entities.SaveChanges();
+        }
+
     }
 
 }

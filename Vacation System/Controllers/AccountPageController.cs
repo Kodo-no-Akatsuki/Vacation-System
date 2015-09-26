@@ -90,10 +90,30 @@ namespace Vacation_System.Controllers
 			return View(pvm);
 		}
 
-        public ActionResult Requests() {
+		public ActionResult Requests() {
 
-            return View();
-        }
+			RequestViewModel rvm = new RequestViewModel();
+			ServiceClient service = new ServiceClient();
+
+			rvm.Solicitudes = service.LoadSolicitudes(((Empleado) Session["User"]).User.TalentoHumano).ToList();
+
+			service.Close();
+
+			return View(rvm);
+		}
+
+		[HttpPost]
+		public RedirectToRouteResult Requests(string respuesta, int idSolicitud)
+		{
+			ServiceClient service = new ServiceClient();
+
+			service.UpdateSolicitud(respuesta == "Aprobado", idSolicitud);
+
+			service.Close();
+
+		    return RedirectToAction("Dashboard");
+		}
+
 		[HttpGet]
 		public ActionResult Departments()
 		{
@@ -158,7 +178,7 @@ namespace Vacation_System.Controllers
 
 			if (estatus != null)
 			{
-			    deptoEditado.Activo = !(estatus.Equals("True"));
+				deptoEditado.Activo = !(estatus.Equals("True"));
 			}
 
 			service.EditDepartment(deptoEditado);

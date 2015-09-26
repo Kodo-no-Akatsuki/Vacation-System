@@ -1,4 +1,4 @@
-﻿@model Vacation_System.ServiceReference.Empleado
+﻿@model Vacation_System.Models.RequestViewModel
 
 @{
     ViewBag.Title = "Solicitudes";
@@ -27,50 +27,57 @@
 
     <tbody>
 
-
-        <tr>
-            <td>Hola</td>
-            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#requestmodal">Revisar</button></td>
-        </tr>
-
-        @*<tr>
-            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#requestmodal">Revisar</button></td>
-        </tr>*@
-        @*@foreach (var user in Model.Users)
+        @foreach (var solicitud in Model.Solicitudes)
         {
             <tr>
-                <td>
-                    <a href="@Url.Action("UserProfile", new {talentoHumano = user.TalentoHumano})">
-                        @user.PrimerNombre @user.PrimerApellido
-                    </a>
-                </td>
+                <td>@solicitud.EmployeeData.PrimerNombre @solicitud.EmployeeData.PrimerApellido</td>
+                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#@solicitud.VacData.VacacionesId">Revisar</button></td>
             </tr>
-        }*@
+        }
+        
 
     </tbody>
 
 </table>
 
-<!--Request Modal-->
-<div id="requestmodal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h3>Revisar Solicitud</h3>
-            </div>
-            <div class="modal-body">
+@using (Html.BeginForm())
+{
+    foreach (var solicitud in Model.Solicitudes)
+    {
+    <!--Request Modal-->
+        <div id="@solicitud.VacData.VacacionesId" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h3>Revisar Solicitud</h3>
+                    </div>
+                    <div class="modal-body">
+                        <label>
+                            Fecha de Salida
 
-                <div class="container" style="width:500px; height: 250px; overflow-y: scroll;">
-                    <!--Ingresar datos aqui-->
+                        </label>
+                        @solicitud.VacData.FechaSalida.ToString()
+                        <br />
+
+                        <label>
+                            Fecha de Regreso
+                        </label>
+                        @solicitud.VacData.FechaEntrada.ToString()
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <input type="hidden" name="idSolicitud" value="@solicitud.VacData.VacacionesId"/>
+
+                        <button type="submit" name="respuesta" class="btn btn-primary" value="Rechazado">Rechazar</button>
+
+
+                        <button type="submit" name="respuesta" class="btn btn-primary" value="Aprobado">Aceptar</button>
+
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <a href="#" class="btn" data-dismiss="modal">Close</a>
-
-                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-
-            </div>
         </div>
-    </div>
-</div>
+    }
+}

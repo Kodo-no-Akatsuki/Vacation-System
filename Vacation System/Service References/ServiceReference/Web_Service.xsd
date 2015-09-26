@@ -22,4 +22,17 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Empleado" nillable="true" type="tns:Empleado" />
+  <xs:complexType name="ArrayOfSolicitud">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Solicitud" nillable="true" type="tns:Solicitud" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSolicitud" nillable="true" type="tns:ArrayOfSolicitud" />
+  <xs:complexType name="Solicitud">
+    <xs:sequence>
+      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="EmployeeData" nillable="true" type="q12:UserMirror" />
+      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Web_Service.Mirror_Classes" minOccurs="0" name="VacData" nillable="true" type="q13:VacacionesMirror" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Solicitud" nillable="true" type="tns:Solicitud" />
 </xs:schema>

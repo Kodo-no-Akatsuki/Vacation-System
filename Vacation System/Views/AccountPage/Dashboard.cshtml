@@ -193,6 +193,8 @@
                                     var daysAccepted = false;
                                     var range = daysInBetween(new Date(res[0]), new Date(res[1]));
 
+                                    console.log(document.getElementById('fechasHidden').value);
+
                                     document.getElementById('fsalida').value = res[0];
                                     document.getElementById('fregreso').value = res[1];
                                     document.getElementById('diassolic').value = range;
@@ -211,6 +213,11 @@
                                         daysAccepted = checkDates(dateInvalid, res[0], res[1]);
                                         if (!daysAccepted)
                                             break;
+                                    }
+
+                                    //CUIDADO AQUI
+                                    if (invaliddates.length === 0) {
+                                        daysAccepted = true;
                                     }
 
                                     if (daysAccepted) {

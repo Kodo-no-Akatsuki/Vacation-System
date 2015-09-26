@@ -93,6 +93,7 @@
       <DependentUpon>VacationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Service.cs" />
+    <Compile Include="Solicitud.cs" />
     <Compile Include="TipoDia.cs">
       <DependentUpon>VacationModel.tt</DependentUpon>
     </Compile>
